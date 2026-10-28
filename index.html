@@ -34,4 +34,1016 @@
       margin: 0;
       min-height: 100vh;
       background:
-        radial-gradient(ellipse at 50% -15%, rgba(160,112,34,.18), transparent 55%
+        radial-gradient(ellipse at 50% -15%, rgba(160,112,34,.18), transparent 55%),
+        linear-gradient(180deg, #0d0c0a, var(--bg) 55%);
+      color: var(--text);
+      font-family: Inter, Arial, sans-serif;
+    }
+
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    button:disabled { opacity: .4; cursor: not-allowed; }
+
+    .page {
+      width: min(1180px, 92%);
+      margin: auto;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--gold-dark);
+      border-radius: 12px;
+      color: var(--gold-light);
+      background: linear-gradient(145deg, #2a2111, #100e0a);
+      font-family: Cinzel, serif;
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .brand-name {
+      margin: 0;
+      font: 900 clamp(21px, 4vw, 34px)/1 Cinzel, serif;
+      letter-spacing: 1px;
+      color: var(--gold-light);
+      text-shadow: 0 0 24px rgba(214,173,87,.15);
+    }
+
+    .brand-sub {
+      margin-top: 6px;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--muted);
+    }
+
+    .account {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .user-email {
+      color: var(--muted);
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 245px;
+      margin: 28px 0;
+      padding: clamp(25px, 5vw, 52px);
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background:
+        linear-gradient(90deg, rgba(7,7,6,.97) 0%, rgba(10,9,7,.84) 55%, rgba(10,9,7,.4) 100%),
+        url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1800&q=85") center 48%/cover,
+        #17130c;
+      box-shadow: 0 20px 70px rgba(0,0,0,.28);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(110deg, transparent 35%, rgba(214,173,87,.06), transparent 80%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 650px;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 3px;
+      font-weight: 800;
+    }
+
+    .hero h2 {
+      margin: 13px 0;
+      font: 800 clamp(28px, 5vw, 48px)/1.15 Cinzel, serif;
+      color: #fff3d3;
+    }
+
+    .hero p {
+      max-width: 490px;
+      margin: 0;
+      color: #c0b7a7;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .status-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 22px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 11px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: #d8c9a9;
+      background: rgba(10,9,7,.72);
+      font-size: 11px;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      display: inline-block;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 9px rgba(126,217,160,.4);
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin: 32px 0 18px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font: 700 clamp(20px, 3vw, 27px) Cinzel, serif;
+      color: var(--gold-light);
+    }
+
+    .section-head p {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .btn {
+      border: 1px solid var(--gold-dark);
+      border-radius: 9px;
+      padding: 11px 15px;
+      color: var(--gold-light);
+      background: linear-gradient(135deg, #2a2112, #171109);
+      font-weight: 700;
+      font-size: 12px;
+      transition: .2s ease;
+    }
+
+    .btn:hover:not(:disabled) {
+      border-color: var(--gold);
+      transform: translateY(-1px);
+      filter: brightness(1.15);
+    }
+
+    .btn.primary {
+      color: #171006;
+      border-color: #e1bb68;
+      background: linear-gradient(135deg, #f1d38a, #b88935);
+    }
+
+    .btn.subtle {
+      color: #d5cbb7;
+      background: #171511;
+      border-color: #393126;
+    }
+
+    .btn.danger {
+      color: #ffaaaa;
+      background: #241111;
+      border-color: #603030;
+    }
+
+    .btn.small {
+      padding: 8px 10px;
+      font-size: 11px;
+    }
+
+    .timer-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .timer-card {
+      position: relative;
+      overflow: hidden;
+      min-width: 0;
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: linear-gradient(145deg, rgba(25,22,16,.98), rgba(13,13,12,.98));
+      transition: border-color .2s, transform .2s;
+    }
+
+    .timer-card:hover {
+      border-color: rgba(214,173,87,.55);
+      transform: translateY(-2px);
+    }
+
+    .timer-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 20px;
+      right: 20px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: .6;
+    }
+
+    .timer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .timer-name {
+      margin: 0;
+      overflow-wrap: anywhere;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .timer-created {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .badge {
+      white-space: nowrap;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 9px;
+      color: var(--gold-light);
+      background: #211a0e;
+      font-size: 10px;
+    }
+
+    .badge.running {
+      color: var(--green);
+      border-color: rgba(126,217,160,.3);
+      background: rgba(24,68,40,.2);
+    }
+
+    .badge.finished {
+      color: #b8b0a2;
+      background: #1a1916;
+      border-color: #37342d;
+    }
+
+    .countdown {
+      margin: 25px 0 18px;
+      text-align: center;
+      font: 800 clamp(28px, 4vw, 42px)/1.2 Inter, monospace;
+      letter-spacing: 1px;
+      color: var(--gold-light);
+      text-shadow: 0 0 25px rgba(214,173,87,.12);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .time-labels {
+      display: flex;
+      justify-content: center;
+      gap: 23px;
+      margin-top: -11px;
+      margin-bottom: 20px;
+      color: #887b62;
+      font-size: 9px;
+      letter-spacing: 1px;
+    }
+
+    .timer-progress {
+      height: 4px;
+      overflow: hidden;
+      border-radius: 10px;
+      background: #29251d;
+      margin-bottom: 19px;
+    }
+
+    .timer-progress span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #8a6327, #f4d58d);
+      transition: width .4s linear;
+    }
+
+    .timer-actions {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+
+    .empty {
+      grid-column: 1 / -1;
+      padding: 55px 20px;
+      text-align: center;
+      border: 1px dashed #4c3d24;
+      border-radius: 15px;
+      background: rgba(18,16,12,.65);
+    }
+
+    .empty-icon {
+      color: var(--gold);
+      font-size: 35px;
+    }
+
+    .empty h3 {
+      margin: 13px 0 8px;
+      font: 700 22px Cinzel, serif;
+      color: var(--gold-light);
+    }
+
+    .empty p {
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .notice {
+      display: none;
+      margin: 16px 0;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      font-size: 12px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .notice.show { display: block; }
+    .notice.error { color: #ffb5b5; border-color: #633434; background: #241111; }
+    .notice.success { color: #b9edca; border-color: #31583c; background: #102015; }
+
+    .loading {
+      color: var(--muted);
+      padding: 35px;
+      text-align: center;
+      grid-column: 1 / -1;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 50px;
+      padding: 22px 0 28px;
+      border-top: 1px solid var(--border);
+      color: #756c5b;
+      font-size: 11px;
+    }
+
+    .footer strong { color: var(--gold); }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(0,0,0,.78);
+      backdrop-filter: blur(7px);
+    }
+
+    .modal-backdrop.open { display: flex; }
+
+    .modal {
+      width: min(460px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 25px;
+      border: 1px solid var(--gold-dark);
+      border-radius: 16px;
+      background: #11100d;
+      box-shadow: 0 25px 90px #000;
+    }
+
+    .modal h2 {
+      margin: 0 0 8px;
+      color: var(--gold-light);
+      font: 700 23px Cinzel, serif;
+    }
+
+    .modal > p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .field { margin: 18px 0; }
+
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      color: #d8c9a9;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 12px;
+      color: var(--text);
+      background: #090908;
+      border: 1px solid #443822;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    .field input:focus { border-color: var(--gold); }
+
+    .duration-fields {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 9px;
+    }
+
+    .duration-fields .field { min-width: 0; }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 9px;
+      margin-top: 22px;
+    }
+
+    @media (max-width: 700px) {
+      .timer-grid { grid-template-columns: 1fr; }
+      .hero { min-height: 225px; }
+      .topbar { align-items: flex-start; }
+      .user-email { max-width: 150px; }
+      .timer-card { padding: 18px; }
+    }
+
+    @media (max-width: 430px) {
+      .brand-sub { letter-spacing: 1px; font-size: 9px; }
+      .account { max-width: 130px; }
+      .brand-mark { width: 39px; height: 39px; }
+      .countdown { font-size: 29px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">3</div>
+        <div>
+          <h1 class="brand-name">3zReil</h1>
+          <div class="brand-sub">SILKROAD PSRO KILLER</div>
+        </div>
+      </div>
+
+      <div class="account">
+        <span class="user-email" id="userEmail">Guest mode</span>
+        <button class="btn" id="loginBtn" type="button">Sign in with Google</button>
+        <button class="btn subtle" id="logoutBtn" type="button" hidden>Sign out</button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-content">
+        <div class="eyebrow">YOUR WORLD · YOUR TIMERS</div>
+        <h2>Silkroad Timer</h2>
+        <p>
+          Your events. Your countdowns. One shared dashboard.
+          Create and manage timers in one place.
+        </p>
+        <div class="status-row">
+          <span class="pill"><span class="dot" id="syncDot"></span><span id="syncStatus">Connecting...</span></span>
+          <span class="pill">✦ Black & Gold Edition</span>
+        </div>
+      </div>
+    </section>
+
+    <div id="notice" class="notice" role="status"></div>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <h2>Your Timers</h2>
+          <p id="timerCount">0 timers</p>
+        </div>
+        <button class="btn primary" id="addTimerBtn" type="button" hidden>＋ Create Timer</button>
+      </div>
+
+      <div id="timerGrid" class="timer-grid">
+        <div class="loading">Loading timers...</div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div><strong>3zReil</strong> · Silkroad PSRO Timer</div>
+      <div>Live sync · Google Login · Supabase</div>
+    </footer>
+  </div>
+
+  <div class="modal-backdrop" id="timerModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <form class="modal" id="timerForm">
+      <h2 id="modalTitle">Create Timer</h2>
+      <p>Enter a name and the duration you want. The timer will be shared with everyone who can view the dashboard.</p>
+
+      <div class="field">
+        <label for="timerName">Timer name</label>
+        <input id="timerName" name="timerName" maxlength="100" placeholder="Enter timer name" required>
+      </div>
+
+      <div class="duration-fields">
+        <div class="field">
+          <label for="hours">Hours</label>
+          <input id="hours" type="number" min="0" max="87600" value="0" inputmode="numeric" required>
+        </div>
+        <div class="field">
+          <label for="minutes">Minutes</label>
+          <input id="minutes" type="number" min="0" max="59" value="0" inputmode="numeric" required>
+        </div>
+        <div class="field">
+          <label for="seconds">Seconds</label>
+          <input id="seconds" type="number" min="0" max="59" value="0" inputmode="numeric" required>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn subtle" id="cancelModalBtn" type="button">Cancel</button>
+        <button class="btn primary" id="saveTimerBtn" type="submit">Create Timer</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Existing Supabase project
+    const SUPABASE_URL = 'https://qmsxzhnwecdiuraczspn.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_pPOJtppTvBkfpsIGdkW4Ww_w5GmR3oa';
+    const ADMIN_EMAIL = 'zozaprivate1996@gmail.com';
+
+    const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    let currentUser = null;
+    let isAdmin = false;
+    let timers = [];
+    let channel = null;
+    let pollHandle = null;
+    let noticeHandle = null;
+
+    const $ = id => document.getElementById(id);
+
+    function escapeHtml(value) {
+      return String(value ?? '').replace(/[&<>"']/g, char => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      })[char]);
+    }
+
+    function formatTime(totalSeconds) {
+      const seconds = Math.max(0, Math.floor(Number(totalSeconds) || 0));
+      const hours = Math.floor(seconds / 3600);
+      const minutes = Math.floor((seconds % 3600) / 60);
+      const secs = seconds % 60;
+      return [hours, minutes, secs].map(n => String(n).padStart(2, '0')).join(':');
+    }
+
+    function getRemaining(timer) {
+      if (timer.is_running && timer.ends_at) {
+        const remaining = Math.ceil((new Date(timer.ends_at).getTime() - Date.now()) / 1000);
+        return Math.max(0, remaining);
+      }
+      return Math.max(0, Number(timer.remaining_seconds) || 0);
+    }
+
+    function timerState(timer) {
+      if (timer.is_running && getRemaining(timer) > 0) return 'Running';
+      if (timer.is_running || getRemaining(timer) === 0) return 'Finished';
+      return 'Paused';
+    }
+
+    function showNotice(message, type = 'success') {
+      const el = $('notice');
+      el.textContent = message;
+      el.className = `notice show ${type}`;
+      clearTimeout(noticeHandle);
+      noticeHandle = setTimeout(() => el.classList.remove('show'), 6000);
+    }
+
+    function updateAccountUI() {
+      $('userEmail').textContent = currentUser ? currentUser.email : 'Guest mode';
+      $('loginBtn').hidden = !!currentUser;
+      $('logoutBtn').hidden = !currentUser;
+      $('addTimerBtn').hidden = !isAdmin;
+      renderTimers();
+    }
+
+    async function loadTimers() {
+      const { data, error } = await db
+        .from('timers')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        $('timerGrid').innerHTML = '<div class="empty"><h3>Unable to load timers</h3><p>Check your connection and Supabase table permissions.</p></div>';
+        showNotice(error.message, 'error');
+        $('syncStatus').textContent = 'Sync error';
+        $('syncDot').style.background = '#ff7777';
+        return;
+      }
+
+      timers = data || [];
+      $('syncStatus').textContent = 'Live sync enabled';
+      $('syncDot').style.background = '#7ed9a0';
+      renderTimers();
+    }
+
+    function renderTimers() {
+      const grid = $('timerGrid');
+      $('timerCount').textContent = `${timers.length} timer${timers.length === 1 ? '' : 's'}`;
+
+      if (!timers.length) {
+        grid.innerHTML = `
+          <div class="empty">
+            <div class="empty-icon">✦</div>
+            <h3>No timers yet</h3>
+            <p>Your dashboard is ready.<br>Create your first timer and it will appear here.</p>
+            ${isAdmin ? '<button class="btn primary" type="button" data-action="add">＋ Create Your First Timer</button>' : '<p>Only the administrator can create and manage timers.</p>'}
+          </div>`;
+        return;
+      }
+
+      grid.innerHTML = timers.map(timer => {
+        const remaining = getRemaining(timer);
+        const state = timerState(timer);
+        const duration = Math.max(0, Number(timer.duration_seconds) || 0);
+        const percent = duration > 0 ? Math.min(100, Math.max(0, (remaining / duration) * 100)) : 0;
+        const running = timer.is_running && remaining > 0;
+        const canStart = isAdmin && !running && remaining > 0;
+        const canPause = isAdmin && running;
+        const safeName = escapeHtml(timer.name || 'Untitled Timer');
+
+        return `
+          <article class="timer-card" data-timer-id="${timer.id}">
+            <div class="timer-top">
+              <div>
+                <h3 class="timer-name">${safeName}</h3>
+                <div class="timer-created">Duration: ${formatTime(duration)}</div>
+              </div>
+              <span class="badge ${running ? 'running' : state === 'Finished' ? 'finished' : ''}">${state}</span>
+            </div>
+
+            <div class="countdown" data-countdown="${timer.id}">${formatTime(remaining)}</div>
+            <div class="time-labels"><span>HOURS</span><span>MINUTES</span><span>SECONDS</span></div>
+
+            <div class="timer-progress"><span style="width:${percent}%"></span></div>
+
+            <div class="timer-actions">
+              ${canStart ? `<button class="btn small primary" data-action="start" data-id="${timer.id}">▶ Start</button>` : ''}
+              ${canPause ? `<button class="btn small" data-action="pause" data-id="${timer.id}">Ⅱ Pause</button>` : ''}
+              ${isAdmin && remaining === 0 ? `<button class="btn small primary" data-action="restart" data-id="${timer.id}">↻ Restart</button>` : ''}
+              ${isAdmin ? `<button class="btn small subtle" data-action="rename" data-id="${timer.id}">Rename</button>` : ''}
+              ${isAdmin ? `<button class="btn small danger" data-action="delete" data-id="${timer.id}">Delete</button>` : ''}
+            </div>
+          </article>`;
+      }).join('');
+    }
+
+    function tick() {
+      for (const timer of timers) {
+        const countdown = document.querySelector(`[data-countdown="${timer.id}"]`);
+        if (!countdown) continue;
+
+        const remaining = getRemaining(timer);
+        countdown.textContent = formatTime(remaining);
+
+        const card = countdown.closest('.timer-card');
+        if (!card) continue;
+
+        const badge = card.querySelector('.badge');
+        const progress = card.querySelector('.timer-progress span');
+        const duration = Math.max(0, Number(timer.duration_seconds) || 0);
+        const running = timer.is_running && remaining > 0;
+
+        badge.textContent = running ? 'Running' : remaining === 0 ? 'Finished' : 'Paused';
+        badge.className = `badge ${running ? 'running' : remaining === 0 ? 'finished' : ''}`;
+
+        if (progress) {
+          const percent = duration > 0 ? Math.min(100, Math.max(0, remaining / duration * 100)) : 0;
+          progress.style.width = `${percent}%`;
+        }
+
+        const startButton = card.querySelector('[data-action="start"]');
+        const pauseButton = card.querySelector('[data-action="pause"]');
+
+        if (remaining === 0 && timer.is_running) {
+          if (startButton) startButton.remove();
+          if (pauseButton) pauseButton.remove();
+
+          if (isAdmin && !card.querySelector('[data-action="restart"]')) {
+            const button = document.createElement('button');
+            button.className = 'btn small primary';
+            button.dataset.action = 'restart';
+            button.dataset.id = timer.id;
+            button.textContent = '↻ Restart';
+            card.querySelector('.timer-actions').prepend(button);
+          }
+        }
+      }
+    }
+
+    async function addTimer(name, duration) {
+      const { error } = await db.from('timers').insert({
+        name,
+        remaining_seconds: duration,
+        duration_seconds: duration,
+        is_running: false,
+        ends_at: null
+      });
+
+      if (error) throw error;
+      await loadTimers();
+      showNotice('Timer created successfully.');
+    }
+
+    async function startTimer(id) {
+      const timer = timers.find(t => String(t.id) === String(id));
+      if (!timer) return;
+
+      const remaining = getRemaining(timer);
+      if (remaining <= 0) {
+        showNotice('This timer has finished. Use Restart instead.', 'error');
+        return;
+      }
+
+      const { error } = await db.from('timers').update({
+        is_running: true,
+        remaining_seconds: remaining,
+        ends_at: new Date(Date.now() + remaining * 1000).toISOString()
+      }).eq('id', id);
+
+      if (error) throw error;
+      await loadTimers();
+    }
+
+    async function pauseTimer(id) {
+      const timer = timers.find(t => String(t.id) === String(id));
+      if (!timer) return;
+
+      const remaining = getRemaining(timer);
+      const { error } = await db.from('timers').update({
+        is_running: false,
+        remaining_seconds: remaining,
+        ends_at: null
+      }).eq('id', id);
+
+      if (error) throw error;
+      await loadTimers();
+    }
+
+    async function restartTimer(id) {
+      const timer = timers.find(t => String(t.id) === String(id));
+      if (!timer) return;
+
+      const duration = Math.max(0, Number(timer.duration_seconds) || 0);
+      if (duration <= 0) {
+        showNotice('This timer has no saved duration. Please create a new timer.', 'error');
+        return;
+      }
+
+      const { error } = await db.from('timers').update({
+        is_running: true,
+        remaining_seconds: duration,
+        ends_at: new Date(Date.now() + duration * 1000).toISOString()
+      }).eq('id', id);
+
+      if (error) throw error;
+      await loadTimers();
+    }
+
+    async function renameTimer(id) {
+      const timer = timers.find(t => String(t.id) === String(id));
+      if (!timer) return;
+
+      const name = prompt('Enter the new timer name:', timer.name || '');
+      if (name === null) return;
+      if (!name.trim()) {
+        showNotice('Timer name cannot be empty.', 'error');
+        return;
+      }
+
+      const { error } = await db.from('timers').update({
+        name: name.trim().slice(0, 100)
+      }).eq('id', id);
+
+      if (error) throw error;
+      await loadTimers();
+      showNotice('Timer renamed.');
+    }
+
+    async function deleteTimer(id) {
+      const timer = timers.find(t => String(t.id) === String(id));
+      if (!timer) return;
+      if (!confirm(`Delete "${timer.name}"? This cannot be undone.`)) return;
+
+      const { error } = await db.from('timers').delete().eq('id', id);
+      if (error) throw error;
+
+      await loadTimers();
+      showNotice('Timer deleted.');
+    }
+
+    async function handleAction(action, id) {
+      if (action === 'add') {
+        openModal();
+        return;
+      }
+
+      if (!isAdmin) {
+        showNotice('Only the administrator can manage timers.', 'error');
+        return;
+      }
+
+      try {
+        if (action === 'start') await startTimer(id);
+        else if (action === 'pause') await pauseTimer(id);
+        else if (action === 'restart') await restartTimer(id);
+        else if (action === 'rename') await renameTimer(id);
+        else if (action === 'delete') await deleteTimer(id);
+      } catch (error) {
+        showNotice(error.message || 'Something went wrong.', 'error');
+      }
+    }
+
+    function openModal() {
+      if (!isAdmin) return;
+      $('timerForm').reset();
+      $('hours').value = '0';
+      $('minutes').value = '0';
+      $('seconds').value = '0';
+      $('timerModal').classList.add('open');
+      $('timerName').focus();
+    }
+
+    function closeModal() {
+      $('timerModal').classList.remove('open');
+    }
+
+    $('loginBtn').addEventListener('click', async () => {
+      const { error } = await db.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: window.location.origin + window.location.pathname
+        }
+      });
+      if (error) showNotice(error.message, 'error');
+    });
+
+    $('logoutBtn').addEventListener('click', async () => {
+      const { error } = await db.auth.signOut();
+      if (error) showNotice(error.message, 'error');
+      else window.location.reload();
+    });
+
+    $('addTimerBtn').addEventListener('click', openModal);
+    $('cancelModalBtn').addEventListener('click', closeModal);
+
+    $('timerModal').addEventListener('click', event => {
+      if (event.target === $('timerModal')) closeModal();
+    });
+
+    $('timerGrid').addEventListener('click', event => {
+      const button = event.target.closest('[data-action]');
+      if (!button) return;
+      handleAction(button.dataset.action, button.dataset.id).catch(error => {
+        showNotice(error.message || 'Something went wrong.', 'error');
+      });
+    });
+
+    $('timerForm').addEventListener('submit', async event => {
+      event.preventDefault();
+      if (!isAdmin) return;
+
+      const name = $('timerName').value.trim();
+      const hours = Number($('hours').value);
+      const minutes = Number($('minutes').value);
+      const seconds = Number($('seconds').value);
+
+      if (!name) {
+        showNotice('Please enter a timer name.', 'error');
+        return;
+      }
+
+      if (![hours, minutes, seconds].every(Number.isInteger) ||
+          hours < 0 || hours > 87600 ||
+          minutes < 0 || minutes > 59 ||
+          seconds < 0 || seconds > 59) {
+        showNotice('Please enter a valid duration.', 'error');
+        return;
+      }
+
+      const duration = hours * 3600 + minutes * 60 + seconds;
+      if (duration <= 0) {
+        showNotice('Duration must be at least one second.', 'error');
+        return;
+      }
+
+      const saveButton = $('saveTimerBtn');
+      saveButton.disabled = true;
+      saveButton.textContent = 'Creating...';
+
+      try {
+        await addTimer(name, duration);
+        closeModal();
+      } catch (error) {
+        showNotice(error.message || 'Could not create timer.', 'error');
+      } finally {
+        saveButton.disabled = false;
+        saveButton.textContent = 'Create Timer';
+      }
+    });
+
+    async function init() {
+      const { data, error } = await db.auth.getSession();
+
+      if (error) showNotice(error.message, 'error');
+
+      currentUser = data?.session?.user || null;
+      isAdmin = currentUser?.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase();
+      updateAccountUI();
+      await loadTimers();
+
+      db.auth.onAuthStateChange((_event, session) => {
+        currentUser = session?.user || null;
+        isAdmin = currentUser?.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase();
+        updateAccountUI();
+        loadTimers();
+      });
+
+      if (channel) await db.removeChannel(channel);
+
+      channel = db.channel('timers-live')
+        .on('postgres_changes', {
+          event: '*',
+          schema: 'public',
+          table: 'timers'
+        }, () => {
+          loadTimers();
+        })
+        .subscribe(status => {
+          if (status === 'SUBSCRIBED') {
+            $('syncStatus').textContent = 'Live sync enabled';
+            $('syncDot').style.background = '#7ed9a0';
+          }
+        });
+
+      // Polling fallback in case realtime is not enabled for the table.
+      clearInterval(pollHandle);
+      pollHandle = setInterval(loadTimers, 15000);
+
+      // Render the countdown locally every second; ends_at keeps devices in sync.
+      setInterval(tick, 1000);
+    }
+
+    init();
+  </script>
+</body>
+</html>
+```
