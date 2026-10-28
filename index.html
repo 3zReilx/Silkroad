@@ -125,8 +125,14 @@ function remaining(t) {
 }
 function formatTime(seconds) {
   seconds = Math.max(0, Math.floor(seconds));
-  const h = Math.floor(seconds / 3600), m = Math.floor((seconds % 3600) / 60), s = seconds % 60;
-  return [h,m,s].map(n => String(n).padStart(2,'0')).join(':');
+
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const secs = seconds % 60;
+
+  return [hours, minutes, secs]
+    .map(value => String(value).padStart(2, '0'))
+    .join(':');
 }
 function render() {
   $('loginBtn').classList.toggle('hidden', !!currentUser);
@@ -268,7 +274,9 @@ db.auth.onAuthStateChange(async () => {
 });
 (async function init() {
   await refreshUser(); await loadTimers(); await setupRealtime();
-  setInterval(render,1000);
+  setInterval(() => {
+  render();
+}, 1000);
   setInterval(() => loadTimers(false),15000);
 })();
 </script>
