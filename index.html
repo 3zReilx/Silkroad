@@ -572,6 +572,30 @@
       .timer-actions .btn { padding:7px 9px; }
     }
 
+
+    /* Hero v2: show the whole banner, no text over the artwork */
+    .brand-sub { display: none; }
+    .hero { border-bottom: 1px solid rgba(214,173,87,.35); background-position: center 40%; }
+    .hero::after { background: linear-gradient(180deg, transparent 82%, rgba(8,8,7,.7) 100%); }
+    @media (min-width: 761px) {
+      .hero { min-height: 0; aspect-ratio: 1536 / 338; }
+    }
+    .tagline { text-align: center; margin: 4px 0 6px; }
+    .tagline-main { display: flex; align-items: center; justify-content: center; gap: 16px; }
+    .tagline-main i { flex: 0 1 120px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dark)); }
+    .tagline-main i:last-child { transform: scaleX(-1); }
+    .tagline-main span { color: var(--gold-light); font-size: 11px; font-weight: 800; letter-spacing: 4px; }
+    .tagline small { display: block; margin-top: 8px; color: var(--muted); font-size: 12px; }
+    @media (max-width: 430px) {
+      .tagline-main span { letter-spacing: 2px; font-size: 10px; }
+      .tagline-main i { flex-basis: 30px; }
+    }
+
+    /* Full-width site: banner runs edge to edge, content uses more of the screen */
+    body { overflow-x: hidden; }
+    .page { width: min(1500px, 94%); }
+    .topbar { border-bottom: 0; }
+    .hero { margin: 0 calc(50% - 50vw) 24px; max-height: 520px; }
   </style>
 </head>
 
@@ -595,11 +619,12 @@
 
     <section class="hero" aria-label="3zReil Silkroad PSRO Killer">
       <div class="hero-shade"></div>
-      <div class="hero-content">
-        <div class="eyebrow">ONE TEAM · ONE GAME · ONE TIMER</div>
-        <p>Silkroad Timer · Live synced for everyone</p>
-      </div>
     </section>
+
+    <div class="tagline">
+      <div class="tagline-main"><i></i><span>ONE TEAM · ONE GAME · ONE TIMER</span><i></i></div>
+      <small>Silkroad Timer · Live synced for everyone</small>
+    </div>
 
     <div id="notice" class="notice" role="status"></div>
 
