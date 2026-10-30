@@ -520,6 +520,58 @@
       .brand-mark { width: 39px; height: 39px; }
       .countdown { font-size: 29px; }
     }
+
+    /* 3zReil cinematic hero and public timer rows */
+    .page { width: min(1380px, 94%); }
+    .topbar { padding: 14px 0; }
+    .brand-mark { display:none; }
+    .hero {
+      min-height: 310px;
+      margin: 0 -3.2vw 28px;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: #080706 url("assets/3zreil-hero.jpg") center 48%/cover no-repeat;
+      box-shadow: 0 18px 55px rgba(0,0,0,.45);
+    }
+    .hero::after {
+      background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.18) 60%, #080807 100%);
+    }
+    .hero-shade { position:absolute; inset:0; background:linear-gradient(90deg,rgba(0,0,0,.1),transparent 50%,rgba(0,0,0,.12)); }
+    .hero-content { position:absolute; left:50%; bottom:18px; transform:translateX(-50%); width:100%; max-width:none; text-align:center; }
+    .hero-content .eyebrow { text-shadow:0 2px 8px #000; color:#f6df9c; letter-spacing:4px; }
+    .hero-content p { margin:7px auto 0; color:#f4dfad; font-size:12px; text-shadow:0 2px 8px #000; }
+    .section-head { margin: 28px 0 14px; }
+    .timer-list { display:flex; flex-direction:column; gap:9px; }
+    .timer-card {
+      display:grid; grid-template-columns:minmax(170px,1.4fr) minmax(140px,.8fr) minmax(95px,.5fr) minmax(220px,1fr);
+      align-items:center; gap:16px; padding:14px 18px;
+      border-radius:10px; background:linear-gradient(100deg,rgba(24,20,13,.96),rgba(8,9,9,.96));
+    }
+    .timer-card:hover { transform:translateX(2px); }
+    .timer-top { align-items:center; }
+    .timer-created { margin-top:4px; }
+    .countdown { margin:0; font-size:clamp(22px,3vw,32px); text-align:center; }
+    .time-labels { margin:3px 0 0; gap:15px; font-size:8px; }
+    .timer-progress { display:none; }
+    .timer-actions { justify-content:flex-end; }
+    .empty { border-radius:10px; }
+    .footer { margin-top:32px; }
+    @media(max-width:760px) {
+      .hero { min-height:230px; margin-left:-3.2vw; margin-right:-3.2vw; }
+      .timer-card { grid-template-columns:1fr auto; gap:8px 12px; }
+      .timer-top { grid-column:1 / -1; }
+      .countdown-wrap { grid-column:1; }
+      .timer-actions { grid-column:1 / -1; justify-content:flex-start; }
+      .timer-card .countdown { text-align:left; }
+      .timer-card .time-labels { justify-content:flex-start; }
+    }
+    @media(max-width:430px) {
+      .hero { min-height:190px; }
+      .timer-card { padding:12px; }
+      .timer-actions .btn { padding:7px 9px; }
+    }
+
   </style>
 </head>
 
@@ -535,24 +587,17 @@
       </div>
 
       <div class="account">
-        <span class="user-email" id="userEmail">Guest mode</span>
+        <span class="user-email" id="userEmail">Public view</span>
         <button class="btn" id="loginBtn" type="button">Sign in with Google</button>
         <button class="btn subtle" id="logoutBtn" type="button" hidden>Sign out</button>
       </div>
     </header>
 
-    <section class="hero">
+    <section class="hero" aria-label="3zReil Silkroad PSRO Killer">
+      <div class="hero-shade"></div>
       <div class="hero-content">
-        <div class="eyebrow">YOUR WORLD · YOUR TIMERS</div>
-        <h2>Silkroad Timer</h2>
-        <p>
-          Your events. Your countdowns. One shared dashboard.
-          Create and manage timers in one place.
-        </p>
-        <div class="status-row">
-          <span class="pill"><span class="dot" id="syncDot"></span><span id="syncStatus">Connecting...</span></span>
-          <span class="pill">✦ Black & Gold Edition</span>
-        </div>
+        <div class="eyebrow">ONE TEAM · ONE GAME · ONE TIMER</div>
+        <p>Silkroad Timer · Live synced for everyone</p>
       </div>
     </section>
 
@@ -561,20 +606,20 @@
     <section>
       <div class="section-head">
         <div>
-          <h2>Your Timers</h2>
-          <p id="timerCount">0 timers</p>
+          <h2>Live Timers</h2>
+          <p id="timerCount">All timers are public · Admin controls only</p>
         </div>
-        <button class="btn primary" id="addTimerBtn" type="button" hidden>＋ Create Timer</button>
+        <button class="btn primary" id="addTimerBtn" type="button" hidden>＋ Add Timer</button>
       </div>
 
-      <div id="timerGrid" class="timer-grid">
+      <div id="timerGrid" class="timer-list">
         <div class="loading">Loading timers...</div>
       </div>
     </section>
 
     <footer class="footer">
       <div><strong>3zReil</strong> · Silkroad PSRO Timer</div>
-      <div>Live sync · Google Login · Supabase</div>
+      <div>Public viewing · Admin-only control · Live sync</div>
     </footer>
   </div>
 
@@ -668,7 +713,7 @@
     }
 
     function updateAccountUI() {
-      $('userEmail').textContent = currentUser ? currentUser.email : 'Guest mode';
+      $('userEmail').textContent = currentUser ? currentUser.email : 'Public view';
       $('loginBtn').hidden = !!currentUser;
       $('logoutBtn').hidden = !currentUser;
       $('addTimerBtn').hidden = !isAdmin;
@@ -705,7 +750,7 @@
             <div class="empty-icon">✦</div>
             <h3>No timers yet</h3>
             <p>Your dashboard is ready.<br>Create your first timer and it will appear here.</p>
-            ${isAdmin ? '<button class="btn primary" type="button" data-action="add">＋ Create Your First Timer</button>' : '<p>Only the administrator can create and manage timers.</p>'}
+            ${isAdmin ? '<button class="btn primary" type="button" data-action="add">＋ Add the First Timer</button>' : '<p>Only the administrator can create and manage timers.</p>'}
           </div>`;
         return;
       }
@@ -729,17 +774,15 @@
               </div>
               <span class="badge ${running ? 'running' : state === 'Finished' ? 'finished' : ''}">${state}</span>
             </div>
-
-            <div class="countdown" data-countdown="${timer.id}">${formatTime(remaining)}</div>
-            <div class="time-labels"><span>HOURS</span><span>MINUTES</span><span>SECONDS</span></div>
-
-            <div class="timer-progress"><span style="width:${percent}%"></span></div>
-
+            <div class="countdown-wrap">
+              <div class="countdown" data-countdown="${timer.id}">${formatTime(remaining)}</div>
+              <div class="time-labels"><span>HOURS</span><span>MINUTES</span><span>SECONDS</span></div>
+            </div>
             <div class="timer-actions">
               ${canStart ? `<button class="btn small primary" data-action="start" data-id="${timer.id}">▶ Start</button>` : ''}
               ${canPause ? `<button class="btn small" data-action="pause" data-id="${timer.id}">Ⅱ Pause</button>` : ''}
               ${isAdmin && remaining === 0 ? `<button class="btn small primary" data-action="restart" data-id="${timer.id}">↻ Restart</button>` : ''}
-              ${isAdmin ? `<button class="btn small subtle" data-action="rename" data-id="${timer.id}">Rename</button>` : ''}
+              ${isAdmin ? `<button class="btn small subtle" data-action="rename" data-id="${timer.id}">Edit name</button>` : ''}
               ${isAdmin ? `<button class="btn small danger" data-action="delete" data-id="${timer.id}">Delete</button>` : ''}
             </div>
           </article>`;
@@ -790,6 +833,7 @@
     }
 
     async function addTimer(name, duration) {
+      if (!isAdmin) throw new Error("Only the administrator can manage timers.");
       const { error } = await db.from('timers').insert({
         name,
         remaining_seconds: duration,
@@ -804,6 +848,7 @@
     }
 
     async function startTimer(id) {
+      if (!isAdmin) throw new Error("Only the administrator can manage timers.");
       const timer = timers.find(t => String(t.id) === String(id));
       if (!timer) return;
 
@@ -824,6 +869,7 @@
     }
 
     async function pauseTimer(id) {
+      if (!isAdmin) throw new Error("Only the administrator can manage timers.");
       const timer = timers.find(t => String(t.id) === String(id));
       if (!timer) return;
 
@@ -839,6 +885,7 @@
     }
 
     async function restartTimer(id) {
+      if (!isAdmin) throw new Error("Only the administrator can manage timers.");
       const timer = timers.find(t => String(t.id) === String(id));
       if (!timer) return;
 
@@ -859,6 +906,7 @@
     }
 
     async function renameTimer(id) {
+      if (!isAdmin) throw new Error("Only the administrator can manage timers.");
       const timer = timers.find(t => String(t.id) === String(id));
       if (!timer) return;
 
@@ -879,6 +927,7 @@
     }
 
     async function deleteTimer(id) {
+      if (!isAdmin) throw new Error("Only the administrator can manage timers.");
       const timer = timers.find(t => String(t.id) === String(id));
       if (!timer) return;
       if (!confirm(`Delete "${timer.name}"? This cannot be undone.`)) return;
