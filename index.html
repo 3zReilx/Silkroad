@@ -363,10 +363,11 @@
     .ab-orn::before, .ab-orn::after { content: ""; width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
     .ab-orn::after { transform: scaleX(-1); }
     .modal h2.ab-title {
-      margin: 12px 0 4px; font: 700 30px/1.1 Rajdhani, Impact, sans-serif; letter-spacing: 1px;
+      margin: 10px 0 6px; font: 700 36px/1 Rajdhani, Impact, sans-serif; letter-spacing: 1px;
       background: linear-gradient(180deg, #ffe7ae, #f1b94d 55%, #d68a28); -webkit-background-clip: text; background-clip: text; color: transparent;
       filter: drop-shadow(0 0 10px rgba(255, 160, 40, .3));
     }
+    .ab-title small { display: block; margin-bottom: 6px; font: 600 12px/1 Inter, sans-serif; letter-spacing: 5px; text-transform: uppercase; color: var(--gold-l); -webkit-text-fill-color: var(--gold-l); }
     .modal p.ab-lead { margin: 0 0 16px; color: var(--gold-l); font-size: 14px; font-weight: 600; }
     .modal p.ab-text { margin: 0 auto 10px; max-width: 470px; color: #e6d9c1; font-size: 13.5px; line-height: 1.75; }
     .ab-text b { color: var(--gold-l); font-weight: 600; }
@@ -393,7 +394,7 @@
     .modal p.ab-quote { margin: 18px auto 0; padding-top: 14px; max-width: 360px; border-top: 1px solid rgba(232, 182, 74, .22); color: var(--gold-l); font-size: 15px; font-style: italic; }
     .ab-actions { justify-content: center; }
     @media (max-width: 520px) { .ab-card { grid-template-columns: 1fr 1fr; } .ab-tile:nth-child(3) { grid-column: 1 / -1; } }
-    @media (max-width: 420px) { .about-modal { padding: 26px 16px 20px; } .ab-card { padding: 8px; gap: 6px; } .ab-tile { padding: 9px 10px; gap: 8px; } .ab-ico { width: 30px; height: 30px; font-size: 14px; } .modal h2.ab-title { font-size: 26px; } }
+    @media (max-width: 420px) { .about-modal { padding: 26px 16px 20px; } .ab-card { padding: 8px; gap: 6px; } .ab-tile { padding: 9px 10px; gap: 8px; } .ab-ico { width: 30px; height: 30px; font-size: 14px; } .modal h2.ab-title { font-size: 32px; } }
 
     /* Payment window */
     .pay-modal { width: min(480px, 100%); }
@@ -674,7 +675,7 @@
     <div class="frame modal about-modal">
       <span class="gem top"></span><span class="gem bot"></span>
       <div class="ab-orn" aria-hidden="true"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20L20 4M15 4h5v5M4 4l16 16M4 9V4h5"/></svg></div>
-      <h2 id="aboutTitle" class="ab-title">About 3zReil</h2>
+      <h2 id="aboutTitle" class="ab-title"><small>About</small>3zReil</h2>
       <p class="ab-lead">Welcome &mdash; I'm glad you're here.</p>
 
       <p class="ab-text">I've been in the Silkroad world for a long time, long enough to know every road, every spawn and every trick of the game. Over the years I've helped a lot of players reach their goals, and I'm still doing it today.</p>
