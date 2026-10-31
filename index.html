@@ -357,6 +357,44 @@
     .pay-btn { margin-top: 20px; padding: 11px 26px; font-size: 14px; font-weight: 700; letter-spacing: .4px; }
     .pay-btn svg.i { font-size: 17px; }
 
+    /* About window */
+    .about-modal { width: min(560px, 100%); padding: 30px 26px 24px; text-align: center; }
+    .ab-orn { display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--gold); font-size: 18px; }
+    .ab-orn::before, .ab-orn::after { content: ""; width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
+    .ab-orn::after { transform: scaleX(-1); }
+    .modal h2.ab-title {
+      margin: 12px 0 4px; font: 700 30px/1.1 Rajdhani, Impact, sans-serif; letter-spacing: 1px;
+      background: linear-gradient(180deg, #ffe7ae, #f1b94d 55%, #d68a28); -webkit-background-clip: text; background-clip: text; color: transparent;
+      filter: drop-shadow(0 0 10px rgba(255, 160, 40, .3));
+    }
+    .modal p.ab-lead { margin: 0 0 16px; color: var(--gold-l); font-size: 14px; font-weight: 600; }
+    .modal p.ab-text { margin: 0 auto 10px; max-width: 470px; color: #e6d9c1; font-size: 13.5px; line-height: 1.75; }
+    .ab-text b { color: var(--gold-l); font-weight: 600; }
+    .ab-divider { display: flex; align-items: center; gap: 12px; margin: 22px 0 14px; color: var(--gold-l); font-size: 12px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; }
+    .ab-divider::before, .ab-divider::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(232, 182, 74, .6)); }
+    .ab-divider::after { transform: scaleX(-1); }
+    .ab-card {
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 0 0 20px; padding: 12px;
+      text-align: left; border: 1px solid rgba(232, 182, 74, .45); border-radius: 10px;
+      background: radial-gradient(120% 100% at 50% 0%, rgba(232, 170, 60, .1), transparent 70%), #0b0906;
+      box-shadow: inset 0 0 18px rgba(232, 160, 40, .1), 0 0 22px rgba(232, 150, 30, .1);
+    }
+    .ab-tile { display: flex; align-items: center; gap: 10px; min-width: 0; padding: 10px 12px; border-radius: 8px; background: linear-gradient(180deg, #14100b, #0d0a07); border: 1px solid rgba(232, 182, 74, .16); }
+    .ab-tile.wide { grid-column: 1 / -1; }
+    .ab-ico { width: 34px; height: 34px; flex: none; display: grid; place-items: center; border-radius: 50%; color: var(--gold-l); font-size: 16px; background: #13100a; border: 1px solid rgba(232, 182, 74, .4); }
+    .ab-tile small { display: block; font-size: 10.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+    .ab-tile b { display: block; font-size: 14px; font-weight: 600; color: #fff; overflow-wrap: anywhere; }
+    .ab-live i { display: inline-block; width: 8px; height: 8px; margin: 0 7px 1px 0; vertical-align: middle; border-radius: 50%; background: #2fd27c; box-shadow: 0 0 8px rgba(47, 210, 124, .8); }
+    .ab-links { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 6px 0 4px; }
+    .ab-links:not(:has(a:not([hidden]))) { display: none; }
+    .ab-link { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; color: var(--gold-l); font-size: 13px; font-weight: 600; text-decoration: none; border: 1px solid rgba(232, 182, 74, .55); border-radius: 999px; background: linear-gradient(180deg, #1c150b, #100c07); }
+    .ab-link:hover { border-color: var(--gold-l); filter: brightness(1.2); }
+    .ab-link svg.i { font-size: 16px; }
+    .modal p.ab-quote { margin: 18px auto 0; padding-top: 14px; max-width: 360px; border-top: 1px solid rgba(232, 182, 74, .22); color: var(--gold-l); font-size: 15px; font-style: italic; }
+    .ab-actions { justify-content: center; }
+    @media (max-width: 520px) { .ab-card { grid-template-columns: 1fr 1fr; } .ab-tile:nth-child(3) { grid-column: 1 / -1; } }
+    @media (max-width: 420px) { .about-modal { padding: 26px 16px 20px; } .ab-card { padding: 8px; gap: 6px; } .ab-tile { padding: 9px 10px; gap: 8px; } .ab-ico { width: 30px; height: 30px; font-size: 14px; } .modal h2.ab-title { font-size: 26px; } }
+
     /* Payment window */
     .pay-modal { width: min(480px, 100%); }
     .pay-head { display: flex; align-items: center; gap: 10px; margin: 18px 0 8px; font: 600 12px Inter, sans-serif; letter-spacing: 1.6px; color: #fff; text-transform: uppercase; }
@@ -633,11 +671,37 @@
   </div>
 
   <div class="backdrop" id="aboutModal" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
-    <div class="frame modal">
-      <h2 id="aboutTitle">3zReil Silkroad Timer</h2>
-      <p>Live timers shared with the whole team. Everyone can watch them, and only the administrator can start, pause, change the time, rename or delete them.</p>
-      <div class="modal-actions"><button class="add" id="closeAboutBtn" type="button">Close</button></div>
+    <div class="frame modal about-modal">
+      <span class="gem top"></span><span class="gem bot"></span>
+      <div class="ab-orn" aria-hidden="true"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20L20 4M15 4h5v5M4 4l16 16M4 9V4h5"/></svg></div>
+      <h2 id="aboutTitle" class="ab-title">About 3zReil</h2>
+      <p class="ab-lead">Welcome &mdash; I'm glad you're here.</p>
+
+      <p class="ab-text">I've been in the Silkroad world for a long time, long enough to know every road, every spawn and every trick of the game. Over the years I've helped a lot of players reach their goals, and I'm still doing it today.</p>
+      <p class="ab-text">I work <b>non-stop</b>, day and night, weekdays and weekends. When you book with me, you get someone who shows up, stays on time and finishes the job.</p>
+
+      <div class="ab-divider"><span>&#10022; Let me introduce myself &#10022;</span></div>
+
+      <div class="ab-card">
+        <div class="ab-tile"><span class="ab-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 5-6 8-6s7 1 8 6"/></svg></span><span><small>Name</small><b>Hazem</b></span></div>
+        <div class="ab-tile"><span class="ab-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg></span><span><small>Age</small><b>31 years old</b></span></div>
+        <div class="ab-tile"><span class="ab-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8l4 4 5-7 5 7 4-4-2 11H5z"/></svg></span><span><small>In-game</small><b>3zReil</b></span></div>
+        <div class="ab-tile wide"><span class="ab-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L5 14h6l-1 8 8-12h-6z"/></svg></span><span><small>Availability</small><b class="ab-live"><i></i>Non-stop &mdash; always online</b></span></div>
+        <div class="ab-tile wide"><span class="ab-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20L20 4M15 4h5v5M4 4l16 16M4 9V4h5"/></svg></span><span><small>Service</small><b>Silkroad taxi (hourly &amp; long-term)</b></span></div>
+      </div>
+
+      <p class="ab-text">My promise is simple: <b>honest prices, clear timing and respect for every customer.</b> Whether you're with me for a few hours or a full week, you'll be treated as a friend first and a customer second.</p>
+      <p class="ab-text">Got a question? Message me on WhatsApp or join the Discord. I'm always around.</p>
+
+      <div class="ab-links">
+        <a class="ab-link" id="aboutWa" href="#" target="_blank" rel="noopener noreferrer" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.6-1.6l.8-1-1-2z"/></svg>WhatsApp</a>
+        <a class="ab-link" id="aboutDc" href="#" target="_blank" rel="noopener noreferrer" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7c2-1 8-1 10 0l2 9c-2 2-4 2.5-5 2.5l-1-1.5h-2l-1 1.5c-1 0-3-.5-5-2.5z"/><circle cx="9.5" cy="12" r="1.2"/><circle cx="14.5" cy="12" r="1.2"/></svg>Discord</a>
+      </div>
+
+      <p class="ab-quote">&ldquo;Always on. Always on time.&rdquo;</p>
+      <div class="modal-actions ab-actions"><button class="add" id="closeAboutBtn" type="button">Close</button></div>
     </div>
+  </div>
   </div>
 
   <script>
@@ -1205,6 +1269,8 @@
         $('waLink').hidden = false;
       }
       if (dcUrl) { $('dcLink').href = dcUrl; $('dcLink').hidden = false; }
+      if (!$('waLink').hidden) { $('aboutWa').href = $('waLink').href; $('aboutWa').hidden = false; }
+      if (dcUrl) { $('aboutDc').href = dcUrl; $('aboutDc').hidden = false; }
       $('social').hidden = !(digits || dcUrl);
     }
     setupContact();
