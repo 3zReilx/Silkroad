@@ -314,13 +314,14 @@
       .menu { position: absolute; left: calc(var(--u) * 382); top: 0; bottom: 0; overflow: visible; gap: calc(var(--u) * 6); }
       .menu a, .menu button { padding: 0 calc(var(--u) * 23); gap: calc(var(--u) * 10); font-size: calc(var(--u) * 15); }
       .menu svg.i { font-size: calc(var(--u) * 17); }
-      .visitors { gap: calc(var(--u) * 18); margin-top: calc(var(--u) * 14); padding: calc(var(--u) * 10) calc(var(--u) * 20); border-radius: calc(var(--u) * 12); }
-      .vs-item small { font-size: calc(var(--u) * 10); }
-      .vs-item b { font-size: calc(var(--u) * 22); gap: calc(var(--u) * 6); }
-      .vs-main { gap: calc(var(--u) * 10); }
-      .vs-main b { font-size: calc(var(--u) * 28); }
-      .vs-ico { width: calc(var(--u) * 36); height: calc(var(--u) * 36); font-size: calc(var(--u) * 18); }
-      .vs-sep { height: calc(var(--u) * 30); }
+      body .visitors { position: absolute; left: calc(var(--u) * -195); top: calc(var(--u) * 20); width: calc(var(--u) * 244); margin: 0; padding: calc(var(--u) * 12) calc(var(--u) * 14); border-radius: calc(var(--u) * 7); }
+      body .vs-head { gap: calc(var(--u) * 10); padding-bottom: calc(var(--u) * 9); margin-bottom: calc(var(--u) * 4); }
+      body .vs-head b { font-size: calc(var(--u) * 12); letter-spacing: calc(var(--u) * 1.6); }
+      body .vs-ico { width: calc(var(--u) * 32); height: calc(var(--u) * 32); font-size: calc(var(--u) * 16); }
+      body .vs-row { padding: calc(var(--u) * 6) calc(var(--u) * 2); gap: calc(var(--u) * 10); }
+      body .vs-row span { font-size: calc(var(--u) * 12.5); gap: calc(var(--u) * 7); }
+      body .vs-row b { font-size: calc(var(--u) * 20); }
+      body .vs-row:first-of-type b { font-size: calc(var(--u) * 24); }
       .nav-badge { min-width: calc(var(--u) * 18); height: calc(var(--u) * 18); font-size: calc(var(--u) * 10.5); padding: 0 calc(var(--u) * 5); }
       .user { position: absolute; right: calc(var(--u) * 56); top: 0; bottom: 0; gap: calc(var(--u) * 11); padding: 0; }
       .avatar { width: calc(var(--u) * 34); height: calc(var(--u) * 34); font-size: calc(var(--u) * 18); }
@@ -477,24 +478,22 @@
     .ab-actions { justify-content: center; }
     @media (max-width: 420px) { .about-modal { padding: 26px 16px 20px; } .ab-card { padding: 8px; gap: 6px; } .ab-tile { padding: 9px 10px; gap: 8px; } .ab-ico { width: 30px; height: 30px; font-size: 14px; } .modal h2.ab-title { font-size: 32px; } }
 
-    /* Visitors bar on Home (everyone sees it) */
+    /* Visitors card on Home (everyone sees it): rows under each other; on computers it sits on the left, under the 3zReil card */
     body[data-view="timers"] .visitors { display: none; }
     .visitors {
-      display: flex; align-items: center; justify-content: center; gap: 18px; width: max-content; max-width: 100%;
-      margin: 14px auto 0; padding: 10px 20px; border-radius: 12px;
-      background: linear-gradient(180deg, rgba(20, 16, 11, .92), rgba(10, 8, 6, .92));
-      border: 1px solid rgba(185, 155, 113, .45);
-      box-shadow: inset 0 0 14px rgba(169, 137, 97, .1), 0 8px 24px rgba(0, 0, 0, .45);
+      width: min(340px, 100%); margin: 14px auto 0; padding: 12px 14px;
+      background: rgba(8, 6, 4, .82); backdrop-filter: blur(4px);
+      border: 1px solid rgba(185, 155, 113, .38); border-radius: 7px;
+      box-shadow: inset 0 0 16px rgba(169, 137, 97, .1), 0 8px 24px rgba(0, 0, 0, .5);
     }
-    .vs-item { display: flex; flex-direction: column; align-items: center; min-width: 0; }
-    .vs-item small { font-size: 10px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--muted); }
-    .vs-item b { display: flex; align-items: center; gap: 6px; font: 700 22px/1.15 Rajdhani, Impact, sans-serif; color: #eadfc9; font-variant-numeric: tabular-nums; }
-    .vs-main { flex-direction: row; gap: 10px; }
-    .vs-main > span:last-child { display: flex; flex-direction: column; align-items: flex-start; }
-    .vs-main b { font-size: 28px; color: var(--gold-l); }
-    .vs-ico { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; color: var(--gold-l); font-size: 18px; background: #13100a; border: 1px solid rgba(185, 155, 113, .45); }
-    .vs-sep { width: 1px; height: 30px; background: linear-gradient(180deg, transparent, rgba(185, 155, 113, .5), transparent); }
-    @media (max-width: 380px) { .visitors { gap: 12px; padding: 10px 14px; } .vs-main b { font-size: 24px; } .vs-item b { font-size: 19px; } }
+    .vs-head { display: flex; align-items: center; gap: 10px; padding-bottom: 9px; margin-bottom: 4px; border-bottom: 1px solid rgba(185, 155, 113, .22); }
+    .vs-head b { font: 600 12px Inter, sans-serif; letter-spacing: 1.6px; color: #fff; }
+    .vs-ico { width: 32px; height: 32px; display: grid; place-items: center; flex: none; border-radius: 50%; color: var(--gold-l); font-size: 16px; background: #13100a; border: 1px solid rgba(185, 155, 113, .45); }
+    .vs-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 6px 2px; }
+    .vs-row + .vs-row { border-top: 1px dashed rgba(185, 155, 113, .14); }
+    .vs-row span { display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: #e6dac4; }
+    .vs-row b { font: 700 20px/1 Rajdhani, Impact, sans-serif; color: var(--gold-l); font-variant-numeric: tabular-nums; }
+    .vs-row:first-of-type b { font-size: 24px; }
 
     /* Visitors window (admin only) */
     .nav-badge { min-width: 18px; height: 18px; padding: 0 5px; display: inline-grid; place-items: center; border-radius: 999px; font-size: 10.5px; font-weight: 700; color: #0b2a20; background: #3fe0b0; }
@@ -696,14 +695,13 @@
     <a class="all-link" href="#timers"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 3h6"/></svg>Open Timers<span class="count" id="homeCount"></span>&rarr;</a>
 
     <section class="visitors" id="visitorsBox" aria-label="Visitors" hidden>
-      <div class="vs-item vs-main">
+      <div class="vs-head">
         <span class="vs-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
-        <span><small>Visitors</small><b id="vsAll">0</b></span>
+        <b>VISITORS</b>
       </div>
-      <i class="vs-sep" aria-hidden="true"></i>
-      <div class="vs-item"><small>Today</small><b id="vsToday">0</b></div>
-      <i class="vs-sep" aria-hidden="true"></i>
-      <div class="vs-item"><small>Online now</small><b><span class="dot ok"></span><span id="vsOnline">1</span></b></div>
+      <div class="vs-row"><span>Total visitors</span><b id="vsAll">0</b></div>
+      <div class="vs-row"><span>Today</span><b id="vsToday">0</b></div>
+      <div class="vs-row"><span><i class="dot ok"></i>Online now</span><b id="vsOnline">0</b></div>
     </section>
 
     <section class="frame welcome" aria-label="Welcome">
@@ -1152,7 +1150,7 @@
       } catch (e) { return 'tmp' + Math.random().toString(16).slice(2, 14) + Date.now().toString(16); }
     })();
     const isPhoneDevice = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
-    let onlineNow = 0, presenceChannel = null, visitLogged = false;
+    let onlineNow = 0, onlineAll = 0, presenceChannel = null, visitLogged = false;
 
     async function logVisit() {
       if (isAdmin || visitLogged) return;                 // your own visits as admin are not counted
@@ -1170,7 +1168,8 @@
         .on('presence', { event: 'sync' }, () => {
           let state = {};
           try { state = presenceChannel.presenceState() || {}; } catch (e) {}
-          onlineNow = Object.values(state).filter(list => !list.some(m => m.admin)).length;   // people on the site now, not counting you
+          onlineAll = Object.keys(state).length;                                                // everyone on the site now
+          onlineNow = Object.values(state).filter(list => !list.some(m => m.admin)).length;   // same, without you (admin window)
           updateOnline();
         })
         .subscribe(status => { if (status === 'SUBSCRIBED') { try { presenceChannel.track(presenceMeta()); } catch (e) {} } });
@@ -1201,7 +1200,7 @@
     }
 
     function updateOnline() {
-      $('vsOnline').textContent = Math.max(onlineNow, isAdmin ? 0 : 1);      // a visitor always counts himself
+      $('vsOnline').textContent = Math.max(onlineAll, 1);                    // whoever is looking is online too
       $('statOnline').textContent = onlineNow;
       $('statsBadge').textContent = onlineNow;
       $('statsBadge').hidden = !isAdmin || !onlineNow;
