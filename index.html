@@ -1150,7 +1150,6 @@
           else if (remaining > 0) acts += `<button class="ib go" data-action="start" data-id="${id}" aria-label="Start" title="Start">${svg('play')}</button>`;
           else acts += `<button class="ib go" data-action="restart" data-id="${id}" aria-label="Restart" title="Restart">${svg('restart')}</button>`;
           acts += `<button class="ib tm" data-action="time" data-id="${id}" aria-label="Edit time" title="Edit time">${svg('clockEdit')}</button>`;
-          acts += `<button class="ib" data-action="rename" data-id="${id}" aria-label="Edit name" title="Edit name">${svg('edit')}</button>`;
           acts += `<button class="ib del" data-action="delete" data-id="${id}" aria-label="Delete" title="Delete">${svg('trash')}</button>`;
         }
 
@@ -1311,17 +1310,6 @@
       return h * 3600 + m * 60 + sec;
     }
 
-    async function renameTimer(id) {
-      const timer = findTimer(id); if (!timer) return;
-      const name = prompt('Enter the new timer name:', timer.name || '');
-      if (name === null) return;
-      if (!name.trim()) { showNotice('Timer name cannot be empty.', 'error'); return; }
-      const { error } = await db.from('timers').update({ name: name.trim().slice(0, 100) }).eq('id', id);
-      if (error) throw error;
-      await loadTimers();
-      showNotice('Timer renamed.');
-    }
-
     async function deleteTimer(id) {
       const timer = findTimer(id); if (!timer) return;
       if (!confirm(`Delete "${timer.name}"? This cannot be undone.`)) return;
@@ -1339,7 +1327,6 @@
         else if (action === 'pause') await pauseTimer(id);
         else if (action === 'restart') await restartTimer(id);
         else if (action === 'time') openTimeModal(id);
-        else if (action === 'rename') await renameTimer(id);
         else if (action === 'delete') await deleteTimer(id);
       } catch (error) {
         showNotice(error.message || 'Something went wrong.', 'error');
