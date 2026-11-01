@@ -339,6 +339,17 @@
     .modal-actions { display: flex; justify-content: flex-end; gap: 9px; margin-top: 18px; }
     .toggle { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin: 16px 0 6px; padding: 12px 14px; border: 1px solid rgba(185, 155, 113, .2); border-radius: 9px; background: #0d0a07; font-size: 13px; }
     .toggle input { width: 20px; height: 20px; accent-color: #b99b71; }
+    .set-admin .pay-head:first-child { margin-top: 6px; }
+    .set-row {
+      display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 9px;
+      background: linear-gradient(90deg, rgba(64, 48, 28, .55), #0d0a07); border: 1px solid rgba(215, 192, 154, .45);
+    }
+    .set-ico { width: 34px; height: 34px; flex: none; display: grid; place-items: center; border-radius: 50%; color: var(--gold-l); font-size: 17px; border: 1px solid rgba(215, 192, 154, .55); background: #13100a; }
+    .set-txt { flex: 1; min-width: 0; display: grid; gap: 3px; }
+    .set-txt b { font-size: 13.5px; font-weight: 600; color: #f4ead8; }
+    .set-txt small { font-size: 12px; line-height: 1.5; color: var(--muted); }
+    .set-txt small .dot { display: inline-block; margin-inline-end: 6px; vertical-align: 1px; }
+    .set-edit { flex: none; padding: 8px 14px; font-size: 12.5px; }
 
     /* ---------------- desktop: exact scaled copy of the design ---------------- */
     @media (min-width: 1100px) {
@@ -578,7 +589,6 @@
     .status-pill.busy b { color: #ffcf7a; }
     .status-pill.offline b { color: #b9ad97; }
     .dot.busy { background: #f0a53a; box-shadow: 0 0 8px rgba(240, 165, 58, .8); }
-    .st-edit { padding: 6px 10px; }
     .wl-btns { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
     .wl-btns .pay-btn { margin-top: 0; }
     .book-btn { padding: 11px 20px; font-size: 14px; font-weight: 700; gap: 8px; }
@@ -894,7 +904,6 @@
 
     <div class="status-wrap" id="statusWrap" hidden>
       <div class="status-pill" id="statusPill"><span class="dot" id="statusDot"></span><b id="statusText"></b><span class="st-slots" id="statusSlots"></span></div>
-      <button class="chip-btn st-edit" id="homeEditBtn" type="button" hidden>&#9998; <span data-i18n="editHome">Edit</span></button>
     </div>
     <a class="all-link" href="#timers"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 3h6"/></svg><span data-i18n="openTimers">Open Timers</span><span class="count" id="homeCount"></span><span class="arr" aria-hidden="true">&rarr;</span></a>
 
@@ -1004,6 +1013,15 @@
   <div class="backdrop" id="settingsModal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
     <div class="frame modal">
       <h2 id="settingsTitle" data-i18n="navSettings">Settings</h2>
+      <div class="set-admin" id="setAdmin" hidden>
+        <h3 class="pay-head" data-i18n="setAdminHead">Home page &middot; everyone sees this</h3>
+        <div class="set-row">
+          <span class="set-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h3l6 4V6L6 10H3z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg></span>
+          <span class="set-txt"><b data-i18n="homeTitle">Status &amp; announcement</b><small id="setHomeSum"></small></span>
+          <button class="add set-edit" id="homeEditBtn" type="button">&#9998; <span data-i18n="editHome">Edit</span></button>
+        </div>
+        <h3 class="pay-head" data-i18n="setDeviceHead">This device</h3>
+      </div>
       <p data-i18n="settingsIntro">These settings are saved on this device only.</p>
       <label class="toggle"><span data-i18n="setLoud">Alarm when a timer finishes</span><input type="checkbox" id="soundToggle"></label>
       <label class="toggle"><span data-i18n="setVoice">Voice says &ldquo;Attention! A timer has finished. Please check.&rdquo;</span><input type="checkbox" id="voiceToggle"></label>
@@ -1264,6 +1282,7 @@
         hoursN: '{n} hours',
         insteadOf: 'Instead of',
         langLabel: 'Language',
+        annOn: 'Announcement: on', annOff: 'Announcement: off',
         loadFailed: 'Could not load the numbers:',
         loadTimersFail: 'Unable to load timers',
         loadTimersFailHint: 'Check your connection and Supabase table permissions.',
@@ -1398,6 +1417,8 @@
         hoursN: '{n} ساعة', hoursN_few: '{n} ساعات',
         insteadOf: 'بدلًا من',
         langLabel: 'اللغة',
+        annOn: 'الإعلان: ظاهر', annOff: 'الإعلان: مخفي',
+        setAdminHead: 'الصفحة الرئيسية · الكل يرى هذا', setDeviceHead: 'هذا الجهاز',
         last30: 'آخر 30 يومًا', last7: 'آخر 7 أيام',
         loadFailed: 'تعذّر تحميل الأرقام:',
         loadTimersFail: 'تعذّر تحميل المؤقتات',
@@ -1577,6 +1598,8 @@
         hoursN: '{n} saat',
         insteadOf: 'Normal fiyat:',
         langLabel: 'Dil',
+        annOn: 'Duyuru: açık', annOff: 'Duyuru: kapalı',
+        setAdminHead: 'Ana Sayfa · herkes görür', setDeviceHead: 'Bu cihaz',
         last30: 'Son 30 gün', last7: 'Son 7 gün',
         loadFailed: 'Sayılar yüklenemedi:',
         loadTimersFail: 'Zamanlayıcılar yüklenemedi',
@@ -1756,6 +1779,8 @@
         hoursN: '{n} heures',
         insteadOf: 'Au lieu de',
         langLabel: 'Langue',
+        annOn: 'Annonce : affichée', annOff: 'Annonce : masquée',
+        setAdminHead: 'Page d\'accueil · visible par tous', setDeviceHead: 'Cet appareil',
         last30: '30 derniers jours', last7: '7 derniers jours',
         loadFailed: 'Impossible de charger les chiffres :',
         loadTimersFail: 'Impossible de charger les minuteurs',
@@ -2347,8 +2372,8 @@
     }
     function renderHomeBits() {
       const st = siteStatus && siteStatus.state;
-      $('statusWrap').hidden = !(st || isAdmin);
-      $('homeEditBtn').hidden = !isAdmin;
+      $('statusWrap').hidden = !st;
+      $('setAdmin').hidden = !isAdmin;
       const pill = $('statusPill');
       pill.className = 'status-pill ' + (st || 'none');
       $('statusDot').className = 'dot ' + (st === 'online' ? 'ok' : st === 'busy' ? 'busy' : '');
@@ -2357,6 +2382,8 @@
       $('statusSlots').textContent = st === 'online' && slots > 0 ? '· ' + T('stSlotsFree', { n: slots }) : '';
       const text = siteAnn && siteAnn.show && String(siteAnn.text || '').trim();
       $('announce').hidden = !text;                 // stays up for everyone until the admin switches it off
+      $('setHomeSum').innerHTML = `<i class="dot ${st === 'online' ? 'ok' : st === 'busy' ? 'busy' : ''}"></i>` +
+        escapeHtml((st ? T('stNow_' + st) + (st === 'online' && slots > 0 ? ' · ' + T('stSlotsFree', { n: slots }) : '') : T('stNotSet')) + ' · ' + T(text ? 'annOn' : 'annOff'));
       const line = (text || '').replace(/\s*\n+\s*/g, '   •   ');
       if ($('announceText').dataset.txt !== line) { $('announceText').dataset.txt = line; $('announceSr').textContent = line; buildTicker(); }
     }
@@ -2389,6 +2416,7 @@
       $('annText').value = (siteAnn && siteAnn.text) || '';
       $('annShow').checked = !!(siteAnn && siteAnn.show);
       $('homeMsg').hidden = true;
+      $('settingsModal').classList.remove('open');
       $('homeModal').classList.add('open');
     }
 
