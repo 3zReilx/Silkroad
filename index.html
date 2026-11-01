@@ -857,7 +857,7 @@
     /* Small WhatsApp / Discord icons on every page: fixed at the lower right edge on desktop (also above open windows like About), in a row at the bottom on phones; one tap opens the app */
     .social { display: flex; justify-content: center; gap: 16px; margin: 18px auto 0; }
     /* Same dark-and-gold look as the rest of the page (like the round badges in the hero cards) */
-    .social a {
+    .social a, .rico {
       position: relative; width: 50px; height: 50px; display: grid; place-items: center; border-radius: 50%;
       color: var(--gold-l); font-size: 24px; text-decoration: none;
       background: radial-gradient(circle at 35% 30%, #2a1f10, #0d0a06 72%);
@@ -865,11 +865,49 @@
       box-shadow: inset 0 0 12px rgba(169, 137, 97, .22), 0 0 14px rgba(169, 137, 97, .28), 0 8px 22px rgba(0, 0, 0, .6);
       transition: transform .15s ease, box-shadow .15s ease, color .15s ease, border-color .15s ease;
     }
-    .social a:hover, .social a:focus-visible {
+    .social a:hover, .social a:focus-visible, .rico:hover, .rico:focus-visible {
       transform: scale(1.08); color: #fff3d6; border-color: var(--gold-l);
       box-shadow: inset 0 0 14px rgba(196, 167, 124, .35), 0 0 26px rgba(186, 156, 114, .6), 0 8px 22px rgba(0, 0, 0, .6);
     }
-    .social svg.i { stroke-width: 1.8; filter: drop-shadow(0 0 4px rgba(182, 152, 110, .45)); }
+    .social svg.i, .rico svg.i { stroke-width: 1.8; filter: drop-shadow(0 0 4px rgba(182, 152, 110, .45)); }
+    .rico { flex: none; }
+    .rico::before {
+      content: attr(data-label); position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+      padding: 5px 10px; border-radius: 6px; white-space: nowrap; pointer-events: none;
+      font-size: 12px; font-weight: 600; color: var(--gold-l); background: rgba(10, 7, 4, .94); border: 1px solid var(--line);
+      opacity: 0; transition: opacity .15s ease;
+    }
+    .rico:hover::before, .rico:focus-visible::before { opacity: 1; }
+    .ab-links { gap: 14px; margin: 6px 0 0; }
+    .ab-links .rico { width: 46px; height: 46px; font-size: 22px; }
+    .faq-btns { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 14px; }
+    /* phones and tablets: one round gold button fixed at the right edge on every page (under open windows);
+       a tap opens WhatsApp / Telegram / Discord above it, a tap anywhere else closes them */
+    .social-toggle { display: none; }
+    @media (max-width: 1099.98px) {
+      .social { position: fixed; z-index: 29; right: 12px; bottom: calc(18px + env(safe-area-inset-bottom)); flex-direction: column; align-items: center; gap: 10px; margin: 0; pointer-events: none; transition: bottom .25s ease; }
+      body:has(#soundHint:not([hidden])) .social { bottom: calc(84px + env(safe-area-inset-bottom)); }
+      .social a { width: 44px; height: 44px; font-size: 21px; opacity: 0; visibility: hidden; transform: translateY(16px) scale(.55);
+        transition: opacity .16s ease, transform .2s ease, visibility 0s linear .2s; }
+      .social.open a { opacity: 1; visibility: visible; transform: none; pointer-events: auto;
+        transition: opacity .2s ease, transform .3s cubic-bezier(.3, 1.45, .5, 1), visibility 0s; }
+      .social.open a.dc { transition-delay: 0s; } .social.open a.tg { transition-delay: .05s; } .social.open a.wa { transition-delay: .1s; }
+      .social a::before { display: none; }
+      .social-toggle {
+        display: grid; place-items: center; width: 52px; height: 52px; padding: 0; border-radius: 50%; cursor: pointer; pointer-events: auto;
+        color: #2b1604; font-size: 24px; background: linear-gradient(180deg, #d2b98f, #93714b); border: 1px solid #e3cfa9;
+        box-shadow: 0 0 18px rgba(169, 137, 97, .55), 0 8px 22px rgba(0, 0, 0, .65); -webkit-tap-highlight-color: transparent;
+        transition: transform .2s ease, box-shadow .2s ease;
+      }
+      .social-toggle:active { transform: scale(.94); }
+      .social-toggle svg.i { stroke-width: 2; transition: transform .25s ease, opacity .2s ease; }
+      .social-toggle .st-x { display: none; }
+      .social.open .social-toggle { box-shadow: 0 0 26px rgba(196, 167, 124, .8), 0 8px 22px rgba(0, 0, 0, .65); }
+      .social.open .social-toggle .st-chat { display: none; }
+      .social.open .social-toggle .st-x { display: block; animation: stSpin .25s ease; }
+      @keyframes stSpin { from { transform: rotate(-90deg); opacity: 0; } }
+      .social:not(:has(a:not([hidden]))) .social-toggle { display: none; }
+    }
     .social a::before {
       content: attr(data-label); position: absolute; right: calc(100% + 10px); top: 50%; transform: translateY(-50%);
       padding: 5px 10px; border-radius: 6px; white-space: nowrap; pointer-events: none;
@@ -1274,9 +1312,9 @@
       <div class="faq-cta">
         <p data-i18n="faqMore">Still have a question? Message me, I'm always around.</p>
         <div class="faq-btns">
-          <a class="chip-btn" id="faqWa" href="#" target="_blank" rel="noopener noreferrer" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.6-1.6l.8-1-1-2z"/></svg>WhatsApp</a>
-          <a class="chip-btn" id="faqTg" href="#" target="_blank" rel="noopener noreferrer" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4L3 11.2l5.6 2.1L17.5 7.6 10.6 14.6l.4 5.4 3.1-3.6 4 3L21 4z"/></svg>Telegram</a>
-          <a class="chip-btn" id="faqDc" href="#" target="_blank" rel="noopener noreferrer" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7c2-1 8-1 10 0l2 9c-2 2-4 2.5-5 2.5l-1-1.5h-2l-1 1.5c-1 0-3-.5-5-2.5z"/><circle cx="9.5" cy="12" r="1.2"/><circle cx="14.5" cy="12" r="1.2"/></svg>Discord</a>
+          <a class="rico" id="faqWa" href="#" target="_blank" rel="noopener noreferrer" data-label="WhatsApp" aria-label="WhatsApp" title="WhatsApp" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.6-1.6l.8-1-1-2z"/></svg></a>
+          <a class="rico" id="faqTg" href="#" target="_blank" rel="noopener noreferrer" data-label="Telegram" aria-label="Telegram" title="Telegram" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4L3 11.2l5.6 2.1L17.5 7.6 10.6 14.6l.4 5.4 3.1-3.6 4 3L21 4z"/></svg></a>
+          <a class="rico" id="faqDc" href="#" target="_blank" rel="noopener noreferrer" data-label="Discord" aria-label="Discord" title="Discord" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7c2-1 8-1 10 0l2 9c-2 2-4 2.5-5 2.5l-1-1.5h-2l-1 1.5c-1 0-3-.5-5-2.5z"/><circle cx="9.5" cy="12" r="1.2"/><circle cx="14.5" cy="12" r="1.2"/></svg></a>
           <button class="add" id="faqBook" type="button"><span data-i18n="bookBtn">Book a Taxi</span></button>
         </div>
       </div>
@@ -1304,6 +1342,7 @@
       <a class="wa" id="waLink" href="#" target="_blank" rel="noopener noreferrer" data-label="WhatsApp" aria-label="Chat with 3zReil on WhatsApp" title="WhatsApp" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.6-1.6l.8-1-1-2z"/></svg></a>
       <a class="tg" id="tgLink" href="#" target="_blank" rel="noopener noreferrer" data-label="Telegram" aria-label="Telegram" title="Telegram" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4L3 11.2l5.6 2.1L17.5 7.6 10.6 14.6l.4 5.4 3.1-3.6 4 3L21 4z"/></svg></a>
       <a class="dc" id="dcLink" href="#" target="_blank" rel="noopener noreferrer" data-label="Discord" aria-label="Join our Discord server" title="Discord" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7c2-1 8-1 10 0l2 9c-2 2-4 2.5-5 2.5l-1-1.5h-2l-1 1.5c-1 0-3-.5-5-2.5z"/><circle cx="9.5" cy="12" r="1.2"/><circle cx="14.5" cy="12" r="1.2"/></svg></a>
+      <button class="social-toggle" id="socialToggle" type="button" aria-expanded="false" aria-controls="social" aria-label="Contact me" title="Contact me"><svg class="i st-chat" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h16v10.5H9.5L5 20v-4H4z"/><path d="M8.5 10.8h.01M12 10.8h.01M15.5 10.8h.01" style="stroke-width:2.8"/></svg><svg class="i st-x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </nav>
   </main>
 
@@ -1616,9 +1655,9 @@
       <p class="ab-text" data-i18n="abP4">Got a question? Message me on WhatsApp or join the Discord. I'm always around.</p>
 
       <div class="ab-links">
-        <a class="ab-link" id="aboutWa" href="#" target="_blank" rel="noopener noreferrer" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.6-1.6l.8-1-1-2z"/></svg>WhatsApp</a>
-        <a class="ab-link" id="aboutTg" href="#" target="_blank" rel="noopener noreferrer" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4L3 11.2l5.6 2.1L17.5 7.6 10.6 14.6l.4 5.4 3.1-3.6 4 3L21 4z"/></svg>Telegram</a>
-        <a class="ab-link" id="aboutDc" href="#" target="_blank" rel="noopener noreferrer" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7c2-1 8-1 10 0l2 9c-2 2-4 2.5-5 2.5l-1-1.5h-2l-1 1.5c-1 0-3-.5-5-2.5z"/><circle cx="9.5" cy="12" r="1.2"/><circle cx="14.5" cy="12" r="1.2"/></svg>Discord</a>
+        <a class="rico" id="aboutWa" href="#" target="_blank" rel="noopener noreferrer" data-label="WhatsApp" aria-label="WhatsApp" title="WhatsApp" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.6-1.6l.8-1-1-2z"/></svg></a>
+        <a class="rico" id="aboutTg" href="#" target="_blank" rel="noopener noreferrer" data-label="Telegram" aria-label="Telegram" title="Telegram" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4L3 11.2l5.6 2.1L17.5 7.6 10.6 14.6l.4 5.4 3.1-3.6 4 3L21 4z"/></svg></a>
+        <a class="rico" id="aboutDc" href="#" target="_blank" rel="noopener noreferrer" data-label="Discord" aria-label="Discord" title="Discord" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7c2-1 8-1 10 0l2 9c-2 2-4 2.5-5 2.5l-1-1.5h-2l-1 1.5c-1 0-3-.5-5-2.5z"/><circle cx="9.5" cy="12" r="1.2"/><circle cx="14.5" cy="12" r="1.2"/></svg></a>
       </div>
 
       <p class="ab-quote" data-i18n="abQuote">&ldquo;Always on. Always on time.&rdquo;</p>
@@ -1638,7 +1677,7 @@
     // Contact icons at the lower right. An icon left empty is simply not shown.
     const WHATSAPP_NUMBER = '+201097765848';                 // opens a chat with this number directly
     const DISCORD_LINK = 'https://discord.gg/SUzgewRPrd';    // server invite
-    const TELEGRAM_LINK = '';                                 // e.g. https://t.me/3zReil (empty = hidden)
+    const TELEGRAM_LINK = 'https://t.me/+BOYlEBa1a41jYTVk';  // Telegram group (empty = hidden)
     // payment details shown in the Payment List (empty = that card is hidden)
     const PAY_METHODS = {
       vodafone: { number: '01097765848', name: 'Hazem Khaled' },          // Vodafone Cash
@@ -1729,7 +1768,7 @@
         langLabel: 'Language',
         annOn: 'Announcement: on', annOff: 'Announcement: off',
         vipTip: '{d}-day package or longer with 3zReil',
-        payHow: 'How to pay', payName: 'Name', payInGame: 'In game', payInGameVal: 'Silk (Item Mall, F10) or Gold, straight to 3zReil', payEgypt: 'From Egypt', payAbroad: 'From abroad', qrScan: 'Scan to pay', openInstapay: 'Open in InstaPay', payReceipt: 'Send me the receipt here', copy: 'Copy', copied: 'Copied ✓', chat: 'Chat',
+        payHow: 'How to pay', payName: 'Name', payInGame: 'In game', payInGameVal: 'Silk (Item Mall, F10) or Gold, straight to 3zReil', payEgypt: 'From Egypt', payAbroad: 'From abroad', qrScan: 'Scan to pay', contactMe: 'Contact me', openInstapay: 'Open in InstaPay', payReceipt: 'Send me the receipt here', copy: 'Copy', copied: 'Copied ✓', chat: 'Chat',
         faqOpenAll: 'Open all', faqCloseAll: 'Close all',
         cpOk: '✓ {p}% off', cpInvalid: 'This code is not valid.', cpExpired: 'This code has expired.', cpUsedUp: 'This code was already used up.',
         cpUnavailable: 'Coupons are not available right now.', cpEmpty: 'No coupons yet.', cpUses: 'used {n}', cpUsesMax: 'used {n} of {m}',
@@ -1891,7 +1930,7 @@
         langLabel: 'اللغة',
         annOn: 'الإعلان: ظاهر', annOff: 'الإعلان: مخفي',
         vipTip: 'باقة {d} أيام أو أكثر مع 3zReil',
-        payHow: 'طرق الدفع', payName: 'الاسم', payInGame: 'داخل اللعبة', payInGameVal: 'Silk (من الـ Item Mall بزرار F10) أو Gold، لـ 3zReil على طول', payEgypt: 'من مصر', payAbroad: 'من برّه مصر', qrScan: 'امسح الكود للدفع', openInstapay: 'افتح في إنستاباي', payReceipt: 'ابعتلي الإيصال هنا', copy: 'نسخ', copied: 'اتنسخ ✓', chat: 'محادثة',
+        payHow: 'طرق الدفع', payName: 'الاسم', payInGame: 'داخل اللعبة', payInGameVal: 'Silk (من الـ Item Mall بزرار F10) أو Gold، لـ 3zReil على طول', payEgypt: 'من مصر', payAbroad: 'من برّه مصر', qrScan: 'امسح الكود للدفع', contactMe: 'تواصل معي', openInstapay: 'افتح في إنستاباي', payReceipt: 'ابعتلي الإيصال هنا', copy: 'نسخ', copied: 'اتنسخ ✓', chat: 'محادثة',
         navFaq: 'الأسئلة', faqTitle: 'الأسئلة الشائعة', faqMore: 'لسه عندك سؤال؟ كلّمني، أنا موجود دايمًا.', faqOpenAll: 'فتح الكل', faqCloseAll: 'قفل الكل',
         bkCoupon: 'كود الخصم', bkCouponApply: 'تطبيق',
         cpTitle: 'كوبونات الخصم', cpManage: 'إدارة', cpNew: 'كوبون جديد', cpCode: 'الكود', cpPercent: 'نسبة الخصم %', cpEnds: 'آخر يوم', cpMax: 'أقصى عدد استخدامات', cpAdd: 'إضافة الكوبون',
@@ -2108,7 +2147,7 @@
         langLabel: 'Dil',
         annOn: 'Duyuru: açık', annOff: 'Duyuru: kapalı',
         vipTip: '3zReil ile {d} günlük veya daha uzun paket',
-        payHow: 'Nasıl ödenir', payName: 'Ad', payInGame: 'Oyun içinde', payInGameVal: 'Silk (Item Mall, F10) veya Gold, doğrudan 3zReil\'e', payEgypt: 'Mısır\'dan', payAbroad: 'Yurt dışından', qrScan: 'Ödemek için tarayın', openInstapay: 'InstaPay\'de aç', payReceipt: 'Dekontu buradan gönder', copy: 'Kopyala', copied: 'Kopyalandı ✓', chat: 'Sohbet',
+        payHow: 'Nasıl ödenir', payName: 'Ad', payInGame: 'Oyun içinde', payInGameVal: 'Silk (Item Mall, F10) veya Gold, doğrudan 3zReil\'e', payEgypt: 'Mısır\'dan', payAbroad: 'Yurt dışından', qrScan: 'Ödemek için tarayın', contactMe: 'Bana ulaş', openInstapay: 'InstaPay\'de aç', payReceipt: 'Dekontu buradan gönder', copy: 'Kopyala', copied: 'Kopyalandı ✓', chat: 'Sohbet',
         navFaq: 'SSS', faqTitle: 'Sıkça sorulan sorular', faqMore: 'Başka bir soru mu var? Bana yaz, her zaman buralardayım.', faqOpenAll: 'Tümünü aç', faqCloseAll: 'Tümünü kapat',
         bkCoupon: 'İndirim kodu', bkCouponApply: 'Uygula',
         cpTitle: 'Kuponlar', cpManage: 'Yönet', cpNew: 'Yeni kupon', cpCode: 'Kod', cpPercent: 'İndirim %', cpEnds: 'Son gün', cpMax: 'En fazla kullanım', cpAdd: 'Kupon ekle',
@@ -2325,7 +2364,7 @@
         langLabel: 'Langue',
         annOn: 'Annonce : affichée', annOff: 'Annonce : masquée',
         vipTip: 'Forfait de {d} jours ou plus avec 3zReil',
-        payHow: 'Comment payer', payName: 'Nom', payInGame: 'En jeu', payInGameVal: 'Silk (Item Mall, F10) ou Gold, directement à 3zReil', payEgypt: 'Depuis l\'Égypte', payAbroad: 'Depuis l\'étranger', qrScan: 'Scannez pour payer', openInstapay: 'Ouvrir dans InstaPay', payReceipt: 'Envoyez-moi le reçu ici', copy: 'Copier', copied: 'Copié ✓', chat: 'Discuter',
+        payHow: 'Comment payer', payName: 'Nom', payInGame: 'En jeu', payInGameVal: 'Silk (Item Mall, F10) ou Gold, directement à 3zReil', payEgypt: 'Depuis l\'Égypte', payAbroad: 'Depuis l\'étranger', qrScan: 'Scannez pour payer', contactMe: 'Me contacter', openInstapay: 'Ouvrir dans InstaPay', payReceipt: 'Envoyez-moi le reçu ici', copy: 'Copier', copied: 'Copié ✓', chat: 'Discuter',
         navFaq: 'FAQ', faqTitle: 'Questions fréquentes', faqMore: 'Encore une question ? Écrivez-moi, je suis toujours là.', faqOpenAll: 'Tout ouvrir', faqCloseAll: 'Tout fermer',
         bkCoupon: 'Code promo', bkCouponApply: 'Appliquer',
         cpTitle: 'Codes promo', cpManage: 'Gérer', cpNew: 'Nouveau code', cpCode: 'Code', cpPercent: 'Réduction %', cpEnds: 'Dernier jour', cpMax: 'Utilisations max', cpAdd: 'Ajouter le code',
@@ -4094,6 +4133,7 @@
         b.classList.toggle('on', on); b.setAttribute('aria-checked', on ? 'true' : 'false');
       });
       $('statsBtn').title = T('navStats'); $('reqBtn').title = T('navRequests');
+      $('socialToggle').title = T('contactMe'); $('socialToggle').setAttribute('aria-label', T('contactMe'));
       document.documentElement.classList.remove('i18n-wait');
       fitNav();
       if (first) return;
@@ -4148,6 +4188,12 @@
     applyLang(lang, true);
 
     setupPayment();
+    // phones: the contact button opens / closes the three icons
+    const setSocial = open => { $('social').classList.toggle('open', open); $('socialToggle').setAttribute('aria-expanded', open ? 'true' : 'false'); };
+    $('socialToggle').addEventListener('click', e => { e.stopPropagation(); setSocial(!$('social').classList.contains('open')); });
+    $('social').addEventListener('click', e => { if (e.target.closest('a')) setTimeout(() => setSocial(false), 150); });
+    document.addEventListener('click', e => { if ($('social').classList.contains('open') && !e.target.closest('#social')) setSocial(false); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') setSocial(false); });
     $('introBtn').addEventListener('click', () => { $('settingsModal').classList.remove('open'); setTimeout(() => window.playIntro && window.playIntro(), 150); });
     $('paymentBtn').addEventListener('click', () => $('paymentModal').classList.add('open'));
     $('closePaymentBtn').addEventListener('click', () => $('paymentModal').classList.remove('open'));
