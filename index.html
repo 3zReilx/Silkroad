@@ -349,8 +349,11 @@
       .menu { position: absolute; left: calc(var(--u) * 382); top: 0; bottom: 0; overflow: visible; gap: calc(var(--u) * 6); }
       .menu a, .menu button { padding: 0 calc(var(--u) * 23); gap: calc(var(--u) * 10); font-size: calc(var(--u) * 15); }
       .menu svg.i { font-size: calc(var(--u) * 17); }
-      .announce { width: calc(var(--u) * 640); margin-top: calc(var(--u) * 14); padding: calc(var(--u) * 12) calc(var(--u) * 14); gap: calc(var(--u) * 12); border-radius: calc(var(--u) * 10); }
-      .announce p { font-size: calc(var(--u) * 14); margin-top: calc(var(--u) * 5); }
+      /* computers: same row as the owner card and the Live Sync box */
+      body .announce { position: absolute; z-index: 3; left: 50%; top: calc(var(--u) * 277); transform: translateX(-50%); width: calc(var(--u) * 640); margin: 0; padding: calc(var(--u) * 8) calc(var(--u) * 12); gap: calc(var(--u) * 12); border-radius: calc(var(--u) * 10); }
+      body .announce p { font-size: calc(var(--u) * 14.5); }
+      body .an-unit { padding-inline-end: calc(var(--u) * 40); }
+      body .an-unit::after { margin-inline-start: calc(var(--u) * 40); }
       .an-ico { width: calc(var(--u) * 32); height: calc(var(--u) * 32); font-size: calc(var(--u) * 17); }
       .status-wrap { margin-top: calc(var(--u) * 14); gap: calc(var(--u) * 8); }
       .status-pill { padding: calc(var(--u) * 7) calc(var(--u) * 14); gap: calc(var(--u) * 8); font-size: calc(var(--u) * 13); }
@@ -541,13 +544,32 @@
     /* Home: announcement + status */
     body[data-view="timers"] .announce, body[data-view="timers"] .status-wrap { display: none; }
     .announce {
-      display: flex; align-items: flex-start; gap: 12px; width: min(640px, 100%); margin: 14px auto 0; padding: 12px 14px; border-radius: 10px;
+      display: flex; align-items: center; gap: 12px; width: min(560px, 92%); margin: 0 auto 12px; padding: 9px 12px; border-radius: 10px;
       color: #f4ead8; background: linear-gradient(90deg, rgba(64, 48, 28, .95), rgba(20, 15, 10, .95)); border: 1px solid rgba(215, 192, 154, .55);
       box-shadow: 0 0 18px rgba(185, 155, 113, .25), 0 10px 26px rgba(0, 0, 0, .5);
     }
     .an-ico { width: 32px; height: 32px; flex: none; display: grid; place-items: center; border-radius: 50%; color: var(--gold-l); font-size: 17px; border: 1px solid rgba(215, 192, 154, .55); background: #13100a; }
-    .announce p { flex: 1; margin: 5px 0 0; font-size: 14px; line-height: 1.55; white-space: pre-line; overflow-wrap: anywhere; }
-    .an-close { width: 28px; height: 28px; flex: none; border: 0; border-radius: 6px; color: #d7c09a; background: transparent; font-size: 20px; line-height: 1; }
+    .announce p {
+      flex: 1; min-width: 0; margin: 0; overflow: hidden; white-space: nowrap; font-size: 14px; line-height: 1.6;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+    }
+    .announce p { direction: ltr; }
+    .announce p.rtl-text { direction: rtl; }
+    .an-track { display: inline-flex; width: max-content; animation: anMove 20s linear infinite; will-change: transform; }
+    .announce p.rtl-text .an-track { animation-name: anMoveRtl; }
+    .an-item { display: inline-flex; flex: none; }
+    .an-unit { flex: none; padding-inline-end: 34px; }
+    /* crown between repeats, in the same bronze as the 3zReil logo */
+    .an-unit::after {
+      content: ""; display: inline-block; width: 1.15em; height: 1.15em; margin-inline-start: 34px; vertical-align: -.2em;
+      background: linear-gradient(180deg, #f1dfbd, #c9a874 55%, #8f6c45);
+      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M2.5 7.5l4.6 4.2L12 4l4.9 7.7 4.6-4.2-2.2 11H4.7z'/%3E%3Crect x='4.7' y='19.6' width='14.6' height='2' rx='.6'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M2.5 7.5l4.6 4.2L12 4l4.9 7.7 4.6-4.2-2.2 11H4.7z'/%3E%3Crect x='4.7' y='19.6' width='14.6' height='2' rx='.6'/%3E%3C/svg%3E") center / contain no-repeat;
+      filter: drop-shadow(0 0 4px rgba(214, 180, 120, .55));
+    }
+    .announce:hover .an-track { animation-play-state: paused; }       /* hold the mouse on it to read */
+    @keyframes anMove { to { transform: translateX(-50%); } }
+    @keyframes anMoveRtl { to { transform: translateX(50%); } }
+    .an-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
     .status-wrap { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 14px auto 0; }
     .status-pill { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; font-size: 13px; background: rgba(8, 6, 4, .85); border: 1px solid rgba(185, 155, 113, .45); box-shadow: 0 6px 18px rgba(0, 0, 0, .45); }
     .status-pill b { font-weight: 600; color: #eadfc9; }
@@ -816,6 +838,11 @@
 
   <section class="hero" aria-label="3zReil Silkroad PSRO Killer">
     <div class="hero-logo" role="img" aria-label="3zReil &mdash; Silkroad PSRO Killer"></div>
+    <div class="announce" id="announce" role="status" hidden>
+      <span class="an-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h3l6 4V6L6 10H3z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg></span>
+      <span class="an-sr" id="announceSr"></span>
+      <p id="announceText" aria-hidden="true"></p>
+    </div>
     <div class="sides">
       <div class="side left">
         <div class="ring"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M12 8l1.6 3.2 3.4.5-2.5 2.4.6 3.4-3.1-1.6-3.1 1.6.6-3.4L7 11.7l3.4-.5z"/></svg></div>
@@ -865,11 +892,6 @@
       </div>
     </section>
 
-    <div class="announce" id="announce" role="status" hidden>
-      <span class="an-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h3l6 4V6L6 10H3z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg></span>
-      <p id="announceText" dir="auto"></p>
-      <button class="an-close" id="announceClose" type="button" aria-label="Close">&times;</button>
-    </div>
     <div class="status-wrap" id="statusWrap" hidden>
       <div class="status-pill" id="statusPill"><span class="dot" id="statusDot"></span><b id="statusText"></b><span class="st-slots" id="statusSlots"></span></div>
       <button class="chip-btn st-edit" id="homeEditBtn" type="button" hidden>&#9998; <span data-i18n="editHome">Edit</span></button>
@@ -2334,11 +2356,32 @@
       const slots = Number(siteStatus && siteStatus.slots);
       $('statusSlots').textContent = st === 'online' && slots > 0 ? '· ' + T('stSlotsFree', { n: slots }) : '';
       const text = siteAnn && siteAnn.show && String(siteAnn.text || '').trim();
-      let dismissed = '';
-      try { dismissed = localStorage.getItem('annDismissed') || ''; } catch (e) {}
-      $('announceText').textContent = text || '';
-      $('announce').hidden = !text || dismissed === hashText(text);
+      $('announce').hidden = !text;                 // stays up for everyone until the admin switches it off
+      const line = (text || '').replace(/\s*\n+\s*/g, '   •   ');
+      if ($('announceText').dataset.txt !== line) { $('announceText').dataset.txt = line; $('announceSr').textContent = line; buildTicker(); }
     }
+    // the announcement scrolls like a news ticker: enough copies to fill the box, twice, then slide by one copy and repeat
+    function buildTicker() {
+      const box = $('announceText'), text = box.dataset.txt || '';
+      box.textContent = '';
+      tickerWidth = box.clientWidth;
+      if (!text || !tickerWidth) return;                       // hidden right now: built again when it shows (see ResizeObserver)
+      box.classList.toggle('rtl-text', /^[^A-Za-z\u00C0-\u024F\u0590-\u08FF]*[\u0590-\u08FF]/.test(text));   // Arabic moves the other way
+      const unit = () => { const u = document.createElement('span'); u.className = 'an-unit'; u.textContent = text; return u; };
+      const track = document.createElement('span'); track.className = 'an-track';
+      const item = document.createElement('span'); item.className = 'an-item'; item.append(unit());
+      track.append(item); box.append(track);
+      const one = item.getBoundingClientRect().width || 1;
+      for (let i = 1; i < Math.ceil(tickerWidth / one); i++) item.append(unit());
+      track.append(item.cloneNode(true));
+      const speed = 40 * (innerWidth >= 1100 ? innerWidth / 1344 : 1);            // pixels per second (slowed down on request)
+      track.style.animationDuration = Math.max(10, item.getBoundingClientRect().width / speed).toFixed(2) + 's';
+    }
+    let tickerWidth = 0;
+    try {
+      new ResizeObserver(() => { const w = $('announceText').clientWidth; if (w && Math.abs(w - tickerWidth) > 2) buildTicker(); }).observe($('announceText'));
+    } catch (e) {}
+    try { document.fonts.ready.then(() => { if ($('announceText').clientWidth) buildTicker(); }); } catch (e) {}
     function openHomeModal() {
       const st = (siteStatus && siteStatus.state) || 'online';
       document.querySelectorAll('input[name="hsState"]').forEach(r => { r.checked = r.value === st; });
@@ -2807,10 +2850,7 @@
     // Home: status + announcement
     $('homeEditBtn').addEventListener('click', openHomeModal);
     $('homeCancel').addEventListener('click', () => $('homeModal').classList.remove('open'));
-    $('announceClose').addEventListener('click', () => {
-      try { localStorage.setItem('annDismissed', hashText(String((siteAnn && siteAnn.text) || '').trim())); } catch (e) {}
-      $('announce').hidden = true;
-    });
+    try { localStorage.removeItem('annDismissed'); } catch (e) {}   // the old close (x) button is gone
     $('homeForm').addEventListener('submit', async e => {
       e.preventDefault();
       if (!isAdmin) return;
