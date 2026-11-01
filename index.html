@@ -377,6 +377,22 @@
     .set-txt small .dot { display: inline-block; margin-inline-end: 6px; vertical-align: 1px; }
     .set-edit { flex: none; padding: 8px 14px; font-size: 12.5px; }
     .install-row { margin-top: 12px; }
+    .cp-set-row { margin-top: 10px; }
+    .cp-row { display: flex; gap: 8px; }
+    .cp-row input { flex: 1; min-width: 0; text-transform: uppercase; letter-spacing: 1px; }
+    .cp-row .chip-btn { flex: none; padding: 0 16px; }
+    .cp-msg { margin: 7px 0 0; font-size: 12.5px; line-height: 1.5; }
+    .cp-msg.ok { color: #6fe0b4; }
+    .cp-msg.err { color: #ff8b80; }
+    .cp-msg s { color: var(--muted); margin-inline-end: 4px; }
+    .cp-msg b { color: var(--gold-l); }
+    .cp-item { grid-template-columns: minmax(0, 1fr) auto auto; }
+    .er-row.cp-item b { display: inline; letter-spacing: 1px; }
+    .cp-pct { margin-inline-start: 8px; padding: 1px 8px; border-radius: 999px; font-size: 11.5px; font-weight: 700; color: #2b1604; background: linear-gradient(180deg, #c1a479, #93714b); }
+    .cp-item.off { opacity: .55; }
+    .cp-tog { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--muted); cursor: pointer; }
+    .cp-tog input { width: 17px; height: 17px; accent-color: #b99b71; }
+    .req-card .rq-info s { color: var(--muted); }
     .install-help { margin: 8px 0 0; padding: 10px 12px; border-radius: 8px; font-size: 12.5px; line-height: 1.6; color: #eadfc9; background: rgba(185, 155, 113, .1); border: 1px dashed rgba(185, 155, 113, .4); text-align: start; }
     .install-chip { display: inline-flex; align-items: center; gap: 7px; margin-top: 14px; padding: 6px 4px; border: 0; background: none; color: var(--gold-l); font-size: 12.5px; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
     .install-chip svg.i { font-size: 16px; }
@@ -1116,6 +1132,11 @@
           <span class="set-txt"><b data-i18n="homeTitle">Status &amp; announcement</b><small id="setHomeSum"></small></span>
           <button class="add set-edit" id="homeEditBtn" type="button">&#9998; <span data-i18n="editHome">Edit</span></button>
         </div>
+        <div class="set-row cp-set-row">
+          <span class="set-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9V5h18v4a3 3 0 0 0 0 6v4H3v-4a3 3 0 0 0 0-6z"/><path d="M9.5 15l5-6M9.6 9.4h.01M14.4 14.6h.01" style="stroke-width:2.6"/></svg></span>
+          <span class="set-txt"><b data-i18n="cpTitle">Coupons</b><small id="setCouponSum"></small></span>
+          <button class="add set-edit" id="couponBtn" type="button" data-i18n="cpManage">Manage</button>
+        </div>
         <h3 class="pay-head" data-i18n="setDeviceHead">This device</h3>
       </div>
       <p data-i18n="settingsIntro">These settings are saved on this device only.</p>
@@ -1212,6 +1233,10 @@
       <p data-i18n="bookIntro">Send your details and 3zReil will contact you to start.</p>
       <div class="field"><label for="bkName" data-i18n="bkName">In-game name</label><input id="bkName" type="text" dir="auto" maxlength="40" required></div>
       <div class="field"><label for="bkPackage" data-i18n="fPackage">Package</label><select id="bkPackage"></select></div>
+      <div class="field"><label for="bkCoupon"><span data-i18n="bkCoupon">Coupon code</span> <small class="opt" data-i18n="optional">optional</small></label>
+        <div class="cp-row"><input id="bkCoupon" type="text" maxlength="20" autocomplete="off" autocapitalize="characters" spellcheck="false" dir="ltr"><button class="chip-btn" id="bkCouponApply" type="button" data-i18n="bkCouponApply">Apply</button></div>
+        <p class="cp-msg" id="bkCouponMsg" hidden></p>
+      </div>
       <div class="duration two">
         <div class="field"><label for="bkLevel"><span data-i18n="bkLevel">Current level</span> <small class="opt" data-i18n="optional">optional</small></label><input id="bkLevel" type="number" min="1" max="200" inputmode="numeric"></div>
         <div class="field"><label for="bkContact" data-i18n="bkContact">WhatsApp or Discord</label><input id="bkContact" type="text" dir="auto" maxlength="60" required></div>
@@ -1223,6 +1248,31 @@
         <button class="add" id="bkSend" type="submit" data-i18n="bkSend">Send request</button>
       </div>
     </form>
+  </div>
+
+  <div class="backdrop" id="couponModal" role="dialog" aria-modal="true" aria-labelledby="cpTitleH">
+    <div class="frame modal">
+      <span class="gem top"></span>
+      <h2 id="cpTitleH" data-i18n="cpTitle">Coupons</h2>
+      <p data-i18n="cpIntro">Customers type a code in the booking form to get a discount. Every code is checked by the server, and visitors cannot see the list.</p>
+      <div class="er-list" id="cpList"></div>
+      <h3 class="pay-head" data-i18n="cpNew">New coupon</h3>
+      <form id="cpForm">
+        <div class="duration two">
+          <div class="field"><label for="cpCode" data-i18n="cpCode">Code</label><input id="cpCode" type="text" maxlength="20" required placeholder="EID20" dir="ltr" autocomplete="off" autocapitalize="characters" spellcheck="false"></div>
+          <div class="field"><label for="cpPercent" data-i18n="cpPercent">Discount %</label><input id="cpPercent" type="number" min="1" max="90" required inputmode="numeric" placeholder="20"></div>
+        </div>
+        <div class="duration two">
+          <div class="field"><label for="cpEnds"><span data-i18n="cpEnds">Last day</span> <small class="opt" data-i18n="optional">optional</small></label><input id="cpEnds" type="date"></div>
+          <div class="field"><label for="cpMax"><span data-i18n="cpMax">Max uses</span> <small class="opt" data-i18n="optional">optional</small></label><input id="cpMax" type="number" min="1" max="100000" inputmode="numeric"></div>
+        </div>
+        <p class="form-msg" id="cpMsg" hidden></p>
+        <div class="modal-actions">
+          <button class="chip-btn" id="cpClose" type="button" data-i18n="close">Close</button>
+          <button class="add" id="cpAdd" type="submit" data-i18n="cpAdd">Add coupon</button>
+        </div>
+      </form>
+    </div>
   </div>
 
   <div class="backdrop" id="reviewModal" role="dialog" aria-modal="true" aria-labelledby="reviewTitle">
@@ -1416,6 +1466,12 @@
         insteadOf: 'Instead of',
         langLabel: 'Language',
         annOn: 'Announcement: on', annOff: 'Announcement: off',
+        cpOk: '✓ {p}% off', cpInvalid: 'This code is not valid.', cpExpired: 'This code has expired.', cpUsedUp: 'This code was already used up.',
+        cpUnavailable: 'Coupons are not available right now.', cpEmpty: 'No coupons yet.', cpUses: 'used {n}', cpUsesMax: 'used {n} of {m}',
+        cpUntil: 'last day {d}', cpEnded: 'ended', cpActive: 'Active', cpActiveN: '{n} active', cpNoneActive: 'No active coupons',
+        cpBadCode: 'Code: 3 to 20 letters or numbers (no spaces).', cpBadPercent: 'Discount must be between 1 and 90%.',
+        cpExists: 'This code already exists.', cpAdded: 'Coupon added.', confirmDelCoupon: 'Delete coupon {code}?',
+        reqCoupon: 'Coupon', reqPrice: 'Price',
         stSlotsNone: 'all slots taken', nextSlotIn: 'Next free slot in {t}', nextSlotSoon: 'A slot frees up in less than a minute',
         revSent: 'Thank you! Your review will show on the site after approval.',
         revTooMany: 'You already sent reviews today. Thank you!',
@@ -1569,6 +1625,15 @@
         insteadOf: 'بدلًا من',
         langLabel: 'اللغة',
         annOn: 'الإعلان: ظاهر', annOff: 'الإعلان: مخفي',
+        bkCoupon: 'كود الخصم', bkCouponApply: 'تطبيق',
+        cpTitle: 'كوبونات الخصم', cpManage: 'إدارة', cpNew: 'كوبون جديد', cpCode: 'الكود', cpPercent: 'نسبة الخصم %', cpEnds: 'آخر يوم', cpMax: 'أقصى عدد استخدامات', cpAdd: 'إضافة الكوبون',
+        cpIntro: 'العميل يكتب الكود في فورم الحجز فيحصل على الخصم. الخادم يتحقق من كل كود، والزوار لا يمكنهم رؤية القائمة.',
+        cpOk: '✓ خصم {p}%', cpInvalid: 'هذا الكود غير صالح.', cpExpired: 'انتهت صلاحية هذا الكود.', cpUsedUp: 'هذا الكود استُخدم بالكامل.',
+        cpUnavailable: 'الكوبونات غير متاحة الآن.', cpEmpty: 'لا توجد كوبونات بعد.', cpUses: 'استُخدم {n}', cpUsesMax: 'استُخدم {n} من {m}',
+        cpUntil: 'آخر يوم {d}', cpEnded: 'انتهى', cpActive: 'مفعّل', cpActiveN: '{n} مفعّل', cpNoneActive: 'لا توجد كوبونات مفعّلة',
+        cpBadCode: 'الكود: من 3 إلى 20 حرفًا أو رقمًا (بدون مسافات).', cpBadPercent: 'الخصم يجب أن يكون بين 1 و90%.',
+        cpExists: 'هذا الكود موجود بالفعل.', cpAdded: 'تمت إضافة الكوبون.', confirmDelCoupon: 'حذف الكوبون {code}؟',
+        reqCoupon: 'الكوبون', reqPrice: 'السعر',
         stSlotsNone: 'كل الأماكن محجوزة', nextSlotIn: 'أقرب مكان متاح بعد {t}', nextSlotSoon: 'سيتوفر مكان خلال أقل من دقيقة', nextSlotBook: 'احجزه',
         revTitle: 'آراء العملاء', revWrite: 'اكتب رأيك',
         revIntro: 'هل جرّبت التاكسي مع 3zReil؟ شارك تجربتك مع الآخرين. يظهر رأيك في الموقع بعد موافقة 3zReil.',
@@ -1774,6 +1839,15 @@
         insteadOf: 'Normal fiyat:',
         langLabel: 'Dil',
         annOn: 'Duyuru: açık', annOff: 'Duyuru: kapalı',
+        bkCoupon: 'İndirim kodu', bkCouponApply: 'Uygula',
+        cpTitle: 'Kuponlar', cpManage: 'Yönet', cpNew: 'Yeni kupon', cpCode: 'Kod', cpPercent: 'İndirim %', cpEnds: 'Son gün', cpMax: 'En fazla kullanım', cpAdd: 'Kupon ekle',
+        cpIntro: 'Müşteri rezervasyon formuna kodu yazar ve indirim alır. Her kod sunucuda kontrol edilir; ziyaretçiler listeyi göremez.',
+        cpOk: '✓ %{p} indirim', cpInvalid: 'Bu kod geçerli değil.', cpExpired: 'Bu kodun süresi doldu.', cpUsedUp: 'Bu kodun kullanım hakkı bitti.',
+        cpUnavailable: 'Kuponlar şu an kullanılamıyor.', cpEmpty: 'Henüz kupon yok.', cpUses: '{n} kez kullanıldı', cpUsesMax: '{n}/{m} kullanıldı',
+        cpUntil: 'son gün {d}', cpEnded: 'bitti', cpActive: 'Aktif', cpActiveN: '{n} aktif', cpNoneActive: 'Aktif kupon yok',
+        cpBadCode: 'Kod: 3-20 harf veya rakam (boşluksuz).', cpBadPercent: 'İndirim %1 ile %90 arasında olmalı.',
+        cpExists: 'Bu kod zaten var.', cpAdded: 'Kupon eklendi.', confirmDelCoupon: '{code} kuponu silinsin mi?',
+        reqCoupon: 'Kupon', reqPrice: 'Fiyat',
         stSlotsNone: 'tüm yerler dolu', nextSlotIn: 'Sıradaki boş yer: {t} sonra', nextSlotSoon: 'Bir dakikadan kısa sürede yer açılıyor', nextSlotBook: 'Yer ayırt',
         revTitle: 'Müşteri yorumları', revWrite: 'Yorum yaz',
         revIntro: '3zReil ile çalıştın mı? Deneyimini başkalarına anlat. Yorumun 3zReil onayladıktan sonra sitede görünür.',
@@ -1979,6 +2053,15 @@
         insteadOf: 'Au lieu de',
         langLabel: 'Langue',
         annOn: 'Annonce : affichée', annOff: 'Annonce : masquée',
+        bkCoupon: 'Code promo', bkCouponApply: 'Appliquer',
+        cpTitle: 'Codes promo', cpManage: 'Gérer', cpNew: 'Nouveau code', cpCode: 'Code', cpPercent: 'Réduction %', cpEnds: 'Dernier jour', cpMax: 'Utilisations max', cpAdd: 'Ajouter le code',
+        cpIntro: 'Le client saisit le code dans le formulaire de réservation pour obtenir la réduction. Chaque code est vérifié par le serveur et les visiteurs ne peuvent pas voir la liste.',
+        cpOk: '✓ -{p} %', cpInvalid: 'Ce code n\'est pas valide.', cpExpired: 'Ce code a expiré.', cpUsedUp: 'Ce code a déjà été entièrement utilisé.',
+        cpUnavailable: 'Les codes promo ne sont pas disponibles pour le moment.', cpEmpty: 'Aucun code pour l\'instant.', cpUses: 'utilisé {n} fois', cpUsesMax: 'utilisé {n}/{m}',
+        cpUntil: 'dernier jour {d}', cpEnded: 'terminé', cpActive: 'Actif', cpActiveN: '{n} actif(s)', cpNoneActive: 'Aucun code actif',
+        cpBadCode: 'Code : 3 à 20 lettres ou chiffres (sans espaces).', cpBadPercent: 'La réduction doit être entre 1 et 90 %.',
+        cpExists: 'Ce code existe déjà.', cpAdded: 'Code ajouté.', confirmDelCoupon: 'Supprimer le code {code} ?',
+        reqCoupon: 'Code promo', reqPrice: 'Prix',
         stSlotsNone: 'toutes les places sont prises', nextSlotIn: 'Prochaine place libre dans {t}', nextSlotSoon: 'Une place se libère dans moins d\'une minute', nextSlotBook: 'Réserver',
         revTitle: 'Avis des clients', revWrite: 'Laisser un avis',
         revIntro: 'Vous avez joué avec 3zReil ? Racontez votre expérience. Votre avis apparaît sur le site après validation par 3zReil.',
@@ -2702,6 +2785,9 @@
           <div class="rq-info">
             <span><em>${escapeHtml(T('fPackage'))}:</em> ${escapeHtml(r.package ? pkgShow(r.package) : T('pkgNotSureShort'))}</span>
             ${r.level ? `<span><em>${escapeHtml(T('bkLevel'))}:</em> ${escapeHtml(r.level)}</span>` : ''}
+            ${r.coupon ? `<span><em>${escapeHtml(T('reqCoupon'))}:</em> ${escapeHtml(r.coupon)} (-${escapeHtml(r.discount_percent)}%)</span>` : ''}
+            ${(() => { const i = findPackage(r.package); if (i < 0) return ''; const full = PACKAGES[i].price, pay = r.discount_percent ? afterDiscount(full, r.discount_percent) : full;
+              return `<span><em>${escapeHtml(T('reqPrice'))}:</em> ${pay !== full ? `<s>${full.toLocaleString('en-US')}</s> ` : ''}${escapeHtml(silkText(pay))}</span>`; })()}
             <span><em>${escapeHtml(T('bkContact'))}:</em> <bdi>${escapeHtml(r.contact || '-')}</bdi></span>
             ${r.notes ? `<span><em>${escapeHtml(T('bkNotes'))}:</em> <bdi>${escapeHtml(r.notes)}</bdi></span>` : ''}
           </div>
@@ -2838,6 +2924,98 @@
       }
       msg.className = 'form-msg ok'; msg.textContent = T('revSent');
       setTimeout(() => $('reviewModal').classList.remove('open'), 2600);
+    });
+
+
+    /* ---------- coupons ---------- */
+    const afterDiscount = (price, pct) => Math.round(Number(price) * (100 - Number(pct)) / 100);
+    let bkCoupon = null;                    // { code, percent } once the server said the code is fine
+    function showCouponMsg(problem) {
+      const m = $('bkCouponMsg');
+      if (problem) { m.hidden = false; m.className = 'cp-msg err'; m.textContent = T({ invalid: 'cpInvalid', expired: 'cpExpired', used_up: 'cpUsedUp', off: 'cpUnavailable' }[problem] || 'cpInvalid'); return; }
+      if (!bkCoupon) { m.hidden = true; m.textContent = ''; return; }
+      const i = $('bkPackage').value, p = i !== '' && PACKAGES[i] ? PACKAGES[i] : null;
+      m.hidden = false; m.className = 'cp-msg ok';
+      m.innerHTML = escapeHtml(T('cpOk', { p: bkCoupon.percent })) +
+        (p ? ` &nbsp;·&nbsp; <s>${p.price.toLocaleString('en-US')}</s><b>${escapeHtml(silkText(afterDiscount(p.price, bkCoupon.percent)))}</b>` : '');
+    }
+    async function applyCoupon() {
+      const code = $('bkCoupon').value.trim().toUpperCase();
+      $('bkCoupon').value = code;
+      bkCoupon = null;
+      if (!code) { showCouponMsg(); return true; }
+      const { data, error } = await db.rpc('check_coupon', { p_code: code });
+      if (error) { showCouponMsg('off'); return false; }
+      if (!data || !data.ok) { showCouponMsg((data && data.reason) || 'invalid'); return false; }
+      bkCoupon = { code: data.code, percent: data.percent };
+      showCouponMsg();
+      return true;
+    }
+    $('bkCouponApply').addEventListener('click', () => applyCoupon());
+    $('bkCoupon').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); applyCoupon(); } });
+    $('bkCoupon').addEventListener('input', () => { if (bkCoupon && $('bkCoupon').value.trim().toUpperCase() !== bkCoupon.code) { bkCoupon = null; showCouponMsg(); } else if (!bkCoupon) $('bkCouponMsg').hidden = true; });
+    $('bkPackage').addEventListener('change', () => { if (bkCoupon) showCouponMsg(); });
+
+    // admin: make, switch off and delete coupons
+    let coupons = [], couponsOk = null;
+    async function loadCoupons() {
+      if (!isAdmin) return;
+      const { data, error } = await db.from('coupons').select('*').order('created_at', { ascending: false });
+      if (error) { couponsOk = false; coupons = []; } else { couponsOk = true; coupons = data || []; }
+      renderCoupons();
+    }
+    const couponLive = c => c.active && !(c.expires_at && Date.parse(c.expires_at) <= Date.now()) && !(c.max_uses && c.uses >= c.max_uses);
+    function renderCoupons() {
+      const live = coupons.filter(couponLive).length;
+      $('setCouponSum').textContent = couponsOk === false ? T('setupNeeded') : live ? T('cpActiveN', { n: live }) : T('cpNoneActive');
+      if (couponsOk === false) { $('cpList').innerHTML = `<div class="er-empty">${escapeHtml(T('setupNeeded'))}</div>`; return; }
+      $('cpList').innerHTML = coupons.length ? coupons.map(c => {
+        const ended = c.expires_at && Date.parse(c.expires_at) <= Date.now();
+        const bits = [c.max_uses ? T('cpUsesMax', { n: c.uses || 0, m: c.max_uses }) : T('cpUses', { n: c.uses || 0 })];
+        if (c.expires_at) bits.push(ended ? T('cpEnded') : T('cpUntil', { d: dayText(c.expires_at) }));
+        return `
+        <div class="er-row cp-item ${couponLive(c) ? '' : 'off'}">
+          <div><b>${escapeHtml(c.code)}</b><span class="cp-pct">-${escapeHtml(c.percent)}%</span><small>${escapeHtml(bits.join(' · '))}</small></div>
+          <label class="cp-tog"><input type="checkbox" data-cp-toggle="${escapeHtml(c.code)}" ${c.active ? 'checked' : ''}><span>${escapeHtml(T('cpActive'))}</span></label>
+          <button class="x" type="button" data-cp-del="${escapeHtml(c.code)}" title="${escapeHtml(T('delete'))}" aria-label="${escapeHtml(T('delete'))}">&times;</button>
+        </div>`; }).join('') : `<div class="er-empty">${escapeHtml(T('cpEmpty'))}</div>`;
+    }
+    $('couponBtn').addEventListener('click', () => {
+      $('settingsModal').classList.remove('open');
+      $('cpForm').reset(); $('cpMsg').hidden = true;
+      $('couponModal').classList.add('open');
+      renderCoupons(); loadCoupons();
+    });
+    $('cpClose').addEventListener('click', () => $('couponModal').classList.remove('open'));
+    $('cpForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const msg = $('cpMsg'), code = $('cpCode').value.trim().toUpperCase(), pct = parseInt($('cpPercent').value, 10);
+      const fail = t => { msg.hidden = false; msg.className = 'form-msg err'; msg.textContent = t; };
+      if (!/^[A-Z0-9_-]{3,20}$/.test(code)) return fail(T('cpBadCode'));
+      if (!(pct >= 1 && pct <= 90)) return fail(T('cpBadPercent'));
+      const row = { code, percent: pct };
+      if ($('cpEnds').value) { const [y, m, d] = $('cpEnds').value.split('-').map(Number); row.expires_at = new Date(y, m - 1, d, 23, 59, 59).toISOString(); }
+      if ($('cpMax').value) row.max_uses = Math.max(1, parseInt($('cpMax').value, 10));
+      $('cpAdd').disabled = true;
+      const { error } = await db.from('coupons').insert(row);
+      $('cpAdd').disabled = false;
+      if (error) return fail(/duplicate|already exists|unique/i.test(error.message) ? T('cpExists') : /relation|does not exist|schema cache/i.test(error.message) ? T('setupNeeded') : error.message);
+      msg.hidden = false; msg.className = 'form-msg ok'; msg.textContent = T('cpAdded');
+      $('cpForm').reset();
+      loadCoupons();
+    });
+    $('cpList').addEventListener('change', async e => {
+      const t = e.target.closest('[data-cp-toggle]'); if (!t) return;
+      const { error } = await db.from('coupons').update({ active: t.checked }).eq('code', t.dataset.cpToggle);
+      if (error) showNotice(error.message || T('nWrong'), 'error');
+      loadCoupons();
+    });
+    $('cpList').addEventListener('click', async e => {
+      const d = e.target.closest('[data-cp-del]'); if (!d) return;
+      if (!confirm(T('confirmDelCoupon', { code: d.dataset.cpDel }))) return;
+      const { error } = await db.from('coupons').delete().eq('code', d.dataset.cpDel);
+      if (error) showNotice(error.message || T('nWrong'), 'error');
+      loadCoupons();
     });
 
     /* ---------- install as an app (phone home screen) ---------- */
@@ -3199,7 +3377,10 @@
       if (prefill) {
         $('timerName').value = prefill.name || '';
         const idx = findPackage(prefill.pkg);
-        if (idx >= 0) { $('pkgSelect').value = String(idx); applyPackage(idx); }
+        if (idx >= 0) {
+          $('pkgSelect').value = String(idx); applyPackage(idx);
+          if (prefill.discount) $('priceSilk').value = afterDiscount(PACKAGES[idx].price, prefill.discount);   // price after the coupon
+        }
         pendingRequestId = prefill.requestId ?? null;
       }
       $('timerModal').classList.add('open');
@@ -3210,7 +3391,7 @@
       $('hours').value = p.hours; $('minutes').value = 0; $('seconds').value = 0; $('priceSilk').value = p.price;
     }
     const closeModal = () => { $('timerModal').classList.remove('open'); };
-    const closeAll = () => { closeModal(); closeTimeModal(); ['aboutModal', 'settingsModal', 'paymentModal', 'statsModal', 'bookModal', 'reqModal', 'homeModal', 'reviewModal'].forEach(id => $(id).classList.remove('open')); };
+    const closeAll = () => { closeModal(); closeTimeModal(); ['aboutModal', 'settingsModal', 'paymentModal', 'statsModal', 'bookModal', 'reqModal', 'homeModal', 'reviewModal', 'couponModal'].forEach(id => $(id).classList.remove('open')); };
 
     $('loginBtn').addEventListener('click', async () => {
       const { error } = await db.auth.signInWithOAuth({
@@ -3307,6 +3488,7 @@
     $('bookBtn').addEventListener('click', () => {
       $('bookForm').reset(); fillPackageSelects(); $('bkPackage').value = '';
       $('bkMsg').hidden = true; $('bkSend').disabled = false;
+      bkCoupon = null; showCouponMsg();
       $('bookModal').classList.add('open'); $('bkName').focus();
     });
     $('bkCancel').addEventListener('click', () => $('bookModal').classList.remove('open'));
@@ -3317,14 +3499,21 @@
       const pIdx = $('bkPackage').value;
       const levelRaw = $('bkLevel').value.trim();
       const msg = $('bkMsg'), send = $('bkSend');
+      // a code typed but not applied yet: check it first
+      if ($('bkCoupon').value.trim() && (!bkCoupon || bkCoupon.code !== $('bkCoupon').value.trim().toUpperCase())) {
+        if (!(await applyCoupon())) return;
+      }
       send.disabled = true;
-      const { error } = await db.rpc('create_booking', {
+      const args = {
         p_visitor: visitorId, p_ign: ign, p_package: pIdx !== '' && PACKAGES[pIdx] ? PACKAGES[pIdx].name : null,
         p_level: levelRaw === '' ? null : parseInt(levelRaw, 10), p_contact: contact, p_notes: $('bkNotes').value.trim() || null
-      });
+      };
+      if (bkCoupon) args.p_coupon = bkCoupon.code;
+      const { error } = await db.rpc('create_booking', args);
       msg.hidden = false;
       if (error) {
         send.disabled = false; msg.className = 'form-msg err';
+        if (/coupon/i.test(error.message)) { bkCoupon = null; showCouponMsg('invalid'); msg.hidden = true; return; }
         msg.textContent = /too many/i.test(error.message) ? T('bkTooMany') : /function|schema cache|does not exist/i.test(error.message) ? T('bkUnavailable') : T('bkFailed');
         return;
       }
@@ -3342,7 +3531,7 @@
       if (acc) {
         const r = requests.find(x => String(x.id) === acc.dataset.reqAccept); if (!r) return;
         $('reqModal').classList.remove('open');
-        openModal({ name: r.ign, pkg: r.package, requestId: r.id });
+        openModal({ name: r.ign, pkg: r.package, requestId: r.id, discount: r.discount_percent });
       } else if (del) {
         if (!confirm(T('confirmDelRequest'))) return;
         const { error } = await db.from('bookings').delete().eq('id', del.dataset.reqDel);
@@ -3361,6 +3550,7 @@
       $('warnToggle').checked = pref('warn10', true);
       $('notifyToggle').checked = notifyOn();
       $('settingsModal').classList.add('open');
+      if (isAdmin) loadCoupons();
     });
     $('closeSettingsBtn').addEventListener('click', () => $('settingsModal').classList.remove('open'));
     $('soundToggle').addEventListener('change', e => setPref('sfx', e.target.checked));
@@ -3453,8 +3643,8 @@
       setupPayment(); fillPackageSelects(); updateAccountUI(); updateHoldUI();
       if (lastSync) setSync(lastSync[0], lastSync[1]);
       if (!$('timerGrid').querySelector('.loading')) renderTimers();
-      renderReviews(); updateInstallUI();
-      if (isAdmin) { renderEarnings(); renderHistory(); renderRequests(); renderAdminReviews(); }
+      renderReviews(); updateInstallUI(); showCouponMsg();
+      if (isAdmin) { renderEarnings(); renderHistory(); renderRequests(); renderAdminReviews(); renderCoupons(); }
     }
     function fitNav() {
       const nav = $('top'), menu = nav.querySelector('.menu');
