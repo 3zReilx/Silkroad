@@ -314,6 +314,14 @@
       .menu { position: absolute; left: calc(var(--u) * 382); top: 0; bottom: 0; overflow: visible; gap: calc(var(--u) * 6); }
       .menu a, .menu button { padding: 0 calc(var(--u) * 23); gap: calc(var(--u) * 10); font-size: calc(var(--u) * 15); }
       .menu svg.i { font-size: calc(var(--u) * 17); }
+      .visitors { gap: calc(var(--u) * 18); margin-top: calc(var(--u) * 14); padding: calc(var(--u) * 10) calc(var(--u) * 20); border-radius: calc(var(--u) * 12); }
+      .vs-item small { font-size: calc(var(--u) * 10); }
+      .vs-item b { font-size: calc(var(--u) * 22); gap: calc(var(--u) * 6); }
+      .vs-main { gap: calc(var(--u) * 10); }
+      .vs-main b { font-size: calc(var(--u) * 28); }
+      .vs-ico { width: calc(var(--u) * 36); height: calc(var(--u) * 36); font-size: calc(var(--u) * 18); }
+      .vs-sep { height: calc(var(--u) * 30); }
+      .nav-badge { min-width: calc(var(--u) * 18); height: calc(var(--u) * 18); font-size: calc(var(--u) * 10.5); padding: 0 calc(var(--u) * 5); }
       .user { position: absolute; right: calc(var(--u) * 56); top: 0; bottom: 0; gap: calc(var(--u) * 11); padding: 0; }
       .avatar { width: calc(var(--u) * 34); height: calc(var(--u) * 34); font-size: calc(var(--u) * 18); }
       .user-text .mail { max-width: calc(var(--u) * 190); font-size: calc(var(--u) * 12.5); }
@@ -469,6 +477,49 @@
     .ab-actions { justify-content: center; }
     @media (max-width: 420px) { .about-modal { padding: 26px 16px 20px; } .ab-card { padding: 8px; gap: 6px; } .ab-tile { padding: 9px 10px; gap: 8px; } .ab-ico { width: 30px; height: 30px; font-size: 14px; } .modal h2.ab-title { font-size: 32px; } }
 
+    /* Visitors bar on Home (everyone sees it) */
+    body[data-view="timers"] .visitors { display: none; }
+    .visitors {
+      display: flex; align-items: center; justify-content: center; gap: 18px; width: max-content; max-width: 100%;
+      margin: 14px auto 0; padding: 10px 20px; border-radius: 12px;
+      background: linear-gradient(180deg, rgba(20, 16, 11, .92), rgba(10, 8, 6, .92));
+      border: 1px solid rgba(185, 155, 113, .45);
+      box-shadow: inset 0 0 14px rgba(169, 137, 97, .1), 0 8px 24px rgba(0, 0, 0, .45);
+    }
+    .vs-item { display: flex; flex-direction: column; align-items: center; min-width: 0; }
+    .vs-item small { font-size: 10px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--muted); }
+    .vs-item b { display: flex; align-items: center; gap: 6px; font: 700 22px/1.15 Rajdhani, Impact, sans-serif; color: #eadfc9; font-variant-numeric: tabular-nums; }
+    .vs-main { flex-direction: row; gap: 10px; }
+    .vs-main > span:last-child { display: flex; flex-direction: column; align-items: flex-start; }
+    .vs-main b { font-size: 28px; color: var(--gold-l); }
+    .vs-ico { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; color: var(--gold-l); font-size: 18px; background: #13100a; border: 1px solid rgba(185, 155, 113, .45); }
+    .vs-sep { width: 1px; height: 30px; background: linear-gradient(180deg, transparent, rgba(185, 155, 113, .5), transparent); }
+    @media (max-width: 380px) { .visitors { gap: 12px; padding: 10px 14px; } .vs-main b { font-size: 24px; } .vs-item b { font-size: 19px; } }
+
+    /* Visitors window (admin only) */
+    .nav-badge { min-width: 18px; height: 18px; padding: 0 5px; display: inline-grid; place-items: center; border-radius: 999px; font-size: 10.5px; font-weight: 700; color: #0b2a20; background: #3fe0b0; }
+    .stats-modal { width: min(520px, 100%); }
+    .st-live { display: flex; align-items: center; gap: 8px; margin: 14px 0 12px; padding: 10px 14px; border-radius: 9px; font-size: 13px; color: #e6dac4; background: #0d0a07; border: 1px solid rgba(185, 155, 113, .25); }
+    .st-live b { font: 700 22px/1 Rajdhani, Impact, sans-serif; color: #3fe0b0; }
+    .st-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+    .st-card { padding: 10px 10px 9px; border-radius: 8px; text-align: center; background: linear-gradient(180deg, #14100b, #0d0a07); border: 1px solid rgba(185, 155, 113, .25); }
+    .st-card small { display: block; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+    .st-card b { display: block; margin: 4px 0 2px; font: 700 28px/1 Rajdhani, Impact, sans-serif; color: var(--gold-l); }
+    .st-card span { font-size: 11px; color: #cfc3ad; }
+    .st-card i { font-style: normal; font-weight: 600; color: #eadfc9; }
+    .st-chart { display: grid; grid-template-columns: repeat(14, minmax(0, 1fr)); align-items: end; gap: 4px; height: 120px; padding: 8px 6px 0; border-radius: 8px; background: #0b0906; border: 1px solid rgba(185, 155, 113, .18); }
+    .st-col { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; min-width: 0; }
+    .st-bar { width: 100%; min-height: 2px; border-radius: 3px 3px 0 0; background: linear-gradient(180deg, #d7c09a, #93714b); }
+    .st-col.today .st-bar { background: linear-gradient(180deg, #7ff0cc, #2a9c7a); }
+    .st-col em { font-style: normal; font-size: 9.5px; color: #eadfc9; margin-bottom: 2px; }
+    .st-col span { margin-top: 4px; font-size: 9.5px; color: var(--muted); }
+    .st-split { display: flex; height: 28px; overflow: hidden; border-radius: 7px; border: 1px solid rgba(185, 155, 113, .25); font-size: 11.5px; font-weight: 600; }
+    .st-split div { display: grid; place-items: center; min-width: 0; white-space: nowrap; overflow: hidden; }
+    .st-split .ph { color: #24190f; background: linear-gradient(180deg, #d7c09a, #a5845a); }
+    .st-split .pc { color: #eadfc9; background: #1d1711; }
+    .modal p.st-note { margin-top: 12px; font-size: 11.5px; }
+    @media (max-width: 480px) { .st-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .st-chart { gap: 2px; } .st-col span { font-size: 8.5px; } }
+
     /* Payment window */
     .pay-modal { width: min(480px, 100%); }
     .pay-head { display: flex; align-items: center; gap: 10px; margin: 18px 0 8px; font: 600 12px Inter, sans-serif; letter-spacing: 1.6px; color: #fff; text-transform: uppercase; }
@@ -577,6 +628,7 @@
       <a href="#timers" data-nav="timers"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 3h6"/></svg>Timers</a>
       <button type="button" id="settingsBtn"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg>Settings</button>
       <button type="button" id="aboutBtn"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>About</button>
+      <button type="button" id="statsBtn" hidden><svg class="i" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Stats<span class="nav-badge" id="statsBadge" hidden></span></button>
     </nav>
 
     <div class="user">
@@ -643,12 +695,23 @@
 
     <a class="all-link" href="#timers"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 3h6"/></svg>Open Timers<span class="count" id="homeCount"></span>&rarr;</a>
 
+    <section class="visitors" id="visitorsBox" aria-label="Visitors" hidden>
+      <div class="vs-item vs-main">
+        <span class="vs-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
+        <span><small>Visitors</small><b id="vsAll">0</b></span>
+      </div>
+      <i class="vs-sep" aria-hidden="true"></i>
+      <div class="vs-item"><small>Today</small><b id="vsToday">0</b></div>
+      <i class="vs-sep" aria-hidden="true"></i>
+      <div class="vs-item"><small>Online now</small><b><span class="dot ok"></span><span id="vsOnline">1</span></b></div>
+    </section>
+
     <section class="frame welcome" aria-label="Welcome">
       <span class="gem top"></span><span class="gem bot"></span>
       <div class="orn" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><path d="M4 20L20 4M15 4h5v5M4 4l16 16M4 9V4h5"/></svg></div>
       <h2>Welcome everyone to my official website!</h2>
       <p>I'm a long-term taxi, here to make some profit to be honest with you (but in a gentle way) &mdash; as friends and business at the same time.</p>
-      <button class="add pay-btn" id="paymentBtn" type="button"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="6.5" rx="7" ry="3"/><path d="M5 6.5v5c0 1.7 3.1 3 7 3s7-1.3 7-3v-5M5 11.5v5c0 1.7 3.1 3 7 3s7-1.3 7-3v-5"/></svg>Payment</button>
+      <button class="add pay-btn" id="paymentBtn" type="button"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="6.5" rx="7" ry="3"/><path d="M5 6.5v5c0 1.7 3.1 3 7 3s7-1.3 7-3v-5M5 11.5v5c0 1.7 3.1 3 7 3s7-1.3 7-3v-5"/></svg>Payment List</button>
     </section>
 
     <section class="frame list" id="timersPanel" aria-label="Timers">
@@ -741,7 +804,7 @@
   <div class="backdrop" id="paymentModal" role="dialog" aria-modal="true" aria-labelledby="paymentTitle">
     <div class="frame modal pay-modal">
       <span class="gem top"></span>
-      <h2 id="paymentTitle">Payment</h2>
+      <h2 id="paymentTitle">Payment List</h2>
       <p>Payments of the taxi. You may ask for a discount if you are a long-term customer with me.</p>
 
       <h3 class="pay-head">Prices</h3>
@@ -754,6 +817,30 @@
       <div class="modal-actions">
         <a class="chip-btn" id="payAskBtn" href="#" target="_blank" rel="noopener noreferrer" hidden>Ask for a discount on WhatsApp</a>
         <button class="add" id="closePaymentBtn" type="button">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="backdrop" id="statsModal" role="dialog" aria-modal="true" aria-labelledby="statsTitle">
+    <div class="frame modal stats-modal">
+      <span class="gem top"></span>
+      <h2 id="statsTitle">Visitors</h2>
+      <p>Only you can see this. Your own visits as admin are not counted.</p>
+      <div class="st-live"><span class="dot ok"></span><b id="statOnline">0</b><span>on the site right now</span></div>
+      <div class="st-grid">
+        <div class="st-card"><small>Today</small><b id="stTodayU">&ndash;</b><span><i id="stTodayV">&ndash;</i> visits</span></div>
+        <div class="st-card"><small>Last 7 days</small><b id="st7U">&ndash;</b><span><i id="st7V">&ndash;</i> visits</span></div>
+        <div class="st-card"><small>Last 30 days</small><b id="st30U">&ndash;</b><span><i id="st30V">&ndash;</i> visits</span></div>
+        <div class="st-card"><small>All time</small><b id="stAllU">&ndash;</b><span><i id="stAllV">&ndash;</i> visits</span></div>
+      </div>
+      <h3 class="pay-head">People per day &middot; last 14 days</h3>
+      <div class="st-chart" id="stChart"></div>
+      <h3 class="pay-head">Phone vs computer &middot; last 30 days</h3>
+      <div class="st-split" id="stSplit"></div>
+      <p class="st-note" id="stNote">People = different phones or computers. A visit counts again after 30 minutes away.</p>
+      <div class="modal-actions">
+        <button class="chip-btn" id="refreshStatsBtn" type="button">Refresh</button>
+        <button class="add" id="closeStatsBtn" type="button">Close</button>
       </div>
     </div>
   </div>
@@ -1052,6 +1139,100 @@
     ['pointerdown', 'keydown', 'touchstart'].forEach(ev => document.addEventListener(ev, unlockAudio, { passive: true }));
     setTimeout(() => { if (!audioUnlocked && soundOn()) $('soundHint').hidden = false; }, 1200);
 
+    /* ---------- visitors: counted in Supabase, admin sees totals in the Stats window ---------- */
+    const visitorId = (() => {
+      try {
+        let v = localStorage.getItem('vid');
+        if (!v) {
+          const a = new Uint8Array(12); crypto.getRandomValues(a);
+          v = Array.from(a, b => b.toString(16).padStart(2, '0')).join('');
+          localStorage.setItem('vid', v);
+        }
+        return v;
+      } catch (e) { return 'tmp' + Math.random().toString(16).slice(2, 14) + Date.now().toString(16); }
+    })();
+    const isPhoneDevice = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+    let onlineNow = 0, presenceChannel = null, visitLogged = false;
+
+    async function logVisit() {
+      if (isAdmin || visitLogged) return;                 // your own visits as admin are not counted
+      visitLogged = true;
+      try { if (Date.now() - Number(localStorage.getItem('vlog') || 0) < 30 * 60 * 1000) return; } catch (e) {}
+      const { error } = await db.rpc('log_visit', { p_visitor: visitorId, p_device: isPhoneDevice ? 'mobile' : 'desktop', p_signed_in: !!currentUser });
+      if (!error) { try { localStorage.setItem('vlog', String(Date.now())); } catch (e) {} }
+    }
+
+    function presenceMeta() { return { admin: isAdmin, device: isPhoneDevice ? 'mobile' : 'desktop' }; }
+    function startPresence() {
+      if (presenceChannel) return;
+      presenceChannel = db.channel('site-presence', { config: { presence: { key: visitorId } } });
+      presenceChannel
+        .on('presence', { event: 'sync' }, () => {
+          let state = {};
+          try { state = presenceChannel.presenceState() || {}; } catch (e) {}
+          onlineNow = Object.values(state).filter(list => !list.some(m => m.admin)).length;   // people on the site now, not counting you
+          updateOnline();
+        })
+        .subscribe(status => { if (status === 'SUBSCRIBED') { try { presenceChannel.track(presenceMeta()); } catch (e) {} } });
+    }
+    // Public visitor numbers for the Home bar (shown only once Supabase answers, so no fake zeros)
+    let publicCounts = null;
+    function countUp(el, to) {
+      const from = Number(el.dataset.v || 0); el.dataset.v = to;
+      if (from === to) { el.textContent = Number(to).toLocaleString('en-US'); return; }
+      const t0 = performance.now(), dur = 900;
+      const step = now => {
+        const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+        el.textContent = Math.round(from + (to - from) * e).toLocaleString('en-US');
+        if (k < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+    async function loadPublicCounts() {
+      try {
+        const { data, error } = await db.rpc('visitor_counts');
+        if (error || !data) return;
+        publicCounts = typeof data === 'string' ? JSON.parse(data) : data;
+        $('visitorsBox').hidden = false;
+        countUp($('vsAll'), Number(publicCounts.all_unique) || 0);
+        countUp($('vsToday'), Number(publicCounts.today_unique) || 0);
+        updateOnline();
+      } catch (e) { /* the bar simply stays hidden */ }
+    }
+
+    function updateOnline() {
+      $('vsOnline').textContent = Math.max(onlineNow, isAdmin ? 0 : 1);      // a visitor always counts himself
+      $('statOnline').textContent = onlineNow;
+      $('statsBadge').textContent = onlineNow;
+      $('statsBadge').hidden = !isAdmin || !onlineNow;
+    }
+
+    async function loadStats() {
+      $('stNote').textContent = 'Loading...';
+      const { data, error } = await db.rpc('visit_stats');
+      if (error) {
+        $('stNote').textContent = /function|does not exist|schema cache/i.test(error.message)
+          ? 'One-time setup needed: run the visitors SQL in Supabase, then press Refresh.'
+          : 'Could not load the numbers: ' + error.message;
+        return;
+      }
+      const d = typeof data === 'string' ? JSON.parse(data) : data;
+      const n = v => Number(v || 0).toLocaleString('en-US');
+      [['stTodayU', d.today_unique], ['stTodayV', d.today_visits], ['st7U', d.d7_unique], ['st7V', d.d7_visits],
+       ['st30U', d.d30_unique], ['st30V', d.d30_visits], ['stAllU', d.all_unique], ['stAllV', d.all_visits]].forEach(([id, v]) => { $(id).textContent = n(v); });
+      const days = d.daily || [];
+      const max = Math.max(1, ...days.map(x => Number(x.unique) || 0));
+      $('stChart').innerHTML = days.map((x, i) => {
+        const u = Number(x.unique) || 0, day = String(x.day).slice(8, 10);
+        return `<div class="st-col${i === days.length - 1 ? ' today' : ''}" title="${escapeHtml(x.day)}: ${u} people, ${Number(x.visits) || 0} visits"><em>${u || ''}</em><div class="st-bar" style="height:${Math.round(u / max * 82)}%"></div><span>${day}</span></div>`;
+      }).join('');
+      const ph = Number(d.d30_mobile) || 0, pc = Number(d.d30_desktop) || 0, tot = ph + pc;
+      $('stSplit').innerHTML = tot
+        ? `<div class="ph" style="width:${Math.max(ph / tot * 100, ph ? 12 : 0)}%">📱 ${ph}</div><div class="pc" style="flex:1">💻 ${pc}</div>`
+        : '<div class="pc" style="flex:1">No visits yet</div>';
+      $('stNote').textContent = 'People = different phones or computers. A visit counts again after 30 minutes away.';
+    }
+
     function updateAccountUI() {
       const role = isAdmin ? 'Administrator' : 'Viewer';
       // The admin's email is never shown on the page; the admin appears as "3zReil".
@@ -1061,6 +1242,9 @@
       $('loginBtn').hidden = !!currentUser;
       $('logoutBtn').hidden = !currentUser;
       $('addTimerBtn').hidden = !isAdmin;
+      $('statsBtn').hidden = !isAdmin;
+      if (presenceChannel) { try { presenceChannel.track(presenceMeta()); } catch (e) {} }
+      updateOnline();
       renderTimers();
     }
 
@@ -1341,7 +1525,7 @@
       $('timerName').focus();
     }
     const closeModal = () => $('timerModal').classList.remove('open');
-    const closeAll = () => { closeModal(); closeTimeModal(); ['aboutModal', 'settingsModal', 'paymentModal'].forEach(id => $(id).classList.remove('open')); };
+    const closeAll = () => { closeModal(); closeTimeModal(); ['aboutModal', 'settingsModal', 'paymentModal', 'statsModal'].forEach(id => $(id).classList.remove('open')); };
 
     $('loginBtn').addEventListener('click', async () => {
       const { error } = await db.auth.signInWithOAuth({
@@ -1387,6 +1571,9 @@
     });
 
     $('aboutBtn').addEventListener('click', () => $('aboutModal').classList.add('open'));
+    $('statsBtn').addEventListener('click', () => { $('statsModal').classList.add('open'); loadStats(); });
+    $('refreshStatsBtn').addEventListener('click', loadStats);
+    $('closeStatsBtn').addEventListener('click', () => $('statsModal').classList.remove('open'));
     $('closeAboutBtn').addEventListener('click', () => $('aboutModal').classList.remove('open'));
 
     if (!('speechSynthesis' in window)) $('voiceToggle').closest('.toggle').hidden = true;
@@ -1503,6 +1690,8 @@
       isAdmin = isAdminEmail(currentUser?.email);
       updateAccountUI();
       await loadTimers();
+      logVisit().catch(() => {}).then(loadPublicCounts);
+      setInterval(loadPublicCounts, 60000);
 
       db.auth.onAuthStateChange((_event, session) => {
         currentUser = session?.user || null;
@@ -1519,6 +1708,9 @@
       clearInterval(pollHandle);
       pollHandle = setInterval(loadTimers, 15000);
       setInterval(tick, 1000);
+
+      // live "on the site right now" count; started last and fenced off so it can never stop the timers from working
+      try { startPresence(); } catch (e) { /* the count is optional */ }
     }
 
     init().catch(error => {
