@@ -398,8 +398,36 @@
     .install-chip svg.i { font-size: 16px; }
     .welcome .install-help { max-width: 420px; margin: 8px auto 0; }
 
+    /* FAQ page */
+    .faq { width: min(760px, 100%); margin: 16px auto 0; padding: 22px 18px 20px; }
+    .faq-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+    .faq-head h2 { display: flex; align-items: center; gap: 10px; margin: 0; font: 600 14px Inter, Cairo, sans-serif; letter-spacing: 1.6px; text-transform: uppercase; color: #fff; }
+    .faq-head h2 svg.i { font-size: 21px; color: var(--gold); }
+    .faq-list { display: grid; gap: 9px; }
+    .faq-item { border-radius: 10px; background: linear-gradient(180deg, #15100a, #0c0906); border: 1px solid rgba(185, 155, 113, .28); overflow: hidden; transition: border-color .2s; }
+    .faq-item[open] { border-color: rgba(215, 192, 154, .6); box-shadow: 0 0 18px rgba(162, 130, 90, .14); }
+    .faq-item summary { display: flex; align-items: center; gap: 12px; padding: 13px 14px; cursor: pointer; list-style: none; }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary:hover .faq-q { color: #fff; }
+    .faq-n { width: 26px; height: 26px; flex: none; display: grid; place-items: center; border-radius: 50%; font: 700 12px Rajdhani, Cairo, sans-serif; color: #2b1604; background: linear-gradient(180deg, #c1a479, #93714b); }
+    .faq-q { flex: 1; font-size: 14px; font-weight: 600; color: #f1e6d1; line-height: 1.45; }
+    .faq-chev { flex: none; font-size: 18px; color: var(--gold-l); transition: transform .2s; }
+    .faq-item[open] .faq-chev { transform: rotate(180deg); }
+    .faq-a { padding: 0 16px 14px 52px; font-size: 13.5px; line-height: 1.75; color: #e6dac4; }
+    .faq-a b { color: var(--gold-l); font-weight: 600; }
+    .faq-a ul { margin: 2px 0 0; padding-inline-start: 18px; display: grid; gap: 3px; }
+    .faq-a li::marker { color: var(--gold); }
+    .faq-cta { margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(185, 155, 113, .25); text-align: center; }
+    .faq-cta p { margin: 0 0 12px; font-size: 13.5px; color: #e6dac4; }
+    .faq-btns { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
+    .faq-btns .chip-btn { text-decoration: none; padding: 9px 14px; font-size: 12.5px; }
+    .faq-btns .add { padding: 9px 16px; }
+    .faq-btns > * { display: inline-flex; align-items: center; gap: 7px; height: 38px; box-sizing: border-box; }
+    body.rtl .faq { direction: rtl; }
+    body.rtl .faq-a { padding: 0 52px 14px 16px; }
+
     /* reviews */
-    body[data-view="timers"] .reviews { display: none; }
+    body:not([data-view="home"]) .reviews { display: none; }
     .reviews { width: min(640px, 100%); margin: 22px auto 0; padding: 22px 18px 20px; }
     .rv-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 14px; margin-bottom: 14px; }
     .rv-head h2 { display: flex; align-items: center; gap: 10px; margin: 0; font: 600 14px Inter, Cairo, sans-serif; letter-spacing: 1.6px; text-transform: uppercase; color: #fff; }
@@ -560,11 +588,12 @@
       .chip-btn:not(.sq) { padding: 6px 9px; font-size: 10.5px; }
     }
     /* Home is the landing page; all timers (big box + list) live on the Timers page */
-    body[data-view="home"] .big, body[data-view="home"] .list { display: none; }
-    body[data-view="timers"] .all-link { display: none; }
+    body:not([data-view="timers"]) .big, body:not([data-view="timers"]) .list { display: none; }
+    body:not([data-view="home"]) .all-link { display: none; }
+    body:not([data-view="faq"]) .faq { display: none; }
 
     /* Home welcome text */
-    body[data-view="timers"] .welcome { display: none; }
+    body:not([data-view="home"]) .welcome { display: none; }
     .welcome { width: min(640px, 100%); margin: 22px auto 0; padding: 28px 22px 26px; text-align: center; }
     .welcome .orn { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 0 auto 14px; color: var(--gold); }
     .welcome .orn::before, .welcome .orn::after { content: ""; width: 70px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
@@ -618,7 +647,7 @@
     @media (max-width: 420px) { .about-modal { padding: 26px 16px 20px; } .ab-card { padding: 8px; gap: 6px; } .ab-tile { padding: 9px 10px; gap: 8px; } .ab-ico { width: 30px; height: 30px; font-size: 14px; } .modal h2.ab-title { font-size: 32px; } }
 
     /* Visitors card on Home (everyone sees it): rows under each other; on computers it sits on the left, under the 3zReil card */
-    body[data-view="timers"] .visitors { display: none; }
+    body:not([data-view="home"]) .visitors { display: none; }
     .visitors {
       width: min(340px, 100%); margin: 14px auto 0; padding: 12px 14px;
       background: rgba(8, 6, 4, .82); backdrop-filter: blur(4px);
@@ -635,7 +664,7 @@
     .vs-row:first-of-type b { font-size: 24px; }
 
     /* Home: announcement + status */
-    body[data-view="timers"] .announce, body[data-view="timers"] .status-wrap { display: none; }
+    body:not([data-view="home"]) .announce, body:not([data-view="home"]) .status-wrap { display: none; }
     .announce {
       display: flex; align-items: center; gap: 12px; width: min(560px, 92%); margin: 0 auto 12px; padding: 9px 12px; border-radius: 10px;
       color: #f4ead8; background: linear-gradient(90deg, rgba(64, 48, 28, .95), rgba(20, 15, 10, .95)); border: 1px solid rgba(215, 192, 154, .55);
@@ -717,6 +746,13 @@
     .req-card .rq-info em { font-style: normal; color: var(--muted); }
     .req-card .rq-acts { display: flex; gap: 8px; }
     .req-card .rq-acts .add, .req-card .rq-acts .chip-btn { padding: 7px 12px; font-size: 12px; }
+    .vip { display: inline-flex; align-items: center; gap: 4px; margin-inline-start: 8px; padding: 2px 8px 2px 6px; border-radius: 999px; font: 700 10.5px/1.5 Inter, Cairo, sans-serif; letter-spacing: .3px; vertical-align: 1px; white-space: nowrap; }
+    .vip svg.i { font-size: 13px; }
+    .vip.v1 { color: #2a1606; background: linear-gradient(180deg, #e2a978, #a8693c); box-shadow: 0 0 8px rgba(214, 150, 96, .35); }
+    .vip.v2 { color: #1d2126; background: linear-gradient(180deg, #f3f5f8, #a7aeb8); box-shadow: 0 0 8px rgba(214, 222, 232, .35); }
+    .vip.v3 { color: #2b1a02; background: linear-gradient(180deg, #ffe7a3, #e0a83a); box-shadow: 0 0 12px rgba(255, 205, 100, .55); animation: vipGlow 2.4s ease-in-out infinite; }
+    @keyframes vipGlow { 50% { box-shadow: 0 0 18px rgba(255, 205, 100, .85); } }
+    #fVip .vip { margin-inline-start: 6px; font-size: 10px; }
     .r-price { margin-left: 8px; padding: 2px 7px; border-radius: 999px; font-size: 11px; font-weight: 600; color: var(--gold-l); background: rgba(185, 155, 113, .14); border: 1px solid rgba(185, 155, 113, .35); white-space: nowrap; }
 
     /* Visitors window (admin only) */
@@ -744,7 +780,7 @@
     @media (max-width: 480px) { .st-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .st-chart { gap: 2px; } .st-col span { font-size: 8.5px; } }
 
     /* Payment window */
-    .pay-modal { width: min(480px, 100%); }
+    .pay-modal { width: min(640px, 100%); }
     .pay-head { display: flex; align-items: center; gap: 10px; margin: 18px 0 8px; font: 600 12px Inter, Cairo, sans-serif; letter-spacing: 1.6px; color: #fff; text-transform: uppercase; }
     .pay-head::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(185, 155, 113, .45), transparent); }
     .pay-head.offer { color: var(--gold-l); }
@@ -756,8 +792,55 @@
     }
     .pay-row .t { font-size: 14px; color: #f4ead8; }
     .pay-row .t small { display: block; font-size: 11.5px; color: var(--muted); }
-    .pay-row .p { font: 700 22px/1 Rajdhani, Cairo, Impact, sans-serif; color: var(--gold-l); white-space: nowrap; text-align: right; }
-    .pay-row .p span { font-size: 13px; font-weight: 600; margin-inline-start: 3px; color: var(--gold); }
+    .pay-row { grid-template-columns: minmax(84px, auto) minmax(0, 1fr); }
+    .pay-row .cur { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+    .pay-row .c { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 6px 4px; border-radius: 7px; background: rgba(185, 155, 113, .07); border: 1px solid rgba(185, 155, 113, .16); min-width: 0; }
+    .pay-row .c b { font: 700 18px/1 Rajdhani, Cairo, Impact, sans-serif; color: var(--gold-l); white-space: nowrap; direction: ltr; }
+    .pay-row .c i { font-style: normal; font-size: 10.5px; font-weight: 600; letter-spacing: .4px; color: var(--muted); white-space: nowrap; }
+    .pay-row .c.silk { background: rgba(185, 155, 113, .16); border-color: rgba(215, 192, 154, .4); }
+    .pay-row .c.silk b { font-size: 20px; color: #f6e2b8; }
+    .pay-row .was { flex-wrap: wrap; }
+    .pay-methods { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    @media (max-width: 520px) { .pay-methods { grid-template-columns: minmax(0, 1fr); } }
+    .pm { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 9px; background: linear-gradient(180deg, #120e09, #0b0906); border: 1px solid rgba(185, 155, 113, .25); min-width: 0; }
+    .pm-ico { width: 34px; height: 34px; flex: none; display: grid; place-items: center; border-radius: 9px; font-size: 18px; color: #fff; }
+    .pm-txt { flex: 1; min-width: 0; display: grid; gap: 2px; }
+    .pm-txt b { font-size: 13px; color: #f4ead8; }
+    .pm-txt small { font-size: 11px; color: var(--muted); }
+    .pm-txt code { font: 600 13px/1.3 ui-monospace, Consolas, monospace; color: var(--gold-l); overflow-wrap: anywhere; text-align: start; }
+    .pm-copy { flex: none; padding: 6px 11px; font-size: 11.5px; text-decoration: none; }
+    .pm-line { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+    .pm-line em { font-style: normal; font-size: 11px; color: var(--muted); }
+    .pm-copy-mini { padding: 2px 8px; border-radius: 6px; font-size: 10.5px; font-weight: 700; color: var(--gold-l); background: rgba(185, 155, 113, .12); border: 1px solid rgba(185, 155, 113, .4); cursor: pointer; }
+    .pm-copy-mini:hover { border-color: var(--gold-l); color: #fff; }
+    .pm-copy-mini.done { color: #3fe0b0; border-color: #3fe0b0; }
+    .pay-methods { grid-auto-flow: row dense; }
+    .pm.has-qr { grid-column: 1 / -1; align-items: center; }
+    .pm-qrbox { flex: none; display: flex; flex-direction: column; align-items: center; gap: 5px; text-decoration: none; }
+    .pm-qr { display: block; width: 132px; height: 132px; border-radius: 9px; background: #fff; padding: 6px; object-fit: contain; box-shadow: 0 0 0 1px rgba(185, 155, 113, .5), 0 0 16px rgba(169, 137, 97, .25); }
+    .pm-qrbox small { font-size: 10.5px; font-weight: 600; color: var(--muted); }
+    .pm-qrbox:hover .pm-qr { box-shadow: 0 0 0 2px var(--gold-l), 0 0 18px rgba(169, 137, 97, .45); }
+    .pm-open { justify-self: start; display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; padding: 5px 11px; border-radius: 7px; font-size: 11.5px; font-weight: 700; color: #fff; text-decoration: none; background: linear-gradient(180deg, #6b2fbf, #3f1a7a); border: 1px solid rgba(190, 150, 255, .45); }
+    .pm-open svg.i { font-size: 13px; }
+    .pm-open:hover { filter: brightness(1.15); }
+    @media (max-width: 520px) {
+      .pm.has-qr { flex-wrap: wrap; }
+      .pm.has-qr .pm-txt { flex-basis: calc(100% - 44px); }
+      .pm-qrbox { width: 100%; padding-top: 4px; }
+      .pm-qr { width: 156px; height: 156px; }
+    }
+    .pm-game .pm-ico { background: linear-gradient(180deg, #c1a479, #93714b); color: #2b1604; }
+    .pm-vodafone .pm-ico { background: #e60000; }
+    .pm-instapay .pm-ico { background: linear-gradient(180deg, #6b2fbf, #3f1a7a); }
+    .pm-binance .pm-ico { background: #1e2026; color: #f0b90b; }
+    .pm-whatsapp .pm-ico { background: #1fa855; }
+    .pm-telegram .pm-ico { background: #2a9fd8; }
+    .pm-game { grid-column: 1 / -1; }
+    @media (max-width: 520px) {
+      .pay-row { grid-template-columns: minmax(0, 1fr); }
+      .pay-row .c b { font-size: 15px; } .pay-row .c.silk b { font-size: 16px; }
+      .pay-row .c i { font-size: 9.5px; }
+    }
     .pay-row.offer { border-color: rgba(185, 155, 113, .55); box-shadow: inset 0 0 14px rgba(169, 137, 97, .12); }
     .pay-row .was { grid-column: 1 / -1; display: flex; align-items: center; gap: 8px; font-size: 11.5px; color: var(--muted); }
     .pay-row .was s { color: #b9ad97; }
@@ -819,6 +902,16 @@
       .social { position: fixed; z-index: 34; right: calc(var(--u) * 26); bottom: calc(var(--u) * 46); flex-direction: column; gap: calc(var(--u) * 14); margin: 0; }
       .social a { width: calc(var(--u) * 50); height: calc(var(--u) * 50); font-size: calc(var(--u) * 25); }
       .social a::before { right: calc(100% + var(--u) * 10); font-size: calc(var(--u) * 12); padding: calc(var(--u) * 5) calc(var(--u) * 10); }
+      .faq { width: calc(var(--u) * 846); margin-top: calc(var(--u) * 16); padding: calc(var(--u) * 24) calc(var(--u) * 28) calc(var(--u) * 26); }
+      .faq-head { margin-bottom: calc(var(--u) * 16); }
+      .faq-head h2 { font-size: calc(var(--u) * 14.5); gap: calc(var(--u) * 10); letter-spacing: calc(var(--u) * 1.6); }
+      .faq-list { gap: calc(var(--u) * 9); }
+      .faq-item summary { padding: calc(var(--u) * 13) calc(var(--u) * 16); gap: calc(var(--u) * 12); }
+      .faq-n { width: calc(var(--u) * 26); height: calc(var(--u) * 26); font-size: calc(var(--u) * 12); }
+      .faq-q { font-size: calc(var(--u) * 14.5); }
+      .faq-a { padding: 0 calc(var(--u) * 20) calc(var(--u) * 16) calc(var(--u) * 54); font-size: calc(var(--u) * 14); }
+      body.rtl .faq-a { padding: 0 calc(var(--u) * 54) calc(var(--u) * 16) calc(var(--u) * 20); }
+      .faq-cta p { font-size: calc(var(--u) * 14); }
       .reviews { width: calc(var(--u) * 640); margin-top: calc(var(--u) * 22); padding: calc(var(--u) * 24) calc(var(--u) * 22) calc(var(--u) * 22); }
       .welcome { width: calc(var(--u) * 640); margin-top: calc(var(--u) * 26); padding: calc(var(--u) * 30) calc(var(--u) * 26) calc(var(--u) * 28); }
       .welcome .orn { gap: calc(var(--u) * 10); margin-bottom: calc(var(--u) * 14); }
@@ -911,6 +1004,7 @@
     <nav class="menu" aria-label="Main">
       <a href="#home" class="active" data-nav="home"><svg class="i" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg><span data-i18n="navHome">Home</span></a>
       <a href="#timers" data-nav="timers"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 3h6"/></svg><span data-i18n="navTimers">Timers</span></a>
+      <a href="#faq" data-nav="faq"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 1 1 3.6 2.3c-.8.4-1.2 1-1.2 1.9v.4M12 16.8v.2"/></svg><span data-i18n="navFaq">FAQ</span></a>
       <button type="button" id="settingsBtn"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg><span data-i18n="navSettings">Settings</span></button>
       <button type="button" id="aboutBtn"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span data-i18n="navAbout">About</span></button>
       <button type="button" id="statsBtn" hidden><svg class="i" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span data-i18n="navStats">Stats</span><span class="nav-badge" id="statsBadge" hidden></span></button>
@@ -971,7 +1065,7 @@
       <span class="tip l"></span><span class="tip r"></span>
       <div class="big-label">
         <svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-        <div><b data-i18n="bigTimer">TIMER</b><small id="fName" dir="auto">No timers yet</small><span class="f-state" id="fState" hidden></span></div>
+        <div><b data-i18n="bigTimer">TIMER</b><small id="fName" dir="auto">No timers yet</small><span id="fVip"></span><span class="f-state" id="fState" hidden></span></div>
       </div>
       <div class="digits">
         <div class="unit"><div class="num" id="fh">00</div><div class="lab" data-i18n="hoursCap">HOURS</div></div>
@@ -1040,6 +1134,24 @@
       </div>
     </section>
 
+    <section class="frame faq" id="faqPanel" aria-labelledby="faqTitle">
+      <span class="gem top"></span>
+      <div class="faq-head">
+        <h2 id="faqTitle"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 1 1 3.6 2.3c-.8.4-1.2 1-1.2 1.9v.4M12 16.8v.2"/></svg><span data-i18n="faqTitle">Frequently asked questions</span></h2>
+        <button class="chip-btn" id="faqToggleAll" type="button"></button>
+      </div>
+      <div class="faq-list" id="faqList"></div>
+      <div class="faq-cta">
+        <p data-i18n="faqMore">Still have a question? Message me, I'm always around.</p>
+        <div class="faq-btns">
+          <a class="chip-btn" id="faqWa" href="#" target="_blank" rel="noopener noreferrer" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.6-1.6l.8-1-1-2z"/></svg>WhatsApp</a>
+          <a class="chip-btn" id="faqTg" href="#" target="_blank" rel="noopener noreferrer" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4L3 11.2l5.6 2.1L17.5 7.6 10.6 14.6l.4 5.4 3.1-3.6 4 3L21 4z"/></svg>Telegram</a>
+          <a class="chip-btn" id="faqDc" href="#" target="_blank" rel="noopener noreferrer" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7c2-1 8-1 10 0l2 9c-2 2-4 2.5-5 2.5l-1-1.5h-2l-1 1.5c-1 0-3-.5-5-2.5z"/><circle cx="9.5" cy="12" r="1.2"/><circle cx="14.5" cy="12" r="1.2"/></svg>Discord</a>
+          <button class="add" id="faqBook" type="button"><span data-i18n="bookBtn">Book a Taxi</span></button>
+        </div>
+      </div>
+    </section>
+
     <section class="frame list" id="timersPanel" aria-label="Timers">
       <span class="gem top"></span>
       <div class="list-head">
@@ -1060,6 +1172,7 @@
 
     <nav class="social" id="social" aria-label="Contact" hidden>
       <a class="wa" id="waLink" href="#" target="_blank" rel="noopener noreferrer" data-label="WhatsApp" aria-label="Chat with 3zReil on WhatsApp" title="WhatsApp" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.6-1.6l.8-1-1-2z"/></svg></a>
+      <a class="tg" id="tgLink" href="#" target="_blank" rel="noopener noreferrer" data-label="Telegram" aria-label="Telegram" title="Telegram" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4L3 11.2l5.6 2.1L17.5 7.6 10.6 14.6l.4 5.4 3.1-3.6 4 3L21 4z"/></svg></a>
       <a class="dc" id="dcLink" href="#" target="_blank" rel="noopener noreferrer" data-label="Discord" aria-label="Join our Discord server" title="Discord" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7c2-1 8-1 10 0l2 9c-2 2-4 2.5-5 2.5l-1-1.5h-2l-1 1.5c-1 0-3-.5-5-2.5z"/><circle cx="9.5" cy="12" r="1.2"/><circle cx="14.5" cy="12" r="1.2"/></svg></a>
     </nav>
   </main>
@@ -1169,6 +1282,9 @@
       <h3 class="pay-head offer" data-i18n="longOffer">Long-term offer</h3>
       <p class="pay-note" data-i18n="payNote">If you're a long-term customer: going from level 70 to 95 takes a lot of time and days, so let me offer you:</p>
       <div class="pay-list" id="offerList"></div>
+
+      <h3 class="pay-head" data-i18n="payHow">How to pay</h3>
+      <div class="pay-methods" id="payMethods"></div>
 
       <div class="modal-actions">
         <a class="chip-btn" id="payAskBtn" href="#" target="_blank" rel="noopener noreferrer" hidden data-i18n="askDiscount">Ask for a discount on WhatsApp</a>
@@ -1366,6 +1482,7 @@
 
       <div class="ab-links">
         <a class="ab-link" id="aboutWa" href="#" target="_blank" rel="noopener noreferrer" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.6-1.6l.8-1-1-2z"/></svg>WhatsApp</a>
+        <a class="ab-link" id="aboutTg" href="#" target="_blank" rel="noopener noreferrer" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4L3 11.2l5.6 2.1L17.5 7.6 10.6 14.6l.4 5.4 3.1-3.6 4 3L21 4z"/></svg>Telegram</a>
         <a class="ab-link" id="aboutDc" href="#" target="_blank" rel="noopener noreferrer" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7c2-1 8-1 10 0l2 9c-2 2-4 2.5-5 2.5l-1-1.5h-2l-1 1.5c-1 0-3-.5-5-2.5z"/><circle cx="9.5" cy="12" r="1.2"/><circle cx="14.5" cy="12" r="1.2"/></svg>Discord</a>
       </div>
 
@@ -1386,16 +1503,26 @@
     // Contact icons at the lower right. An icon left empty is simply not shown.
     const WHATSAPP_NUMBER = '+201097765848';                 // opens a chat with this number directly
     const DISCORD_LINK = 'https://discord.gg/SUzgewRPrd';    // server invite
+    const TELEGRAM_LINK = '';                                 // e.g. https://t.me/3zReil (empty = hidden)
+    // payment details shown in the Payment List (empty = that card is hidden)
+    const PAY_METHODS = {
+      vodafone: { number: '01097765848', name: 'Hazem Khaled' },          // Vodafone Cash
+      instapay: { address: 'Kingzoza@instapay', number: '01097765848', link: 'https://ipn.eg/S/kingzoza/instapay/2lxRya', qr: true },   // qr: true = show the QR code (made from this link)
+      binance: { payId: '811900534', name: '3zReil' },                                    // Binance Pay ID
+    };
 
     // Payment window. Edit the prices here.
+    // price = Silk, gold = millions of Gold, egp = Egyptian pounds, usd = US dollars (1,000 Silk = 850 EGP = $15; 100 Silk = 65m)
     const PRICES = [
-      { time: '24 hours', price: 150 },
-      { time: '12 hours', price: 100 },
-      { time: '6 hours', price: 50 },
+      { time: '24 hours', price: 150, gold: 98, egp: 130, usd: 2.25 },
+      { time: '12 hours', price: 100, gold: 65, egp: 85, usd: 1.5 },
+      { time: '6 hours', price: 50, gold: 33, egp: 45, usd: 0.75 },
     ];
+    // long packages: the price after the package discount, and "was" = the full price before it
     const LONGTERM_OFFERS = [
-      { time: '168 hours', note: '1 week', price: 800, was: 1050 },
-      { time: '72 hours', note: '3 days', price: 400, was: 450 },
+      { time: '240 hours', note: '10 days', price: 1350, was: 1500, gold: 877, wasGold: 975, egp: 1150, wasEgp: 1275, usd: 20.25, wasUsd: 22.5 },
+      { time: '168 hours', note: '7 days', price: 950, was: 1050, gold: 618, wasGold: 683, egp: 810, wasEgp: 895, usd: 14.25, wasUsd: 15.75 },
+      { time: '72 hours', note: '3 days', price: 400, was: 450, gold: 260, wasGold: 293, egp: 340, wasEgp: 385, usd: 6, wasUsd: 6.75 },
     ];
 
     // Small SHA-256 (works on http and https alike) used to check the admin without storing the email in the page
@@ -1466,6 +1593,9 @@
         insteadOf: 'Instead of',
         langLabel: 'Language',
         annOn: 'Announcement: on', annOff: 'Announcement: off',
+        vipTip: '{d}-day package or longer with 3zReil',
+        payHow: 'How to pay', payName: 'Name', payInGame: 'In game', payInGameVal: 'Silk (Item Mall, F10) or Gold, straight to 3zReil', payEgypt: 'From Egypt', payAbroad: 'From abroad', qrScan: 'Scan to pay', openInstapay: 'Open in InstaPay', payReceipt: 'Send me the receipt here', copy: 'Copy', copied: 'Copied ✓', chat: 'Chat',
+        faqOpenAll: 'Open all', faqCloseAll: 'Close all',
         cpOk: '✓ {p}% off', cpInvalid: 'This code is not valid.', cpExpired: 'This code has expired.', cpUsedUp: 'This code was already used up.',
         cpUnavailable: 'Coupons are not available right now.', cpEmpty: 'No coupons yet.', cpUses: 'used {n}', cpUsesMax: 'used {n} of {m}',
         cpUntil: 'last day {d}', cpEnded: 'ended', cpActive: 'Active', cpActiveN: '{n} active', cpNoneActive: 'No active coupons',
@@ -1523,7 +1653,7 @@
         nWrong: 'Something went wrong.',
         noTimers: 'No timers yet',
         noVisits: 'No visits yet',
-        note_1_week: '1 week', note_3_days: '3 days',
+        note_1_week: '1 week', note_3_days: '3 days', note_7_days: '7 days', note_10_days: '10 days', curEgp: 'EGP',
         pauseAll: 'Pause All', pauseAllTip: 'Put every running timer on hold', pausing: 'Pausing...',
         pillRunning: 'Running', pillPaused: 'Paused', pillFinished: 'Finished', pillHold: 'On hold', pillSoon: 'Ending soon',
         pkgCustom: 'Custom time (type it below)', pkgCustomShort: 'Custom', pkgNotSure: 'Not sure yet', pkgNotSureShort: 'Not sure',
@@ -1625,6 +1755,9 @@
         insteadOf: 'بدلًا من',
         langLabel: 'اللغة',
         annOn: 'الإعلان: ظاهر', annOff: 'الإعلان: مخفي',
+        vipTip: 'باقة {d} أيام أو أكثر مع 3zReil',
+        payHow: 'طرق الدفع', payName: 'الاسم', payInGame: 'داخل اللعبة', payInGameVal: 'Silk (من الـ Item Mall بزرار F10) أو Gold، لـ 3zReil على طول', payEgypt: 'من مصر', payAbroad: 'من برّه مصر', qrScan: 'امسح الكود للدفع', openInstapay: 'افتح في إنستاباي', payReceipt: 'ابعتلي الإيصال هنا', copy: 'نسخ', copied: 'اتنسخ ✓', chat: 'محادثة',
+        navFaq: 'الأسئلة', faqTitle: 'الأسئلة الشائعة', faqMore: 'لسه عندك سؤال؟ كلّمني، أنا موجود دايمًا.', faqOpenAll: 'فتح الكل', faqCloseAll: 'قفل الكل',
         bkCoupon: 'كود الخصم', bkCouponApply: 'تطبيق',
         cpTitle: 'كوبونات الخصم', cpManage: 'إدارة', cpNew: 'كوبون جديد', cpCode: 'الكود', cpPercent: 'نسبة الخصم %', cpEnds: 'آخر يوم', cpMax: 'أقصى عدد استخدامات', cpAdd: 'إضافة الكوبون',
         cpIntro: 'العميل يكتب الكود في فورم الحجز فيحصل على الخصم. الخادم يتحقق من كل كود، والزوار لا يمكنهم رؤية القائمة.',
@@ -1698,7 +1831,7 @@
         navAbout: 'نبذة', navHome: 'الرئيسية', navRequests: 'الطلبات', navSettings: 'الإعدادات', navStats: 'الإحصائيات', navTimers: 'المؤقتات',
         noTimers: 'لا توجد مؤقتات بعد',
         noVisits: 'لا توجد زيارات بعد',
-        note_1_week: 'أسبوع', note_3_days: '3 أيام',
+        note_1_week: 'أسبوع', note_3_days: '3 أيام', note_7_days: '7 أيام', note_10_days: '10 أيام', curEgp: 'ج.م',
         onSiteNow: 'على الموقع الآن',
         onlineNow: 'متصل الآن',
         openTimers: 'فتح المؤقتات',
@@ -1839,6 +1972,9 @@
         insteadOf: 'Normal fiyat:',
         langLabel: 'Dil',
         annOn: 'Duyuru: açık', annOff: 'Duyuru: kapalı',
+        vipTip: '3zReil ile {d} günlük veya daha uzun paket',
+        payHow: 'Nasıl ödenir', payName: 'Ad', payInGame: 'Oyun içinde', payInGameVal: 'Silk (Item Mall, F10) veya Gold, doğrudan 3zReil\'e', payEgypt: 'Mısır\'dan', payAbroad: 'Yurt dışından', qrScan: 'Ödemek için tarayın', openInstapay: 'InstaPay\'de aç', payReceipt: 'Dekontu buradan gönder', copy: 'Kopyala', copied: 'Kopyalandı ✓', chat: 'Sohbet',
+        navFaq: 'SSS', faqTitle: 'Sıkça sorulan sorular', faqMore: 'Başka bir soru mu var? Bana yaz, her zaman buralardayım.', faqOpenAll: 'Tümünü aç', faqCloseAll: 'Tümünü kapat',
         bkCoupon: 'İndirim kodu', bkCouponApply: 'Uygula',
         cpTitle: 'Kuponlar', cpManage: 'Yönet', cpNew: 'Yeni kupon', cpCode: 'Kod', cpPercent: 'İndirim %', cpEnds: 'Son gün', cpMax: 'En fazla kullanım', cpAdd: 'Kupon ekle',
         cpIntro: 'Müşteri rezervasyon formuna kodu yazar ve indirim alır. Her kod sunucuda kontrol edilir; ziyaretçiler listeyi göremez.',
@@ -1912,7 +2048,7 @@
         navAbout: 'Hakkında', navHome: 'Ana Sayfa', navRequests: 'İstekler', navSettings: 'Ayarlar', navStats: 'İstatistik', navTimers: 'Zamanlayıcılar',
         noTimers: 'Henüz zamanlayıcı yok',
         noVisits: 'Henüz ziyaret yok',
-        note_1_week: '1 hafta', note_3_days: '3 gün',
+        note_1_week: '1 hafta', note_3_days: '3 gün', note_7_days: '7 gün', note_10_days: '10 gün', curEgp: 'EGP',
         onSiteNow: 'şu an sitede',
         onlineNow: 'Şu an çevrimiçi',
         openTimers: 'Zamanlayıcıları Aç',
@@ -2053,6 +2189,9 @@
         insteadOf: 'Au lieu de',
         langLabel: 'Langue',
         annOn: 'Annonce : affichée', annOff: 'Annonce : masquée',
+        vipTip: 'Forfait de {d} jours ou plus avec 3zReil',
+        payHow: 'Comment payer', payName: 'Nom', payInGame: 'En jeu', payInGameVal: 'Silk (Item Mall, F10) ou Gold, directement à 3zReil', payEgypt: 'Depuis l\'Égypte', payAbroad: 'Depuis l\'étranger', qrScan: 'Scannez pour payer', openInstapay: 'Ouvrir dans InstaPay', payReceipt: 'Envoyez-moi le reçu ici', copy: 'Copier', copied: 'Copié ✓', chat: 'Discuter',
+        navFaq: 'FAQ', faqTitle: 'Questions fréquentes', faqMore: 'Encore une question ? Écrivez-moi, je suis toujours là.', faqOpenAll: 'Tout ouvrir', faqCloseAll: 'Tout fermer',
         bkCoupon: 'Code promo', bkCouponApply: 'Appliquer',
         cpTitle: 'Codes promo', cpManage: 'Gérer', cpNew: 'Nouveau code', cpCode: 'Code', cpPercent: 'Réduction %', cpEnds: 'Dernier jour', cpMax: 'Utilisations max', cpAdd: 'Ajouter le code',
         cpIntro: 'Le client saisit le code dans le formulaire de réservation pour obtenir la réduction. Chaque code est vérifié par le serveur et les visiteurs ne peuvent pas voir la liste.',
@@ -2126,7 +2265,7 @@
         navAbout: 'À propos', navHome: 'Accueil', navRequests: 'Demandes', navSettings: 'Réglages', navStats: 'Stats', navTimers: 'Minuteurs',
         noTimers: 'Aucun minuteur pour l\'instant',
         noVisits: 'Aucune visite pour l\'instant',
-        note_1_week: '1 semaine', note_3_days: '3 jours',
+        note_1_week: '1 semaine', note_3_days: '3 jours', note_7_days: '7 jours', note_10_days: '10 jours', curEgp: 'EGP',
         onSiteNow: 'sur le site en ce moment',
         onlineNow: 'En ligne',
         openTimers: 'Ouvrir les minuteurs',
@@ -2588,7 +2727,7 @@
       $('bkPackage').innerHTML = `<option value="">${escapeHtml(T('pkgNotSure'))}</option>` + opts;
       $('pkgSelect').value = a; $('bkPackage').value = b;
     }
-    const findPackage = text => PACKAGES.findIndex(p => text && (text === p.name || String(text).startsWith(p.name)));
+    const findPackage = text => { const h = parseInt(text, 10); return h > 0 ? PACKAGES.findIndex(p => p.hours === h) : -1; };
     // packages are saved in English ("24 hours"); show them in the chosen language
     const pkgShow = text => { if (!text) return ''; if (text === 'Custom') return T('pkgCustomShort'); const i = findPackage(text); return i >= 0 ? pkgTitle(PACKAGES[i]) : text; };
 
@@ -3072,7 +3211,48 @@
       timers = data || [];
       setSync(true);
       renderTimers();
+      loadVip();
     }
+
+    /* ---------- VIP badges: a timer of 3 days (72 h) = VIP 1, 7 days (168 h) = VIP 2, 10 days (240 h) = VIP 3.
+       Shows as soon as such a timer exists and stays (Supabase keeps the record in the history). ---------- */
+    const VIP_HOURS = [0, 72, 168, 240], VIP_DAYS = [0, 3, 7, 10];
+    const vipFromSeconds = sec => { const h = (Number(sec) || 0) / 3600; return h >= 240 ? 3 : h >= 168 ? 2 : h >= 72 ? 1 : 0; };
+    const VIP_ICONS = [
+      '',
+      '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z" style="fill:currentColor;stroke:none"/>',
+      '<path d="M21 3L7.5 16.5M5 15l4 4M3 21l3-3M3 3l13.5 13.5M19 15l-4 4M21 21l-3-3" style="stroke-width:2.4"/>',
+      '<path d="M12 2c1.5 3.5 5 5.5 5 10a5 5 0 0 1-10 0c0-2.2 1-3.8 2.2-5 .3 1.8 1.2 3 2.3 3.4C11.2 7.6 11.3 4.6 12 2z" style="fill:currentColor;stroke:none"/>',
+    ];
+    let vipMap = new Map(), vipAsked = '';
+    const vipKey = n => String(n || '').trim().toLowerCase();
+    function vipLevel(name) {
+      const k = vipKey(name);
+      let lv = vipMap.get(k) || 0;                               // from the record (Supabase)
+      for (const t of timers) if (vipKey(t.name) === k) lv = Math.max(lv, vipFromSeconds(t.duration_seconds));   // a timer on the list right now
+      return lv;
+    }
+    function vipBadge(name) {
+      const lv = vipLevel(name);
+      if (!lv) return '';
+      return `<span class="vip v${lv}" title="${escapeHtml('VIP ' + lv + ' · ' + T('vipTip', { d: VIP_DAYS[lv] }))}"><svg class="i" viewBox="0 0 24 24" aria-hidden="true">${VIP_ICONS[lv]}</svg>VIP ${lv}</span>`;
+    }
+    async function loadVip(force) {
+      const names = [...new Set(timers.map(t => vipKey(t.name)).filter(Boolean))].sort();
+      const key = timers.map(t => vipKey(t.name) + ':' + (t.duration_seconds || 0)).sort().join('|');
+      if (!force && key === vipAsked) return;
+      vipAsked = key;
+      if (!names.length) { vipMap = new Map(); return; }
+      try {
+        const { data, error } = await db.rpc('vip_levels', { p_names: names });
+        if (error) return;                                  // not set up yet: no badges, nothing breaks
+        const next = new Map((data || []).map(r => [r.name, Number(r.level) || 0]));
+        const changed = next.size !== vipMap.size || [...next].some(([k, v]) => vipMap.get(k) !== v);
+        vipMap = next;
+        if (changed) { $('timerGrid').dataset.order = ''; renderTimers(); }
+      } catch (e) {}
+    }
+    setInterval(() => loadVip(true), 5 * 60000);           // levels go up when timers finish
 
     // Most time left on top, then down in order; finished timers (00:00:00) drop to the bottom
     function sortedTimers() {
@@ -3139,6 +3319,8 @@
       $('fm').textContent = pad(Math.floor((s % 3600) / 60));
       $('fs').textContent = pad(s % 60);
       $('fName').textContent = ft ? (ft.name || T('untitled')) : T('noTimers');
+      const fv = ft ? vipBadge(ft.name) : '';
+      if ($('fVip').dataset.v !== fv) { $('fVip').innerHTML = fv; $('fVip').dataset.v = fv; }
       const st = ft ? timerState(ft) : '';
       const tag = ft && ft.held && st === 'Paused' ? T('tagHold') : st === 'Paused' ? T('tagPaused') : '';
       $('fState').hidden = !tag; $('fState').textContent = tag;
@@ -3182,7 +3364,7 @@
           <article class="row" data-row="${id}" data-state="${state}">
             ${DRAG}
             <div class="r-ico">${svg(ROW_ICONS[index % ROW_ICONS.length])}</div>
-            <div class="r-name"><bdi>${name}</bdi>${isAdmin && earningsByTimer.has(String(timer.id)) ? `<span class="r-price">${escapeHtml(silkText(earningsByTimer.get(String(timer.id)).price_silk))}</span>` : ''}</div>
+            <div class="r-name"><bdi>${name}</bdi>${vipBadge(timer.name)}${isAdmin && earningsByTimer.has(String(timer.id)) ? `<span class="r-price">${escapeHtml(silkText(earningsByTimer.get(String(timer.id)).price_silk))}</span>` : ''}</div>
             <div class="r-time">${svg('clock')}<span data-countdown>${formatTime(remaining)}</span></div>
             <span class="pill ${state.toLowerCase()}${isSoon(timer) ? ' soon' : ''}">${isSoon(timer) ? T('pillSoon') : T('pill' + (state === 'Paused' && timer.held ? 'Hold' : state))}</span>
             <div class="r-acts">${acts}</div>
@@ -3577,7 +3759,7 @@
     document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeAll(); if (!$('alarm').hidden) stopAlarm(); } });
 
     function setView() {
-      const view = location.hash === '#timers' ? 'timers' : 'home';
+      const view = location.hash === '#timers' ? 'timers' : location.hash === '#faq' ? 'faq' : 'home';
       document.body.dataset.view = view;
       document.querySelectorAll('[data-nav]').forEach(l => l.classList.toggle('active', l.dataset.nav === view));
       window.scrollTo(0, 0);
@@ -3600,25 +3782,166 @@
       }
       if (dcUrl) { $('dcLink').href = dcUrl; $('dcLink').hidden = false; }
       if (!$('waLink').hidden) { $('aboutWa').href = $('waLink').href; $('aboutWa').hidden = false; }
-      if (dcUrl) { $('aboutDc').href = dcUrl; $('aboutDc').hidden = false; }
-      $('social').hidden = !(digits || dcUrl);
+      if (dcUrl) { $('aboutDc').href = dcUrl; $('aboutDc').hidden = false; $('faqDc').href = dcUrl; $('faqDc').hidden = false; }
+      if (!$('waLink').hidden) { $('faqWa').href = $('waLink').href; $('faqWa').hidden = false; }
+      const tg = TELEGRAM_LINK.trim();
+      const tgUrl = !tg ? '' : /^https?:\/\//i.test(tg) ? tg : 'https://t.me/' + tg.replace(/^@/, '');
+      if (tgUrl) for (const id of ['tgLink', 'aboutTg', 'faqTg']) { $(id).href = tgUrl; $(id).hidden = false; }
+      $('social').hidden = !(digits || dcUrl || tgUrl);
     }
     setupContact();
 
+    const num = n => Number(n).toLocaleString('en-US');
+    const usdText = n => '$' + Number(n).toFixed(2);
+    function priceCells(r, was) {
+      const v = was ? [r.was, r.wasGold, r.wasEgp, r.wasUsd] : [r.price, r.gold, r.egp, r.usd];
+      const cell = (cls, val, label) => val == null ? '' : `<span class="c ${cls}"><b>${escapeHtml(val)}</b><i>${escapeHtml(label)}</i></span>`;
+      return cell('silk', num(v[0]), 'Silk') + cell('gold', v[1] != null ? num(v[1]) + 'm' : null, 'Gold') +
+             cell('egp', v[2] != null ? num(v[2]) : null, T('curEgp')) + cell('usd', v[3] != null ? usdText(v[3]) : null, 'USD');
+    }
+
+    // "How to pay": in game, Vodafone Cash, InstaPay (with QR code), Binance (copy buttons)
+    const PM_ICONS = {
+      game: '<path d="M6 9h12a3 3 0 0 1 3 3v3a3 3 0 0 1-5.2 2L14 15h-4l-1.8 2A3 3 0 0 1 3 15v-3a3 3 0 0 1 3-3zM8 11v3M6.5 12.5h3M15.5 12h.01M17.5 13.5h.01"/>',
+      vodafone: '<circle cx="12" cy="12" r="9"/><path d="M13.5 7.5c-3 .2-5 2.4-5 5s1.8 4 3.8 4 3.2-1.4 3.2-3.2c0-2-1.6-2.8-2.8-2.8"/>',
+      instapay: '<rect x="3" y="6" width="18" height="12" rx="2.5"/><path d="M3 10h18M7 14.5h4"/>',
+      binance: '<path d="M12 3l3 3-3 3-3-3zM6 9l3 3-3 3-3-3zM18 9l3 3-3 3-3-3zM12 15l3 3-3 3-3-3zM12 10.2l1.8 1.8-1.8 1.8-1.8-1.8z" style="fill:currentColor;stroke:none"/>',
+      whatsapp: '<path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.6-1.6l.8-1-1-2z"/>',
+      telegram: '<path d="M21 4L3 11.2l5.6 2.1L17.5 7.6 10.6 14.6l.4 5.4 3.1-3.6 4 3L21 4z"/>',
+    };
+    const INSTAPAY_QR_IMG = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMyAzMyIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIj48cmVjdCB3aWR0aD0iMzMiIGhlaWdodD0iMzMiIGZpbGw9IiNmZmYiLz48cGF0aCBkPSJNMiAyaDd2MWgtN3pNMTUgMmgxdjFoLTF6TTE4IDJoNXYxaC01ek0yNCAyaDd2MWgtN3pNMiAzaDF2MWgtMXpNOCAzaDF2MWgtMXpNMTEgM2gxdjFoLTF6TTEzIDNoMnYxaC0yek0xNiAzaDJ2MWgtMnpNMTkgM2gxdjFoLTF6TTI0IDNoMXYxaC0xek0zMCAzaDF2MWgtMXpNMiA0aDF2MWgtMXpNNCA0aDN2MWgtM3pNOCA0aDF2MWgtMXpNMTAgNGg1djFoLTV6TTIxIDRoMXYxaC0xek0yNCA0aDF2MWgtMXpNMjYgNGgzdjFoLTN6TTMwIDRoMXYxaC0xek0yIDVoMXYxaC0xek00IDVoM3YxaC0zek04IDVoMXYxaC0xek0xMCA1aDJ2MWgtMnpNMTQgNWg2djFoLTZ6TTIxIDVoMnYxaC0yek0yNCA1aDF2MWgtMXpNMjYgNWgzdjFoLTN6TTMwIDVoMXYxaC0xek0yIDZoMXYxaC0xek00IDZoM3YxaC0zek04IDZoMXYxaC0xek0xMCA2aDF2MWgtMXpNMTIgNmgxdjFoLTF6TTE1IDZoMnYxaC0yek0xOSA2aDF2MWgtMXpNMjEgNmgydjFoLTJ6TTI0IDZoMXYxaC0xek0yNiA2aDN2MWgtM3pNMzAgNmgxdjFoLTF6TTIgN2gxdjFoLTF6TTggN2gxdjFoLTF6TTEwIDdoMXYxaC0xek0xMiA3aDF2MWgtMXpNMTcgN2g0djFoLTR6TTIyIDdoMXYxaC0xek0yNCA3aDF2MWgtMXpNMzAgN2gxdjFoLTF6TTIgOGg3djFoLTd6TTEwIDhoMXYxaC0xek0xMiA4aDF2MWgtMXpNMTQgOGgxdjFoLTF6TTE2IDhoMXYxaC0xek0xOCA4aDF2MWgtMXpNMjAgOGgxdjFoLTF6TTIyIDhoMXYxaC0xek0yNCA4aDd2MWgtN3pNMTAgOWgxdjFoLTF6TTEyIDloMXYxaC0xek0xOCA5aDF2MWgtMXpNMjAgOWgzdjFoLTN6TTIgMTBoMXYxaC0xek00IDEwaDV2MWgtNXpNMTMgMTBoMXYxaC0xek0xNiAxMGgxdjFoLTF6TTE5IDEwaDF2MWgtMXpNMjQgMTBoNXYxaC01ek0yIDExaDF2MWgtMXpNNCAxMWgydjFoLTJ6TTcgMTFoMXYxaC0xek05IDExaDJ2MWgtMnpNMTMgMTFoMXYxaC0xek0xNiAxMWgxdjFoLTF6TTIwIDExaDd2MWgtN3pNMzAgMTFoMXYxaC0xek00IDEyaDF2MWgtMXpNNyAxMmgydjFoLTJ6TTEwIDEyaDZ2MWgtNnpNMTcgMTJoMnYxaC0yek0yMCAxMmgxdjFoLTF6TTMgMTNoMXYxaC0xek03IDEzaDF2MWgtMXpNMTEgMTNoMnYxaC0yek0xNyAxM2gxdjFoLTF6TTIxIDEzaDJ2MWgtMnpNMjUgMTNoMXYxaC0xek0yNyAxM2gxdjFoLTF6TTI5IDEzaDF2MWgtMXpNMyAxNGg3djFoLTd6TTEyIDE0aDJ2MWgtMnpNMTUgMTRoMnYxaC0yek0xOCAxNGg0djFoLTR6TTI3IDE0aDJ2MWgtMnpNNCAxNWgxdjFoLTF6TTYgMTVoMXYxaC0xek05IDE1aDV2MWgtNXpNMTUgMTVoMnYxaC0yek0xOCAxNWg3djFoLTd6TTI2IDE1aDF2MWgtMXpNMzAgMTVoMXYxaC0xek04IDE2aDR2MWgtNHpNMTQgMTZoMXYxaC0xek0xNyAxNmgzdjFoLTN6TTIyIDE2aDF2MWgtMXpNMjcgMTZoMnYxaC0yek0yIDE3aDR2MWgtNHpNNyAxN2gxdjFoLTF6TTEyIDE3aDJ2MWgtMnpNMTYgMTdoMnYxaC0yek0yNCAxN2gydjFoLTJ6TTI5IDE3aDF2MWgtMXpNMiAxOGgydjFoLTJ6TTYgMThoMXYxaC0xek04IDE4aDJ2MWgtMnpNMTEgMThoMnYxaC0yek0xNCAxOGg0djFoLTR6TTE5IDE4aDF2MWgtMXpNMjEgMThoMXYxaC0xek0yMyAxOGgxdjFoLTF6TTI3IDE4aDJ2MWgtMnpNMiAxOWgxdjFoLTF6TTQgMTloNHYxaC00ek05IDE5aDJ2MWgtMnpNMTQgMTloMXYxaC0xek0xOCAxOWg5djFoLTl6TTI4IDE5aDF2MWgtMXpNMzAgMTloMXYxaC0xek0yIDIwaDF2MWgtMXpNNCAyMGgxdjFoLTF6TTYgMjBoNXYxaC01ek0xNCAyMGgxdjFoLTF6TTE3IDIwaDF2MWgtMXpNMjAgMjBoMXYxaC0xek0yMiAyMGgxdjFoLTF6TTI0IDIwaDF2MWgtMXpNMjYgMjBoMXYxaC0xek0yOCAyMGgxdjFoLTF6TTIgMjFoMXYxaC0xek00IDIxaDJ2MWgtMnpNNyAyMWgxdjFoLTF6TTEwIDIxaDF2MWgtMXpNMTIgMjFoMnYxaC0yek0xNiAyMWgydjFoLTJ6TTIxIDIxaDF2MWgtMXpNMjQgMjFoMXYxaC0xek0yNiAyMWgxdjFoLTF6TTI5IDIxaDF2MWgtMXpNMiAyMmgxdjFoLTF6TTQgMjJoMXYxaC0xek02IDIyaDF2MWgtMXpNOCAyMmgxdjFoLTF6TTExIDIyaDF2MWgtMXpNMTMgMjJoMXYxaC0xek0xNyAyMmgzdjFoLTN6TTIxIDIyaDZ2MWgtNnpNMjggMjJoM3YxaC0zek0xMCAyM2gxdjFoLTF6TTEyIDIzaDF2MWgtMXpNMTUgMjNoMXYxaC0xek0xOCAyM2gzdjFoLTN6TTIyIDIzaDF2MWgtMXpNMjYgMjNoNXYxaC01ek0yIDI0aDd2MWgtN3pNMTEgMjRoMnYxaC0yek0xNSAyNGg1djFoLTV6TTIxIDI0aDJ2MWgtMnpNMjQgMjRoMXYxaC0xek0yNiAyNGgzdjFoLTN6TTIgMjVoMXYxaC0xek04IDI1aDF2MWgtMXpNMTAgMjVoM3YxaC0zek0xNSAyNWgxdjFoLTF6TTE3IDI1aDF2MWgtMXpNMjAgMjVoM3YxaC0zek0yNiAyNWgxdjFoLTF6TTIgMjZoMXYxaC0xek00IDI2aDN2MWgtM3pNOCAyNmgxdjFoLTF6TTEwIDI2aDN2MWgtM3pNMTYgMjZoMnYxaC0yek0xOSAyNmgxdjFoLTF6TTIyIDI2aDV2MWgtNXpNMjggMjZoM3YxaC0zek0yIDI3aDF2MWgtMXpNNCAyN2gzdjFoLTN6TTggMjdoMXYxaC0xek0xMCAyN2gydjFoLTJ6TTE1IDI3aDF2MWgtMXpNMTggMjdoMXYxaC0xek0yMSAyN2gydjFoLTJ6TTI1IDI3aDF2MWgtMXpNMjcgMjdoNHYxaC00ek0yIDI4aDF2MWgtMXpNNCAyOGgzdjFoLTN6TTggMjhoMXYxaC0xek0xMCAyOGgxdjFoLTF6TTEzIDI4aDJ2MWgtMnpNMTcgMjhoMXYxaC0xek0xOSAyOGg0djFoLTR6TTI1IDI4aDV2MWgtNXpNMiAyOWgxdjFoLTF6TTggMjloMXYxaC0xek0xNCAyOWg1djFoLTV6TTIyIDI5aDJ2MWgtMnpNMjUgMjloM3YxaC0zek0yOSAyOWgxdjFoLTF6TTIgMzBoN3YxaC03ek0xMCAzMGgydjFoLTJ6TTEzIDMwaDJ2MWgtMnpNMTYgMzBoNHYxaC00ek0yNCAzMGgxdjFoLTF6TTI4IDMwaDF2MWgtMXoiIGZpbGw9IiMwMDAiLz48L3N2Zz4=';   // QR picture of PAY_METHODS.instapay.link (made when the site is built)
+    function setupPayMethods() {
+      // lines = [{ label, value, copy }]; opt.link = "Open" button under the lines; opt.qr = QR picture (tap = open the link)
+      const card = (kind, title, sub, lines, opt = {}) => `
+        <div class="pm pm-${kind}${opt.qr ? ' has-qr' : ''}">
+          <span class="pm-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true">${PM_ICONS[kind]}</svg></span>
+          <span class="pm-txt"><b>${escapeHtml(title)}</b><small>${escapeHtml(sub)}</small>
+            ${(lines || []).map(l => `<span class="pm-line">${l.label ? `<em>${escapeHtml(l.label)}</em>` : ''}<code dir="ltr">${escapeHtml(l.value)}</code>${l.copy ? `<button class="pm-copy-mini" type="button" data-copy="${escapeHtml(l.value)}" title="${escapeHtml(T('copy'))}" aria-label="${escapeHtml(T('copy') + ' ' + l.value)}">${escapeHtml(T('copy'))}</button>` : ''}</span>`).join('')}
+            ${opt.link ? `<a class="pm-open" href="${escapeHtml(opt.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(opt.linkText)}<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>` : ''}
+          </span>
+          ${opt.qr ? `<a class="pm-qrbox"${opt.link ? ` href="${escapeHtml(opt.link)}" target="_blank" rel="noopener noreferrer"` : ''} aria-label="${escapeHtml(T('qrScan'))}"><img class="pm-qr" src="${escapeHtml(opt.qr)}" alt="QR ${escapeHtml(title)}" width="120" height="120"><small>${escapeHtml(T('qrScan'))}</small></a>` : ''}
+        </div>`;
+      const P = PAY_METHODS;
+      const parts = [card('game', T('payInGame'), T('payInGameVal'))];
+      if (P.vodafone && P.vodafone.number) parts.push(card('vodafone', 'Vodafone Cash', T('payEgypt'),
+        [{ value: P.vodafone.number, copy: true }, ...(P.vodafone.name ? [{ label: T('payName'), value: P.vodafone.name }] : [])]));
+      if (P.instapay && (P.instapay.address || P.instapay.number)) parts.push(card('instapay', 'InstaPay', T('payEgypt'),
+        [...(P.instapay.address ? [{ value: P.instapay.address, copy: true }] : []), ...(P.instapay.number ? [{ value: P.instapay.number, copy: true }] : [])],
+        { link: P.instapay.link, linkText: T('openInstapay'), qr: P.instapay.qr && P.instapay.link ? INSTAPAY_QR_IMG : '' }));
+      if (P.binance && P.binance.payId) parts.push(card('binance', 'Binance', T('payAbroad'),
+        [{ label: 'Pay ID', value: P.binance.payId, copy: true }, ...(P.binance.name ? [{ label: T('payName'), value: P.binance.name }] : [])]));
+      $('payMethods').innerHTML = parts.join('');
+    }
+    $('payMethods').addEventListener('click', async e => {
+      const b = e.target.closest('[data-copy]'); if (!b) return;
+      try { await navigator.clipboard.writeText(b.dataset.copy); }
+      catch (err) { const t = document.createElement('textarea'); t.value = b.dataset.copy; document.body.append(t); t.select(); try { document.execCommand('copy'); } catch (x) {} t.remove(); }
+      const old = b.textContent; b.textContent = T('copied'); b.classList.add('done'); b.disabled = true;
+      setTimeout(() => { b.textContent = old; b.classList.remove('done'); b.disabled = false; }, 1600);
+    });
+
     function setupPayment() {
-      const silk = n => `${Number(n).toLocaleString('en-US')}<span>Silk</span>`;
       const tm = r => escapeHtml(hoursText(parseInt(r.time, 10) || r.time));
       const nt = r => r.note ? `<small>${escapeHtml(T('note_' + r.note.replace(/\s+/g, '_')) )}</small>` : '';
       $('priceList').innerHTML = PRICES.map(r => `
-        <div class="pay-row"><div class="t">${tm(r)}${nt(r)}</div><div class="p">${silk(r.price)}</div></div>`).join('');
+        <div class="pay-row"><div class="t">${tm(r)}${nt(r)}</div><div class="cur">${priceCells(r)}</div></div>`).join('');
       $('offerList').innerHTML = LONGTERM_OFFERS.map(r => `
         <div class="pay-row offer">
-          <div class="t">${tm(r)}${nt(r)}</div><div class="p">${silk(r.price)}</div>
-          ${r.was ? `<div class="was">${escapeHtml(T('insteadOf'))} <s>${Number(r.was).toLocaleString('en-US')} Silk</s>${r.was > r.price ? `<span class="save">${escapeHtml(T('saveSilk', { n: Number(r.was - r.price).toLocaleString('en-US') }))}</span>` : ''}</div>` : ''}
+          <div class="t">${tm(r)}${nt(r)}</div><div class="cur">${priceCells(r)}</div>
+          ${r.was ? `<div class="was"><span>${escapeHtml(T('insteadOf'))}</span><s><bdi>${num(r.was)} Silk</bdi> · <bdi>${num(r.wasGold)}m</bdi> · <bdi>${num(r.wasEgp)} ${escapeHtml(T('curEgp'))}</bdi> · <bdi dir="ltr">${usdText(r.wasUsd)}</bdi></s>${r.was > r.price ? `<span class="save">${escapeHtml(T('saveSilk', { n: num(r.was - r.price) }))}</span>` : ''}</div>` : ''}
         </div>`).join('');
       const wa = $('waLink');
       if (!wa.hidden) { $('payAskBtn').href = wa.href; $('payAskBtn').hidden = false; }
+      setupPayMethods();
     }
+    /* ---------- FAQ (page of its own) ---------- */
+    const FAQ = {
+      en: [
+        ['What does the taxi do?', 'It helps you level up fast, much faster than leveling on your own.'],
+        ['How can I pay?', '<ul><li>In game: <b>Silk</b> (buy it from the Item Mall, <b>F10</b>) or <b>Gold</b>.</li><li>Outside the game (Egypt): <b>Vodafone Cash</b> or <b>InstaPay</b>.</li><li>Outside the game (other countries): <b>Binance</b>.</li></ul>'],
+        ['When do I pay?', 'Payment is always made as soon as you join the party.'],
+        ['What do you need from me?', 'Nothing. Just be comfortable and enjoy the ride.'],
+        ['Do I need to share my account? Is it safe?', 'No. <b>Never share your account with anyone</b>, not even a Game Manager. Your account always stays safe, with zero risk.'],
+        ['Do I have to stay online?', 'Yes, you need to be online during your taxi time. Before we start, I\'ll walk you through a few game settings so everything goes smoothly without any problems.'],
+        ['What if the internet cuts out?', 'If my connection drops, I sign in to this site and pause the time for the whole party right away. If yours drops, your spot stays reserved for you until the last minute of your time. I\'ll also try to pause your time on the first and second day, but after that it\'s unfortunately out of my hands.'],
+        ['Which levels do you take?', 'Usually from level <b>70 up to 95–100</b>, depending on how far you want to go. I keep helping you until you tell me it\'s enough.'],
+        ['How long does each level take?', 'I can\'t promise an exact time per level, but I\'m always here to live up to your trust and help you reach the strongest level possible.'],
+        ['Can I extend my time?', 'Of course. There\'s always a place for you with us, and you can extend your time even after it has ended.'],
+        ['What if something goes wrong?', 'If anything goes wrong because of me, you get everything back in full, plus a free party on top.'],
+        ['How do I book?', 'Any way that suits you: the Discord link, WhatsApp, the <b>Book a Taxi</b> button on this site, or message me in game: <b>3zReil</b>.'],
+        ['Is there a discount for regular customers?', 'Yes! Use a coupon code when you book, or just tell me how many hours, days or weeks you need, and we\'ll find a discount that suits you.'],
+      ],
+      ar: [
+        ['خدمة التاكسي بتعمل إيه؟', 'تساعدك ترفع مستواك بسرعة، أسرع بكتير من إنك تلعب لوحدك.'],
+        ['أدفع إزاي؟', '<ul><li>داخل اللعبة: <b>Silk</b> (تشتريه من الـ Item Mall بزرار <b>F10</b>) أو <b>Gold</b>.</li><li>خارج اللعبة (من مصر): <b>فودافون كاش</b> أو <b>إنستاباي</b>.</li><li>خارج اللعبة (من برّه مصر): <b>Binance</b>.</li></ul>'],
+        ['أدفع إمتى؟', 'الدفع دايمًا أول ما تدخل البارتي.'],
+        ['محتاج مني إيه؟', 'ولا حاجة، بس تكون مرتاح ومبسوط.'],
+        ['لازم أشارك حسابي؟ وحسابي في أمان؟', 'لأ، <b>إوعى تشارك حسابك مع أي حد</b>، حتى لو Game Manager. حسابك دايمًا في أمان، Zero risk.'],
+        ['لازم أفضل أونلاين؟', 'أيوه، لازم تكون أونلاين في وقت التاكسي بتاعك. وقبل ما نبدأ هشرحلك شوية إعدادات في اللعبة عشان الدنيا تعدّي على خير من غير أي مشاكل.'],
+        ['لو النت فصل؟', 'لو فصل عندي، بدخل على الموقع بحسابي وبوقّف الوقت للبارتي كله على طول. ولو فصل عندك، مكانك بيفضل محجوزلك لحد آخر دقيقة من وقتك. وبحاول أوقّفلك وقتك في أول يوم وتاني يوم، بس بعد كده للأسف بتبقى حاجة غصب عني.'],
+        ['بتطلّع من مستوى كام لكام؟', 'عادةً من مستوى <b>70 لحد 95–100</b>، على حسب إنت حابب تكمّل لحد فين. وبفضل أساعدك لحد ما تقولي كفاية.'],
+        ['المستوى بياخد وقت قد إيه؟', 'للأسف مقدرش أحدد وقت مظبوط لكل مستوى، بس أنا هنا دايمًا عشان أكون عند حسن ظنك وأساعدك توصل لأقوى مستوى.'],
+        ['أقدر أمدّ وقتي؟', 'طبعًا، ليك دايمًا مكان وسطنا، وتقدر تمدّ وقتك حتى لو خلص.'],
+        ['لو حصلت مشكلة؟', 'لو حصلت أي مشكلة بسببي، حقك بيرجعلك كامل، وكمان تدخل البارتي ببلاش.'],
+        ['أحجز إزاي؟', 'بأي طريقة تناسبك: لينك الديسكورد، أو الواتساب، أو زرار <b>احجز تاكسي</b> في الموقع، أو كلّمني جوه اللعبة: <b>3zReil</b>.'],
+        ['فيه خصم للعملاء الدايمين؟', 'طبعًا! حط كود الخصم وإنت بتحجز، أو قولّي محتاج كام ساعة أو يوم أو أسبوع، ونلاقيلك الخصم المناسب.'],
+      ],
+      tr: [
+        ['Taksi ne işe yarar?', 'Hızlıca seviye atlamanı sağlar; tek başına kasmaktan çok daha hızlı.'],
+        ['Nasıl ödeme yapabilirim?', '<ul><li>Oyun içinde: <b>Silk</b> (Item Mall\'dan alabilirsin, <b>F10</b>) veya <b>Gold</b>.</li><li>Oyun dışında (Mısır): <b>Vodafone Cash</b> veya <b>InstaPay</b>.</li><li>Oyun dışında (diğer ülkeler): <b>Binance</b>.</li></ul>'],
+        ['Ne zaman ödeme yaparım?', 'Ödeme her zaman partiye katıldığın anda yapılır.'],
+        ['Benden ne lazım?', 'Hiçbir şey. Sadece rahat ol ve keyfini çıkar.'],
+        ['Hesabımı paylaşmam gerekiyor mu? Güvende mi?', 'Hayır. <b>Hesabını asla kimseyle paylaşma</b>, bir Game Manager ile bile. Hesabın her zaman güvende, sıfır risk.'],
+        ['Çevrimiçi kalmam gerekiyor mu?', 'Evet, taksi süren boyunca çevrimiçi olmalısın. Başlamadan önce sana birkaç oyun ayarını anlatacağım, böylece her şey sorunsuz geçer.'],
+        ['İnternet kesilirse ne olur?', 'Benim bağlantım koparsa, bu siteye kendi hesabımla girip tüm partinin süresini hemen durdururum. Seninki koparsa, yerin sürenin son dakikasına kadar sana ayrılmış kalır. İlk ve ikinci gün süreni durdurmaya da çalışırım, ama ondan sonrası maalesef benim elimde değil.'],
+        ['Hangi seviyelerde taksi yapıyorsun?', 'Genelde <b>70. seviyeden 95–100\'e kadar</b>, ne kadar ilerlemek istediğine göre. "Yeter" diyene kadar sana yardım etmeye devam ederim.'],
+        ['Her seviye ne kadar sürer?', 'Seviye başına kesin bir süre veremem, ama güvenini boşa çıkarmamak ve en güçlü seviyeye ulaşmana yardım etmek için her zaman buradayım.'],
+        ['Süremi uzatabilir miyim?', 'Elbette. Aramızda her zaman bir yerin var; süren bitmiş olsa bile uzatabilirsin.'],
+        ['Bir sorun çıkarsa ne olur?', 'Benden kaynaklı herhangi bir sorun olursa, hakkını eksiksiz geri alırsın, üstüne bir de ücretsiz parti.'],
+        ['Nasıl rezervasyon yaparım?', 'Sana hangisi uygunsa: Discord linki, WhatsApp, bu sitedeki <b>Taksi Rezerve Et</b> düğmesi ya da oyunda bana yaz: <b>3zReil</b>.'],
+        ['Düzenli müşterilere indirim var mı?', 'Evet! Rezervasyon yaparken kupon kodunu kullan ya da kaç saat, gün veya hafta istediğini söyle; sana uygun bir indirim buluruz.'],
+      ],
+      fr: [
+        ['À quoi sert le taxi ?', 'Il vous fait monter de niveau rapidement, bien plus vite qu\'en jouant seul.'],
+        ['Comment puis-je payer ?', '<ul><li>En jeu : <b>Silk</b> (à acheter dans l\'Item Mall, <b>F10</b>) ou <b>Gold</b>.</li><li>Hors du jeu (Égypte) : <b>Vodafone Cash</b> ou <b>InstaPay</b>.</li><li>Hors du jeu (autres pays) : <b>Binance</b>.</li></ul>'],
+        ['Quand dois-je payer ?', 'Le paiement se fait toujours dès que vous rejoignez la party.'],
+        ['De quoi avez-vous besoin de ma part ?', 'De rien. Soyez juste à l\'aise et profitez.'],
+        ['Dois-je partager mon compte ? Est-il en sécurité ?', 'Non. <b>Ne partagez jamais votre compte avec qui que ce soit</b>, même pas un Game Manager. Votre compte reste toujours en sécurité, zéro risque.'],
+        ['Dois-je rester connecté ?', 'Oui, vous devez être en ligne pendant votre temps de taxi. Avant de commencer, je vous expliquerai quelques réglages du jeu pour que tout se passe sans problème.'],
+        ['Et si Internet coupe ?', 'Si ma connexion tombe, je me connecte à ce site avec mon compte et je mets aussitôt en pause le temps de toute la party. Si c\'est la vôtre, votre place reste réservée jusqu\'à la dernière minute de votre temps. J\'essaie aussi de mettre votre temps en pause le premier et le deuxième jour, mais après cela, malheureusement, ça ne dépend plus de moi.'],
+        ['Quels niveaux faites-vous ?', 'En général du niveau <b>70 jusqu\'au 95–100</b>, selon jusqu\'où vous voulez aller. Je continue à vous aider jusqu\'à ce que vous me disiez que ça suffit.'],
+        ['Combien de temps prend chaque niveau ?', 'Je ne peux pas promettre un temps exact par niveau, mais je suis toujours là pour être à la hauteur de votre confiance et vous aider à atteindre le niveau le plus fort possible.'],
+        ['Puis-je prolonger mon temps ?', 'Bien sûr. Il y a toujours une place pour vous parmi nous, et vous pouvez prolonger votre temps même après la fin.'],
+        ['Et si quelque chose se passe mal ?', 'Si quelque chose se passe mal à cause de moi, vous êtes remboursé intégralement, avec en plus une party gratuite.'],
+        ['Comment réserver ?', 'Comme vous préférez : le lien Discord, WhatsApp, le bouton <b>Réserver un taxi</b> sur ce site, ou écrivez-moi en jeu : <b>3zReil</b>.'],
+        ['Y a-t-il une réduction pour les clients réguliers ?', 'Oui ! Utilisez un code promo lors de la réservation, ou dites-moi combien d\'heures, de jours ou de semaines il vous faut, et nous trouverons une réduction qui vous convient.'],
+      ],
+    };
+    function renderFaq() {
+      const list = FAQ[lang] || FAQ.en;
+      const open = new Set([...document.querySelectorAll('#faqList details[open]')].map(d => d.dataset.i));
+      $('faqList').innerHTML = list.map(([q, a], i) => `
+        <details class="faq-item" data-i="${i}"${open.has(String(i)) ? ' open' : ''}>
+          <summary><span class="faq-n">${i + 1}</span><span class="faq-q">${escapeHtml(q)}</span><svg class="i faq-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <div class="faq-a">${a}</div>
+        </details>`).join('');
+      updateFaqToggle();
+    }
+    function updateFaqToggle() {
+      const all = [...document.querySelectorAll('#faqList details')];
+      const anyClosed = all.some(d => !d.open);
+      $('faqToggleAll').textContent = anyClosed ? T('faqOpenAll') : T('faqCloseAll');
+    }
+    $('faqList').addEventListener('toggle', updateFaqToggle, true);
+    $('faqToggleAll').addEventListener('click', () => {
+      const all = [...document.querySelectorAll('#faqList details')];
+      const openAll = all.some(d => !d.open);
+      all.forEach(d => { d.open = openAll; });
+      updateFaqToggle();
+    });
+    $('faqBook').addEventListener('click', () => $('bookBtn').click());
+    renderFaq();
+
     /* ---------- language switch (EN / AR / TR / FR) ---------- */
     function applyLang(next, first) {
       lang = LANGS[next] ? next : 'en';
@@ -3643,7 +3966,7 @@
       setupPayment(); fillPackageSelects(); updateAccountUI(); updateHoldUI();
       if (lastSync) setSync(lastSync[0], lastSync[1]);
       if (!$('timerGrid').querySelector('.loading')) renderTimers();
-      renderReviews(); updateInstallUI(); showCouponMsg();
+      renderReviews(); updateInstallUI(); showCouponMsg(); renderFaq();
       if (isAdmin) { renderEarnings(); renderHistory(); renderRequests(); renderAdminReviews(); renderCoupons(); }
     }
     function fitNav() {
