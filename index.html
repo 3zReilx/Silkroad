@@ -432,6 +432,9 @@
       .status-wrap { margin-top: calc(var(--u) * 14); gap: calc(var(--u) * 8); }
       .status-pill { padding: calc(var(--u) * 7) calc(var(--u) * 14); gap: calc(var(--u) * 8); font-size: calc(var(--u) * 13); }
       .status-pill .st-slots { font-size: calc(var(--u) * 12); }
+      .next-slot { gap: calc(var(--u) * 8); padding: calc(var(--u) * 4) calc(var(--u) * 4) calc(var(--u) * 4) calc(var(--u) * 12); font-size: calc(var(--u) * 12.5); }
+      .next-slot svg.i { font-size: calc(var(--u) * 15); }
+      .ns-book { padding: calc(var(--u) * 5) calc(var(--u) * 11); font-size: calc(var(--u) * 11.5); }
       .wl-btns { gap: calc(var(--u) * 10); margin-top: calc(var(--u) * 20); }
       .book-btn { padding: calc(var(--u) * 11) calc(var(--u) * 20); font-size: calc(var(--u) * 14); height: auto; }
       body .visitors { position: absolute; left: calc(var(--u) * -195); top: calc(var(--u) * 20); width: calc(var(--u) * 244); margin: 0; padding: calc(var(--u) * 12) calc(var(--u) * 14); border-radius: calc(var(--u) * 7); }
@@ -644,7 +647,16 @@
     @keyframes anMove { to { transform: translateX(-50%); } }
     @keyframes anMoveRtl { to { transform: translateX(50%); } }
     .an-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-    .status-wrap { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 14px auto 0; }
+    .status-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; margin: 14px auto 0; }
+    /* all slots taken: when the next one frees up (from the running timers) */
+    .next-slot { display: inline-flex; align-items: center; gap: 8px; max-width: calc(100vw - 32px); padding: 4px 4px 4px 12px; border-radius: 999px; font-size: 12.5px; color: #f0d9a8;
+      background: rgba(40, 29, 16, .88); border: 1px solid rgba(215, 192, 154, .45); box-shadow: 0 6px 18px rgba(0, 0, 0, .45); }
+    .next-slot[hidden] { display: none; }
+    .next-slot svg.i { flex: none; font-size: 15px; color: var(--gold-l); animation: nsTurn 4s ease-in-out infinite; }
+    @keyframes nsTurn { 0%, 70% { transform: rotate(0); } 85%, 100% { transform: rotate(180deg); } }
+    .ns-book { flex: none; padding: 5px 11px; border: 0; border-radius: 999px; font-size: 11.5px; font-weight: 700; color: #2b1604; background: linear-gradient(180deg, #c1a479, #93714b); cursor: pointer; }
+    .ns-book:hover { filter: brightness(1.1); }
+    body.rtl .next-slot { direction: rtl; padding: 4px 12px 4px 4px; }
     .status-pill { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; font-size: 13px; background: rgba(8, 6, 4, .85); border: 1px solid rgba(185, 155, 113, .45); box-shadow: 0 6px 18px rgba(0, 0, 0, .45); }
     .status-pill b { font-weight: 600; color: #eadfc9; }
     .status-pill .st-slots { color: var(--gold-l); font-size: 12px; }
@@ -968,6 +980,11 @@
 
     <div class="status-wrap" id="statusWrap" hidden>
       <div class="status-pill" id="statusPill"><span class="dot" id="statusDot"></span><b id="statusText"></b><span class="st-slots" id="statusSlots"></span></div>
+      <div class="next-slot" id="nextSlot" hidden>
+        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12M6 21h12M7 3c0 5 5 6 5 9s-5 4-5 9M17 3c0 5-5 6-5 9s5 4 5 9"/></svg>
+        <span id="nextSlotText" role="status"></span>
+        <button class="ns-book" id="nextSlotBook" type="button" data-i18n="nextSlotBook">Reserve it</button>
+      </div>
     </div>
     <a class="all-link" href="#timers"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 3h6"/></svg><span data-i18n="openTimers">Open Timers</span><span class="count" id="homeCount"></span><span class="arr" aria-hidden="true">&rarr;</span></a>
 
@@ -1399,6 +1416,7 @@
         insteadOf: 'Instead of',
         langLabel: 'Language',
         annOn: 'Announcement: on', annOff: 'Announcement: off',
+        stSlotsNone: 'all slots taken', nextSlotIn: 'Next free slot in {t}', nextSlotSoon: 'A slot frees up in less than a minute',
         revSent: 'Thank you! Your review will show on the site after approval.',
         revTooMany: 'You already sent reviews today. Thank you!',
         revUnavailable: 'Reviews are not available right now.',
@@ -1551,6 +1569,7 @@
         insteadOf: 'بدلًا من',
         langLabel: 'اللغة',
         annOn: 'الإعلان: ظاهر', annOff: 'الإعلان: مخفي',
+        stSlotsNone: 'كل الأماكن محجوزة', nextSlotIn: 'أقرب مكان متاح بعد {t}', nextSlotSoon: 'سيتوفر مكان خلال أقل من دقيقة', nextSlotBook: 'احجزه',
         revTitle: 'آراء العملاء', revWrite: 'اكتب رأيك',
         revIntro: 'هل جرّبت التاكسي مع 3zReil؟ شارك تجربتك مع الآخرين. يظهر رأيك في الموقع بعد موافقة 3zReil.',
         revRating: 'تقييمك', revComment: 'رأيك', revCommentPh: 'كيف كانت الخدمة؟', revSend: 'إرسال الرأي',
@@ -1755,6 +1774,7 @@
         insteadOf: 'Normal fiyat:',
         langLabel: 'Dil',
         annOn: 'Duyuru: açık', annOff: 'Duyuru: kapalı',
+        stSlotsNone: 'tüm yerler dolu', nextSlotIn: 'Sıradaki boş yer: {t} sonra', nextSlotSoon: 'Bir dakikadan kısa sürede yer açılıyor', nextSlotBook: 'Yer ayırt',
         revTitle: 'Müşteri yorumları', revWrite: 'Yorum yaz',
         revIntro: '3zReil ile çalıştın mı? Deneyimini başkalarına anlat. Yorumun 3zReil onayladıktan sonra sitede görünür.',
         revRating: 'Puanın', revComment: 'Yorumun', revCommentPh: 'Hizmet nasıldı?', revSend: 'Yorumu gönder',
@@ -1959,6 +1979,7 @@
         insteadOf: 'Au lieu de',
         langLabel: 'Langue',
         annOn: 'Annonce : affichée', annOff: 'Annonce : masquée',
+        stSlotsNone: 'toutes les places sont prises', nextSlotIn: 'Prochaine place libre dans {t}', nextSlotSoon: 'Une place se libère dans moins d\'une minute', nextSlotBook: 'Réserver',
         revTitle: 'Avis des clients', revWrite: 'Laisser un avis',
         revIntro: 'Vous avez joué avec 3zReil ? Racontez votre expérience. Votre avis apparaît sur le site après validation par 3zReil.',
         revRating: 'Votre note', revComment: 'Votre avis', revCommentPh: 'Comment était le service ?', revSend: 'Envoyer l\'avis',
@@ -2581,9 +2602,11 @@
       $('statusDot').className = 'dot ' + (st === 'online' ? 'ok' : st === 'busy' ? 'busy' : '');
       $('statusText').textContent = st ? T('stNow_' + st) : T('stNotSet');
       const slots = Number(siteStatus && siteStatus.slots);
-      $('statusSlots').textContent = st === 'online' && slots > 0 ? '· ' + T('stSlotsFree', { n: slots }) : '';
+      const noneLeft = st === 'online' && siteStatus.slots !== '' && siteStatus.slots != null && slots === 0;
+      $('statusSlots').textContent = st === 'online' && slots > 0 ? '· ' + T('stSlotsFree', { n: slots }) : noneLeft ? '· ' + T('stSlotsNone') : '';
       const text = siteAnn && siteAnn.show && String(siteAnn.text || '').trim();
       $('announce').hidden = !text;                 // stays up for everyone until the admin switches it off
+      updateNextSlot();
       $('setHomeSum').innerHTML = `<i class="dot ${st === 'online' ? 'ok' : st === 'busy' ? 'busy' : ''}"></i>` +
         escapeHtml((st ? T('stNow_' + st) + (st === 'online' && slots > 0 ? ' · ' + T('stSlotsFree', { n: slots }) : '') : T('stNotSet')) + ' · ' + T(text ? 'annOn' : 'annOff'));
       const line = (text || '').replace(/\s*\n+\s*/g, '   •   ');
@@ -2611,6 +2634,27 @@
       new ResizeObserver(() => { const w = $('announceText').clientWidth; if (w && Math.abs(w - tickerWidth) > 2) buildTicker(); }).observe($('announceText'));
     } catch (e) {}
     try { document.fonts.ready.then(() => { if ($('announceText').clientWidth) buildTicker(); }); } catch (e) {}
+    // "Next free slot in ..." when every slot is taken: the soonest running timer decides
+    const DUR_UNITS = { en: ['d', 'h', 'm', ''], ar: ['ي', 'س', 'د', ' '], tr: ['g', 'sa', 'dk', ' '], fr: ['j', 'h', 'min', ' '] };
+    function durShort(sec) {
+      const [ud, uh, um, sp] = DUR_UNITS[lang] || DUR_UNITS.en;
+      const mins = Math.ceil(sec / 60), d = Math.floor(mins / 1440), h = Math.floor((mins % 1440) / 60), m = mins % 60;
+      const f = (n, u) => n + sp + u;
+      return d ? f(d, ud) + (h ? ' ' + f(h, uh) : '') : h ? f(h, uh) + (m ? ' ' + f(m, um) : '') : f(m, um);
+    }
+    function updateNextSlot() {
+      const st = siteStatus && siteStatus.state, raw = siteStatus ? siteStatus.slots : null;
+      const full = st === 'busy' || (st === 'online' && raw !== '' && raw != null && Number(raw) === 0);
+      let soonest = Infinity;
+      if (full) for (const t of timers) if (timerState(t) === 'Running') soonest = Math.min(soonest, getRemaining(t));
+      const show = full && soonest !== Infinity && soonest > 0;
+      if ($('nextSlot').hidden === show) $('nextSlot').hidden = !show;
+      if (!show) return;
+      const txt = soonest < 60 ? T('nextSlotSoon') : T('nextSlotIn', { t: durShort(soonest) });
+      if ($('nextSlotText').textContent !== txt) $('nextSlotText').textContent = txt;
+    }
+    $('nextSlotBook').addEventListener('click', () => $('bookBtn').click());
+
     function openHomeModal() {
       const st = (siteStatus && siteStatus.state) || 'online';
       document.querySelectorAll('input[name="hsState"]').forEach(r => { r.checked = r.value === st; });
@@ -2972,6 +3016,7 @@
 
     function tick() {
       const changed = checkStates();
+      updateNextSlot();
       const order = sortedTimers().map(t => t.id).join(',');
       if (timers.length && (changed || order !== $('timerGrid').dataset.order)) {
         renderTimers();
