@@ -925,7 +925,7 @@
     }
     .side .name { font-size: 15px; font-weight: 600; letter-spacing: .3px; margin-bottom: 2px; }
     @media (min-width: 1100px) { .side .name { font-size: calc(var(--u) * 15); margin-bottom: calc(var(--u) * 2); } }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *:not(.intro):not(.intro *):not(.bg) { transition: none !important; } }
 
     /* ---------------- language picker ---------------- */
     .i18n-wait body { visibility: hidden; }
@@ -1114,8 +1114,7 @@
       }
       window.playIntro = function () { if (el.hidden) play(); };
       try {
-        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (sessionStorage.getItem('introShown') || reduce) return;
+        if (sessionStorage.getItem('introShown')) return;
         sessionStorage.setItem('introShown', '1');
       } catch (e) { return; }   // the browser cannot remember it: skip, so it never plays on every refresh
       play();
