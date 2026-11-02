@@ -420,6 +420,72 @@
     .faq-a b { color: var(--gold-l); font-weight: 600; }
     .faq-a ul { margin: 2px 0 0; padding-inline-start: 18px; display: grid; gap: 3px; }
     .faq-a li::marker { color: var(--gold); }
+    /* ---------------- Shop: Silk + Gold (sizes use --s: 1px on phones, the desktop scale on computers) ---------------- */
+    .shop { --s: 1px; width: min(760px, 100%); margin: 16px auto 0; padding: 22px 18px 20px; }
+    .shop .faq-head h2 svg.i { color: var(--gold); }
+    .shop-intro { margin: 0 0 calc(var(--s) * 16); font-size: calc(var(--s) * 13.5); line-height: 1.7; color: #e6dac4; }
+    .shop-soon { margin: 6px 0 14px; padding: 14px; border-radius: 10px; text-align: center; font-size: 13.5px; color: var(--gold-l); background: rgba(185, 155, 113, .08); border: 1px dashed rgba(185, 155, 113, .4); }
+    .shop-items { display: grid; gap: calc(var(--s) * 14); }
+    .shop-block { padding: calc(var(--s) * 14); border-radius: calc(var(--s) * 12); background: linear-gradient(180deg, #15100a, #0b0806); border: 1px solid rgba(185, 155, 113, .3); }
+    .sb-head { display: flex; align-items: center; flex-wrap: wrap; gap: calc(var(--s) * 6) calc(var(--s) * 10); margin-bottom: calc(var(--s) * 12); }
+    .sb-ico { width: calc(var(--s) * 38); height: calc(var(--s) * 38); flex: none; display: grid; place-items: center; border-radius: 50%; font-size: calc(var(--s) * 20); color: #2b1604; background: linear-gradient(180deg, #d2b98f, #93714b); box-shadow: 0 0 14px rgba(169, 137, 97, .35); }
+    .shop-gold .sb-ico { background: linear-gradient(180deg, #ffe08a, #c9962c); }
+    .shop-silk .sb-ico { background: linear-gradient(180deg, #e9dcff, #9a7fd0); }
+    .sb-title { display: grid; gap: 2px; flex: 1; min-width: 0; }
+    .sb-title b { font: 700 calc(var(--s) * 19)/1.05 Rajdhani, Cairo, Impact, sans-serif; letter-spacing: 1.2px; text-transform: uppercase; color: #fff; }
+    .sb-title small { font-size: calc(var(--s) * 12); color: var(--muted); }
+    .sb-out { padding: calc(var(--s) * 4) calc(var(--s) * 10); border-radius: 999px; font-size: calc(var(--s) * 11.5); font-weight: 700; color: #ffb3a8; background: #3a1411; border: 1px solid #7a2a22; }
+    .sb-packs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(var(--s) * 10); }
+    .sb-pack {
+      display: grid; justify-items: center; align-content: start; gap: calc(var(--s) * 3); min-width: 0; padding: calc(var(--s) * 14) calc(var(--s) * 8) calc(var(--s) * 12);
+      border-radius: calc(var(--s) * 10); cursor: pointer; color: inherit; font: inherit; text-align: center;
+      background: radial-gradient(circle at 50% 0, rgba(215, 192, 154, .16), transparent 70%), #0d0a07; border: 1px solid rgba(185, 155, 113, .35);
+      transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+    }
+    .sb-pack:hover:not(:disabled), .sb-pack:focus-visible { transform: translateY(-2px); border-color: var(--gold-l); box-shadow: 0 0 18px rgba(169, 137, 97, .3); }
+    .sb-pack:disabled { opacity: .45; cursor: not-allowed; }
+    .sp-amt { font: 700 calc(var(--s) * 23)/1.1 Rajdhani, Cairo, Impact, sans-serif; color: #f6e2b8; white-space: nowrap; }
+    .sp-egp { font-size: calc(var(--s) * 15); font-weight: 700; color: #fff; white-space: nowrap; }
+    .sp-usd { font-size: calc(var(--s) * 12); color: var(--muted); white-space: nowrap; }
+    .sp-buy { margin-top: calc(var(--s) * 7); padding: calc(var(--s) * 5) calc(var(--s) * 18); border-radius: 999px; font-size: calc(var(--s) * 12); font-weight: 700; color: #2b1604; background: linear-gradient(180deg, #c1a479, #93714b); }
+    .sb-custom { margin-top: calc(var(--s) * 12); padding-top: calc(var(--s) * 12); border-top: 1px dashed rgba(185, 155, 113, .25); }
+    .sb-custom label { display: block; margin-bottom: calc(var(--s) * 7); font-size: calc(var(--s) * 12); font-weight: 600; color: #ecdcc0; }
+    .sb-crow { display: flex; align-items: center; flex-wrap: wrap; gap: calc(var(--s) * 8); }
+    .sb-in { width: calc(var(--s) * 120); padding: calc(var(--s) * 9) calc(var(--s) * 11); color: var(--cream); background: #0a0705; border: 1px solid #4d3720; border-radius: calc(var(--s) * 8); outline: none; font: inherit; font-size: calc(var(--s) * 14); }
+    .sb-in:focus { border-color: var(--gold); }
+    .sb-in.bad { border-color: #e5392f; }
+    .sb-unit { font-size: calc(var(--s) * 12.5); color: var(--muted); }
+    .sb-live { flex: 1; min-width: calc(var(--s) * 120); font-size: calc(var(--s) * 14); font-weight: 700; color: #fff; }
+    .sb-crow .add { padding: calc(var(--s) * 8) calc(var(--s) * 18); font-size: calc(var(--s) * 13); }
+    .sb-hint { display: block; margin-top: calc(var(--s) * 6); font-size: calc(var(--s) * 11.5); color: var(--muted); }
+    .sb-hint.bad { color: #ff8f80; }
+    .shop-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: calc(var(--s) * 9); }
+    .shop-steps li { display: flex; align-items: center; gap: calc(var(--s) * 12); padding: calc(var(--s) * 10) calc(var(--s) * 12); border-radius: calc(var(--s) * 9); font-size: calc(var(--s) * 13.5); color: #e6dac4; background: #0d0a07; border: 1px solid rgba(185, 155, 113, .2); }
+    .shop .pay-head { margin-top: calc(var(--s) * 20); }
+    @media (max-width: 520px) {
+      .sb-packs { grid-template-columns: minmax(0, 1fr); }
+      .sb-pack { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "amt egp buy" "amt usd buy"; justify-items: start; align-items: center; column-gap: 12px; padding: 11px 12px; text-align: start; }
+      .sp-amt { grid-area: amt; font-size: 21px; min-width: 96px; } .sp-egp { grid-area: egp; } .sp-usd { grid-area: usd; } .sp-buy { grid-area: buy; margin: 0; }
+    }
+    body.rtl .shop, body.rtl .shop-modal { direction: rtl; }
+    body.rtl .sb-title small { text-align: right; }
+    /* order window */
+    .ord-sum { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 14px; margin: 6px 0 4px; padding: 12px 14px; border-radius: 10px; background: radial-gradient(circle at 0 0, rgba(215, 192, 154, .16), transparent 70%), #0d0a07; border: 1px solid rgba(185, 155, 113, .4); }
+    .ord-sum b { font: 700 24px/1 Rajdhani, Cairo, Impact, sans-serif; color: #f6e2b8; }
+    .ord-sum span { font-size: 14.5px; font-weight: 700; color: #fff; }
+    .ord-sum small { display: block; font-size: 11.5px; font-weight: 400; color: var(--muted); }
+    .ord-pay span { font-size: 12.5px; text-align: center; }
+    .ord-done-title { margin: 10px 0 4px; font-size: 16px; font-weight: 700; color: #3fe0b0; }
+    .ord-done-pay { margin: 0 0 10px; font-size: 13.5px; color: #e6dac4; line-height: 1.6; }
+    .ord-paybox { grid-template-columns: minmax(0, 1fr); }
+    .ord-receipt { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 12px 0 0; padding: 11px 14px; text-decoration: none; font-size: 13.5px; }
+    .ord-trade { margin: 12px 0 0; font-size: 12.5px; color: var(--muted); line-height: 1.6; }
+    .shp-item { margin-top: 12px; padding: 12px; border-radius: 10px; background: #0d0a07; border: 1px solid rgba(185, 155, 113, .25); }
+    .shp-item h3 { margin: 0 0 4px; font: 700 15px Rajdhani, Cairo, sans-serif; letter-spacing: 1px; text-transform: uppercase; color: var(--gold-l); }
+    .shp-item .field { margin: 10px 0; }
+    .shp-item .toggle { margin: 8px 0 0; }
+    .ord-card .ord-st { display: inline-block; margin-top: 2px; padding: 2px 9px; border-radius: 999px; font-size: 11px; font-weight: 700; color: #f0d79e; background: #3a2a10; }
+    .ord-card .ord-st.paid { color: #0b2a20; background: #3fe0b0; }
     .faq-cta { margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(185, 155, 113, .25); text-align: center; }
     .faq-cta p { margin: 0 0 12px; font-size: 13.5px; color: #e6dac4; }
     .faq-btns { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
@@ -594,6 +660,7 @@
     body:not([data-view="timers"]) .big, body:not([data-view="timers"]) .list { display: none; }
     body:not([data-view="home"]) .all-link { display: none; }
     body:not([data-view="faq"]) .faq { display: none; }
+    body:not([data-view="shop"]) .shop { display: none; }
 
     /* Home welcome text */
     body:not([data-view="home"]) .welcome { display: none; }
@@ -943,6 +1010,7 @@
       .social { position: fixed; z-index: 34; right: calc(var(--u) * 26); bottom: calc(var(--u) * 46); flex-direction: column; gap: calc(var(--u) * 14); margin: 0; }
       .social a { width: calc(var(--u) * 50); height: calc(var(--u) * 50); font-size: calc(var(--u) * 25); }
       .social a::before { right: calc(100% + var(--u) * 10); font-size: calc(var(--u) * 12); padding: calc(var(--u) * 5) calc(var(--u) * 10); }
+      .shop { --s: var(--u); width: calc(var(--u) * 846); margin-top: calc(var(--u) * 16); padding: calc(var(--u) * 24) calc(var(--u) * 28) calc(var(--u) * 26); }
       .faq { width: calc(var(--u) * 846); margin-top: calc(var(--u) * 16); padding: calc(var(--u) * 24) calc(var(--u) * 28) calc(var(--u) * 26); }
       .faq-head { margin-bottom: calc(var(--u) * 16); }
       .faq-head h2 { font-size: calc(var(--u) * 14.5); gap: calc(var(--u) * 10); letter-spacing: calc(var(--u) * 1.6); }
@@ -1175,6 +1243,7 @@
       <a href="#home" class="active" data-nav="home"><svg class="i" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg><span data-i18n="navHome">Home</span></a>
       <a href="#timers" data-nav="timers"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 3h6"/></svg><span data-i18n="navTimers">Timers</span></a>
       <a href="#faq" data-nav="faq"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 1 1 3.6 2.3c-.8.4-1.2 1-1.2 1.9v.4M12 16.8v.2"/></svg><span data-i18n="navFaq">FAQ</span></a>
+      <a href="#shop" data-nav="shop"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg><span data-i18n="navShop">Shop</span></a>
       <button type="button" id="settingsBtn"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg><span data-i18n="navSettings">Settings</span></button>
       <button type="button" id="aboutBtn"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span data-i18n="navAbout">About</span></button>
       <button type="button" id="statsBtn" hidden><svg class="i" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span data-i18n="navStats">Stats</span><span class="nav-badge" id="statsBadge" hidden></span></button>
@@ -1322,6 +1391,20 @@
       </div>
     </section>
 
+    <section class="frame shop" id="shopPanel" aria-labelledby="shopTitle">
+      <span class="gem top"></span>
+      <div class="faq-head"><h2 id="shopTitle"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg><span data-i18n="shopTitle">Silk &amp; Gold shop</span></h2></div>
+      <p class="shop-intro" data-i18n="shopIntro">Buy Silk and Gold straight from 3zReil. Choose a package or type your own amount, pay, and I give it to you in game by Trade.</p>
+      <div class="shop-items" id="shopItems"></div>
+      <p class="shop-soon" id="shopSoon" hidden data-i18n="shopSoon">Prices are coming very soon. Message me on WhatsApp if you want to buy now.</p>
+      <h3 class="pay-head" data-i18n="shopHow">How it works</h3>
+      <ol class="shop-steps">
+        <li><span class="faq-n">1</span><span data-i18n="shopStep1">Choose what you want and send the order.</span></li>
+        <li><span class="faq-n">2</span><span data-i18n="shopStep2">Pay with Vodafone Cash, InstaPay or Binance and send me the receipt.</span></li>
+        <li><span class="faq-n">3</span><span data-i18n="shopStep3">We meet in game and I give it to you by Trade.</span></li>
+      </ol>
+    </section>
+
     <section class="frame list" id="timersPanel" aria-label="Timers">
       <span class="gem top"></span>
       <div class="list-head">
@@ -1420,6 +1503,11 @@
           <span class="set-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9V5h18v4a3 3 0 0 0 0 6v4H3v-4a3 3 0 0 0 0-6z"/><path d="M9.5 15l5-6M9.6 9.4h.01M14.4 14.6h.01" style="stroke-width:2.6"/></svg></span>
           <span class="set-txt"><b data-i18n="cpTitle">Coupons</b><small id="setCouponSum"></small></span>
           <button class="add set-edit" id="couponBtn" type="button" data-i18n="cpManage">Manage</button>
+        </div>
+        <div class="set-row">
+          <span class="set-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg></span>
+          <span class="set-txt"><b data-i18n="shpTitle">Shop prices</b><small id="setShopSum"></small></span>
+          <button class="add set-edit" id="shopAdminBtn" type="button" data-i18n="cpManage">Manage</button>
         </div>
         <h3 class="pay-head" data-i18n="setDeviceHead">This device</h3>
       </div>
@@ -1542,6 +1630,52 @@
     </form>
   </div>
 
+  <div class="backdrop" id="shopModal" role="dialog" aria-modal="true" aria-labelledby="ordTitle">
+    <form class="frame modal shop-modal" id="ordForm">
+      <span class="gem top"></span>
+      <h2 id="ordTitle"></h2>
+      <div class="ord-sum" id="ordSum"></div>
+      <div id="ordFields">
+        <div class="field"><label for="ordName" data-i18n="bkName">In-game name</label><input id="ordName" type="text" dir="auto" maxlength="40" required></div>
+        <div class="field"><label data-i18n="ordPay">Pay with</label>
+          <div class="seg ord-pay">
+            <label><input type="radio" name="ordPay" value="vodafone" required><span>Vodafone Cash</span></label>
+            <label><input type="radio" name="ordPay" value="instapay"><span>InstaPay</span></label>
+            <label><input type="radio" name="ordPay" value="binance"><span>Binance</span></label>
+          </div>
+        </div>
+        <div class="field"><label for="ordContact" data-i18n="ordContact">WhatsApp, Telegram or Discord</label><input id="ordContact" type="text" dir="auto" maxlength="60" required></div>
+        <div class="field"><label for="ordNotes"><span data-i18n="bkNotes">Notes</span> <small class="opt" data-i18n="optional">optional</small></label><textarea id="ordNotes" dir="auto" maxlength="200" rows="2"></textarea></div>
+        <p class="form-msg" id="ordMsg" hidden></p>
+      </div>
+      <div class="ord-done" id="ordDone" hidden>
+        <p class="ord-done-title" id="ordDoneTitle"></p>
+        <p class="ord-done-pay" id="ordDonePay"></p>
+        <div class="pay-methods ord-paybox" id="ordPayBox"></div>
+        <a class="add ord-receipt" id="ordReceipt" href="#" target="_blank" rel="noopener noreferrer"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"/></svg><span data-i18n="ordReceipt">Send me the receipt on WhatsApp</span></a>
+        <p class="ord-trade" id="ordTrade"></p>
+      </div>
+      <div class="modal-actions">
+        <button class="chip-btn" id="ordCancel" type="button" data-i18n="cancel">Cancel</button>
+        <button class="add" id="ordSend" type="submit" data-i18n="ordSend">Send order</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="backdrop" id="shopAdminModal" role="dialog" aria-modal="true" aria-labelledby="shpTitle">
+    <form class="frame modal" id="shpForm">
+      <span class="gem top"></span>
+      <h2 id="shpTitle" data-i18n="shpTitle">Shop prices</h2>
+      <p data-i18n="shpIntro">Prices for every 100 Silk and every 100m Gold. Leave a price empty to hide that item. Customers always pay what is set here.</p>
+      <div id="shpFields"></div>
+      <p class="form-msg" id="shpMsg" hidden></p>
+      <div class="modal-actions">
+        <button class="chip-btn" id="shpClose" type="button" data-i18n="cancel">Cancel</button>
+        <button class="add" id="shpSave" type="submit" data-i18n="save">Save</button>
+      </div>
+    </form>
+  </div>
+
   <div class="backdrop" id="couponModal" role="dialog" aria-modal="true" aria-labelledby="cpTitleH">
     <div class="frame modal">
       <span class="gem top"></span>
@@ -1593,12 +1727,18 @@
       <h2 id="reqTitle" data-i18n="navRequests">Requests</h2>
       <div class="tabs" role="tablist">
         <button class="tab on" type="button" data-rtab="bookings"><span data-i18n="reqTabBookings">Bookings</span><span class="tab-n" id="rqTabN1" hidden></span></button>
+        <button class="tab" type="button" data-rtab="orders"><span data-i18n="reqTabOrders">Orders</span><span class="tab-n" id="rqTabN3" hidden></span></button>
         <button class="tab" type="button" data-rtab="reviews"><span data-i18n="reqTabReviews">Reviews</span><span class="tab-n" id="rqTabN2" hidden></span></button>
       </div>
       <div class="rq-tab" data-rtab="bookings">
         <p data-i18n="reqIntro">New requests from the booking form. Accept one to start a timer for that customer.</p>
         <div class="er-list" id="reqList"></div>
         <p class="st-note" id="reqNote"></p>
+      </div>
+      <div class="rq-tab" data-rtab="orders" hidden>
+        <p data-i18n="ordAdminIntro">Orders from the Shop page. Mark an order paid when the money arrives, then delivered after the Trade.</p>
+        <div class="er-list" id="ordList"></div>
+        <p class="st-note" id="ordNote"></p>
       </div>
       <div class="rq-tab" data-rtab="reviews" hidden>
         <p data-i18n="revAdminIntro">Approve a review to show it on the Home page. Hidden and new reviews are seen only by you.</p>
@@ -1771,7 +1911,8 @@
         langLabel: 'Language',
         annOn: 'Announcement: on', annOff: 'Announcement: off',
         vipTip: '{d}-day package or longer with 3zReil',
-        payHow: 'How to pay', payName: 'Name', payInGame: 'In game', payInGameVal: 'Silk (Item Mall, F10) or Gold, straight to 3zReil', payEgypt: 'From Egypt', payAbroad: 'From abroad', qrScan: 'Scan to pay', contactMe: 'Contact me', tgNotify: 'Get a Telegram message before your time ends', openInstapay: 'Open in InstaPay', payReceipt: 'Send me the receipt here', copy: 'Copy', copied: 'Copied ✓', chat: 'Chat',
+        payHow: 'How to pay', payName: 'Name', payInGame: 'In game', payInGameVal: 'Silk (Item Mall, F10) or Gold, straight to 3zReil', payEgypt: 'From Egypt', payAbroad: 'From abroad', qrScan: 'Scan to pay', contactMe: 'Contact me', tgNotify: 'Get a Telegram message before your time ends',
+        shopPer: '{amt} =', shopOut: 'Out of stock', shopBuy: 'Buy', shopCustom: 'Or type your own amount', shopGoldUnit: 'million Gold', shopRange: 'From {min} to {max}', ordTitle: 'Buy {amt}', ordOr: 'or {v}', ordNotAvail: 'This is not available right now. The prices were updated, please check again.', ordDone: 'Order #{id} sent ✓', ordDonePay: 'Now pay {price} with {method}, then send me the receipt:', ordWaText: 'Hi 3zReil, order #{id}: {amt} = {price}, paid with {method}. My in-game name: {name}', ordTrade: 'As soon as the payment arrives, I will give it to {name} in game by Trade.', shpNotSet: 'No prices yet', shpPriceEgp: '{amt} in EGP', shpPriceUsd: '{amt} in USD', shpPacksSilk: 'Packages (Silk)', shpPacksGold: 'Packages (millions of Gold, 1000 = 1b)', shpAvailable: 'Available (off = out of stock)', shpBad: 'Check the {item} prices: fill both EGP and USD (or leave both empty).', shpSaved: 'Shop prices saved.', nNewOrder: 'New order: {amt} from {name}', nNewOrderTitle: 'New shop order', ordPrice: 'Price', ordContactShort: 'Contact', ordStNew: 'Waiting for payment', ordStPaid: 'Paid, deliver it', ordMarkPaid: 'Paid', ordMarkDone: 'Delivered', ordEmpty: 'No open orders right now.', confirmDelOrder: 'Delete this order?', nOrderDone: 'Order delivered ✓', openInstapay: 'Open in InstaPay', payReceipt: 'Send me the receipt here', copy: 'Copy', copied: 'Copied ✓', chat: 'Chat',
         faqOpenAll: 'Open all', faqCloseAll: 'Close all',
         cpOk: '✓ {p}% off', cpInvalid: 'This code is not valid.', cpExpired: 'This code has expired.', cpUsedUp: 'This code was already used up.',
         cpUnavailable: 'Coupons are not available right now.', cpEmpty: 'No coupons yet.', cpUses: 'used {n}', cpUsesMax: 'used {n} of {m}',
@@ -1933,7 +2074,9 @@
         langLabel: 'اللغة',
         annOn: 'الإعلان: ظاهر', annOff: 'الإعلان: مخفي',
         vipTip: 'باقة {d} أيام أو أكثر مع 3zReil',
-        payHow: 'طرق الدفع', payName: 'الاسم', payInGame: 'داخل اللعبة', payInGameVal: 'Silk (من الـ Item Mall بزرار F10) أو Gold، لـ 3zReil على طول', payEgypt: 'من مصر', payAbroad: 'من برّه مصر', qrScan: 'امسح الكود للدفع', contactMe: 'تواصل معي', tgNotify: 'رسالة على تليجرام قبل انتهاء وقتك', openInstapay: 'افتح في إنستاباي', payReceipt: 'ابعتلي الإيصال هنا', copy: 'نسخ', copied: 'اتنسخ ✓', chat: 'محادثة',
+        payHow: 'طرق الدفع', payName: 'الاسم', payInGame: 'داخل اللعبة', payInGameVal: 'Silk (من الـ Item Mall بزرار F10) أو Gold، لـ 3zReil على طول', payEgypt: 'من مصر', payAbroad: 'من برّه مصر', qrScan: 'امسح الكود للدفع', contactMe: 'تواصل معي', tgNotify: 'رسالة على تليجرام قبل انتهاء وقتك',
+        shopPer: '{amt} =', shopOut: 'نفدت الكمية', shopBuy: 'اشترِ', shopCustom: 'أو اكتب الكمية التي تريدها', shopGoldUnit: 'مليون Gold', shopRange: 'من {min} إلى {max}', ordTitle: 'شراء {amt}', ordOr: 'أو {v}', ordNotAvail: 'غير متاح الآن، تم تحديث الأسعار. راجع الصفحة مرة أخرى.', ordDone: 'تم إرسال الطلب رقم {id} ✓', ordDonePay: 'ادفع الآن {price} عن طريق {method}، ثم أرسل لي الإيصال:', ordWaText: 'أهلاً 3zReil، الطلب رقم {id}: {amt} = {price}، الدفع عن طريق {method}. اسمي في اللعبة: {name}', ordTrade: 'فور وصول الدفع سأسلّمها إلى {name} داخل اللعبة عن طريق Trade.', shpNotSet: 'لا توجد أسعار بعد', shpPriceEgp: 'سعر {amt} بالجنيه', shpPriceUsd: 'سعر {amt} بالدولار', shpPacksSilk: 'الباقات (Silk)', shpPacksGold: 'الباقات (بالمليون Gold، 1000 = 1b)', shpAvailable: 'متاح (عند الإيقاف: نفدت الكمية)', shpBad: 'راجع أسعار {item}: اكتب الجنيه والدولار معاً (أو اترك الاثنين فارغين).', shpSaved: 'تم حفظ أسعار المتجر.', nNewOrder: 'طلب جديد: {amt} من {name}', nNewOrderTitle: 'طلب جديد من المتجر', ordPrice: 'السعر', ordContactShort: 'التواصل', ordStNew: 'في انتظار الدفع', ordStPaid: 'تم الدفع، سلّمها', ordMarkPaid: 'تم الدفع', ordMarkDone: 'تم التسليم', ordEmpty: 'لا توجد طلبات مفتوحة الآن.', confirmDelOrder: 'حذف هذا الطلب؟', nOrderDone: 'تم تسليم الطلب ✓',
+        navShop: 'المتجر', shopTitle: 'متجر Silk و Gold', shopIntro: 'اشترِ Silk و Gold من 3zReil مباشرة. اختر باقة أو اكتب الكمية التي تريدها، ادفع، وسأسلّمها لك داخل اللعبة عن طريق Trade.', shopSoon: 'الأسعار قريباً جداً. لو تريد الشراء الآن راسلني على واتساب.', shopHow: 'طريقة الشراء', shopStep1: 'اختر ما تريده وأرسل الطلب.', shopStep2: 'ادفع بفودافون كاش أو إنستاباي أو Binance وأرسل لي الإيصال.', shopStep3: 'نتقابل في اللعبة وأسلّمها لك عن طريق Trade.', ordPay: 'طريقة الدفع', ordContact: 'واتساب أو تليجرام أو ديسكورد', ordSend: 'إرسال الطلب', ordReceipt: 'أرسل لي الإيصال على واتساب', shpTitle: 'أسعار المتجر', shpIntro: 'السعر لكل 100 Silk ولكل 100 مليون Gold. اترك السعر فارغاً لإخفاء المنتج. العميل يدفع دائماً السعر المكتوب هنا.', reqTabOrders: 'طلبات المتجر', ordAdminIntro: 'طلبات صفحة المتجر. علّم الطلب «تم الدفع» عند وصول المال، ثم «تم التسليم» بعد الـ Trade.', openInstapay: 'افتح في إنستاباي', payReceipt: 'ابعتلي الإيصال هنا', copy: 'نسخ', copied: 'اتنسخ ✓', chat: 'محادثة',
         navFaq: 'الأسئلة', faqTitle: 'الأسئلة الشائعة', faqMore: 'لسه عندك سؤال؟ كلّمني، أنا موجود دايمًا.', faqOpenAll: 'فتح الكل', faqCloseAll: 'قفل الكل',
         bkCoupon: 'كود الخصم', bkCouponApply: 'تطبيق',
         cpTitle: 'كوبونات الخصم', cpManage: 'إدارة', cpNew: 'كوبون جديد', cpCode: 'الكود', cpPercent: 'نسبة الخصم %', cpEnds: 'آخر يوم', cpMax: 'أقصى عدد استخدامات', cpAdd: 'إضافة الكوبون',
@@ -2150,7 +2293,9 @@
         langLabel: 'Dil',
         annOn: 'Duyuru: açık', annOff: 'Duyuru: kapalı',
         vipTip: '3zReil ile {d} günlük veya daha uzun paket',
-        payHow: 'Nasıl ödenir', payName: 'Ad', payInGame: 'Oyun içinde', payInGameVal: 'Silk (Item Mall, F10) veya Gold, doğrudan 3zReil\'e', payEgypt: 'Mısır\'dan', payAbroad: 'Yurt dışından', qrScan: 'Ödemek için tarayın', contactMe: 'Bana ulaş', tgNotify: 'Süren bitmeden Telegram mesajı al', openInstapay: 'InstaPay\'de aç', payReceipt: 'Dekontu buradan gönder', copy: 'Kopyala', copied: 'Kopyalandı ✓', chat: 'Sohbet',
+        payHow: 'Nasıl ödenir', payName: 'Ad', payInGame: 'Oyun içinde', payInGameVal: 'Silk (Item Mall, F10) veya Gold, doğrudan 3zReil\'e', payEgypt: 'Mısır\'dan', payAbroad: 'Yurt dışından', qrScan: 'Ödemek için tarayın', contactMe: 'Bana ulaş', tgNotify: 'Süren bitmeden Telegram mesajı al',
+        shopPer: '{amt} =', shopOut: 'Stokta yok', shopBuy: 'Satın al', shopCustom: 'Ya da istediğin miktarı yaz', shopGoldUnit: 'milyon Gold', shopRange: '{min} ile {max} arası', ordTitle: '{amt} satın al', ordOr: 'veya {v}', ordNotAvail: 'Şu anda mevcut değil. Fiyatlar güncellendi, lütfen tekrar bak.', ordDone: '#{id} numaralı sipariş gönderildi ✓', ordDonePay: 'Şimdi {price} tutarını {method} ile öde, sonra dekontu bana gönder:', ordWaText: 'Merhaba 3zReil, sipariş #{id}: {amt} = {price}, ödeme {method} ile. Oyundaki adım: {name}', ordTrade: 'Ödeme gelir gelmez oyunda {name} adlı karaktere Trade ile vereceğim.', shpNotSet: 'Henüz fiyat yok', shpPriceEgp: '{amt} fiyatı (EGP)', shpPriceUsd: '{amt} fiyatı (USD)', shpPacksSilk: 'Paketler (Silk)', shpPacksGold: 'Paketler (milyon Gold, 1000 = 1b)', shpAvailable: 'Mevcut (kapalı = stokta yok)', shpBad: '{item} fiyatlarını kontrol et: EGP ve USD ikisini birlikte yaz (ya da ikisini de boş bırak).', shpSaved: 'Mağaza fiyatları kaydedildi.', nNewOrder: 'Yeni sipariş: {amt} ({name})', nNewOrderTitle: 'Yeni mağaza siparişi', ordPrice: 'Fiyat', ordContactShort: 'İletişim', ordStNew: 'Ödeme bekleniyor', ordStPaid: 'Ödendi, teslim et', ordMarkPaid: 'Ödendi', ordMarkDone: 'Teslim edildi', ordEmpty: 'Şu anda açık sipariş yok.', confirmDelOrder: 'Bu sipariş silinsin mi?', nOrderDone: 'Sipariş teslim edildi ✓',
+        navShop: 'Mağaza', shopTitle: 'Silk & Gold mağazası', shopIntro: 'Silk ve Gold\'u doğrudan 3zReil\'den al. Bir paket seç ya da istediğin miktarı yaz, öde, ben de oyunda Trade ile sana vereyim.', shopSoon: 'Fiyatlar çok yakında. Şimdi almak istersen bana WhatsApp\'tan yaz.', shopHow: 'Nasıl çalışır', shopStep1: 'İstediğini seç ve siparişi gönder.', shopStep2: 'Vodafone Cash, InstaPay veya Binance ile öde ve dekontu bana gönder.', shopStep3: 'Oyunda buluşuruz ve sana Trade ile veririm.', ordPay: 'Ödeme yöntemi', ordContact: 'WhatsApp, Telegram veya Discord', ordSend: 'Siparişi gönder', ordReceipt: 'Dekontu WhatsApp\'tan gönder', shpTitle: 'Mağaza fiyatları', shpIntro: 'Her 100 Silk ve her 100m Gold için fiyat. Bir ürünü gizlemek için fiyatı boş bırak. Müşteri her zaman burada yazan fiyatı öder.', reqTabOrders: 'Siparişler', ordAdminIntro: 'Mağaza sayfasından gelen siparişler. Para gelince "Ödendi", Trade\'den sonra "Teslim edildi" olarak işaretle.', openInstapay: 'InstaPay\'de aç', payReceipt: 'Dekontu buradan gönder', copy: 'Kopyala', copied: 'Kopyalandı ✓', chat: 'Sohbet',
         navFaq: 'SSS', faqTitle: 'Sıkça sorulan sorular', faqMore: 'Başka bir soru mu var? Bana yaz, her zaman buralardayım.', faqOpenAll: 'Tümünü aç', faqCloseAll: 'Tümünü kapat',
         bkCoupon: 'İndirim kodu', bkCouponApply: 'Uygula',
         cpTitle: 'Kuponlar', cpManage: 'Yönet', cpNew: 'Yeni kupon', cpCode: 'Kod', cpPercent: 'İndirim %', cpEnds: 'Son gün', cpMax: 'En fazla kullanım', cpAdd: 'Kupon ekle',
@@ -2367,7 +2512,9 @@
         langLabel: 'Langue',
         annOn: 'Annonce : affichée', annOff: 'Annonce : masquée',
         vipTip: 'Forfait de {d} jours ou plus avec 3zReil',
-        payHow: 'Comment payer', payName: 'Nom', payInGame: 'En jeu', payInGameVal: 'Silk (Item Mall, F10) ou Gold, directement à 3zReil', payEgypt: 'Depuis l\'Égypte', payAbroad: 'Depuis l\'étranger', qrScan: 'Scannez pour payer', contactMe: 'Me contacter', tgNotify: 'Recevoir un message Telegram avant la fin', openInstapay: 'Ouvrir dans InstaPay', payReceipt: 'Envoyez-moi le reçu ici', copy: 'Copier', copied: 'Copié ✓', chat: 'Discuter',
+        payHow: 'Comment payer', payName: 'Nom', payInGame: 'En jeu', payInGameVal: 'Silk (Item Mall, F10) ou Gold, directement à 3zReil', payEgypt: 'Depuis l\'Égypte', payAbroad: 'Depuis l\'étranger', qrScan: 'Scannez pour payer', contactMe: 'Me contacter', tgNotify: 'Recevoir un message Telegram avant la fin',
+        shopPer: '{amt} =', shopOut: 'Rupture de stock', shopBuy: 'Acheter', shopCustom: 'Ou tapez la quantité voulue', shopGoldUnit: 'millions de Gold', shopRange: 'De {min} à {max}', ordTitle: 'Acheter {amt}', ordOr: 'ou {v}', ordNotAvail: 'Ce n\'est pas disponible pour le moment. Les prix ont été mis à jour, vérifiez à nouveau.', ordDone: 'Commande n°{id} envoyée ✓', ordDonePay: 'Payez maintenant {price} avec {method}, puis envoyez-moi le reçu :', ordWaText: 'Salut 3zReil, commande n°{id} : {amt} = {price}, payée avec {method}. Mon nom en jeu : {name}', ordTrade: 'Dès réception du paiement, je le donne à {name} en jeu par Trade.', shpNotSet: 'Pas encore de prix', shpPriceEgp: '{amt} en EGP', shpPriceUsd: '{amt} en USD', shpPacksSilk: 'Packs (Silk)', shpPacksGold: 'Packs (millions de Gold, 1000 = 1b)', shpAvailable: 'Disponible (désactivé = rupture de stock)', shpBad: 'Vérifiez les prix {item} : remplissez EGP et USD (ou laissez les deux vides).', shpSaved: 'Prix de la boutique enregistrés.', nNewOrder: 'Nouvelle commande : {amt} de {name}', nNewOrderTitle: 'Nouvelle commande boutique', ordPrice: 'Prix', ordContactShort: 'Contact', ordStNew: 'En attente du paiement', ordStPaid: 'Payé, à livrer', ordMarkPaid: 'Payé', ordMarkDone: 'Livré', ordEmpty: 'Aucune commande en cours.', confirmDelOrder: 'Supprimer cette commande ?', nOrderDone: 'Commande livrée ✓',
+        navShop: 'Boutique', shopTitle: 'Boutique Silk & Gold', shopIntro: 'Achetez Silk et Gold directement à 3zReil. Choisissez un pack ou tapez votre quantité, payez, et je vous le donne en jeu par Trade.', shopSoon: 'Les prix arrivent très bientôt. Écrivez-moi sur WhatsApp pour acheter maintenant.', shopHow: 'Comment ça marche', shopStep1: 'Choisissez ce que vous voulez et envoyez la commande.', shopStep2: 'Payez par Vodafone Cash, InstaPay ou Binance et envoyez-moi le reçu.', shopStep3: 'On se retrouve en jeu et je vous le donne par Trade.', ordPay: 'Payer avec', ordContact: 'WhatsApp, Telegram ou Discord', ordSend: 'Envoyer la commande', ordReceipt: 'Envoyez-moi le reçu sur WhatsApp', shpTitle: 'Prix de la boutique', shpIntro: 'Prix pour 100 Silk et pour 100m de Gold. Laissez un prix vide pour masquer l\'article. Le client paie toujours le prix indiqué ici.', reqTabOrders: 'Commandes', ordAdminIntro: 'Commandes de la page Boutique. Marquez « Payé » quand l\'argent arrive, puis « Livré » après le Trade.', openInstapay: 'Ouvrir dans InstaPay', payReceipt: 'Envoyez-moi le reçu ici', copy: 'Copier', copied: 'Copié ✓', chat: 'Discuter',
         navFaq: 'FAQ', faqTitle: 'Questions fréquentes', faqMore: 'Encore une question ? Écrivez-moi, je suis toujours là.', faqOpenAll: 'Tout ouvrir', faqCloseAll: 'Tout fermer',
         bkCoupon: 'Code promo', bkCouponApply: 'Appliquer',
         cpTitle: 'Codes promo', cpManage: 'Gérer', cpNew: 'Nouveau code', cpCode: 'Code', cpPercent: 'Réduction %', cpEnds: 'Dernier jour', cpMax: 'Utilisations max', cpAdd: 'Ajouter le code',
@@ -3069,6 +3216,7 @@
     /* ---------- bookings ---------- */
     let requests = [], requestsOk = null, requestsLoaded = false, pendingRequestId = null;
     async function loadRequests() {
+      loadOrders();
       if (!isAdmin) { requests = []; updateReqBadge(); return; }
       const { data, error } = await db.from('bookings').select('*').eq('status', 'new').order('created_at', { ascending: true });
       if (error) { requestsOk = false; updateReqBadge(); if ($('reqModal').classList.contains('open')) renderRequests(); return; }
@@ -3086,11 +3234,12 @@
     }
     function updateReqBadge() {
       $('reqBtn').hidden = !isAdmin;
-      const waiting = requests.length + pendingReviews.length;
+      const waiting = requests.length + pendingReviews.length + orders.length;
       $('reqBadge').textContent = waiting;
       $('reqBadge').hidden = !isAdmin || !waiting;
       $('rqTabN1').textContent = requests.length; $('rqTabN1').hidden = !requests.length;
       $('rqTabN2').textContent = pendingReviews.length; $('rqTabN2').hidden = !pendingReviews.length;
+      $('rqTabN3').textContent = orders.length; $('rqTabN3').hidden = !orders.length;
       fitNav();
     }
     function renderRequests() {
@@ -3115,6 +3264,236 @@
         </div>`).join('') : `<div class="er-empty">${escapeHtml(T('reqEmpty'))}</div>`;
     }
 
+
+    /* ---------- shop: Silk + Gold (prices come from Supabase; the server works out the price of every order) ---------- */
+    let shopPrices = { silk: null, gold: null }, shopOk = null, shopCur = null;     // shopCur = { item, amount }
+    const SHOP_ICONS = {
+      silk: '<path d="M12 2.8l7.4 4.3v8.6L12 20.2l-7.4-4.5V7.1z"/><path d="M12 2.8v17.4M4.6 7.1l14.8 8.6M19.4 7.1L4.6 15.7" style="opacity:.5"/>',
+      gold: '<ellipse cx="12" cy="6.5" rx="7" ry="2.8"/><path d="M5 6.5v5c0 1.6 3.1 2.8 7 2.8s7-1.2 7-2.8v-5M5 11.5v5c0 1.6 3.1 2.8 7 2.8s7-1.2 7-2.8v-5"/>',
+    };
+    const PAY_NAMES = { vodafone: 'Vodafone Cash', instapay: 'InstaPay', binance: 'Binance' };
+    const goldAmt = m => m >= 1000 && m % 100 === 0 ? (m / 1000).toLocaleString('en-US', { maximumFractionDigits: 1 }) + 'b' : Number(m).toLocaleString('en-US') + 'm';
+    const shopAmt = (item, n) => item === 'silk' ? Number(n).toLocaleString('en-US') + ' Silk' : goldAmt(n) + ' Gold';
+    const egpText = n => Number(n).toLocaleString('en-US') + ' ' + T('curEgp');
+    const ltr = s => '\u2066' + s + '\u2069';           // keeps "500 Silk" / "$8.00" in the right order inside Arabic text
+    const shopReady = item => { const p = shopPrices[item]; return !!(p && p.per100_egp != null && p.per100_usd != null); };
+    function shopPrice(item, n) {                   // same rounding as the server: whole pounds, cents
+      const p = shopPrices[item]; if (!shopReady(item)) return null;
+      return { egp: Math.round(Number(p.per100_egp) * n / 100), usd: Math.round(Number(p.per100_usd) * n) / 100 };
+    }
+    async function loadShop() {
+      try {
+        const { data, error } = await db.from('shop_prices').select('item,per100_egp,per100_usd,packs,min_amount,max_amount,available');
+        if (error) shopOk = false;
+        else { shopOk = true; shopPrices = { silk: null, gold: null }; (data || []).forEach(r => { if (r.item in shopPrices) shopPrices[r.item] = r; }); }
+      } catch (e) { shopOk = false; }
+      renderShop(); updateShopSum();
+    }
+    function renderShop() {
+      const items = ['silk', 'gold'].filter(shopReady);
+      $('shopSoon').hidden = shopOk === null || items.length > 0;
+      $('shopItems').innerHTML = items.map(item => {
+        const p = shopPrices[item], out = !p.available, per = shopPrice(item, 100);
+        const packs = (p.packs || []).filter(n => n >= p.min_amount && n <= p.max_amount);
+        return `
+        <div class="shop-block shop-${item}${out ? ' out' : ''}">
+          <div class="sb-head">
+            <span class="sb-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true">${SHOP_ICONS[item]}</svg></span>
+            <span class="sb-title"><b>${item === 'silk' ? 'Silk' : 'Gold'}</b><small dir="ltr">${escapeHtml(T('shopPer', { amt: shopAmt(item, 100) }))} <bdi dir="ltr">${escapeHtml(egpText(per.egp))}</bdi> · <bdi dir="ltr">${escapeHtml(usdText(per.usd))}</bdi></small></span>
+            ${out ? `<span class="sb-out">${escapeHtml(T('shopOut'))}</span>` : ''}
+          </div>
+          <div class="sb-packs">${packs.map(n => { const pr = shopPrice(item, n); return `
+            <button class="sb-pack" type="button" data-buy="${item}" data-amt="${n}"${out ? ' disabled' : ''} aria-label="${escapeHtml(T('shopBuy') + ' ' + shopAmt(item, n) + ', ' + egpText(pr.egp))}">
+              <span class="sp-amt" dir="ltr">${escapeHtml(shopAmt(item, n))}</span>
+              <span class="sp-egp"><bdi>${escapeHtml(egpText(pr.egp))}</bdi></span><span class="sp-usd" dir="ltr">${escapeHtml(usdText(pr.usd))}</span>
+              <span class="sp-buy">${escapeHtml(T('shopBuy'))}</span>
+            </button>`; }).join('')}
+          </div>
+          <div class="sb-custom">
+            <label for="shopAmt-${item}">${escapeHtml(T('shopCustom'))}</label>
+            <div class="sb-crow">
+              <input class="sb-in" id="shopAmt-${item}" type="number" inputmode="numeric" min="${p.min_amount}" max="${p.max_amount}" step="1" placeholder="${p.min_amount}" data-amt-for="${item}"${out ? ' disabled' : ''}>
+              <span class="sb-unit">${escapeHtml(item === 'silk' ? 'Silk' : T('shopGoldUnit'))}</span>
+              <span class="sb-live" id="shopLive-${item}" aria-live="polite"></span>
+              <button class="add" type="button" data-buy="${item}" data-custom="1"${out ? ' disabled' : ''}>${escapeHtml(T('shopBuy'))}</button>
+            </div>
+            <small class="sb-hint" id="shopHint-${item}">${escapeHtml(T('shopRange', { min: ltr(shopAmt(item, p.min_amount)), max: ltr(shopAmt(item, p.max_amount)) }))}</small>
+          </div>
+        </div>`; }).join('');
+    }
+    function customAmount(item) {                    // the typed amount, or null when it is outside the limits
+      const p = shopPrices[item], v = Number($('shopAmt-' + item).value);
+      return Number.isInteger(v) && v >= p.min_amount && v <= p.max_amount ? v : null;
+    }
+    $('shopItems').addEventListener('input', e => {
+      const item = e.target.dataset.amtFor; if (!item) return;
+      const n = customAmount(item), typed = e.target.value !== '';
+      const pr = n ? shopPrice(item, n) : null;
+      $('shopLive-' + item).innerHTML = pr ? `= <bdi>${escapeHtml(egpText(pr.egp))}</bdi> · <bdi dir="ltr">${escapeHtml(usdText(pr.usd))}</bdi>` : '';
+      e.target.classList.toggle('bad', typed && !n);
+      $('shopHint-' + item).classList.toggle('bad', typed && !n);
+    });
+    $('shopItems').addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.dataset.amtFor) { e.preventDefault(); e.target.closest('.sb-crow').querySelector('[data-buy]').click(); } });
+    $('shopItems').addEventListener('click', e => {
+      const b = e.target.closest('[data-buy]'); if (!b || b.disabled) return;
+      const item = b.dataset.buy;
+      let n = Number(b.dataset.amt);
+      if (b.dataset.custom) {
+        n = customAmount(item);
+        if (!n) { const inp = $('shopAmt-' + item); inp.classList.add('bad'); $('shopHint-' + item).classList.add('bad'); inp.focus(); return; }
+      }
+      openOrder(item, n);
+    });
+
+    // order window
+    const ordPay = () => { const r = document.querySelector('input[name="ordPay"]:checked'); return r ? r.value : ''; };
+    function renderOrderSum() {
+      if (!shopCur) return;
+      const pr = shopPrice(shopCur.item, shopCur.amount), pay = ordPay();
+      const main = pay === 'binance' ? usdText(pr.usd) : egpText(pr.egp), other = pay === 'binance' ? egpText(pr.egp) : usdText(pr.usd);
+      $('ordTitle').textContent = T('ordTitle', { amt: ltr(shopAmt(shopCur.item, shopCur.amount)) });
+      $('ordSum').innerHTML = `<b dir="ltr">${escapeHtml(shopAmt(shopCur.item, shopCur.amount))}</b>
+        <span>${pay ? `<bdi${pay === 'binance' ? ' dir="ltr"' : ''}>${escapeHtml(main)}</bdi><small>${escapeHtml(T('ordOr', { v: pay === 'binance' ? other : ltr(other) }))}</small>`
+                    : `<bdi>${escapeHtml(egpText(pr.egp))}</bdi> · <bdi dir="ltr">${escapeHtml(usdText(pr.usd))}</bdi>`}</span>`;
+    }
+    function openOrder(item, amount) {
+      shopCur = { item, amount };
+      $('ordForm').reset();
+      try { $('ordName').value = localStorage.getItem('ordName') || ''; $('ordContact').value = localStorage.getItem('ordContact') || ''; } catch (e) {}
+      $('ordFields').hidden = false; $('ordDone').hidden = true; $('ordMsg').hidden = true;
+      $('ordSend').hidden = false; $('ordSend').disabled = false; $('ordCancel').textContent = T('cancel');
+      renderOrderSum();
+      $('shopModal').classList.add('open');
+      ($('ordName').value ? $('ordForm').querySelector('input[name="ordPay"]') : $('ordName')).focus();
+    }
+    $('ordForm').addEventListener('change', e => { if (e.target.name === 'ordPay') renderOrderSum(); });
+    $('ordCancel').addEventListener('click', () => $('shopModal').classList.remove('open'));
+    $('ordForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      if (!shopCur) return;
+      const ign = $('ordName').value.trim(), contact = $('ordContact').value.trim(), pay = ordPay();
+      if (!ign || !contact || !pay) return;
+      const msg = $('ordMsg'), send = $('ordSend');
+      send.disabled = true;
+      const { data, error } = await db.rpc('create_shop_order', {
+        p_visitor: visitorId, p_ign: ign, p_item: shopCur.item, p_amount: shopCur.amount,
+        p_pay: pay, p_contact: contact, p_notes: $('ordNotes').value.trim() || null });
+      if (error) {
+        send.disabled = false; msg.hidden = false; msg.className = 'form-msg err';
+        msg.textContent = /too many/i.test(error.message) ? T('bkTooMany') : /not available|amount/i.test(error.message) ? T('ordNotAvail') : T('bkFailed');
+        if (/not available|amount/i.test(error.message)) loadShop();
+        return;
+      }
+      try { localStorage.setItem('ordName', ign); localStorage.setItem('ordContact', contact); } catch (err) {}
+      const o = data || {}, priceText = pay === 'binance' ? usdText(o.price_usd) : egpText(o.price_egp);
+      $('ordFields').hidden = true; $('ordDone').hidden = false; send.hidden = true; $('ordCancel').textContent = T('close');
+      $('ordDoneTitle').textContent = T('ordDone', { id: o.id });
+      $('ordDonePay').innerHTML = escapeHtml(T('ordDonePay', { price: pay === 'binance' ? ltr(priceText) : '\u2068' + priceText + '\u2069', method: PAY_NAMES[pay] }));
+      $('ordPayBox').innerHTML = payCard(pay);
+      const wa = $('waLink').href, text = T('ordWaText', { id: o.id, amt: shopAmt(shopCur.item, shopCur.amount), price: priceText, method: PAY_NAMES[pay], name: ign });
+      $('ordReceipt').href = wa && wa !== '#' && !$('waLink').hidden ? wa + (wa.includes('?') ? '&' : '?') + 'text=' + encodeURIComponent(text) : '#';
+      $('ordReceipt').hidden = $('waLink').hidden;
+      $('ordTrade').textContent = T('ordTrade', { name: ign });
+    });
+
+    // admin: prices
+    function updateShopSum() {
+      const el = $('setShopSum'); if (!el) return;
+      if (shopOk === false) { el.textContent = T('setupNeeded'); return; }
+      const parts = ['silk', 'gold'].filter(shopReady).map(k => { const pr = shopPrice(k, 100); return `${ltr(shopAmt(k, 100))} = \u2068${egpText(pr.egp)}\u2069${shopPrices[k].available ? '' : ' (' + T('shopOut') + ')'}`; });
+      el.textContent = parts.length ? parts.join(' · ') : T('shpNotSet');
+    }
+    function openShopAdmin() {
+      $('shpFields').innerHTML = ['silk', 'gold'].map(k => {
+        const p = shopPrices[k] || {}, unit = shopAmt(k, 100);
+        return `<div class="shp-item">
+          <h3>${k === 'silk' ? 'Silk' : 'Gold'}</h3>
+          <div class="duration two">
+            <div class="field"><label for="shp-${k}-egp">${escapeHtml(T('shpPriceEgp', { amt: ltr(unit) }))}</label><input id="shp-${k}-egp" type="number" min="0.01" step="0.01" inputmode="decimal" dir="ltr" value="${p.per100_egp != null ? Number(p.per100_egp) : ''}"></div>
+            <div class="field"><label for="shp-${k}-usd">${escapeHtml(T('shpPriceUsd', { amt: ltr(unit) }))}</label><input id="shp-${k}-usd" type="number" min="0.01" step="0.01" inputmode="decimal" dir="ltr" value="${p.per100_usd != null ? Number(p.per100_usd) : ''}"></div>
+          </div>
+          <div class="field"><label for="shp-${k}-packs">${escapeHtml(T(k === 'silk' ? 'shpPacksSilk' : 'shpPacksGold'))}</label><input id="shp-${k}-packs" type="text" dir="ltr" inputmode="numeric" placeholder="100, 500, 1000" value="${escapeHtml((p.packs || []).join(', '))}"></div>
+          <label class="toggle"><span>${escapeHtml(T('shpAvailable'))}</span><input type="checkbox" id="shp-${k}-on"${p.available !== false ? ' checked' : ''}></label>
+        </div>`; }).join('');
+      $('shpMsg').hidden = true; $('shpSave').disabled = false;
+      $('settingsModal').classList.remove('open');
+      $('shopAdminModal').classList.add('open');
+    }
+    $('shopAdminBtn').addEventListener('click', () => { if (shopOk === null) loadShop().then(openShopAdmin); else openShopAdmin(); });
+    $('shpClose').addEventListener('click', () => $('shopAdminModal').classList.remove('open'));
+    $('shpForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const msg = $('shpMsg'), rows = [];
+      for (const k of ['silk', 'gold']) {
+        const egp = $(`shp-${k}-egp`).value.trim(), usd = $(`shp-${k}-usd`).value.trim();
+        const packs = [...new Set($(`shp-${k}-packs`).value.split(/[^0-9]+/).filter(Boolean).map(Number).filter(n => n > 0 && n <= 100000))].sort((a, b) => a - b).slice(0, 6);
+        const bothOrNone = (egp === '') === (usd === '');
+        if (!bothOrNone || (egp !== '' && (!(Number(egp) > 0) || !(Number(usd) > 0)))) { msg.hidden = false; msg.className = 'form-msg err'; msg.textContent = T('shpBad', { item: k === 'silk' ? 'Silk' : 'Gold' }); return; }
+        rows.push({ item: k, per100_egp: egp === '' ? null : Number(egp), per100_usd: usd === '' ? null : Number(usd), packs,
+                    min_amount: packs.length ? Math.min(100, packs[0]) : 100, available: $(`shp-${k}-on`).checked, updated_at: new Date().toISOString() });
+      }
+      $('shpSave').disabled = true;
+      for (const r of rows) {
+        const { item, ...vals } = r;
+        const { error } = await db.from('shop_prices').update(vals).eq('item', item);
+        if (error) { $('shpSave').disabled = false; msg.hidden = false; msg.className = 'form-msg err'; msg.textContent = /relation|does not exist|schema cache/i.test(error.message) ? T('setupNeeded') : error.message; return; }
+      }
+      await loadShop();
+      $('shopAdminModal').classList.remove('open');
+      showNotice(T('shpSaved'));
+    });
+
+    // admin: orders (Requests > Orders)
+    let orders = [], ordersOk = null, ordersLoaded = false;
+    async function loadOrders() {
+      if (!isAdmin) { orders = []; ordersLoaded = false; updateReqBadge(); return; }
+      const { data, error } = await db.from('shop_orders').select('id,ign,item,amount,price_egp,price_usd,pay_method,contact,notes,status,created_at')
+        .in('status', ['new', 'paid']).order('created_at', { ascending: true });
+      if (error) { ordersOk = false; updateReqBadge(); if ($('reqModal').classList.contains('open')) renderOrders(); return; }
+      ordersOk = true;
+      const fresh = ordersLoaded ? (data || []).filter(o => !orders.some(x => String(x.id) === String(o.id))) : [];
+      orders = data || []; ordersLoaded = true;
+      if (fresh.length) {
+        const o = fresh[fresh.length - 1];
+        showNotice(T('nNewOrder', { name: o.ign, amt: ltr(shopAmt(o.item, o.amount)) }));
+        if (soundOn() && !alarmActive) { try { const ctx = ensureAudio(); playAlarmSound('dingdong', ctx, ctx.destination, ctx.currentTime + .03); } catch (e) {} }
+        if (notifyOn() && document.hidden) { try { new Notification(T('nNewOrderTitle'), { body: o.ign + ' — ' + shopAmt(o.item, o.amount), tag: 'ord-' + o.id }); } catch (e) {} }
+      }
+      updateReqBadge();
+      if ($('reqModal').classList.contains('open')) renderOrders();
+    }
+    function renderOrders() {
+      if (ordersOk === false) { $('ordList').innerHTML = ''; $('ordNote').textContent = T('setupNeeded'); return; }
+      $('ordNote').textContent = '';
+      $('ordList').innerHTML = orders.length ? orders.map(o => `
+        <div class="req-card ord-card">
+          <div class="rq-top"><b><span dir="ltr">#${escapeHtml(o.id)} · ${escapeHtml(shopAmt(o.item, o.amount))}</span></b><time>${escapeHtml(shortDate(o.created_at))}</time></div>
+          <div class="rq-info">
+            <span><em>${escapeHtml(T('ordPrice'))}:</em> <bdi>${escapeHtml(egpText(Number(o.price_egp)))}</bdi> · <bdi dir="ltr">${escapeHtml(usdText(Number(o.price_usd)))}</bdi></span>
+            <span><em>${escapeHtml(T('ordPay'))}:</em> ${escapeHtml(PAY_NAMES[o.pay_method] || o.pay_method)}</span>
+            <span><em>${escapeHtml(T('bkName'))}:</em> <bdi>${escapeHtml(o.ign)}</bdi></span>
+            <span><em>${escapeHtml(T('ordContactShort'))}:</em> <bdi>${escapeHtml(o.contact)}</bdi></span>
+            ${o.notes ? `<span><em>${escapeHtml(T('bkNotes'))}:</em> <bdi>${escapeHtml(o.notes)}</bdi></span>` : ''}
+            <span><span class="ord-st ${o.status}">${escapeHtml(T(o.status === 'paid' ? 'ordStPaid' : 'ordStNew'))}</span></span>
+          </div>
+          <div class="rq-acts">
+            ${o.status === 'new' ? `<button class="add" type="button" data-ord-paid="${escapeHtml(o.id)}">&#10003; ${escapeHtml(T('ordMarkPaid'))}</button>`
+                                 : `<button class="add" type="button" data-ord-done="${escapeHtml(o.id)}">&#10003; ${escapeHtml(T('ordMarkDone'))}</button>`}
+            <button class="chip-btn" type="button" data-ord-del="${escapeHtml(o.id)}">&times; ${escapeHtml(T('delete'))}</button>
+          </div>
+        </div>`).join('') : `<div class="er-empty">${escapeHtml(T('ordEmpty'))}</div>`;
+    }
+    $('ordList').addEventListener('click', async e => {
+      const paid = e.target.closest('[data-ord-paid]'), done = e.target.closest('[data-ord-done]'), del = e.target.closest('[data-ord-del]');
+      let res;
+      if (paid) res = await db.from('shop_orders').update({ status: 'paid', updated_at: new Date().toISOString() }).eq('id', paid.dataset.ordPaid);
+      else if (done) res = await db.from('shop_orders').update({ status: 'delivered', updated_at: new Date().toISOString() }).eq('id', done.dataset.ordDone);
+      else if (del) { if (!confirm(T('confirmDelOrder'))) return; res = await db.from('shop_orders').delete().eq('id', del.dataset.ordDel); }
+      else return;
+      if (res.error) { showNotice(res.error.message, 'error'); return; }
+      if (done) showNotice(T('nOrderDone'));
+      loadOrders();
+    });
 
     /* ---------- customer reviews ---------- */
     let reviews = [], reviewsOk = null, pendingReviews = [], adminReviewsLoaded = false, reviewsShowAll = false;
@@ -3752,7 +4131,7 @@
       $('hours').value = p.hours; $('minutes').value = 0; $('seconds').value = 0; $('priceSilk').value = p.price;
     }
     const closeModal = () => { $('timerModal').classList.remove('open'); };
-    const closeAll = () => { closeModal(); closeTimeModal(); ['aboutModal', 'settingsModal', 'paymentModal', 'statsModal', 'bookModal', 'reqModal', 'homeModal', 'reviewModal', 'couponModal'].forEach(id => $(id).classList.remove('open')); };
+    const closeAll = () => { closeModal(); closeTimeModal(); ['aboutModal', 'settingsModal', 'paymentModal', 'statsModal', 'bookModal', 'reqModal', 'homeModal', 'reviewModal', 'couponModal', 'shopModal', 'shopAdminModal'].forEach(id => $(id).classList.remove('open')); };
 
     $('loginBtn').addEventListener('click', async () => {
       const { error } = await db.auth.signInWithOAuth({
@@ -3883,7 +4262,7 @@
     });
 
     // Requests (admin)
-    $('reqBtn').addEventListener('click', () => { $('reqModal').classList.add('open'); renderRequests(); renderAdminReviews(); loadRequests(); loadAdminReviews(); });
+    $('reqBtn').addEventListener('click', () => { $('reqModal').classList.add('open'); renderRequests(); renderOrders(); renderAdminReviews(); loadRequests(); loadAdminReviews(); });
     document.querySelectorAll('#reqModal [data-rtab].tab').forEach(b => b.addEventListener('click', () => showReqTab(b.dataset.rtab)));
     $('reqClose').addEventListener('click', () => $('reqModal').classList.remove('open'));
     $('reqRefresh').addEventListener('click', () => { loadRequests(); loadAdminReviews(); loadReviews(); });
@@ -3938,7 +4317,7 @@
     document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeAll(); if (!$('alarm').hidden) stopAlarm(); } });
 
     function setView() {
-      const view = location.hash === '#timers' ? 'timers' : location.hash === '#faq' ? 'faq' : 'home';
+      const view = location.hash === '#timers' ? 'timers' : location.hash === '#faq' ? 'faq' : location.hash === '#shop' ? 'shop' : 'home';
       document.body.dataset.view = view;
       document.querySelectorAll('[data-nav]').forEach(l => l.classList.toggle('active', l.dataset.nav === view));
       window.scrollTo(0, 0);
@@ -3989,7 +4368,7 @@
       telegram: '<path d="M21 4L3 11.2l5.6 2.1L17.5 7.6 10.6 14.6l.4 5.4 3.1-3.6 4 3L21 4z"/>',
     };
     const INSTAPAY_QR_IMG = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMyAzMyIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIj48cmVjdCB3aWR0aD0iMzMiIGhlaWdodD0iMzMiIGZpbGw9IiNmZmYiLz48cGF0aCBkPSJNMiAyaDd2MWgtN3pNMTUgMmgxdjFoLTF6TTE4IDJoNXYxaC01ek0yNCAyaDd2MWgtN3pNMiAzaDF2MWgtMXpNOCAzaDF2MWgtMXpNMTEgM2gxdjFoLTF6TTEzIDNoMnYxaC0yek0xNiAzaDJ2MWgtMnpNMTkgM2gxdjFoLTF6TTI0IDNoMXYxaC0xek0zMCAzaDF2MWgtMXpNMiA0aDF2MWgtMXpNNCA0aDN2MWgtM3pNOCA0aDF2MWgtMXpNMTAgNGg1djFoLTV6TTIxIDRoMXYxaC0xek0yNCA0aDF2MWgtMXpNMjYgNGgzdjFoLTN6TTMwIDRoMXYxaC0xek0yIDVoMXYxaC0xek00IDVoM3YxaC0zek04IDVoMXYxaC0xek0xMCA1aDJ2MWgtMnpNMTQgNWg2djFoLTZ6TTIxIDVoMnYxaC0yek0yNCA1aDF2MWgtMXpNMjYgNWgzdjFoLTN6TTMwIDVoMXYxaC0xek0yIDZoMXYxaC0xek00IDZoM3YxaC0zek04IDZoMXYxaC0xek0xMCA2aDF2MWgtMXpNMTIgNmgxdjFoLTF6TTE1IDZoMnYxaC0yek0xOSA2aDF2MWgtMXpNMjEgNmgydjFoLTJ6TTI0IDZoMXYxaC0xek0yNiA2aDN2MWgtM3pNMzAgNmgxdjFoLTF6TTIgN2gxdjFoLTF6TTggN2gxdjFoLTF6TTEwIDdoMXYxaC0xek0xMiA3aDF2MWgtMXpNMTcgN2g0djFoLTR6TTIyIDdoMXYxaC0xek0yNCA3aDF2MWgtMXpNMzAgN2gxdjFoLTF6TTIgOGg3djFoLTd6TTEwIDhoMXYxaC0xek0xMiA4aDF2MWgtMXpNMTQgOGgxdjFoLTF6TTE2IDhoMXYxaC0xek0xOCA4aDF2MWgtMXpNMjAgOGgxdjFoLTF6TTIyIDhoMXYxaC0xek0yNCA4aDd2MWgtN3pNMTAgOWgxdjFoLTF6TTEyIDloMXYxaC0xek0xOCA5aDF2MWgtMXpNMjAgOWgzdjFoLTN6TTIgMTBoMXYxaC0xek00IDEwaDV2MWgtNXpNMTMgMTBoMXYxaC0xek0xNiAxMGgxdjFoLTF6TTE5IDEwaDF2MWgtMXpNMjQgMTBoNXYxaC01ek0yIDExaDF2MWgtMXpNNCAxMWgydjFoLTJ6TTcgMTFoMXYxaC0xek05IDExaDJ2MWgtMnpNMTMgMTFoMXYxaC0xek0xNiAxMWgxdjFoLTF6TTIwIDExaDd2MWgtN3pNMzAgMTFoMXYxaC0xek00IDEyaDF2MWgtMXpNNyAxMmgydjFoLTJ6TTEwIDEyaDZ2MWgtNnpNMTcgMTJoMnYxaC0yek0yMCAxMmgxdjFoLTF6TTMgMTNoMXYxaC0xek03IDEzaDF2MWgtMXpNMTEgMTNoMnYxaC0yek0xNyAxM2gxdjFoLTF6TTIxIDEzaDJ2MWgtMnpNMjUgMTNoMXYxaC0xek0yNyAxM2gxdjFoLTF6TTI5IDEzaDF2MWgtMXpNMyAxNGg3djFoLTd6TTEyIDE0aDJ2MWgtMnpNMTUgMTRoMnYxaC0yek0xOCAxNGg0djFoLTR6TTI3IDE0aDJ2MWgtMnpNNCAxNWgxdjFoLTF6TTYgMTVoMXYxaC0xek05IDE1aDV2MWgtNXpNMTUgMTVoMnYxaC0yek0xOCAxNWg3djFoLTd6TTI2IDE1aDF2MWgtMXpNMzAgMTVoMXYxaC0xek04IDE2aDR2MWgtNHpNMTQgMTZoMXYxaC0xek0xNyAxNmgzdjFoLTN6TTIyIDE2aDF2MWgtMXpNMjcgMTZoMnYxaC0yek0yIDE3aDR2MWgtNHpNNyAxN2gxdjFoLTF6TTEyIDE3aDJ2MWgtMnpNMTYgMTdoMnYxaC0yek0yNCAxN2gydjFoLTJ6TTI5IDE3aDF2MWgtMXpNMiAxOGgydjFoLTJ6TTYgMThoMXYxaC0xek04IDE4aDJ2MWgtMnpNMTEgMThoMnYxaC0yek0xNCAxOGg0djFoLTR6TTE5IDE4aDF2MWgtMXpNMjEgMThoMXYxaC0xek0yMyAxOGgxdjFoLTF6TTI3IDE4aDJ2MWgtMnpNMiAxOWgxdjFoLTF6TTQgMTloNHYxaC00ek05IDE5aDJ2MWgtMnpNMTQgMTloMXYxaC0xek0xOCAxOWg5djFoLTl6TTI4IDE5aDF2MWgtMXpNMzAgMTloMXYxaC0xek0yIDIwaDF2MWgtMXpNNCAyMGgxdjFoLTF6TTYgMjBoNXYxaC01ek0xNCAyMGgxdjFoLTF6TTE3IDIwaDF2MWgtMXpNMjAgMjBoMXYxaC0xek0yMiAyMGgxdjFoLTF6TTI0IDIwaDF2MWgtMXpNMjYgMjBoMXYxaC0xek0yOCAyMGgxdjFoLTF6TTIgMjFoMXYxaC0xek00IDIxaDJ2MWgtMnpNNyAyMWgxdjFoLTF6TTEwIDIxaDF2MWgtMXpNMTIgMjFoMnYxaC0yek0xNiAyMWgydjFoLTJ6TTIxIDIxaDF2MWgtMXpNMjQgMjFoMXYxaC0xek0yNiAyMWgxdjFoLTF6TTI5IDIxaDF2MWgtMXpNMiAyMmgxdjFoLTF6TTQgMjJoMXYxaC0xek02IDIyaDF2MWgtMXpNOCAyMmgxdjFoLTF6TTExIDIyaDF2MWgtMXpNMTMgMjJoMXYxaC0xek0xNyAyMmgzdjFoLTN6TTIxIDIyaDZ2MWgtNnpNMjggMjJoM3YxaC0zek0xMCAyM2gxdjFoLTF6TTEyIDIzaDF2MWgtMXpNMTUgMjNoMXYxaC0xek0xOCAyM2gzdjFoLTN6TTIyIDIzaDF2MWgtMXpNMjYgMjNoNXYxaC01ek0yIDI0aDd2MWgtN3pNMTEgMjRoMnYxaC0yek0xNSAyNGg1djFoLTV6TTIxIDI0aDJ2MWgtMnpNMjQgMjRoMXYxaC0xek0yNiAyNGgzdjFoLTN6TTIgMjVoMXYxaC0xek04IDI1aDF2MWgtMXpNMTAgMjVoM3YxaC0zek0xNSAyNWgxdjFoLTF6TTE3IDI1aDF2MWgtMXpNMjAgMjVoM3YxaC0zek0yNiAyNWgxdjFoLTF6TTIgMjZoMXYxaC0xek00IDI2aDN2MWgtM3pNOCAyNmgxdjFoLTF6TTEwIDI2aDN2MWgtM3pNMTYgMjZoMnYxaC0yek0xOSAyNmgxdjFoLTF6TTIyIDI2aDV2MWgtNXpNMjggMjZoM3YxaC0zek0yIDI3aDF2MWgtMXpNNCAyN2gzdjFoLTN6TTggMjdoMXYxaC0xek0xMCAyN2gydjFoLTJ6TTE1IDI3aDF2MWgtMXpNMTggMjdoMXYxaC0xek0yMSAyN2gydjFoLTJ6TTI1IDI3aDF2MWgtMXpNMjcgMjdoNHYxaC00ek0yIDI4aDF2MWgtMXpNNCAyOGgzdjFoLTN6TTggMjhoMXYxaC0xek0xMCAyOGgxdjFoLTF6TTEzIDI4aDJ2MWgtMnpNMTcgMjhoMXYxaC0xek0xOSAyOGg0djFoLTR6TTI1IDI4aDV2MWgtNXpNMiAyOWgxdjFoLTF6TTggMjloMXYxaC0xek0xNCAyOWg1djFoLTV6TTIyIDI5aDJ2MWgtMnpNMjUgMjloM3YxaC0zek0yOSAyOWgxdjFoLTF6TTIgMzBoN3YxaC03ek0xMCAzMGgydjFoLTJ6TTEzIDMwaDJ2MWgtMnpNMTYgMzBoNHYxaC00ek0yNCAzMGgxdjFoLTF6TTI4IDMwaDF2MWgtMXoiIGZpbGw9IiMwMDAiLz48L3N2Zz4=';   // QR picture of PAY_METHODS.instapay.link (made when the site is built)
-    function setupPayMethods() {
+    function payCard(kind) {
       // lines = [{ label, value, copy }]; opt.link = "Open" button under the lines; opt.qr = QR picture (tap = open the link)
       const card = (kind, title, sub, lines, opt = {}) => `
         <div class="pm pm-${kind}${opt.qr ? ' has-qr' : ''}">
@@ -4001,23 +4380,26 @@
           ${opt.qr ? `<a class="pm-qrbox"${opt.link ? ` href="${escapeHtml(opt.link)}" target="_blank" rel="noopener noreferrer"` : ''} aria-label="${escapeHtml(T('qrScan'))}"><img class="pm-qr" src="${escapeHtml(opt.qr)}" alt="QR ${escapeHtml(title)}" width="120" height="120"><small>${escapeHtml(T('qrScan'))}</small></a>` : ''}
         </div>`;
       const P = PAY_METHODS;
-      const parts = [card('game', T('payInGame'), T('payInGameVal'))];
-      if (P.vodafone && P.vodafone.number) parts.push(card('vodafone', 'Vodafone Cash', T('payEgypt'),
-        [{ value: P.vodafone.number, copy: true }, ...(P.vodafone.name ? [{ label: T('payName'), value: P.vodafone.name }] : [])]));
-      if (P.instapay && (P.instapay.address || P.instapay.number)) parts.push(card('instapay', 'InstaPay', T('payEgypt'),
+      if (kind === 'game') return card('game', T('payInGame'), T('payInGameVal'));
+      if (kind === 'vodafone' && P.vodafone && P.vodafone.number) return card('vodafone', 'Vodafone Cash', T('payEgypt'),
+        [{ value: P.vodafone.number, copy: true }, ...(P.vodafone.name ? [{ label: T('payName'), value: P.vodafone.name }] : [])]);
+      if (kind === 'instapay' && P.instapay && (P.instapay.address || P.instapay.number)) return card('instapay', 'InstaPay', T('payEgypt'),
         [...(P.instapay.address ? [{ value: P.instapay.address, copy: true }] : []), ...(P.instapay.number ? [{ value: P.instapay.number, copy: true }] : [])],
-        { link: P.instapay.link, linkText: T('openInstapay'), qr: P.instapay.qr && P.instapay.link ? INSTAPAY_QR_IMG : '' }));
-      if (P.binance && P.binance.payId) parts.push(card('binance', 'Binance', T('payAbroad'),
-        [{ label: 'Pay ID', value: P.binance.payId, copy: true }, ...(P.binance.name ? [{ label: T('payName'), value: P.binance.name }] : [])]));
-      $('payMethods').innerHTML = parts.join('');
+        { link: P.instapay.link, linkText: T('openInstapay'), qr: P.instapay.qr && P.instapay.link ? INSTAPAY_QR_IMG : '' });
+      if (kind === 'binance' && P.binance && P.binance.payId) return card('binance', 'Binance', T('payAbroad'),
+        [{ label: 'Pay ID', value: P.binance.payId, copy: true }, ...(P.binance.name ? [{ label: T('payName'), value: P.binance.name }] : [])]);
+      return '';
     }
-    $('payMethods').addEventListener('click', async e => {
+    function setupPayMethods() { $('payMethods').innerHTML = ['game', 'vodafone', 'instapay', 'binance'].map(payCard).join(''); }
+    async function copyClick(e) {
       const b = e.target.closest('[data-copy]'); if (!b) return;
       try { await navigator.clipboard.writeText(b.dataset.copy); }
       catch (err) { const t = document.createElement('textarea'); t.value = b.dataset.copy; document.body.append(t); t.select(); try { document.execCommand('copy'); } catch (x) {} t.remove(); }
       const old = b.textContent; b.textContent = T('copied'); b.classList.add('done'); b.disabled = true;
       setTimeout(() => { b.textContent = old; b.classList.remove('done'); b.disabled = false; }, 1600);
-    });
+    }
+    $('payMethods').addEventListener('click', copyClick);
+    $('ordPayBox').addEventListener('click', copyClick);
 
     function setupPayment() {
       const tm = r => escapeHtml(hoursText(parseInt(r.time, 10) || r.time));
@@ -4146,8 +4528,8 @@
       setupPayment(); fillPackageSelects(); updateAccountUI(); updateHoldUI();
       if (lastSync) setSync(lastSync[0], lastSync[1]);
       if (!$('timerGrid').querySelector('.loading')) renderTimers();
-      renderReviews(); updateInstallUI(); showCouponMsg(); renderFaq();
-      if (isAdmin) { renderEarnings(); renderHistory(); renderRequests(); renderAdminReviews(); renderCoupons(); }
+      renderReviews(); updateInstallUI(); showCouponMsg(); renderFaq(); renderShop(); updateShopSum(); renderOrderSum();
+      if (isAdmin) { renderEarnings(); renderHistory(); renderRequests(); renderOrders(); renderAdminReviews(); renderCoupons(); }
     }
     function fitNav() {
       const nav = $('top'), menu = nav.querySelector('.menu');
@@ -4257,6 +4639,7 @@
       loadSiteSettings(); setInterval(loadSiteSettings, 30000);
       loadEarnings(); loadRequests(); setInterval(() => { if (isAdmin) { loadRequests(); loadAdminReviews(); } }, 20000);
       loadReviews(); setInterval(loadReviews, 5 * 60000);
+      loadShop(); setInterval(loadShop, 5 * 60000);
 
       db.auth.onAuthStateChange((_event, session) => {
         currentUser = session?.user || null;
