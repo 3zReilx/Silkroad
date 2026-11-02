@@ -324,6 +324,8 @@
     .ib.go { color: #cfb48a; background: #17110a; border-color: rgba(185, 155, 113, .55); box-shadow: inset 0 0 10px rgba(176, 145, 104, .28); }
     .ib.del { color: #e5392f; background: #260e0e; border-color: #3d1a1a; }
     .ib.tm { color: #d2b991; border-color: rgba(185, 155, 113, .35); }
+    .ib.tgn { color: #8fd0f2; background: #0e1820; border-color: rgba(120, 190, 230, .45); text-decoration: none; display: inline-grid; place-items: center; }
+    @media (max-width: 599.98px) { .row:has(> .r-acts > .tgn:only-child) { grid-template-areas: "ico name pill" "time time acts"; } }
 
     .empty { padding: 40px 14px; text-align: center; color: var(--muted); font-size: 13px; line-height: 1.8; border: 1px dashed rgba(185, 155, 113, .25); border-radius: 8px; }
     .empty h3 { margin: 0 0 6px; font: 700 18px Inter, Cairo, sans-serif; color: var(--gold-l); }
@@ -1678,6 +1680,7 @@
     const WHATSAPP_NUMBER = '+201097765848';                 // opens a chat with this number directly
     const DISCORD_LINK = 'https://discord.gg/SUzgewRPrd';    // server invite
     const TELEGRAM_LINK = 'https://t.me/+BOYlEBa1a41jYTVk';  // Telegram group (empty = hidden)
+    const TELEGRAM_BOT = 'Reil_TAXI_BOT';                     // Telegram bot that messages customers before their time ends (empty = no bell)
     // payment details shown in the Payment List (empty = that card is hidden)
     const PAY_METHODS = {
       vodafone: { number: '01097765848', name: 'Hazem Khaled' },          // Vodafone Cash
@@ -1768,7 +1771,7 @@
         langLabel: 'Language',
         annOn: 'Announcement: on', annOff: 'Announcement: off',
         vipTip: '{d}-day package or longer with 3zReil',
-        payHow: 'How to pay', payName: 'Name', payInGame: 'In game', payInGameVal: 'Silk (Item Mall, F10) or Gold, straight to 3zReil', payEgypt: 'From Egypt', payAbroad: 'From abroad', qrScan: 'Scan to pay', contactMe: 'Contact me', openInstapay: 'Open in InstaPay', payReceipt: 'Send me the receipt here', copy: 'Copy', copied: 'Copied ✓', chat: 'Chat',
+        payHow: 'How to pay', payName: 'Name', payInGame: 'In game', payInGameVal: 'Silk (Item Mall, F10) or Gold, straight to 3zReil', payEgypt: 'From Egypt', payAbroad: 'From abroad', qrScan: 'Scan to pay', contactMe: 'Contact me', tgNotify: 'Get a Telegram message before your time ends', openInstapay: 'Open in InstaPay', payReceipt: 'Send me the receipt here', copy: 'Copy', copied: 'Copied ✓', chat: 'Chat',
         faqOpenAll: 'Open all', faqCloseAll: 'Close all',
         cpOk: '✓ {p}% off', cpInvalid: 'This code is not valid.', cpExpired: 'This code has expired.', cpUsedUp: 'This code was already used up.',
         cpUnavailable: 'Coupons are not available right now.', cpEmpty: 'No coupons yet.', cpUses: 'used {n}', cpUsesMax: 'used {n} of {m}',
@@ -1930,7 +1933,7 @@
         langLabel: 'اللغة',
         annOn: 'الإعلان: ظاهر', annOff: 'الإعلان: مخفي',
         vipTip: 'باقة {d} أيام أو أكثر مع 3zReil',
-        payHow: 'طرق الدفع', payName: 'الاسم', payInGame: 'داخل اللعبة', payInGameVal: 'Silk (من الـ Item Mall بزرار F10) أو Gold، لـ 3zReil على طول', payEgypt: 'من مصر', payAbroad: 'من برّه مصر', qrScan: 'امسح الكود للدفع', contactMe: 'تواصل معي', openInstapay: 'افتح في إنستاباي', payReceipt: 'ابعتلي الإيصال هنا', copy: 'نسخ', copied: 'اتنسخ ✓', chat: 'محادثة',
+        payHow: 'طرق الدفع', payName: 'الاسم', payInGame: 'داخل اللعبة', payInGameVal: 'Silk (من الـ Item Mall بزرار F10) أو Gold، لـ 3zReil على طول', payEgypt: 'من مصر', payAbroad: 'من برّه مصر', qrScan: 'امسح الكود للدفع', contactMe: 'تواصل معي', tgNotify: 'رسالة على تليجرام قبل انتهاء وقتك', openInstapay: 'افتح في إنستاباي', payReceipt: 'ابعتلي الإيصال هنا', copy: 'نسخ', copied: 'اتنسخ ✓', chat: 'محادثة',
         navFaq: 'الأسئلة', faqTitle: 'الأسئلة الشائعة', faqMore: 'لسه عندك سؤال؟ كلّمني، أنا موجود دايمًا.', faqOpenAll: 'فتح الكل', faqCloseAll: 'قفل الكل',
         bkCoupon: 'كود الخصم', bkCouponApply: 'تطبيق',
         cpTitle: 'كوبونات الخصم', cpManage: 'إدارة', cpNew: 'كوبون جديد', cpCode: 'الكود', cpPercent: 'نسبة الخصم %', cpEnds: 'آخر يوم', cpMax: 'أقصى عدد استخدامات', cpAdd: 'إضافة الكوبون',
@@ -2147,7 +2150,7 @@
         langLabel: 'Dil',
         annOn: 'Duyuru: açık', annOff: 'Duyuru: kapalı',
         vipTip: '3zReil ile {d} günlük veya daha uzun paket',
-        payHow: 'Nasıl ödenir', payName: 'Ad', payInGame: 'Oyun içinde', payInGameVal: 'Silk (Item Mall, F10) veya Gold, doğrudan 3zReil\'e', payEgypt: 'Mısır\'dan', payAbroad: 'Yurt dışından', qrScan: 'Ödemek için tarayın', contactMe: 'Bana ulaş', openInstapay: 'InstaPay\'de aç', payReceipt: 'Dekontu buradan gönder', copy: 'Kopyala', copied: 'Kopyalandı ✓', chat: 'Sohbet',
+        payHow: 'Nasıl ödenir', payName: 'Ad', payInGame: 'Oyun içinde', payInGameVal: 'Silk (Item Mall, F10) veya Gold, doğrudan 3zReil\'e', payEgypt: 'Mısır\'dan', payAbroad: 'Yurt dışından', qrScan: 'Ödemek için tarayın', contactMe: 'Bana ulaş', tgNotify: 'Süren bitmeden Telegram mesajı al', openInstapay: 'InstaPay\'de aç', payReceipt: 'Dekontu buradan gönder', copy: 'Kopyala', copied: 'Kopyalandı ✓', chat: 'Sohbet',
         navFaq: 'SSS', faqTitle: 'Sıkça sorulan sorular', faqMore: 'Başka bir soru mu var? Bana yaz, her zaman buralardayım.', faqOpenAll: 'Tümünü aç', faqCloseAll: 'Tümünü kapat',
         bkCoupon: 'İndirim kodu', bkCouponApply: 'Uygula',
         cpTitle: 'Kuponlar', cpManage: 'Yönet', cpNew: 'Yeni kupon', cpCode: 'Kod', cpPercent: 'İndirim %', cpEnds: 'Son gün', cpMax: 'En fazla kullanım', cpAdd: 'Kupon ekle',
@@ -2364,7 +2367,7 @@
         langLabel: 'Langue',
         annOn: 'Annonce : affichée', annOff: 'Annonce : masquée',
         vipTip: 'Forfait de {d} jours ou plus avec 3zReil',
-        payHow: 'Comment payer', payName: 'Nom', payInGame: 'En jeu', payInGameVal: 'Silk (Item Mall, F10) ou Gold, directement à 3zReil', payEgypt: 'Depuis l\'Égypte', payAbroad: 'Depuis l\'étranger', qrScan: 'Scannez pour payer', contactMe: 'Me contacter', openInstapay: 'Ouvrir dans InstaPay', payReceipt: 'Envoyez-moi le reçu ici', copy: 'Copier', copied: 'Copié ✓', chat: 'Discuter',
+        payHow: 'Comment payer', payName: 'Nom', payInGame: 'En jeu', payInGameVal: 'Silk (Item Mall, F10) ou Gold, directement à 3zReil', payEgypt: 'Depuis l\'Égypte', payAbroad: 'Depuis l\'étranger', qrScan: 'Scannez pour payer', contactMe: 'Me contacter', tgNotify: 'Recevoir un message Telegram avant la fin', openInstapay: 'Ouvrir dans InstaPay', payReceipt: 'Envoyez-moi le reçu ici', copy: 'Copier', copied: 'Copié ✓', chat: 'Discuter',
         navFaq: 'FAQ', faqTitle: 'Questions fréquentes', faqMore: 'Encore une question ? Écrivez-moi, je suis toujours là.', faqOpenAll: 'Tout ouvrir', faqCloseAll: 'Tout fermer',
         bkCoupon: 'Code promo', bkCouponApply: 'Appliquer',
         cpTitle: 'Codes promo', cpManage: 'Gérer', cpNew: 'Nouveau code', cpCode: 'Code', cpPercent: 'Réduction %', cpEnds: 'Dernier jour', cpMax: 'Utilisations max', cpAdd: 'Ajouter le code',
@@ -2532,6 +2535,7 @@
 
     const P = {
       clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+      tgBell: '<path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 1.5h-15z"/><path d="M10 20.5a2.2 2.2 0 0 0 4 0"/>',
       play: '<path d="M8 5v14l11-7z" style="fill:currentColor;stroke:none"/>',
       pause: '<path d="M8 5v14M16 5v14" style="stroke-width:3.4"/>',
       edit: '<path d="M4 20h4l10-10-4-4L4 16z"/><path d="M13 7l4 4"/>',
@@ -3526,6 +3530,7 @@
         const name = escapeHtml(timer.name || T('untitled'));
 
         let acts = '';
+        if (TELEGRAM_BOT && remaining > 0) acts += `<a class="ib tgn" href="https://t.me/${encodeURIComponent(TELEGRAM_BOT)}?start=t${encodeURIComponent(timer.id)}-${lang}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(T('tgNotify'))}" title="${escapeHtml(T('tgNotify'))}">${svg('tgBell')}</a>`;
         if (isAdmin) {
           if (state === 'Running') acts += `<button class="ib go" data-action="pause" data-id="${id}" aria-label="${T('actPause')}" title="${T('actPause')}">${svg('pause')}</button>`;
           else if (remaining > 0) acts += `<button class="ib go" data-action="start" data-id="${id}" aria-label="${T('actStart')}" title="${T('actStart')}">${svg('play')}</button>`;
