@@ -325,6 +325,7 @@
     .ib.del { color: #e5392f; background: #260e0e; border-color: #3d1a1a; }
     .ib.tm { color: #d2b991; border-color: rgba(185, 155, 113, .35); }
     .ib.tgn { color: #8fd0f2; background: #0e1820; border-color: rgba(120, 190, 230, .45); text-decoration: none; display: inline-grid; place-items: center; }
+    .ib.tgn.on { color: #3fe0b0; background: #0b2a20; border-color: #3fe0b0; box-shadow: 0 0 12px rgba(63, 224, 176, .5), inset 0 0 8px rgba(63, 224, 176, .2); }
     @media (max-width: 599.98px) { .row:has(> .r-acts > .tgn:only-child) { grid-template-areas: "ico name pill" "time time acts"; } }
 
     .empty { padding: 40px 14px; text-align: center; color: var(--muted); font-size: 13px; line-height: 1.8; border: 1px dashed rgba(185, 155, 113, .25); border-radius: 8px; }
@@ -1911,7 +1912,7 @@
         langLabel: 'Language',
         annOn: 'Announcement: on', annOff: 'Announcement: off',
         vipTip: '{d}-day package or longer with 3zReil',
-        payHow: 'How to pay', payName: 'Name', payInGame: 'In game', payInGameVal: 'Silk (Item Mall, F10) or Gold, straight to 3zReil', payEgypt: 'From Egypt', payAbroad: 'From abroad', qrScan: 'Scan to pay', contactMe: 'Contact me', tgNotify: 'Get a Telegram message before your time ends',
+        payHow: 'How to pay', payName: 'Name', payInGame: 'In game', payInGameVal: 'Silk (Item Mall, F10) or Gold, straight to 3zReil', payEgypt: 'From Egypt', payAbroad: 'From abroad', qrScan: 'Scan to pay', contactMe: 'Contact me', tgNotify: 'Get a Telegram message before your time ends', tgOn: 'Telegram alerts are on ✓',
         shopPer: '{amt} =', shopOut: 'Out of stock', shopBuy: 'Buy', shopCustom: 'Or type your own amount', shopGoldUnit: 'million Gold', shopRange: 'From {min} to {max}', ordTitle: 'Buy {amt}', ordOr: 'or {v}', ordNotAvail: 'This is not available right now. The prices were updated, please check again.', ordDone: 'Order #{id} sent ✓', ordDonePay: 'Now pay {price} with {method}, then send me the receipt:', ordWaText: 'Hi 3zReil, order #{id}: {amt} = {price}, paid with {method}. My in-game name: {name}', ordTrade: 'As soon as the payment arrives, I will give it to {name} in game by Trade.', shpNotSet: 'No prices yet', shpPriceEgp: '{amt} in EGP', shpPriceUsd: '{amt} in USD', shpPacksSilk: 'Packages (Silk)', shpPacksGold: 'Packages (millions of Gold, 1000 = 1b)', shpAvailable: 'Available (off = out of stock)', shpBad: 'Check the {item} prices: fill both EGP and USD (or leave both empty).', shpSaved: 'Shop prices saved.', nNewOrder: 'New order: {amt} from {name}', nNewOrderTitle: 'New shop order', ordPrice: 'Price', ordContactShort: 'Contact', ordStNew: 'Waiting for payment', ordStPaid: 'Paid, deliver it', ordMarkPaid: 'Paid', ordMarkDone: 'Delivered', ordEmpty: 'No open orders right now.', confirmDelOrder: 'Delete this order?', nOrderDone: 'Order delivered ✓', openInstapay: 'Open in InstaPay', payReceipt: 'Send me the receipt here', copy: 'Copy', copied: 'Copied ✓', chat: 'Chat',
         faqOpenAll: 'Open all', faqCloseAll: 'Close all',
         cpOk: '✓ {p}% off', cpInvalid: 'This code is not valid.', cpExpired: 'This code has expired.', cpUsedUp: 'This code was already used up.',
@@ -2074,7 +2075,7 @@
         langLabel: 'اللغة',
         annOn: 'الإعلان: ظاهر', annOff: 'الإعلان: مخفي',
         vipTip: 'باقة {d} أيام أو أكثر مع 3zReil',
-        payHow: 'طرق الدفع', payName: 'الاسم', payInGame: 'داخل اللعبة', payInGameVal: 'Silk (من الـ Item Mall بزرار F10) أو Gold، لـ 3zReil على طول', payEgypt: 'من مصر', payAbroad: 'من برّه مصر', qrScan: 'امسح الكود للدفع', contactMe: 'تواصل معي', tgNotify: 'رسالة على تليجرام قبل انتهاء وقتك',
+        payHow: 'طرق الدفع', payName: 'الاسم', payInGame: 'داخل اللعبة', payInGameVal: 'Silk (من الـ Item Mall بزرار F10) أو Gold، لـ 3zReil على طول', payEgypt: 'من مصر', payAbroad: 'من برّه مصر', qrScan: 'امسح الكود للدفع', contactMe: 'تواصل معي', tgNotify: 'رسالة على تليجرام قبل انتهاء وقتك', tgOn: 'تنبيهات تليجرام مفعّلة ✓',
         shopPer: '{amt} =', shopOut: 'نفدت الكمية', shopBuy: 'اشترِ', shopCustom: 'أو اكتب الكمية التي تريدها', shopGoldUnit: 'مليون Gold', shopRange: 'من {min} إلى {max}', ordTitle: 'شراء {amt}', ordOr: 'أو {v}', ordNotAvail: 'غير متاح الآن، تم تحديث الأسعار. راجع الصفحة مرة أخرى.', ordDone: 'تم إرسال الطلب رقم {id} ✓', ordDonePay: 'ادفع الآن {price} عن طريق {method}، ثم أرسل لي الإيصال:', ordWaText: 'أهلاً 3zReil، الطلب رقم {id}: {amt} = {price}، الدفع عن طريق {method}. اسمي في اللعبة: {name}', ordTrade: 'فور وصول الدفع سأسلّمها إلى {name} داخل اللعبة عن طريق Trade.', shpNotSet: 'لا توجد أسعار بعد', shpPriceEgp: 'سعر {amt} بالجنيه', shpPriceUsd: 'سعر {amt} بالدولار', shpPacksSilk: 'الباقات (Silk)', shpPacksGold: 'الباقات (بالمليون Gold، 1000 = 1b)', shpAvailable: 'متاح (عند الإيقاف: نفدت الكمية)', shpBad: 'راجع أسعار {item}: اكتب الجنيه والدولار معاً (أو اترك الاثنين فارغين).', shpSaved: 'تم حفظ أسعار المتجر.', nNewOrder: 'طلب جديد: {amt} من {name}', nNewOrderTitle: 'طلب جديد من المتجر', ordPrice: 'السعر', ordContactShort: 'التواصل', ordStNew: 'في انتظار الدفع', ordStPaid: 'تم الدفع، سلّمها', ordMarkPaid: 'تم الدفع', ordMarkDone: 'تم التسليم', ordEmpty: 'لا توجد طلبات مفتوحة الآن.', confirmDelOrder: 'حذف هذا الطلب؟', nOrderDone: 'تم تسليم الطلب ✓',
         navShop: 'المتجر', shopTitle: 'متجر Silk و Gold', shopIntro: 'اشترِ Silk و Gold من 3zReil مباشرة. اختر باقة أو اكتب الكمية التي تريدها، ادفع، وسأسلّمها لك داخل اللعبة عن طريق Trade.', shopSoon: 'الأسعار قريباً جداً. لو تريد الشراء الآن راسلني على واتساب.', shopHow: 'طريقة الشراء', shopStep1: 'اختر ما تريده وأرسل الطلب.', shopStep2: 'ادفع بفودافون كاش أو إنستاباي أو Binance وأرسل لي الإيصال.', shopStep3: 'نتقابل في اللعبة وأسلّمها لك عن طريق Trade.', ordPay: 'طريقة الدفع', ordContact: 'واتساب أو تليجرام أو ديسكورد', ordSend: 'إرسال الطلب', ordReceipt: 'أرسل لي الإيصال على واتساب', shpTitle: 'أسعار المتجر', shpIntro: 'السعر لكل 100 Silk ولكل 100 مليون Gold. اترك السعر فارغاً لإخفاء المنتج. العميل يدفع دائماً السعر المكتوب هنا.', reqTabOrders: 'طلبات المتجر', ordAdminIntro: 'طلبات صفحة المتجر. علّم الطلب «تم الدفع» عند وصول المال، ثم «تم التسليم» بعد الـ Trade.', openInstapay: 'افتح في إنستاباي', payReceipt: 'ابعتلي الإيصال هنا', copy: 'نسخ', copied: 'اتنسخ ✓', chat: 'محادثة',
         navFaq: 'الأسئلة', faqTitle: 'الأسئلة الشائعة', faqMore: 'لسه عندك سؤال؟ كلّمني، أنا موجود دايمًا.', faqOpenAll: 'فتح الكل', faqCloseAll: 'قفل الكل',
@@ -2293,7 +2294,7 @@
         langLabel: 'Dil',
         annOn: 'Duyuru: açık', annOff: 'Duyuru: kapalı',
         vipTip: '3zReil ile {d} günlük veya daha uzun paket',
-        payHow: 'Nasıl ödenir', payName: 'Ad', payInGame: 'Oyun içinde', payInGameVal: 'Silk (Item Mall, F10) veya Gold, doğrudan 3zReil\'e', payEgypt: 'Mısır\'dan', payAbroad: 'Yurt dışından', qrScan: 'Ödemek için tarayın', contactMe: 'Bana ulaş', tgNotify: 'Süren bitmeden Telegram mesajı al',
+        payHow: 'Nasıl ödenir', payName: 'Ad', payInGame: 'Oyun içinde', payInGameVal: 'Silk (Item Mall, F10) veya Gold, doğrudan 3zReil\'e', payEgypt: 'Mısır\'dan', payAbroad: 'Yurt dışından', qrScan: 'Ödemek için tarayın', contactMe: 'Bana ulaş', tgNotify: 'Süren bitmeden Telegram mesajı al', tgOn: 'Telegram bildirimleri açık ✓',
         shopPer: '{amt} =', shopOut: 'Stokta yok', shopBuy: 'Satın al', shopCustom: 'Ya da istediğin miktarı yaz', shopGoldUnit: 'milyon Gold', shopRange: '{min} ile {max} arası', ordTitle: '{amt} satın al', ordOr: 'veya {v}', ordNotAvail: 'Şu anda mevcut değil. Fiyatlar güncellendi, lütfen tekrar bak.', ordDone: '#{id} numaralı sipariş gönderildi ✓', ordDonePay: 'Şimdi {price} tutarını {method} ile öde, sonra dekontu bana gönder:', ordWaText: 'Merhaba 3zReil, sipariş #{id}: {amt} = {price}, ödeme {method} ile. Oyundaki adım: {name}', ordTrade: 'Ödeme gelir gelmez oyunda {name} adlı karaktere Trade ile vereceğim.', shpNotSet: 'Henüz fiyat yok', shpPriceEgp: '{amt} fiyatı (EGP)', shpPriceUsd: '{amt} fiyatı (USD)', shpPacksSilk: 'Paketler (Silk)', shpPacksGold: 'Paketler (milyon Gold, 1000 = 1b)', shpAvailable: 'Mevcut (kapalı = stokta yok)', shpBad: '{item} fiyatlarını kontrol et: EGP ve USD ikisini birlikte yaz (ya da ikisini de boş bırak).', shpSaved: 'Mağaza fiyatları kaydedildi.', nNewOrder: 'Yeni sipariş: {amt} ({name})', nNewOrderTitle: 'Yeni mağaza siparişi', ordPrice: 'Fiyat', ordContactShort: 'İletişim', ordStNew: 'Ödeme bekleniyor', ordStPaid: 'Ödendi, teslim et', ordMarkPaid: 'Ödendi', ordMarkDone: 'Teslim edildi', ordEmpty: 'Şu anda açık sipariş yok.', confirmDelOrder: 'Bu sipariş silinsin mi?', nOrderDone: 'Sipariş teslim edildi ✓',
         navShop: 'Mağaza', shopTitle: 'Silk & Gold mağazası', shopIntro: 'Silk ve Gold\'u doğrudan 3zReil\'den al. Bir paket seç ya da istediğin miktarı yaz, öde, ben de oyunda Trade ile sana vereyim.', shopSoon: 'Fiyatlar çok yakında. Şimdi almak istersen bana WhatsApp\'tan yaz.', shopHow: 'Nasıl çalışır', shopStep1: 'İstediğini seç ve siparişi gönder.', shopStep2: 'Vodafone Cash, InstaPay veya Binance ile öde ve dekontu bana gönder.', shopStep3: 'Oyunda buluşuruz ve sana Trade ile veririm.', ordPay: 'Ödeme yöntemi', ordContact: 'WhatsApp, Telegram veya Discord', ordSend: 'Siparişi gönder', ordReceipt: 'Dekontu WhatsApp\'tan gönder', shpTitle: 'Mağaza fiyatları', shpIntro: 'Her 100 Silk ve her 100m Gold için fiyat. Bir ürünü gizlemek için fiyatı boş bırak. Müşteri her zaman burada yazan fiyatı öder.', reqTabOrders: 'Siparişler', ordAdminIntro: 'Mağaza sayfasından gelen siparişler. Para gelince "Ödendi", Trade\'den sonra "Teslim edildi" olarak işaretle.', openInstapay: 'InstaPay\'de aç', payReceipt: 'Dekontu buradan gönder', copy: 'Kopyala', copied: 'Kopyalandı ✓', chat: 'Sohbet',
         navFaq: 'SSS', faqTitle: 'Sıkça sorulan sorular', faqMore: 'Başka bir soru mu var? Bana yaz, her zaman buralardayım.', faqOpenAll: 'Tümünü aç', faqCloseAll: 'Tümünü kapat',
@@ -2512,7 +2513,7 @@
         langLabel: 'Langue',
         annOn: 'Annonce : affichée', annOff: 'Annonce : masquée',
         vipTip: 'Forfait de {d} jours ou plus avec 3zReil',
-        payHow: 'Comment payer', payName: 'Nom', payInGame: 'En jeu', payInGameVal: 'Silk (Item Mall, F10) ou Gold, directement à 3zReil', payEgypt: 'Depuis l\'Égypte', payAbroad: 'Depuis l\'étranger', qrScan: 'Scannez pour payer', contactMe: 'Me contacter', tgNotify: 'Recevoir un message Telegram avant la fin',
+        payHow: 'Comment payer', payName: 'Nom', payInGame: 'En jeu', payInGameVal: 'Silk (Item Mall, F10) ou Gold, directement à 3zReil', payEgypt: 'Depuis l\'Égypte', payAbroad: 'Depuis l\'étranger', qrScan: 'Scannez pour payer', contactMe: 'Me contacter', tgNotify: 'Recevoir un message Telegram avant la fin', tgOn: 'Alertes Telegram activées ✓',
         shopPer: '{amt} =', shopOut: 'Rupture de stock', shopBuy: 'Acheter', shopCustom: 'Ou tapez la quantité voulue', shopGoldUnit: 'millions de Gold', shopRange: 'De {min} à {max}', ordTitle: 'Acheter {amt}', ordOr: 'ou {v}', ordNotAvail: 'Ce n\'est pas disponible pour le moment. Les prix ont été mis à jour, vérifiez à nouveau.', ordDone: 'Commande n°{id} envoyée ✓', ordDonePay: 'Payez maintenant {price} avec {method}, puis envoyez-moi le reçu :', ordWaText: 'Salut 3zReil, commande n°{id} : {amt} = {price}, payée avec {method}. Mon nom en jeu : {name}', ordTrade: 'Dès réception du paiement, je le donne à {name} en jeu par Trade.', shpNotSet: 'Pas encore de prix', shpPriceEgp: '{amt} en EGP', shpPriceUsd: '{amt} en USD', shpPacksSilk: 'Packs (Silk)', shpPacksGold: 'Packs (millions de Gold, 1000 = 1b)', shpAvailable: 'Disponible (désactivé = rupture de stock)', shpBad: 'Vérifiez les prix {item} : remplissez EGP et USD (ou laissez les deux vides).', shpSaved: 'Prix de la boutique enregistrés.', nNewOrder: 'Nouvelle commande : {amt} de {name}', nNewOrderTitle: 'Nouvelle commande boutique', ordPrice: 'Prix', ordContactShort: 'Contact', ordStNew: 'En attente du paiement', ordStPaid: 'Payé, à livrer', ordMarkPaid: 'Payé', ordMarkDone: 'Livré', ordEmpty: 'Aucune commande en cours.', confirmDelOrder: 'Supprimer cette commande ?', nOrderDone: 'Commande livrée ✓',
         navShop: 'Boutique', shopTitle: 'Boutique Silk & Gold', shopIntro: 'Achetez Silk et Gold directement à 3zReil. Choisissez un pack ou tapez votre quantité, payez, et je vous le donne en jeu par Trade.', shopSoon: 'Les prix arrivent très bientôt. Écrivez-moi sur WhatsApp pour acheter maintenant.', shopHow: 'Comment ça marche', shopStep1: 'Choisissez ce que vous voulez et envoyez la commande.', shopStep2: 'Payez par Vodafone Cash, InstaPay ou Binance et envoyez-moi le reçu.', shopStep3: 'On se retrouve en jeu et je vous le donne par Trade.', ordPay: 'Payer avec', ordContact: 'WhatsApp, Telegram ou Discord', ordSend: 'Envoyer la commande', ordReceipt: 'Envoyez-moi le reçu sur WhatsApp', shpTitle: 'Prix de la boutique', shpIntro: 'Prix pour 100 Silk et pour 100m de Gold. Laissez un prix vide pour masquer l\'article. Le client paie toujours le prix indiqué ici.', reqTabOrders: 'Commandes', ordAdminIntro: 'Commandes de la page Boutique. Marquez « Payé » quand l\'argent arrive, puis « Livré » après le Trade.', openInstapay: 'Ouvrir dans InstaPay', payReceipt: 'Envoyez-moi le reçu ici', copy: 'Copier', copied: 'Copié ✓', chat: 'Discuter',
         navFaq: 'FAQ', faqTitle: 'Questions fréquentes', faqMore: 'Encore une question ? Écrivez-moi, je suis toujours là.', faqOpenAll: 'Tout ouvrir', faqCloseAll: 'Tout fermer',
@@ -2682,6 +2683,7 @@
 
     const P = {
       clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+      tgBellOn: '<path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 1.5h-15z" style="fill:currentColor"/><path d="M10 20.5a2.2 2.2 0 0 0 4 0"/><path d="M9.3 11.6l1.9 1.9 3.6-3.8" style="stroke:#0b2a20;stroke-width:2.2"/>',
       tgBell: '<path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 1.5h-15z"/><path d="M10 20.5a2.2 2.2 0 0 0 4 0"/>',
       play: '<path d="M8 5v14l11-7z" style="fill:currentColor;stroke:none"/>',
       pause: '<path d="M8 5v14M16 5v14" style="stroke-width:3.4"/>',
@@ -3769,7 +3771,24 @@
       setSync(true);
       renderTimers();
       loadVip();
+      loadTgOn();
     }
+
+    let tgOn = new Set(), tgFastUntil = 0;
+    async function loadTgOn() {
+      if (!TELEGRAM_BOT) return;
+      try {
+        const { data, error } = await db.rpc('tg_active_timers');
+        if (error || !Array.isArray(data)) return;
+        const next = new Set(data.map(String));
+        if (next.size === tgOn.size && [...next].every(id => tgOn.has(id))) return;
+        tgOn = next; renderTimers();
+      } catch (e) {}
+    }
+    setInterval(() => { if (!document.hidden && (Date.now() < tgFastUntil || Date.now() % 30000 < 4000)) loadTgOn(); }, 4000);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) loadTgOn(); });
+    window.addEventListener('focus', loadTgOn);
+    document.addEventListener('click', e => { if (e.target.closest('[data-tg-bell]')) tgFastUntil = Date.now() + 120000; });
 
     /* ---------- VIP badges: a timer of 3 days (72 h) = VIP 1, 7 days (168 h) = VIP 2, 10 days (240 h) = VIP 3.
        Shows as soon as such a timer exists and stays (Supabase keeps the record in the history). ---------- */
@@ -3909,7 +3928,8 @@
         const name = escapeHtml(timer.name || T('untitled'));
 
         let acts = '';
-        if (TELEGRAM_BOT && remaining > 0) acts += `<a class="ib tgn" href="https://t.me/${encodeURIComponent(TELEGRAM_BOT)}?start=t${encodeURIComponent(timer.id)}-${lang}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(T('tgNotify'))}" title="${escapeHtml(T('tgNotify'))}">${svg('tgBell')}</a>`;
+        if (TELEGRAM_BOT && remaining > 0) { const on = tgOn.has(String(timer.id)), tip = escapeHtml(T(on ? 'tgOn' : 'tgNotify'));
+          acts += `<a class="ib tgn${on ? ' on' : ''}" href="https://t.me/${encodeURIComponent(TELEGRAM_BOT)}?start=t${encodeURIComponent(timer.id)}-${lang}" target="_blank" rel="noopener noreferrer" data-tg-bell aria-label="${tip}" title="${tip}">${svg(on ? 'tgBellOn' : 'tgBell')}</a>`; }
         if (isAdmin) {
           if (state === 'Running') acts += `<button class="ib go" data-action="pause" data-id="${id}" aria-label="${T('actPause')}" title="${T('actPause')}">${svg('pause')}</button>`;
           else if (remaining > 0) acts += `<button class="ib go" data-action="start" data-id="${id}" aria-label="${T('actStart')}" title="${T('actStart')}">${svg('play')}</button>`;
