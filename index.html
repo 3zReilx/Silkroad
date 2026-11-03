@@ -308,6 +308,29 @@
     .row:hover { border-color: rgba(185, 155, 113, .45); }
     .r-drag { display: none; color: #4f493d; }
     .r-ico { grid-area: ico; display: grid; place-items: center; color: var(--gold-l); font-size: 26px; }
+    /* time ring around each timer's icon: full = all the bought time is left, it empties as the time runs.
+       gold = plenty of time, orange = 30 minutes or less, red and pulsing = last 10 minutes, grey = finished */
+    @property --p { syntax: '<number>'; inherits: true; initial-value: 1; }
+    .r-ico { position: relative; width: 38px; height: 38px; justify-self: center; border-radius: 50%; font-size: 19px; --p: 1; --rc: #d9bc8c; --rg: rgba(217, 188, 140, .35); transition: --p .95s linear, color .4s ease; }
+    .r-ico::before { content: ""; position: absolute; inset: 0; border-radius: 50%;
+      background: conic-gradient(from 0deg, var(--rc) calc(var(--p) * 1turn), rgba(185, 155, 113, .15) 0);
+      -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3.5px), #000 calc(100% - 3px));
+              mask: radial-gradient(farthest-side, transparent calc(100% - 3.5px), #000 calc(100% - 3px));
+      filter: drop-shadow(0 0 3px var(--rg)); }
+    .r-ico svg.i { position: relative; }
+    .r-ico[data-ring="mid"] { --rc: #ff9f43; --rg: rgba(255, 159, 67, .5); color: #ffc48a; }
+    .r-ico[data-ring="low"] { --rc: #ff4433; --rg: rgba(255, 68, 51, .8); color: #ff9a8c; animation: ringPulse 1.1s ease-in-out infinite; }
+    .r-ico[data-ring="paused"] { --rc: #9b8564; --rg: transparent; color: #b3a07f; }
+    .r-ico[data-ring="off"] { --rc: #5e554a; --rg: transparent; color: #7d7364; }
+    @keyframes ringPulse { 50% { transform: scale(1.08); filter: drop-shadow(0 0 8px rgba(255, 68, 51, .85)); } }
+    /* the same idea for the big timer: a thin bar under the numbers */
+    .f-bar { position: absolute; left: 50%; bottom: 7px; width: min(360px, 70%); height: 4px; transform: translateX(-50%); border-radius: 99px; background: rgba(185, 155, 113, .14); overflow: hidden; --p: 1; --rc: #d9bc8c; transition: --p .95s linear; }
+    .f-bar i { position: absolute; inset: 0 auto 0 0; width: calc(var(--p) * 100%); border-radius: inherit; background: linear-gradient(90deg, color-mix(in srgb, var(--rc) 55%, transparent), var(--rc)); box-shadow: 0 0 10px var(--rc); }
+    .f-bar[data-ring="mid"] { --rc: #ff9f43; } .f-bar[data-ring="low"] { --rc: #ff4433; animation: barPulse 1.1s ease-in-out infinite; }
+    .f-bar[data-ring="paused"] { --rc: #9b8564; } .f-bar[data-ring="off"], .f-bar[data-ring="none"] { opacity: 0; }
+    @keyframes barPulse { 50% { opacity: .55; } }
+    .big[data-ring="low"] .num { color: #ffc2b8; text-shadow: 0 0 18px rgba(255, 68, 51, .55); }
+    @media (prefers-reduced-motion: reduce) { .r-ico[data-ring="low"], .f-bar[data-ring="low"] { animation: none; } }
     .r-name { grid-area: name; font-size: 14px; color: #f4ead8; overflow-wrap: anywhere; }
     .r-time { grid-area: time; display: flex; align-items: center; gap: 8px; font-size: 20px; color: #fff; direction: ltr; font-variant-numeric: tabular-nums; }
     .r-time svg.i { font-size: 17px; color: var(--gold-l); }
@@ -352,10 +375,27 @@
     .empty h3 { margin: 0 0 6px; font: 700 18px Inter, Cairo, sans-serif; color: var(--gold-l); }
     .loading { padding: 30px; text-align: center; color: var(--muted); font-size: 13px; }
 
-    .footer { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 26px auto 0; padding: 0 0 28px; width: min(900px, 94%); font-size: 11.5px; color: #eadfc9; }
-    .footer i { flex: 1 1 0; max-width: 130px; height: 1px; background: linear-gradient(90deg, transparent, rgba(185, 155, 113, .5)); }
-    .footer i:last-child { transform: scaleX(-1); }
-    .footer svg { width: 11px; height: 11px; fill: var(--gold); }
+    /* footer: logo, quick links, contact icons, copyright */
+    .footer { display: grid; justify-items: center; gap: 12px; margin: 38px auto 0; padding: 0 0 30px; width: min(900px, 94%); text-align: center; color: #eadfc9; }
+    .ft-orn { display: flex; align-items: center; gap: 10px; width: 100%; max-width: 560px; }
+    .ft-orn i { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(185, 155, 113, .65)); }
+    .ft-orn i:last-child { transform: scaleX(-1); }
+    .ft-gem { width: 9px; height: 9px; transform: rotate(45deg); background: #0a0705; border: 1px solid var(--gold); box-shadow: 0 0 10px rgba(193, 164, 121, .7); }
+    .ft-logo { display: block; margin-top: 2px; }
+    .ft-logo img { display: block; height: 70px; width: auto; filter: drop-shadow(0 6px 18px rgba(0, 0, 0, .75)); transition: transform .25s ease, filter .25s ease; }
+    .ft-logo:hover img { transform: scale(1.04); filter: drop-shadow(0 6px 18px rgba(0, 0, 0, .75)) drop-shadow(0 0 14px rgba(201, 168, 116, .35)); }
+    .ft-tag { margin: -6px 0 2px; font-size: 12.5px; letter-spacing: .4px; color: var(--muted); }
+    .ft-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px 20px; }
+    .ft-links a { padding: 4px 1px; font-size: 13px; color: #eadfc9; text-decoration: none; border-bottom: 1px solid transparent; transition: color .15s ease, border-color .15s ease; }
+    .ft-links a:hover, .ft-links a:focus-visible { color: #fff; border-color: var(--gold); outline: none; }
+    .ft-social { display: flex; justify-content: center; gap: 12px; margin: 4px 0 2px; }
+    .ft-social:not(:has(a:not([hidden]))) { display: none; }
+    .ft-social .rico { width: 42px; height: 42px; font-size: 19px; }
+    .ft-bottom { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 8px; width: 100%; max-width: 560px; padding-top: 14px; border-top: 1px solid rgba(185, 155, 113, .16); font-size: 11.5px; color: rgba(234, 223, 201, .62); }
+    .ft-power { display: inline-flex; align-items: center; gap: 5px; }
+    .ft-power svg { width: 11px; height: 11px; fill: var(--gold); }
+    body.rtl .footer { direction: rtl; }
+    @media (max-width: 1099.98px) { .footer { padding-bottom: 92px; } }   /* room for the round contact button that floats bottom-right */
 
     /* toast + modals */
     .notice {
@@ -489,6 +529,50 @@
       .sp-amt { grid-area: amt; font-size: 21px; min-width: 96px; } .sp-egp { grid-area: egp; } .sp-usd { grid-area: usd; } .sp-buy { grid-area: buy; margin: 0; }
     }
     body.rtl .shop, body.rtl .shop-modal { direction: rtl; }
+
+    /* ---------- maintenance mode: the page visitors see while the admin works on the site ---------- */
+    .maint { position: fixed; inset: 0; z-index: 56; display: grid; place-items: center; padding: 18px; overflow-y: auto;
+             background: radial-gradient(ellipse at 50% 35%, rgba(24, 17, 9, .55), rgba(4, 3, 2, .93) 70%); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
+    body.mt-lock { overflow: hidden; }
+    .mt-card { position: relative; width: min(520px, 100%); padding: 30px 24px 22px; text-align: center; border-radius: 16px;
+               background: linear-gradient(180deg, rgba(22, 16, 9, .96), rgba(8, 6, 4, .97)); border: 1px solid rgba(201, 168, 116, .5);
+               box-shadow: 0 30px 80px rgba(0, 0, 0, .8), 0 0 50px rgba(169, 137, 97, .15), inset 0 1px 0 rgba(255, 236, 200, .06);
+               animation: mtIn .5s cubic-bezier(.2, .9, .3, 1.1) both; }
+    @keyframes mtIn { from { opacity: 0; transform: translateY(14px) scale(.97); } }
+    .mt-corner { position: absolute; width: 22px; height: 22px; border: 2px solid var(--gold); }
+    .mt-corner.tl { top: 8px; left: 8px; border-right: 0; border-bottom: 0; border-radius: 8px 0 0 0; }
+    .mt-corner.tr { top: 8px; right: 8px; border-left: 0; border-bottom: 0; border-radius: 0 8px 0 0; }
+    .mt-corner.bl { bottom: 8px; left: 8px; border-right: 0; border-top: 0; border-radius: 0 0 0 8px; }
+    .mt-corner.br { bottom: 8px; right: 8px; border-left: 0; border-top: 0; border-radius: 0 0 8px 0; }
+    .mt-logo { width: min(240px, 70%); aspect-ratio: 960 / 470; margin: 0 auto -6px; background: var(--herologo) center / contain no-repeat; filter: drop-shadow(0 8px 22px rgba(0, 0, 0, .8)); }
+    .mt-gears { position: relative; width: 84px; height: 64px; margin: 4px auto 10px; color: var(--gold-l); }
+    .mt-gears svg { position: absolute; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linejoin: round; filter: drop-shadow(0 0 8px rgba(201, 168, 116, .55)); }
+    .mt-gears .g1 { left: 6px; top: 4px; width: 46px; height: 46px; animation: mtSpin 6s linear infinite; }
+    .mt-gears .g2 { right: 4px; bottom: 0; width: 32px; height: 32px; color: #c9a874; animation: mtSpin 4.2s linear infinite reverse; }
+    @keyframes mtSpin { to { transform: rotate(360deg); } }
+    .mt-gears .sp { position: absolute; left: 50%; top: 50%; width: 3px; height: 3px; border-radius: 50%; background: #ffd890; box-shadow: 0 0 6px #ffb347; opacity: 0; animation: mtSpark 1.8s ease-out infinite; }
+    .mt-gears .s2 { animation-delay: .45s; --dx: -26px; } .mt-gears .s3 { animation-delay: .9s; --dx: 30px; } .mt-gears .s4 { animation-delay: 1.35s; --dx: -12px; }
+    @keyframes mtSpark { 0% { opacity: 1; transform: translate(0, 0); } 100% { opacity: 0; transform: translate(var(--dx, 18px), -34px); } }
+    .maint h1 { margin: 0 0 8px; font: 700 27px/1.35 Cairo, Inter, sans-serif; background: linear-gradient(180deg, #f6e4bf, #c9a874 60%, #9d7c52); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .mt-msg { margin: 0 auto 14px; max-width: 400px; font-size: 14.5px; line-height: 1.75; color: #e6dac4; white-space: pre-line; overflow-wrap: anywhere; }
+    .mt-eta { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 14px; padding: 8px 16px; border-radius: 999px; font-size: 13px; color: var(--gold-l);
+              background: rgba(185, 155, 113, .1); border: 1px solid rgba(201, 168, 116, .45); }
+    .mt-eta b { font: 700 20px/1 Rajdhani, Inter, sans-serif; letter-spacing: 1px; color: #fff; font-variant-numeric: tabular-nums; }
+    .mt-safe { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 0 0 16px; font-size: 13px; color: #9fe6c4; }
+    .mt-safe svg.i { font-size: 18px; color: #58be8c; }
+    .mt-contact { display: flex; justify-content: center; gap: 12px; margin-bottom: 14px; }
+    .mt-contact .rico { width: 44px; height: 44px; font-size: 20px; }
+    .mt-contact:not(:has(a:not([hidden]))) { display: none; }
+    .mt-admin { padding: 4px 8px; font-size: 11.5px; color: rgba(215, 192, 154, .55); background: none; border: 0; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+    .mt-admin:hover { color: var(--gold-l); }
+    body.rtl .maint { direction: rtl; }
+    .mt-banner { position: fixed; left: 50%; top: calc(var(--nav-h, 100px) + 10px); z-index: 37; transform: translateX(-50%); width: max-content; max-width: calc(100vw - 24px);
+                 display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 14px; border-radius: 999px; font-size: 12.5px; color: #ffe2b0;
+                 background: rgba(60, 34, 6, .94); border: 1px solid rgba(255, 179, 71, .65); box-shadow: 0 8px 26px rgba(0, 0, 0, .6), 0 0 18px rgba(255, 159, 67, .25); }
+    body.rtl .mt-banner { direction: rtl; padding: 8px 14px 8px 8px; }
+    .mt-banner > svg.i { flex: none; font-size: 17px; color: #ffb347; animation: mtSpin 6s linear infinite; }
+    .mt-banner .add { flex: none; padding: 5px 12px; font-size: 11.5px; border-radius: 999px; }
+    @media (prefers-reduced-motion: reduce) { .mt-gears svg, .mt-gears .sp, .mt-banner > svg.i, .mt-card { animation: none; } }
 
     /* ---------- "More" drop-down in the top bar (FAQ, About, Settings + admin pages) ---------- */
     .more-btn .more-chev { font-size: 14px; opacity: .8; transition: transform .22s ease; }
@@ -768,7 +852,8 @@
         border-radius: calc(var(--u) * 8);
       }
       .r-drag { grid-area: drag; display: block; margin-left: calc(var(--u) * 13); width: calc(var(--u) * 10); height: calc(var(--u) * 17); opacity: .9; }
-      .r-ico { font-size: calc(var(--u) * 25); }
+      .r-ico { width: calc(var(--u) * 40); height: calc(var(--u) * 40); font-size: calc(var(--u) * 20); }
+      .f-bar { bottom: calc(var(--u) * 6); width: calc(var(--u) * 330); height: calc(var(--u) * 4); }
       .r-name { padding-left: calc(var(--u) * 8); font-size: calc(var(--u) * 13); }
       .r-time { gap: calc(var(--u) * 9); padding-left: calc(var(--u) * 8); font-size: calc(var(--u) * 15); }
       .r-time svg.i { font-size: calc(var(--u) * 16); }
@@ -776,9 +861,7 @@
       .r-acts { gap: calc(var(--u) * 14); }
       .ib { width: calc(var(--u) * 36); height: calc(var(--u) * 36); font-size: calc(var(--u) * 17); border-radius: calc(var(--u) * 7); }
 
-      .footer { width: calc(var(--u) * 846); margin-top: calc(var(--u) * 24); gap: calc(var(--u) * 14); font-size: calc(var(--u) * 11.5); padding-bottom: calc(var(--u) * 30); }
-      .footer i { max-width: calc(var(--u) * 150); }
-      .footer svg { width: calc(var(--u) * 11); height: calc(var(--u) * 11); }
+      .footer { width: calc(var(--u) * 846); margin-top: calc(var(--u) * 40); gap: calc(var(--u) * 12); padding-bottom: calc(var(--u) * 34); }
     }
 
     /* tablet: keep the phone layout but give it room */
@@ -1474,6 +1557,7 @@
         <div class="colon">:</div>
         <div class="unit"><div class="num" id="fs">00</div><div class="lab" data-i18n="secondsCap">SECONDS</div></div>
       </div>
+      <div class="f-bar" id="fBar" aria-hidden="true" data-ring="none"><i></i></div>
       <div class="emblem" aria-hidden="true">
         <svg viewBox="0 0 80 84" fill="none">
           <defs><linearGradient id="eg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e0ccac"/><stop offset=".55" stop-color="#b6986e"/><stop offset="1" stop-color="#806240"/></linearGradient></defs>
@@ -1614,7 +1698,48 @@
     </nav>
   </main>
 
-  <footer class="footer"><i></i><span>Silkroad Timer</span><span>·</span><span>Powered by Supabase</span><svg viewBox="0 0 24 24"><path d="M13 2L5 14h6l-1 8 8-12h-6z"/></svg><i></i></footer>
+  <footer class="footer">
+    <div class="ft-orn" aria-hidden="true"><i></i><span class="ft-gem"></span><i></i></div>
+    <a class="ft-logo" href="#home" aria-label="3zReil"><img id="ftLogo" alt="3zReil" decoding="async"></a>
+    <p class="ft-tag" data-i18n="ftTag">Silkroad PSRO taxi · always online</p>
+    <nav class="ft-links" aria-label="Footer">
+      <a href="#home" data-i18n="navHome">Home</a><a href="#timers" data-i18n="navTimers">Timers</a><a href="#shop" data-i18n="navShop">Shop</a><a href="#training" data-i18n="navTraining">Training</a><a href="#faq" data-i18n="navFaq">FAQ</a>
+    </nav>
+    <div class="ft-social">
+      <a class="rico" id="ftWa" href="#" target="_blank" rel="noopener noreferrer" data-label="WhatsApp" aria-label="WhatsApp" title="WhatsApp" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.6-1.6l.8-1-1-2z"/></svg></a>
+      <a class="rico" id="ftTg" href="#" target="_blank" rel="noopener noreferrer" data-label="Telegram" aria-label="Telegram" title="Telegram" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4L3 11.2l5.6 2.1L17.5 7.6 10.6 14.6l.4 5.4 3.1-3.6 4 3L21 4z"/></svg></a>
+      <a class="rico" id="ftDc" href="#" target="_blank" rel="noopener noreferrer" data-label="Discord" aria-label="Discord" title="Discord" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7c2-1 8-1 10 0l2 9c-2 2-4 2.5-5 2.5l-1-1.5h-2l-1 1.5c-1 0-3-.5-5-2.5z"/><circle cx="9.5" cy="12" r="1.2"/><circle cx="14.5" cy="12" r="1.2"/></svg></a>
+    </div>
+    <div class="ft-bottom"><span>© <span id="ftYear">2026</span> 3zReil</span><span aria-hidden="true">·</span><span data-i18n="ftRights">All rights reserved</span><span aria-hidden="true">·</span><span class="ft-power">Silkroad Timer<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L5 14h6l-1 8 8-12h-6z"/></svg></span></div>
+  </footer>
+
+  <div class="maint" id="maint" role="alertdialog" aria-modal="true" aria-labelledby="mtTitle" hidden>
+    <div class="mt-card">
+      <span class="mt-corner tl"></span><span class="mt-corner tr"></span><span class="mt-corner bl"></span><span class="mt-corner br"></span>
+      <div class="mt-logo" role="img" aria-label="3zReil"></div>
+      <div class="mt-gears" aria-hidden="true">
+        <svg class="g1" viewBox="0 0 24 24"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zM10.6 2h2.8l.5 2.6 1.7.7 2.2-1.5 2 2-1.5 2.2.7 1.7 2.6.5v2.8l-2.6.5-.7 1.7 1.5 2.2-2 2-2.2-1.5-1.7.7-.5 2.6h-2.8l-.5-2.6-1.7-.7-2.2 1.5-2-2 1.5-2.2-.7-1.7L2 13.4v-2.8l2.6-.5.7-1.7-1.5-2.2 2-2 2.2 1.5 1.7-.7z"/></svg>
+        <svg class="g2" viewBox="0 0 24 24"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zM10.6 2h2.8l.5 2.6 1.7.7 2.2-1.5 2 2-1.5 2.2.7 1.7 2.6.5v2.8l-2.6.5-.7 1.7 1.5 2.2-2 2-2.2-1.5-1.7.7-.5 2.6h-2.8l-.5-2.6-1.7-.7-2.2 1.5-2-2 1.5-2.2-.7-1.7L2 13.4v-2.8l2.6-.5.7-1.7-1.5-2.2 2-2 2.2 1.5 1.7-.7z"/></svg>
+        <i class="sp s1"></i><i class="sp s2"></i><i class="sp s3"></i><i class="sp s4"></i>
+      </div>
+      <h1 id="mtTitle" data-i18n="mtTitle">We are updating the site</h1>
+      <p class="mt-msg" id="mtMsg" dir="auto"></p>
+      <div class="mt-eta" id="mtEta" hidden><span data-i18n="mtBackIn">Back in</span><b id="mtCount" dir="ltr">00:00</b></div>
+      <p class="mt-safe"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5" style="stroke-width:2.2"/></svg><span data-i18n="mtSafe">Your time is safe, nothing is lost.</span></p>
+      <div class="mt-contact">
+        <a class="rico" id="mtWa" href="#" target="_blank" rel="noopener noreferrer" data-label="WhatsApp" aria-label="WhatsApp" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.6-1.6l.8-1-1-2z"/></svg></a>
+        <a class="rico" id="mtTg" href="#" target="_blank" rel="noopener noreferrer" data-label="Telegram" aria-label="Telegram" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4L3 11.2l5.6 2.1L17.5 7.6 10.6 14.6l.4 5.4 3.1-3.6 4 3L21 4z"/></svg></a>
+        <a class="rico" id="mtDc" href="#" target="_blank" rel="noopener noreferrer" data-label="Discord" aria-label="Discord" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7c2-1 8-1 10 0l2 9c-2 2-4 2.5-5 2.5l-1-1.5h-2l-1 1.5c-1 0-3-.5-5-2.5z"/><circle cx="9.5" cy="12" r="1.2"/><circle cx="14.5" cy="12" r="1.2"/></svg></a>
+      </div>
+      <button class="mt-admin" id="mtAdmin" type="button" data-i18n="mtAdmin">Admin sign in</button>
+    </div>
+  </div>
+
+  <div class="mt-banner" id="mtBanner" role="status" hidden>
+    <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zM10.6 2h2.8l.5 2.6 1.7.7 2.2-1.5 2 2-1.5 2.2.7 1.7 2.6.5v2.8l-2.6.5-.7 1.7 1.5 2.2-2 2-2.2-1.5-1.7.7-.5 2.6h-2.8l-.5-2.6-1.7-.7-2.2 1.5-2-2 1.5-2.2-.7-1.7L2 13.4v-2.8l2.6-.5.7-1.7-1.5-2.2 2-2 2.2 1.5 1.7-.7z"/></svg>
+    <span data-i18n="mtBanner">Maintenance mode is on: visitors see the maintenance page.</span>
+    <button class="add" id="mtStop" type="button" data-i18n="mtStop">Turn off</button>
+  </div>
 
   <div id="notice" class="notice" role="status"></div>
 
@@ -1691,6 +1816,11 @@
           <span class="set-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg></span>
           <span class="set-txt"><b data-i18n="shpTitle">Shop prices</b><small id="setShopSum"></small></span>
           <button class="add set-edit" id="shopAdminBtn" type="button" data-i18n="cpManage">Manage</button>
+        </div>
+        <div class="set-row">
+          <span class="set-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zM10.6 2h2.8l.5 2.6 1.7.7 2.2-1.5 2 2-1.5 2.2.7 1.7 2.6.5v2.8l-2.6.5-.7 1.7 1.5 2.2-2 2-2.2-1.5-1.7.7-.5 2.6h-2.8l-.5-2.6-1.7-.7-2.2 1.5-2-2 1.5-2.2-.7-1.7L2 13.4v-2.8l2.6-.5.7-1.7-1.5-2.2 2-2 2.2 1.5 1.7-.7z"/></svg></span>
+          <span class="set-txt"><b data-i18n="mtSet">Maintenance mode</b><small id="setMtSum"></small></span>
+          <button class="add set-edit" id="mtEditBtn" type="button">&#9998; <span data-i18n="editHome">Edit</span></button>
         </div>
         <h3 class="pay-head" data-i18n="setDeviceHead">This device</h3>
       </div>
@@ -2008,6 +2138,28 @@
     </div>
   </div>
 
+  <div class="backdrop" id="mtModal" role="dialog" aria-modal="true" aria-labelledby="mtmTitle">
+    <form class="frame modal" id="mtForm">
+      <span class="gem top"></span>
+      <h2 id="mtmTitle" data-i18n="mtSet">Maintenance mode</h2>
+      <p data-i18n="mtIntro">While it is on, visitors only see a "we are updating the site" page. You still see the whole site.</p>
+      <label class="toggle"><span data-i18n="mtOn">Turn maintenance mode on</span><input type="checkbox" id="mtOn"></label>
+      <div class="field">
+        <label for="mtText"><span data-i18n="mtMsgLabel">Message for visitors</span> <small class="opt" data-i18n="optional">optional</small></label>
+        <textarea id="mtText" rows="3" maxlength="200" dir="auto" data-i18n-ph="mtDefault" placeholder="Short break to make the site even better. Back very soon!"></textarea>
+      </div>
+      <div class="field">
+        <label for="mtUntil" data-i18n="mtUntil">Back in</label>
+        <select id="mtUntil"></select>
+      </div>
+      <p class="form-msg" id="mtFormMsg" hidden></p>
+      <div class="modal-actions">
+        <button class="chip-btn" id="mtCancel" type="button" data-i18n="cancel">Cancel</button>
+        <button class="add" id="mtSave" type="submit" data-i18n="save">Save</button>
+      </div>
+    </form>
+  </div>
+
   <div class="backdrop" id="homeModal" role="dialog" aria-modal="true" aria-labelledby="homeTitle">
     <form class="frame modal" id="homeForm">
       <span class="gem top"></span>
@@ -2168,6 +2320,7 @@
         annOn: 'Announcement: on', annOff: 'Announcement: off',
         vipTip: '{d}-day package or longer with 3zReil',
         payHow: 'How to pay', payName: 'Name', payInGame: 'In game', payInGameVal: 'Silk (Item Mall, F10) or Gold, straight to 3zReil', payEgypt: 'From Egypt', payAbroad: 'From abroad', qrScan: 'Scan to pay', contactMe: 'Contact me', tgNotify: 'Get a Telegram message before your time ends', tgOn: 'Telegram alerts are on ✓', dcTip: 'DC: tell the customer on Telegram that his account is not in the party', dcOff: 'DC: the customer has not turned on Telegram alerts yet', dcNoBell: '{name} has not turned on Telegram alerts (the bell), so the bot cannot message him.', dcSent: 'DC message sent to {name} on Telegram ✓', dcWait: 'A DC message was sent to {name} less than a minute ago.', dcSentTo: 'DC message for {name} sent on Telegram ✓\nReceived by: {who}', dcSomeone: 'a Telegram user',
+        mtDefault: 'Short break to make the site even better. Back very soon!', mtSumOn: 'On: visitors see the maintenance page', mtSumOff: 'Off', mtOpt15: 'About 15 minutes', mtOpt30: 'About 30 minutes', mtOpt60: 'About 1 hour', mtOpt120: 'About 2 hours', mtOpt240: 'About 4 hours', mtNoTime: 'No time shown', mtSavedOn: 'Maintenance mode is on ✓', mtSavedOff: 'Maintenance mode is off, the site is open ✓',
         moreFaqSub: 'Quick answers to common questions', moreAboutSub: 'Who 3zReil is and how I work', moreSetSub: 'Sound, alerts and the app', moreStatsSub: 'Visitors, earnings and history', moreReqSub: 'Bookings, shop orders and reviews',
         trHiddenTag: 'Hidden', trNewLesson: 'New lesson', trNewLessonOpt: '＋ New lesson…', trRename: 'Rename', trShow: 'Show to visitors', trHide: 'Hide from visitors', trShownN: 'Visitors can see this lesson now ✓', trHiddenN: 'Lesson hidden from visitors ✓', trEarlier: 'Move earlier', trLater: 'Move later', trDelLesson: 'Delete lesson', trProg: '{n} of {total} steps done', trAllDone: 'All done! You are ready for the party 👑', trStepN: 'Step {n}', trZoom: 'Tap to see it big', trDone: 'Done', trEditStep: 'Edit step', trSoon: 'Training lessons are coming very soon.', trSoonAdmin: 'No lessons yet. Press "＋ Add step" to put up your first picture.', trEmptyLesson: 'No steps in this lesson yet. Press "＋ Add step".', trConfirmDel: 'Delete this step and its picture?', trConfirmDelLesson: 'Delete the lesson "{name}" and its {n} steps?', trDeleted: 'Deleted ✓', trPick: 'Choose a picture or video', trChange: 'Change', trBadType: 'Use a picture (JPG, PNG, WebP) or an MP4 video.', trTooBig: 'This file is too big (50 MB at most).', trNeedLesson: 'Write the lesson name.', trNeedTitle: 'Write a title for this step.', trUploading: 'Uploading…', trSaved: 'Training saved ✓', trPrev: 'Previous', trNext: 'Next',
         shopPer: '{amt} =', shopOut: 'Out of stock', shopBuy: 'Buy', shopCustom: 'Or type your own amount', shopGoldUnit: 'million Gold', shopRange: 'From {min} to {max}', ordTitle: 'Buy {amt}', ordOr: 'or {v}', ordNotAvail: 'This is not available right now. The prices were updated, please check again.', ordDone: 'Order #{id} sent ✓', ordDonePay: 'Now pay {price} with {method}, then send me the receipt:', ordWaText: 'Hi 3zReil, order #{id}: {amt} = {price}, paid with {method}. My in-game name: {name}', ordTrade: 'As soon as the payment arrives, I will give it to {name} in game by Trade.', shpNotSet: 'No prices yet', shpPriceEgp: '{amt} in EGP', shpPriceUsd: '{amt} in USD', shpPacksSilk: 'Packages (Silk)', shpPacksGold: 'Packages (millions of Gold, 1000 = 1b)', shpAvailable: 'Available (off = out of stock)', shpBad: 'Check the {item} prices: fill both EGP and USD (or leave both empty).', shpSaved: 'Shop prices saved.', nNewOrder: 'New order: {amt} from {name}', nNewOrderTitle: 'New shop order', ordPrice: 'Price', ordContactShort: 'Contact', ordStNew: 'Waiting for payment', ordStPaid: 'Paid, deliver it', ordMarkPaid: 'Paid', ordMarkDone: 'Delivered', ordEmpty: 'No open orders right now.', confirmDelOrder: 'Delete this order?', nOrderDone: 'Order delivered ✓', openInstapay: 'Open in InstaPay', payReceipt: 'Send me the receipt here', copy: 'Copy', copied: 'Copied ✓', chat: 'Chat',
@@ -2333,6 +2486,8 @@
         annOn: 'الإعلان: ظاهر', annOff: 'الإعلان: مخفي',
         vipTip: 'باقة {d} أيام أو أكثر مع 3zReil',
         payHow: 'طرق الدفع', payName: 'الاسم', payInGame: 'داخل اللعبة', payInGameVal: 'Silk (من الـ Item Mall بزرار F10) أو Gold، لـ 3zReil على طول', payEgypt: 'من مصر', payAbroad: 'من برّه مصر', qrScan: 'امسح الكود للدفع', contactMe: 'تواصل معي', tgNotify: 'رسالة على تليجرام قبل انتهاء وقتك', tgOn: 'تنبيهات تليجرام مفعّلة ✓', dcTip: 'DC: إبلاغ الزبون على تليجرام إن الأكونت بتاعه مش في البارتي', dcOff: 'DC: الزبون لسه مفعّلش تنبيهات تليجرام', dcNoBell: '{name} لسه مفعّلش تنبيهات تليجرام (الجرس)، فالبوت مش هيقدر يبعتله.', dcSent: 'اتبعتت رسالة DC لـ {name} على تليجرام ✓', dcWait: 'اتبعتت رسالة DC لـ {name} من أقل من دقيقة.', dcSentTo: 'رسالة DC لـ {name} اتبعتت على تليجرام ✓\nوصلت لـ: {who}', dcSomeone: 'مستخدم تليجرام',
+        mtTitle: 'الموقع قيد التحديث', mtDefault: 'استراحة قصيرة لنجعل الموقع أفضل. راجعين قريباً جداً!', mtBackIn: 'راجعين بعد', mtSafe: 'وقتك محفوظ ولن يضيع منه شيء.', mtAdmin: 'دخول الأدمن', mtBanner: 'وضع الصيانة شغّال: الزوار يرون صفحة الصيانة.', mtStop: 'إيقاف', mtSet: 'وضع الصيانة', mtIntro: 'أثناء تشغيله يرى الزوار صفحة «الموقع قيد التحديث» فقط، وأنت ترى الموقع كاملاً.', mtOn: 'تشغيل وضع الصيانة', mtMsgLabel: 'رسالة للزوار', mtUntil: 'راجعين بعد', mtSumOn: 'شغّال: الزوار يرون صفحة الصيانة', mtSumOff: 'متوقف', mtOpt15: 'حوالي ربع ساعة', mtOpt30: 'حوالي نصف ساعة', mtOpt60: 'حوالي ساعة', mtOpt120: 'حوالي ساعتين', mtOpt240: 'حوالي 4 ساعات', mtNoTime: 'بدون وقت', mtSavedOn: 'تم تشغيل وضع الصيانة ✓', mtSavedOff: 'تم إيقاف وضع الصيانة، الموقع مفتوح ✓',
+        ftTag: 'تاكسي Silkroad PSRO · متواجد دائماً', ftRights: 'جميع الحقوق محفوظة',
         navMore: 'المزيد', moreFaqSub: 'إجابات سريعة لأكثر الأسئلة', moreAboutSub: 'من هو 3zReil وكيف يعمل', moreSetSub: 'الصوت والتنبيهات والتطبيق', moreStatsSub: 'الزوار والأرباح والسجل', moreReqSub: 'الحجوزات وطلبات المتجر والتقييمات', moreAdmin: 'للأدمن',
         navTraining: 'التدريب', trTitle: 'تدريب البارتي', trAddStep: 'إضافة خطوة', trIntro: 'شروحات قصيرة بالصور للأعضاء الجدد في البارتي. اتبع الخطوات بالترتيب، واضغط على أي صورة لتكبيرها.', trMore: 'وقفت عند خطوة؟ راسلني وسأساعدك.', trLesson: 'الدرس', trLessonName: 'اسم الدرس', trLessonPh: 'إعدادات البارتي', trMedia: 'صورة أو فيديو', trRemove: 'إزالة', trMediaHint: 'الصور تُخفَّف تلقائياً. الفيديو: MP4 حتى 50 ميجا.', trStepTitle: 'العنوان', trStepBody: 'الشرح', trBodyPh: 'ماذا تفعل هنا، ولماذا يفيدك', trLangHint: 'باقي اللغات اختيارية. إذا كانت لغة فارغة، يرى الزائر النص الذي كتبته.', trVisible: 'الزوار يمكنهم رؤية هذا الدرس', trHiddenTag: 'مخفي', trNewLesson: 'درس جديد', trNewLessonOpt: '＋ درس جديد…', trRename: 'تغيير الاسم', trShow: 'إظهار للزوار', trHide: 'إخفاء عن الزوار', trShownN: 'الدرس ظاهر للزوار الآن ✓', trHiddenN: 'تم إخفاء الدرس عن الزوار ✓', trEarlier: 'تقديم', trLater: 'تأخير', trDelLesson: 'حذف الدرس', trProg: 'أنجزت {n} من {total}', trAllDone: 'أنهيت كل الخطوات! أنت جاهز للبارتي 👑', trStepN: 'الخطوة {n}', trZoom: 'اضغط للتكبير', trDone: 'تم', trEditStep: 'تعديل الخطوة', trSoon: 'دروس التدريب قريباً جداً.', trSoonAdmin: 'لا توجد دروس بعد. اضغط «＋ إضافة خطوة» لرفع أول صورة.', trEmptyLesson: 'لا توجد خطوات في هذا الدرس بعد. اضغط «＋ إضافة خطوة».', trConfirmDel: 'حذف هذه الخطوة وصورتها؟', trConfirmDelLesson: 'حذف درس «{name}» وكل خطواته ({n})؟', trDeleted: 'تم الحذف ✓', trPick: 'اختر صورة أو فيديو', trChange: 'تغيير', trBadType: 'استخدم صورة (JPG أو PNG أو WebP) أو فيديو MP4.', trTooBig: 'الملف كبير جداً (الحد الأقصى 50 ميجا).', trNeedLesson: 'اكتب اسم الدرس.', trNeedTitle: 'اكتب عنواناً لهذه الخطوة.', trUploading: 'جارٍ الرفع…', trSaved: 'تم حفظ التدريب ✓', trPrev: 'السابق', trNext: 'التالي',
         shopPer: '{amt} =', shopOut: 'نفدت الكمية', shopBuy: 'اشترِ', shopCustom: 'أو اكتب الكمية التي تريدها', shopGoldUnit: 'مليون Gold', shopRange: 'من {min} إلى {max}', ordTitle: 'شراء {amt}', ordOr: 'أو {v}', ordNotAvail: 'غير متاح الآن، تم تحديث الأسعار. راجع الصفحة مرة أخرى.', ordDone: 'تم إرسال الطلب رقم {id} ✓', ordDonePay: 'ادفع الآن {price} عن طريق {method}، ثم أرسل لي الإيصال:', ordWaText: 'أهلاً 3zReil، الطلب رقم {id}: {amt} = {price}، الدفع عن طريق {method}. اسمي في اللعبة: {name}', ordTrade: 'فور وصول الدفع سأسلّمها إلى {name} داخل اللعبة عن طريق Trade.', shpNotSet: 'لا توجد أسعار بعد', shpPriceEgp: 'سعر {amt} بالجنيه', shpPriceUsd: 'سعر {amt} بالدولار', shpPacksSilk: 'الباقات (Silk)', shpPacksGold: 'الباقات (بالمليون Gold، 1000 = 1b)', shpAvailable: 'متاح (عند الإيقاف: نفدت الكمية)', shpBad: 'راجع أسعار {item}: اكتب الجنيه والدولار معاً (أو اترك الاثنين فارغين).', shpSaved: 'تم حفظ أسعار المتجر.', nNewOrder: 'طلب جديد: {amt} من {name}', nNewOrderTitle: 'طلب جديد من المتجر', ordPrice: 'السعر', ordContactShort: 'التواصل', ordStNew: 'في انتظار الدفع', ordStPaid: 'تم الدفع، سلّمها', ordMarkPaid: 'تم الدفع', ordMarkDone: 'تم التسليم', ordEmpty: 'لا توجد طلبات مفتوحة الآن.', confirmDelOrder: 'حذف هذا الطلب؟', nOrderDone: 'تم تسليم الطلب ✓',
@@ -2554,6 +2709,8 @@
         annOn: 'Duyuru: açık', annOff: 'Duyuru: kapalı',
         vipTip: '3zReil ile {d} günlük veya daha uzun paket',
         payHow: 'Nasıl ödenir', payName: 'Ad', payInGame: 'Oyun içinde', payInGameVal: 'Silk (Item Mall, F10) veya Gold, doğrudan 3zReil\'e', payEgypt: 'Mısır\'dan', payAbroad: 'Yurt dışından', qrScan: 'Ödemek için tarayın', contactMe: 'Bana ulaş', tgNotify: 'Süren bitmeden Telegram mesajı al', tgOn: 'Telegram bildirimleri açık ✓', dcTip: 'DC: müşteriye Telegram\'dan hesabının partide olmadığını bildir', dcOff: 'DC: müşteri henüz Telegram bildirimlerini açmadı', dcNoBell: '{name} Telegram bildirimlerini (zil) açmadı, bot ona yazamaz.', dcSent: '{name} adlı müşteriye Telegram\'dan DC mesajı gönderildi ✓', dcWait: '{name} adlı müşteriye bir dakikadan kısa süre önce DC mesajı gönderildi.', dcSentTo: '{name} için DC mesajı Telegram\'dan gönderildi ✓\nAlan: {who}', dcSomeone: 'bir Telegram kullanıcısı',
+        mtTitle: 'Site güncelleniyor', mtDefault: 'Siteyi daha da iyi yapmak için kısa bir ara. Çok yakında döneceğiz!', mtBackIn: 'Dönüş', mtSafe: 'Süren güvende, hiçbir şey kaybolmaz.', mtAdmin: 'Yönetici girişi', mtBanner: 'Bakım modu açık: ziyaretçiler bakım sayfasını görüyor.', mtStop: 'Kapat', mtSet: 'Bakım modu', mtIntro: 'Açıkken ziyaretçiler yalnızca "site güncelleniyor" sayfasını görür. Sen sitenin tamamını görürsün.', mtOn: 'Bakım modunu aç', mtMsgLabel: 'Ziyaretçiler için mesaj', mtUntil: 'Dönüş', mtSumOn: 'Açık: ziyaretçiler bakım sayfasını görüyor', mtSumOff: 'Kapalı', mtOpt15: 'Yaklaşık 15 dakika', mtOpt30: 'Yaklaşık 30 dakika', mtOpt60: 'Yaklaşık 1 saat', mtOpt120: 'Yaklaşık 2 saat', mtOpt240: 'Yaklaşık 4 saat', mtNoTime: 'Süre gösterme', mtSavedOn: 'Bakım modu açıldı ✓', mtSavedOff: 'Bakım modu kapandı, site açık ✓',
+        ftTag: 'Silkroad PSRO taksi · her zaman online', ftRights: 'Tüm hakları saklıdır',
         navMore: 'Daha fazla', moreFaqSub: 'Sık sorulan sorulara hızlı cevaplar', moreAboutSub: '3zReil kim ve nasıl çalışır', moreSetSub: 'Ses, bildirimler ve uygulama', moreStatsSub: 'Ziyaretçiler, kazanç ve geçmiş', moreReqSub: 'Rezervasyonlar, siparişler ve yorumlar', moreAdmin: 'Yönetici',
         navTraining: 'Eğitim', trTitle: 'Parti eğitimi', trAddStep: 'Adım ekle', trIntro: 'Partiye yeni katılanlar için kısa resimli rehberler. Adımları sırayla takip et, büyütmek için herhangi bir resme dokun.', trMore: 'Bir adımda takıldın mı? Bana yaz, yardım edeyim.', trLesson: 'Ders', trLessonName: 'Ders adı', trLessonPh: 'Parti ayarları', trMedia: 'Resim veya video', trRemove: 'Kaldır', trMediaHint: 'Resimler otomatik olarak hafifletilir. Video: MP4, en fazla 50 MB.', trStepTitle: 'Başlık', trStepBody: 'Açıklama', trBodyPh: 'Burada ne yapılır ve neden işe yarar', trLangHint: 'Diğer diller isteğe bağlı. Boş olan dilde ziyaretçi senin yazdığın metni görür.', trVisible: 'Ziyaretçiler bu dersi görebilir', trHiddenTag: 'Gizli', trNewLesson: 'Yeni ders', trNewLessonOpt: '＋ Yeni ders…', trRename: 'Yeniden adlandır', trShow: 'Ziyaretçilere göster', trHide: 'Ziyaretçilerden gizle', trShownN: 'Ders artık ziyaretçilere açık ✓', trHiddenN: 'Ders ziyaretçilerden gizlendi ✓', trEarlier: 'Öne al', trLater: 'Geriye al', trDelLesson: 'Dersi sil', trProg: '{total} adımdan {n} tanesi tamam', trAllDone: 'Hepsi tamam! Partiye hazırsın 👑', trStepN: '{n}. adım', trZoom: 'Büyütmek için dokun', trDone: 'Tamam', trEditStep: 'Adımı düzenle', trSoon: 'Eğitim dersleri çok yakında.', trSoonAdmin: 'Henüz ders yok. İlk resmini eklemek için "＋ Adım ekle"ye bas.', trEmptyLesson: 'Bu derste henüz adım yok. "＋ Adım ekle"ye bas.', trConfirmDel: 'Bu adım ve resmi silinsin mi?', trConfirmDelLesson: '"{name}" dersi ve {n} adımı silinsin mi?', trDeleted: 'Silindi ✓', trPick: 'Resim veya video seç', trChange: 'Değiştir', trBadType: 'Bir resim (JPG, PNG, WebP) veya MP4 video kullan.', trTooBig: 'Bu dosya çok büyük (en fazla 50 MB).', trNeedLesson: 'Ders adını yaz.', trNeedTitle: 'Bu adım için bir başlık yaz.', trUploading: 'Yükleniyor…', trSaved: 'Eğitim kaydedildi ✓', trPrev: 'Önceki', trNext: 'Sonraki',
         shopPer: '{amt} =', shopOut: 'Stokta yok', shopBuy: 'Satın al', shopCustom: 'Ya da istediğin miktarı yaz', shopGoldUnit: 'milyon Gold', shopRange: '{min} ile {max} arası', ordTitle: '{amt} satın al', ordOr: 'veya {v}', ordNotAvail: 'Şu anda mevcut değil. Fiyatlar güncellendi, lütfen tekrar bak.', ordDone: '#{id} numaralı sipariş gönderildi ✓', ordDonePay: 'Şimdi {price} tutarını {method} ile öde, sonra dekontu bana gönder:', ordWaText: 'Merhaba 3zReil, sipariş #{id}: {amt} = {price}, ödeme {method} ile. Oyundaki adım: {name}', ordTrade: 'Ödeme gelir gelmez oyunda {name} adlı karaktere Trade ile vereceğim.', shpNotSet: 'Henüz fiyat yok', shpPriceEgp: '{amt} fiyatı (EGP)', shpPriceUsd: '{amt} fiyatı (USD)', shpPacksSilk: 'Paketler (Silk)', shpPacksGold: 'Paketler (milyon Gold, 1000 = 1b)', shpAvailable: 'Mevcut (kapalı = stokta yok)', shpBad: '{item} fiyatlarını kontrol et: EGP ve USD ikisini birlikte yaz (ya da ikisini de boş bırak).', shpSaved: 'Mağaza fiyatları kaydedildi.', nNewOrder: 'Yeni sipariş: {amt} ({name})', nNewOrderTitle: 'Yeni mağaza siparişi', ordPrice: 'Fiyat', ordContactShort: 'İletişim', ordStNew: 'Ödeme bekleniyor', ordStPaid: 'Ödendi, teslim et', ordMarkPaid: 'Ödendi', ordMarkDone: 'Teslim edildi', ordEmpty: 'Şu anda açık sipariş yok.', confirmDelOrder: 'Bu sipariş silinsin mi?', nOrderDone: 'Sipariş teslim edildi ✓',
@@ -2775,6 +2932,8 @@
         annOn: 'Annonce : affichée', annOff: 'Annonce : masquée',
         vipTip: 'Forfait de {d} jours ou plus avec 3zReil',
         payHow: 'Comment payer', payName: 'Nom', payInGame: 'En jeu', payInGameVal: 'Silk (Item Mall, F10) ou Gold, directement à 3zReil', payEgypt: 'Depuis l\'Égypte', payAbroad: 'Depuis l\'étranger', qrScan: 'Scannez pour payer', contactMe: 'Me contacter', tgNotify: 'Recevoir un message Telegram avant la fin', tgOn: 'Alertes Telegram activées ✓', dcTip: 'DC : prévenir le client sur Telegram que son compte n\'est pas dans la party', dcOff: 'DC : le client n\'a pas encore activé les alertes Telegram', dcNoBell: '{name} n\'a pas activé les alertes Telegram (la cloche), le bot ne peut pas lui écrire.', dcSent: 'Message DC envoyé à {name} sur Telegram ✓', dcWait: 'Un message DC a déjà été envoyé à {name} il y a moins d\'une minute.', dcSentTo: 'Message DC pour {name} envoyé sur Telegram ✓\nReçu par : {who}', dcSomeone: 'un utilisateur Telegram',
+        mtTitle: 'Le site est en cours de mise à jour', mtDefault: 'Petite pause pour rendre le site encore meilleur. De retour très bientôt !', mtBackIn: 'De retour dans', mtSafe: 'Votre temps est en sécurité, rien n\'est perdu.', mtAdmin: 'Connexion admin', mtBanner: 'Mode maintenance activé : les visiteurs voient la page de maintenance.', mtStop: 'Désactiver', mtSet: 'Mode maintenance', mtIntro: 'Quand il est activé, les visiteurs voient seulement la page « mise à jour en cours ». Vous voyez tout le site.', mtOn: 'Activer le mode maintenance', mtMsgLabel: 'Message pour les visiteurs', mtUntil: 'De retour dans', mtSumOn: 'Activé : les visiteurs voient la page de maintenance', mtSumOff: 'Désactivé', mtOpt15: 'Environ 15 minutes', mtOpt30: 'Environ 30 minutes', mtOpt60: 'Environ 1 heure', mtOpt120: 'Environ 2 heures', mtOpt240: 'Environ 4 heures', mtNoTime: 'Sans durée', mtSavedOn: 'Mode maintenance activé ✓', mtSavedOff: 'Mode maintenance désactivé, le site est ouvert ✓',
+        ftTag: 'Taxi Silkroad PSRO · toujours en ligne', ftRights: 'Tous droits réservés',
         navMore: 'Plus', moreFaqSub: 'Réponses rapides aux questions fréquentes', moreAboutSub: 'Qui est 3zReil et comment il travaille', moreSetSub: 'Son, alertes et application', moreStatsSub: 'Visiteurs, gains et historique', moreReqSub: 'Réservations, commandes et avis', moreAdmin: 'Admin',
         navTraining: 'Formation', trTitle: 'Formation de la party', trAddStep: 'Ajouter une étape', trIntro: 'De courts guides en images pour les nouveaux membres de la party. Suivez les étapes dans l\'ordre et touchez une image pour l\'agrandir.', trMore: 'Bloqué à une étape ? Écrivez-moi, je vous aide.', trLesson: 'Leçon', trLessonName: 'Nom de la leçon', trLessonPh: 'Réglages de la party', trMedia: 'Image ou vidéo', trRemove: 'Retirer', trMediaHint: 'Les images sont allégées automatiquement. Vidéo : MP4, 50 Mo maximum.', trStepTitle: 'Titre', trStepBody: 'Explication', trBodyPh: 'Ce qu\'il faut faire ici, et pourquoi c\'est utile', trLangHint: 'Les autres langues sont facultatives. Si l\'une est vide, le visiteur voit le texte que vous avez écrit.', trVisible: 'Les visiteurs voient cette leçon', trHiddenTag: 'Masquée', trNewLesson: 'Nouvelle leçon', trNewLessonOpt: '＋ Nouvelle leçon…', trRename: 'Renommer', trShow: 'Montrer aux visiteurs', trHide: 'Masquer aux visiteurs', trShownN: 'Les visiteurs voient maintenant cette leçon ✓', trHiddenN: 'Leçon masquée aux visiteurs ✓', trEarlier: 'Avancer', trLater: 'Reculer', trDelLesson: 'Supprimer la leçon', trProg: '{n} sur {total} faites', trAllDone: 'Tout est fait ! Vous êtes prêt pour la party 👑', trStepN: 'Étape {n}', trZoom: 'Touchez pour agrandir', trDone: 'Fait', trEditStep: 'Modifier l\'étape', trSoon: 'Les leçons arrivent très bientôt.', trSoonAdmin: 'Pas encore de leçon. Appuyez sur « ＋ Ajouter une étape » pour mettre votre première image.', trEmptyLesson: 'Pas encore d\'étape dans cette leçon. Appuyez sur « ＋ Ajouter une étape ».', trConfirmDel: 'Supprimer cette étape et son image ?', trConfirmDelLesson: 'Supprimer la leçon « {name} » et ses {n} étapes ?', trDeleted: 'Supprimé ✓', trPick: 'Choisir une image ou une vidéo', trChange: 'Changer', trBadType: 'Utilisez une image (JPG, PNG, WebP) ou une vidéo MP4.', trTooBig: 'Ce fichier est trop lourd (50 Mo maximum).', trNeedLesson: 'Écrivez le nom de la leçon.', trNeedTitle: 'Écrivez un titre pour cette étape.', trUploading: 'Envoi…', trSaved: 'Formation enregistrée ✓', trPrev: 'Précédent', trNext: 'Suivant',
         shopPer: '{amt} =', shopOut: 'Rupture de stock', shopBuy: 'Acheter', shopCustom: 'Ou tapez la quantité voulue', shopGoldUnit: 'millions de Gold', shopRange: 'De {min} à {max}', ordTitle: 'Acheter {amt}', ordOr: 'ou {v}', ordNotAvail: 'Ce n\'est pas disponible pour le moment. Les prix ont été mis à jour, vérifiez à nouveau.', ordDone: 'Commande n°{id} envoyée ✓', ordDonePay: 'Payez maintenant {price} avec {method}, puis envoyez-moi le reçu :', ordWaText: 'Salut 3zReil, commande n°{id} : {amt} = {price}, payée avec {method}. Mon nom en jeu : {name}', ordTrade: 'Dès réception du paiement, je le donne à {name} en jeu par Trade.', shpNotSet: 'Pas encore de prix', shpPriceEgp: '{amt} en EGP', shpPriceUsd: '{amt} en USD', shpPacksSilk: 'Packs (Silk)', shpPacksGold: 'Packs (millions de Gold, 1000 = 1b)', shpAvailable: 'Disponible (désactivé = rupture de stock)', shpBad: 'Vérifiez les prix {item} : remplissez EGP et USD (ou laissez les deux vides).', shpSaved: 'Prix de la boutique enregistrés.', nNewOrder: 'Nouvelle commande : {amt} de {name}', nNewOrderTitle: 'Nouvelle commande boutique', ordPrice: 'Prix', ordContactShort: 'Contact', ordStNew: 'En attente du paiement', ordStPaid: 'Payé, à livrer', ordMarkPaid: 'Payé', ordMarkDone: 'Livré', ordEmpty: 'Aucune commande en cours.', confirmDelOrder: 'Supprimer cette commande ?', nOrderDone: 'Commande livrée ✓',
@@ -3397,18 +3556,73 @@
     const hashText = s => { let h = 0; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0; return String(h); };
     async function loadSiteSettings() {
       try {
-        const { data, error } = await db.from('site_settings').select('key,value').in('key', ['status', 'announcement']);
+        const { data, error } = await db.from('site_settings').select('key,value').in('key', ['status', 'announcement', 'maintenance']);
         if (error) { siteSettingsOk = false; renderHomeBits(); return; }
         siteSettingsOk = true;
         const map = Object.fromEntries((data || []).map(r => [r.key, r.value || {}]));
-        siteStatus = map.status || null; siteAnn = map.announcement || null;
+        siteStatus = map.status || null; siteAnn = map.announcement || null; siteMaint = map.maintenance || null;
       } catch (e) { siteSettingsOk = false; }
       renderHomeBits();
     }
+    /* ---------- maintenance mode ---------- */
+    let siteMaint = null, mtTimer = null;
+    const mtIsOn = () => !!(siteMaint && siteMaint.on);
+    function renderMaint() {
+      const on = mtIsOn(), show = on && !isAdmin;
+      if ($('maint').hidden === show) {                       // only touch the page when it changes
+        $('maint').hidden = !show; document.body.classList.toggle('mt-lock', show);
+        if (show) { toggleMore(false); closeAll(); }
+      }
+      $('mtBanner').hidden = !(on && isAdmin);
+      $('mtMsg').textContent = (siteMaint && String(siteMaint.msg || '').trim()) || T('mtDefault');
+      $('setMtSum').textContent = T(on ? 'mtSumOn' : 'mtSumOff');
+      clearInterval(mtTimer);
+      const until = on && siteMaint.until ? Date.parse(siteMaint.until) : NaN;
+      const tickEta = () => {
+        const left = Math.round((until - Date.now()) / 1000);
+        $('mtEta').hidden = !(left > 0);
+        if (left > 0) $('mtCount').textContent = formatTime(left);
+        else { clearInterval(mtTimer); if (show && left > -3600) loadSiteSettings(); }   // time is up: check whether the admin is done
+      };
+      if (on && !isNaN(until)) { tickEta(); mtTimer = setInterval(tickEta, 1000); } else $('mtEta').hidden = true;
+    }
+    function openMtModal() {
+      if (!isAdmin) return;
+      $('mtOn').checked = mtIsOn();
+      $('mtText').value = (siteMaint && siteMaint.msg) || '';
+      $('mtUntil').innerHTML = [0, 15, 30, 60, 120, 240].map(m => `<option value="${m}">${escapeHtml(T(m ? 'mtOpt' + m : 'mtNoTime'))}</option>`).join('');
+      $('mtFormMsg').hidden = true; $('mtSave').disabled = false;
+      $('settingsModal').classList.remove('open');
+      $('mtModal').classList.add('open');
+    }
+    async function saveMaint(value) {
+      const { error } = await db.from('site_settings').upsert([{ key: 'maintenance', value, updated_at: new Date().toISOString() }], { onConflict: 'key' });
+      if (error) throw error;
+      siteMaint = value; renderMaint();
+    }
+    $('mtEditBtn').addEventListener('click', openMtModal);
+    $('mtCancel').addEventListener('click', () => $('mtModal').classList.remove('open'));
+    $('mtForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      if (!isAdmin) return;
+      const mins = Number($('mtUntil').value) || 0;
+      const value = { on: $('mtOn').checked, msg: $('mtText').value.trim().slice(0, 200), until: mins ? new Date(Date.now() + mins * 60000).toISOString() : null };
+      $('mtSave').disabled = true;
+      try { await saveMaint(value); $('mtModal').classList.remove('open'); showNotice(T(value.on ? 'mtSavedOn' : 'mtSavedOff')); }
+      catch (err) { const m = $('mtFormMsg'); m.hidden = false; m.className = 'form-msg err'; m.textContent = /relation|does not exist|schema cache|violates check/i.test(err.message) ? T('setupNeeded') : err.message; }
+      finally { $('mtSave').disabled = false; }
+    });
+    $('mtStop').addEventListener('click', async () => {
+      try { await saveMaint({ ...(siteMaint || {}), on: false, until: null }); showNotice(T('mtSavedOff')); }
+      catch (err) { showNotice(err.message || T('nWrong'), 'error'); }
+    });
+    $('mtAdmin').addEventListener('click', () => $('loginBtn').click());
+
     function renderHomeBits() {
       const st = siteStatus && siteStatus.state;
       $('statusWrap').hidden = !st;
       $('setAdmin').hidden = !isAdmin;
+      renderMaint();
       const pill = $('statusPill');
       pill.className = 'status-pill ' + (st || 'none');
       $('statusDot').className = 'dot ' + (st === 'online' ? 'ok' : st === 'busy' ? 'busy' : '');
@@ -4510,9 +4724,25 @@
       $('homeCount').textContent = running ? T('nRunning', { n: running }) : (timers.length ? String(timers.length) : '');
     }
 
+    // how much of the bought time is left (1 = all of it) and the ring colour for it
+    function ringOf(t) {
+      const left = getRemaining(t), total = Number(t.duration_seconds) || 0, st = timerState(t);
+      const p = total > 0 ? Math.max(0, Math.min(1, left / total)) : left > 0 ? 1 : 0;
+      const k = left <= 0 || st === 'Finished' ? 'off' : st === 'Paused' ? 'paused' : left <= WARN_BEFORE ? 'low' : left <= 1800 ? 'mid' : 'ok';
+      return { p: p.toFixed(4), k };
+    }
+    function paintRing(el, t) {
+      if (!el) return;
+      const r = t ? ringOf(t) : { p: '0', k: 'none' };
+      el.style.setProperty('--p', r.p);
+      if (el.dataset.ring !== r.k) el.dataset.ring = r.k;
+      return r;
+    }
+
     function updateFeatured() {
       const ft = pickFeatured();
       const s = ft ? getRemaining(ft) : 0;
+      const fr = paintRing($('fBar'), ft); document.querySelector('.big').dataset.ring = fr.k;
       $('fh').textContent = pad(Math.floor(s / 3600));
       $('fm').textContent = pad(Math.floor((s % 3600) / 60));
       $('fs').textContent = pad(s % 60);
@@ -4564,7 +4794,7 @@
         return `
           <article class="row" data-row="${id}" data-state="${state}">
             ${DRAG}
-            <div class="r-ico">${svg(ROW_ICONS[index % ROW_ICONS.length])}</div>
+            <div class="r-ico" data-ring="${ringOf(timer).k}" style="--p:${ringOf(timer).p}">${svg(ROW_ICONS[index % ROW_ICONS.length])}</div>
             <div class="r-name"><bdi>${name}</bdi>${vipBadge(timer.name)}${isAdmin && earningsByTimer.has(String(timer.id)) ? `<span class="r-price">${escapeHtml(silkText(earningsByTimer.get(String(timer.id)).price_silk))}</span>` : ''}</div>
             <div class="r-time">${svg('clock')}<span data-countdown>${formatTime(remaining)}</span></div>
             <span class="pill ${state.toLowerCase()}${isSoon(timer) ? ' soon' : ''}">${isSoon(timer) ? T('pillSoon') : T('pill' + (state === 'Paused' && timer.held ? 'Hold' : state))}</span>
@@ -4585,7 +4815,7 @@
       }
       for (const timer of timers) {
         const row = document.querySelector(`[data-row="${CSS.escape(String(timer.id))}"]`);
-        if (row) row.querySelector('[data-countdown]').textContent = formatTime(getRemaining(timer));
+        if (row) { row.querySelector('[data-countdown]').textContent = formatTime(getRemaining(timer)); paintRing(row.querySelector('.r-ico'), timer); }
       }
       updateFeatured();
     }
@@ -4795,7 +5025,7 @@
       $('hours').value = p.hours; $('minutes').value = 0; $('seconds').value = 0; $('priceSilk').value = p.price;
     }
     const closeModal = () => { $('timerModal').classList.remove('open'); };
-    const closeAll = () => { toggleMore(false); closeModal(); closeTimeModal(); ['aboutModal', 'settingsModal', 'paymentModal', 'statsModal', 'bookModal', 'reqModal', 'homeModal', 'reviewModal', 'couponModal', 'shopModal', 'shopAdminModal', 'trainModal', 'lessonModal'].forEach(id => $(id).classList.remove('open')); closeTv(); };
+    const closeAll = () => { toggleMore(false); closeModal(); closeTimeModal(); ['aboutModal', 'settingsModal', 'paymentModal', 'statsModal', 'bookModal', 'reqModal', 'homeModal', 'reviewModal', 'couponModal', 'shopModal', 'shopAdminModal', 'trainModal', 'lessonModal', 'mtModal'].forEach(id => $(id).classList.remove('open')); closeTv(); };
 
     $('loginBtn').addEventListener('click', async () => {
       const { error } = await db.auth.signInWithOAuth({
@@ -5044,14 +5274,17 @@
       }
       if (dcUrl) { $('dcLink').href = dcUrl; $('dcLink').hidden = false; }
       if (!$('waLink').hidden) { $('aboutWa').href = $('waLink').href; $('aboutWa').hidden = false; }
-      if (dcUrl) for (const id of ['aboutDc', 'faqDc', 'trDc']) { $(id).href = dcUrl; $(id).hidden = false; }
-      if (!$('waLink').hidden) for (const id of ['faqWa', 'trWa']) { $(id).href = $('waLink').href; $(id).hidden = false; }
+      if (dcUrl) for (const id of ['aboutDc', 'faqDc', 'trDc', 'ftDc', 'mtDc']) { $(id).href = dcUrl; $(id).hidden = false; }
+      if (!$('waLink').hidden) for (const id of ['faqWa', 'trWa', 'ftWa', 'mtWa']) { $(id).href = $('waLink').href; $(id).hidden = false; }
       const tg = TELEGRAM_LINK.trim();
       const tgUrl = !tg ? '' : /^https?:\/\//i.test(tg) ? tg : 'https://t.me/' + tg.replace(/^@/, '');
-      if (tgUrl) for (const id of ['tgLink', 'aboutTg', 'faqTg', 'trTg']) { $(id).href = tgUrl; $(id).hidden = false; }
+      if (tgUrl) for (const id of ['tgLink', 'aboutTg', 'faqTg', 'trTg', 'ftTg', 'mtTg']) { $(id).href = tgUrl; $(id).hidden = false; }
       $('social').hidden = !(digits || dcUrl || tgUrl);
     }
     setupContact();
+    $('ftYear').textContent = new Date().getFullYear();
+    { const m = /url\(["']?(.*?)["']?\)$/.exec(getComputedStyle(document.documentElement).getPropertyValue('--herologo').trim());   // the big logo of the page, without storing it twice
+      if (m) $('ftLogo').src = m[1]; }
 
     const num = n => Number(n).toLocaleString('en-US');
     const usdText = n => '$' + Number(n).toFixed(2);
