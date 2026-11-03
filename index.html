@@ -2228,6 +2228,7 @@
     const WHATSAPP_NUMBER = '+201097765848';                 // opens a chat with this number directly
     const DISCORD_LINK = 'https://discord.gg/SUzgewRPrd';    // server invite
     const TELEGRAM_LINK = 'https://t.me/+BOYlEBa1a41jYTVk';  // Telegram group (empty = hidden)
+    const WHATSAPP_CHANNEL = 'https://whatsapp.com/channel/0029VbDngqB9sBI3MZkv7p07';   // WhatsApp channel (empty = hidden)
     const TELEGRAM_BOT = 'Reil_TAXI_BOT';                     // Telegram bot that messages customers before their time ends (empty = no bell)
     // payment details shown in the Payment List (empty = that card is hidden)
     const PAY_METHODS = {
@@ -3869,9 +3870,9 @@
       $('ordDoneTitle').textContent = T('ordDone', { id: o.id });
       $('ordDonePay').innerHTML = escapeHtml(T('ordDonePay', { price: pay === 'binance' ? ltr(priceText) : '\u2068' + priceText + '\u2069', method: PAY_NAMES[pay] }));
       $('ordPayBox').innerHTML = payCard(pay);
-      const wa = $('waLink').href, text = T('ordWaText', { id: o.id, amt: shopAmt(shopCur.item, shopCur.amount), price: priceText, method: PAY_NAMES[pay], name: ign });
-      $('ordReceipt').href = wa && wa !== '#' && !$('waLink').hidden ? wa + (wa.includes('?') ? '&' : '?') + 'text=' + encodeURIComponent(text) : '#';
-      $('ordReceipt').hidden = $('waLink').hidden;
+      const wa = WA_CHAT, text = T('ordWaText', { id: o.id, amt: shopAmt(shopCur.item, shopCur.amount), price: priceText, method: PAY_NAMES[pay], name: ign });
+      $('ordReceipt').href = wa ? wa + (wa.includes('?') ? '&' : '?') + 'text=' + encodeURIComponent(text) : '#';
+      $('ordReceipt').hidden = !wa;
       $('ordTrade').textContent = T('ordTrade', { name: ign });
     });
 
@@ -5259,6 +5260,7 @@
     window.addEventListener('hashchange', setView);
     setView();
 
+    let WA_CHAT = '';                                   // chat with 3zReil's number (receipts, discount questions)
     function setupContact() {
       let digits = WHATSAPP_NUMBER.replace(/\D/g, '');
       if (/^01\d{9}$/.test(digits)) digits = '20' + digits.slice(1);   // Egyptian 01xxxxxxxxx -> 201xxxxxxxxx
@@ -5269,17 +5271,20 @@
         // Phones: wa.me opens the WhatsApp app straight into the chat.
         // Computers: WhatsApp Web opens the chat directly, skipping the wa.me "Continue to chat" page.
         const phone = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
-        $('waLink').href = phone ? `https://wa.me/${digits}` : `https://web.whatsapp.com/send?phone=${digits}`;
-        $('waLink').hidden = false;
+        WA_CHAT = phone ? `https://wa.me/${digits}` : `https://web.whatsapp.com/send?phone=${digits}`;
+      }
+      // every WhatsApp icon on the site opens the channel; the chat (his number) is kept for receipts and questions
+      const wch = WHATSAPP_CHANNEL.trim(), waIcon = wch || WA_CHAT;
+      if (waIcon) for (const id of ['waLink', 'aboutWa', 'faqWa', 'trWa', 'ftWa', 'mtWa']) {
+        const a = $(id); a.href = waIcon; a.hidden = false;
+        if (wch) { a.dataset.label = 'WhatsApp Channel'; a.title = 'WhatsApp Channel'; a.setAttribute('aria-label', '3zReil WhatsApp Channel'); }
       }
       if (dcUrl) { $('dcLink').href = dcUrl; $('dcLink').hidden = false; }
-      if (!$('waLink').hidden) { $('aboutWa').href = $('waLink').href; $('aboutWa').hidden = false; }
       if (dcUrl) for (const id of ['aboutDc', 'faqDc', 'trDc', 'ftDc', 'mtDc']) { $(id).href = dcUrl; $(id).hidden = false; }
-      if (!$('waLink').hidden) for (const id of ['faqWa', 'trWa', 'ftWa', 'mtWa']) { $(id).href = $('waLink').href; $(id).hidden = false; }
       const tg = TELEGRAM_LINK.trim();
       const tgUrl = !tg ? '' : /^https?:\/\//i.test(tg) ? tg : 'https://t.me/' + tg.replace(/^@/, '');
       if (tgUrl) for (const id of ['tgLink', 'aboutTg', 'faqTg', 'trTg', 'ftTg', 'mtTg']) { $(id).href = tgUrl; $(id).hidden = false; }
-      $('social').hidden = !(digits || dcUrl || tgUrl);
+      $('social').hidden = !(waIcon || dcUrl || tgUrl);
     }
     setupContact();
     $('ftYear').textContent = new Date().getFullYear();
@@ -5348,8 +5353,7 @@
           <div class="t">${tm(r)}${nt(r)}</div><div class="cur">${priceCells(r)}</div>
           ${r.was ? `<div class="was"><span>${escapeHtml(T('insteadOf'))}</span><s><bdi>${num(r.was)} Silk</bdi> · <bdi>${num(r.wasGold)}m</bdi> · <bdi>${num(r.wasEgp)} ${escapeHtml(T('curEgp'))}</bdi> · <bdi dir="ltr">${usdText(r.wasUsd)}</bdi></s>${r.was > r.price ? `<span class="save">${escapeHtml(T('saveSilk', { n: num(r.was - r.price) }))}</span>` : ''}</div>` : ''}
         </div>`).join('');
-      const wa = $('waLink');
-      if (!wa.hidden) { $('payAskBtn').href = wa.href; $('payAskBtn').hidden = false; }
+      if (WA_CHAT) { $('payAskBtn').href = WA_CHAT; $('payAskBtn').hidden = false; }
       setupPayMethods();
     }
     /* ---------- FAQ (page of its own) ---------- */
