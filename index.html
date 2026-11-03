@@ -472,6 +472,80 @@
       .sp-amt { grid-area: amt; font-size: 21px; min-width: 96px; } .sp-egp { grid-area: egp; } .sp-usd { grid-area: usd; } .sp-buy { grid-area: buy; margin: 0; }
     }
     body.rtl .shop, body.rtl .shop-modal { direction: rtl; }
+
+    /* ---------- Training page ---------- */
+    .train { --s: 1px; width: min(760px, 100%); margin: 16px auto 0; padding: 22px 18px 20px; }
+    .train .faq-head h2 svg.i { color: var(--gold); }
+    .tr-lessons { display: flex; flex-wrap: wrap; gap: calc(var(--s) * 8); margin: 0 0 calc(var(--s) * 14); }
+    .tr-lessons:empty { display: none; }
+    .tr-chip { flex: none; display: inline-flex; align-items: center; gap: calc(var(--s) * 8); max-width: 100%; padding: calc(var(--s) * 8) calc(var(--s) * 14); border-radius: 999px; font-size: calc(var(--s) * 13); font-weight: 600; color: var(--gold-l); background: #0d0a07; border: 1px solid rgba(185, 155, 113, .35); cursor: pointer; }
+    .tr-chip > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .tr-chip small { flex: none; min-width: calc(var(--s) * 20); height: calc(var(--s) * 20); padding: 0 calc(var(--s) * 6); display: grid; place-items: center; border-radius: 999px; font: 700 calc(var(--s) * 11.5) Rajdhani, Cairo, sans-serif; color: #2b1604; background: rgba(193, 164, 121, .6); }
+    .tr-chip svg.i { flex: none; font-size: calc(var(--s) * 15); }
+    .tr-chip.active { color: #2b1604; background: linear-gradient(180deg, #c1a479, #93714b); border-color: #ceb287; box-shadow: 0 0 14px rgba(169, 137, 97, .3); }
+    .tr-chip.active small { color: #f4ead8; background: rgba(43, 22, 4, .55); }
+    .tr-chip.hid { border-style: dashed; }
+    .tr-chip.tr-new { border-style: dashed; color: var(--muted); }
+    .tr-ladmin { display: flex; flex-wrap: wrap; gap: calc(var(--s) * 8); margin: 0 0 calc(var(--s) * 14); padding: calc(var(--s) * 10); border-radius: calc(var(--s) * 10); background: rgba(185, 155, 113, .06); border: 1px dashed rgba(185, 155, 113, .3); }
+    .tr-ladmin .chip-btn { padding: calc(var(--s) * 7) calc(var(--s) * 11); font-size: calc(var(--s) * 11.5); }
+    .tr-ladmin .chip-btn.sq { width: calc(var(--s) * 32); height: calc(var(--s) * 32); padding: 0; }
+    .tr-ladmin .chip-btn:disabled { opacity: .35; cursor: default; filter: none; }
+    .tr-ladmin .tr-del { color: #ff9a8e; border-color: rgba(229, 57, 47, .5); margin-inline-start: auto; }
+    body.rtl .tr-flip svg.i, body.rtl .tv-nav svg.i { transform: scaleX(-1); }
+    .tr-prog { display: flex; align-items: center; gap: calc(var(--s) * 12); margin: 0 0 calc(var(--s) * 14); font-size: calc(var(--s) * 12.5); color: var(--gold-l); }
+    .tr-prog > span:first-child { flex: none; max-width: 70%; }
+    .tr-bar { flex: 1; height: calc(var(--s) * 6); border-radius: 99px; background: #1d150c; border: 1px solid rgba(185, 155, 113, .2); overflow: hidden; }
+    .tr-bar i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #93714b, #e3cfa9); transition: width .35s ease; }
+    .tr-prog.all { color: #bdf0d2; }
+    .tr-prog.all .tr-bar i { background: linear-gradient(90deg, #3f9c6e, #8fe3b8); }
+    .tr-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: calc(var(--s) * 14); }
+    .tr-step { padding: calc(var(--s) * 14); border-radius: calc(var(--s) * 12); background: linear-gradient(180deg, #15100a, #0b0806); border: 1px solid rgba(185, 155, 113, .3); transition: border-color .2s; }
+    .tr-step.done { border-color: rgba(88, 190, 140, .45); }
+    .ts-head { display: flex; align-items: center; gap: calc(var(--s) * 12); margin-bottom: calc(var(--s) * 12); }
+    .ts-head h3 { flex: 1; min-width: 0; margin: 0; font-size: calc(var(--s) * 15); font-weight: 700; line-height: 1.45; color: #f1e6d1; overflow-wrap: anywhere; }
+    .train .faq-n { width: calc(var(--s) * 28); height: calc(var(--s) * 28); font-size: calc(var(--s) * 13); }
+    .tr-step.done .faq-n { background: linear-gradient(180deg, #8fe3b8, #3f9c6e); }
+    .ts-done { flex: none; display: inline-flex; align-items: center; gap: calc(var(--s) * 6); padding: calc(var(--s) * 6) calc(var(--s) * 11); border-radius: 999px; font-size: calc(var(--s) * 12); font-weight: 600; color: var(--muted); border: 1px solid rgba(185, 155, 113, .3); cursor: pointer; user-select: none; }
+    .ts-done input { width: calc(var(--s) * 16); height: calc(var(--s) * 16); margin: 0; accent-color: #58be8c; cursor: pointer; }
+    .tr-step.done .ts-done { color: #bdf0d2; background: rgba(47, 96, 69, .3); border-color: rgba(88, 190, 140, .55); }
+    .ts-media { position: relative; display: block; width: 100%; padding: 0; overflow: hidden; border-radius: calc(var(--s) * 10); background: #000; border: 1px solid rgba(185, 155, 113, .25); cursor: zoom-in; }
+    .ts-media img { display: block; width: 100%; height: auto; max-height: calc(var(--s) * 480); object-fit: contain; }
+    .ts-media:hover { border-color: rgba(215, 192, 154, .6); }
+    .ts-zoom { position: absolute; top: calc(var(--s) * 8); inset-inline-end: calc(var(--s) * 8); display: inline-flex; align-items: center; gap: calc(var(--s) * 5); padding: calc(var(--s) * 5) calc(var(--s) * 10); border-radius: 999px; font-size: calc(var(--s) * 11); color: #f4ead8; background: rgba(0, 0, 0, .7); border: 1px solid rgba(215, 192, 154, .35); }
+    .ts-zoom svg.i { font-size: calc(var(--s) * 13); }
+    .ts-vid { display: block; width: 100%; max-height: calc(var(--s) * 480); border-radius: calc(var(--s) * 10); background: #000; border: 1px solid rgba(185, 155, 113, .25); }
+    .ts-body { margin: calc(var(--s) * 12) 0 0; font-size: calc(var(--s) * 13.5); line-height: 1.75; color: #e6dac4; white-space: pre-line; overflow-wrap: anywhere; }
+    .ts-admin { display: flex; justify-content: flex-end; gap: calc(var(--s) * 8); margin-top: calc(var(--s) * 12); padding-top: calc(var(--s) * 10); border-top: 1px dashed rgba(185, 155, 113, .22); }
+    .ts-admin .ib:disabled { opacity: .3; cursor: default; }
+    body.rtl .train, body.rtl .tr-modal, body.rtl .tr-view { direction: rtl; }
+    /* admin window */
+    .tr-modal { width: min(520px, 100%); }
+    .trm-prev { margin-bottom: 10px; overflow: hidden; border-radius: 10px; background: #000; border: 1px solid rgba(185, 155, 113, .3); }
+    .trm-prev img, .trm-prev video { display: block; width: 100%; max-height: 240px; object-fit: contain; }
+    .trm-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+    .trm-btns .chip-btn { height: 36px; padding: 0 14px; font-size: 12px; cursor: pointer; }
+    .trm-hint { display: block; margin-top: 8px; font-size: 11.5px; line-height: 1.6; color: var(--muted); }
+    .tr-langs { display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 -4px; }
+    .tr-lang { position: relative; padding: 7px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; color: var(--gold-l); background: #0d0a07; border: 1px solid rgba(185, 155, 113, .3); cursor: pointer; }
+    .tr-lang.on { color: #2b1604; background: linear-gradient(180deg, #c1a479, #93714b); border-color: #ceb287; }
+    .tr-lang i { position: absolute; top: -2px; inset-inline-end: -2px; width: 9px; height: 9px; border-radius: 50%; background: #58be8c; border: 2px solid #0a0705; }
+    /* full-screen picture viewer */
+    .tr-view { position: fixed; inset: 0; z-index: 45; display: flex; flex-direction: column; background: rgba(4, 3, 2, .97); }
+    body.tv-lock { overflow: hidden; }
+    .tv-top { display: flex; align-items: center; gap: 12px; padding: calc(10px + env(safe-area-inset-top)) 14px 10px; border-bottom: 1px solid rgba(185, 155, 113, .2); }
+    .tv-n { flex: none; padding: 4px 10px; border-radius: 999px; font: 700 12px Rajdhani, Cairo, sans-serif; color: #2b1604; background: linear-gradient(180deg, #c1a479, #93714b); }
+    .tv-top b { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; color: #fff; }
+    .tv-top .chip-btn.sq { width: 38px; height: 38px; font-size: 18px; }
+    .tv-wrap { position: relative; flex: 1; min-height: 0; }
+    .tv-stage { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; overflow: auto; padding: 10px; }
+    .tv-stage img { max-width: 100%; max-height: 100%; object-fit: contain; cursor: zoom-in; user-select: none; }
+    .tv-stage.zoom { display: block; }
+    .tv-stage.zoom img { max-width: none; max-height: none; width: 200%; cursor: zoom-out; }
+    .tv-nav { position: absolute; top: 50%; z-index: 2; width: 46px; height: 46px; margin-top: -23px; display: grid; place-items: center; border-radius: 50%; font-size: 22px; color: #2b1604; background: linear-gradient(180deg, #d2b98f, #93714b); border: 1px solid #e3cfa9; box-shadow: 0 6px 18px rgba(0, 0, 0, .6); cursor: pointer; }
+    .tv-nav.prev { inset-inline-start: 10px; } .tv-nav.next { inset-inline-end: 10px; }
+    .tv-nav:disabled { opacity: .25; cursor: default; }
+    .tv-cap { margin: 0; max-height: 30vh; overflow-y: auto; padding: 12px 18px calc(14px + env(safe-area-inset-bottom)); font-size: 14px; line-height: 1.7; color: #e6dac4; white-space: pre-line; overflow-wrap: anywhere; border-top: 1px solid rgba(185, 155, 113, .2); }
+    @media (max-width: 420px) { .tr-ladmin .chip-btn > span { display: none; } .tr-ladmin .chip-btn:has(> span) { padding: 7px 9px; } }
     body.rtl .sb-title small { text-align: right; }
     /* order window */
     .ord-sum { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 14px; margin: 6px 0 4px; padding: 12px 14px; border-radius: 10px; background: radial-gradient(circle at 0 0, rgba(215, 192, 154, .16), transparent 70%), #0d0a07; border: 1px solid rgba(185, 155, 113, .4); }
@@ -665,6 +739,7 @@
     body:not([data-view="home"]) .all-link { display: none; }
     body:not([data-view="faq"]) .faq { display: none; }
     body:not([data-view="shop"]) .shop { display: none; }
+    body:not([data-view="training"]) .train { display: none; }
 
     /* Home welcome text */
     body:not([data-view="home"]) .welcome { display: none; }
@@ -1015,6 +1090,7 @@
       .social a { width: calc(var(--u) * 50); height: calc(var(--u) * 50); font-size: calc(var(--u) * 25); }
       .social a::before { right: calc(100% + var(--u) * 10); font-size: calc(var(--u) * 12); padding: calc(var(--u) * 5) calc(var(--u) * 10); }
       .shop { --s: var(--u); width: calc(var(--u) * 846); margin-top: calc(var(--u) * 16); padding: calc(var(--u) * 24) calc(var(--u) * 28) calc(var(--u) * 26); }
+      .train { --s: var(--u); width: calc(var(--u) * 846); margin-top: calc(var(--u) * 16); padding: calc(var(--u) * 24) calc(var(--u) * 28) calc(var(--u) * 26); }
       .faq { width: calc(var(--u) * 846); margin-top: calc(var(--u) * 16); padding: calc(var(--u) * 24) calc(var(--u) * 28) calc(var(--u) * 26); }
       .faq-head { margin-bottom: calc(var(--u) * 16); }
       .faq-head h2 { font-size: calc(var(--u) * 14.5); gap: calc(var(--u) * 10); letter-spacing: calc(var(--u) * 1.6); }
@@ -1077,6 +1153,7 @@
     @media (max-width: 420px) { .sg-long { display: none; } .sg-short { display: inline; } }
     .nav.fit1 #statsBtn > span[data-i18n], .nav.fit1 #reqBtn > span[data-i18n] { display: none; }
     .nav.fit2 .menu a, .nav.fit2 .menu button { padding: 0 10px; }
+    .nav.fit25 #settingsBtn > span[data-i18n], .nav.fit25 #aboutBtn > span[data-i18n] { display: none; }   /* gear and (i) speak for themselves */
     .nav.fit3 .menu > :not(.active) > span[data-i18n] { display: none; }
     @media (min-width: 1100px) {
       .nav.fit2 .menu { left: calc(var(--u) * 296); }
@@ -1247,6 +1324,7 @@
       <a href="#home" class="active" data-nav="home"><svg class="i" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg><span data-i18n="navHome">Home</span></a>
       <a href="#timers" data-nav="timers"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 3h6"/></svg><span data-i18n="navTimers">Timers</span></a>
       <a href="#faq" data-nav="faq"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 1 1 3.6 2.3c-.8.4-1.2 1-1.2 1.9v.4M12 16.8v.2"/></svg><span data-i18n="navFaq">FAQ</span></a>
+      <a href="#training" data-nav="training"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9.5L12 5l10 4.5L12 14z"/><path d="M6 11.6V16c3.5 2.6 8.5 2.6 12 0v-4.4M22 9.5V15"/></svg><span data-i18n="navTraining">Training</span></a>
       <a href="#shop" data-nav="shop"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg><span data-i18n="navShop">Shop</span></a>
       <button type="button" id="settingsBtn"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg><span data-i18n="navSettings">Settings</span></button>
       <button type="button" id="aboutBtn"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span data-i18n="navAbout">About</span></button>
@@ -1391,6 +1469,28 @@
           <a class="rico" id="faqTg" href="#" target="_blank" rel="noopener noreferrer" data-label="Telegram" aria-label="Telegram" title="Telegram" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4L3 11.2l5.6 2.1L17.5 7.6 10.6 14.6l.4 5.4 3.1-3.6 4 3L21 4z"/></svg></a>
           <a class="rico" id="faqDc" href="#" target="_blank" rel="noopener noreferrer" data-label="Discord" aria-label="Discord" title="Discord" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7c2-1 8-1 10 0l2 9c-2 2-4 2.5-5 2.5l-1-1.5h-2l-1 1.5c-1 0-3-.5-5-2.5z"/><circle cx="9.5" cy="12" r="1.2"/><circle cx="14.5" cy="12" r="1.2"/></svg></a>
           <button class="add" id="faqBook" type="button"><span data-i18n="bookBtn">Book a Taxi</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="frame train" id="trainPanel" aria-labelledby="trainTitle">
+      <span class="gem top"></span>
+      <div class="faq-head">
+        <h2 id="trainTitle"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9.5L12 5l10 4.5L12 14z"/><path d="M6 11.6V16c3.5 2.6 8.5 2.6 12 0v-4.4M22 9.5V15"/></svg><span data-i18n="trTitle">Party training</span></h2>
+        <button class="add" id="trAddBtn" type="button" hidden>＋ <span data-i18n="trAddStep">Add step</span></button>
+      </div>
+      <p class="shop-intro" data-i18n="trIntro">Short picture guides for new party members. Follow the steps in order, and tap any picture to see it big.</p>
+      <div class="tr-lessons" id="trLessons" role="tablist" aria-labelledby="trainTitle"></div>
+      <div class="tr-ladmin" id="trLessonAdmin" hidden></div>
+      <div class="tr-prog" id="trProg" hidden></div>
+      <ol class="tr-steps" id="trSteps"></ol>
+      <p class="shop-soon" id="trSoon" hidden></p>
+      <div class="faq-cta">
+        <p data-i18n="trMore">Stuck on a step? Message me and I will help you.</p>
+        <div class="faq-btns">
+          <a class="rico" id="trWa" href="#" target="_blank" rel="noopener noreferrer" data-label="WhatsApp" aria-label="WhatsApp" title="WhatsApp" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.6-1.6l.8-1-1-2z"/></svg></a>
+          <a class="rico" id="trTg" href="#" target="_blank" rel="noopener noreferrer" data-label="Telegram" aria-label="Telegram" title="Telegram" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4L3 11.2l5.6 2.1L17.5 7.6 10.6 14.6l.4 5.4 3.1-3.6 4 3L21 4z"/></svg></a>
+          <a class="rico" id="trDc" href="#" target="_blank" rel="noopener noreferrer" data-label="Discord" aria-label="Discord" title="Discord" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7c2-1 8-1 10 0l2 9c-2 2-4 2.5-5 2.5l-1-1.5h-2l-1 1.5c-1 0-3-.5-5-2.5z"/><circle cx="9.5" cy="12" r="1.2"/><circle cx="14.5" cy="12" r="1.2"/></svg></a>
         </div>
       </div>
     </section>
@@ -1680,6 +1780,79 @@
     </form>
   </div>
 
+  <div class="backdrop" id="trainModal" role="dialog" aria-modal="true" aria-labelledby="trmTitle">
+    <form class="frame modal tr-modal" id="trForm" novalidate>
+      <span class="gem top"></span>
+      <h2 id="trmTitle">Add step</h2>
+      <div class="field">
+        <label for="trmLesson" data-i18n="trLesson">Lesson</label>
+        <select id="trmLesson"></select>
+      </div>
+      <div class="field" id="trmNewWrap" hidden>
+        <label for="trmNewLesson" data-i18n="trLessonName">Lesson name</label>
+        <input id="trmNewLesson" type="text" maxlength="60" dir="auto" autocomplete="off" data-i18n-ph="trLessonPh" placeholder="Party settings">
+      </div>
+      <div class="field">
+        <label for="trmFile" data-i18n="trMedia">Picture or video</label>
+        <div class="trm-prev" id="trmPrev" hidden></div>
+        <div class="trm-btns">
+          <label class="chip-btn trm-pick" for="trmFile"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5M4 15v5h16v-5"/></svg><span id="trmPickTxt">Choose a picture or video</span></label>
+          <button class="chip-btn" id="trmRemove" type="button" hidden data-i18n="trRemove">Remove</button>
+        </div>
+        <input id="trmFile" type="file" accept="image/*,video/mp4,video/webm" hidden>
+        <small class="trm-hint" data-i18n="trMediaHint">Pictures are made lighter automatically. Videos: MP4, up to 50 MB.</small>
+      </div>
+      <div class="tr-langs" id="trmLangs"></div>
+      <div class="field">
+        <label for="trmStepTitle" data-i18n="trStepTitle">Title</label>
+        <input id="trmStepTitle" type="text" maxlength="120" dir="auto" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="trmBody" data-i18n="trStepBody">Explanation</label>
+        <textarea id="trmBody" rows="5" maxlength="1500" dir="auto" data-i18n-ph="trBodyPh" placeholder="What to do here, and why it helps"></textarea>
+      </div>
+      <small class="trm-hint" data-i18n="trLangHint">Other languages are optional. If one is empty, visitors see the text you wrote.</small>
+      <p class="form-msg" id="trmMsg" hidden></p>
+      <div class="modal-actions">
+        <button class="chip-btn" id="trmCancel" type="button" data-i18n="cancel">Cancel</button>
+        <button class="add" id="trmSave" type="submit">Save</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="backdrop" id="lessonModal" role="dialog" aria-modal="true" aria-labelledby="lsmTitle">
+    <form class="frame modal tr-modal" id="lsForm" novalidate>
+      <span class="gem top"></span>
+      <h2 id="lsmTitle">New lesson</h2>
+      <div class="tr-langs" id="lsmLangs"></div>
+      <div class="field">
+        <label for="lsmName" data-i18n="trLessonName">Lesson name</label>
+        <input id="lsmName" type="text" maxlength="60" dir="auto" autocomplete="off" data-i18n-ph="trLessonPh" placeholder="Party settings">
+      </div>
+      <label class="toggle"><span data-i18n="trVisible">Visitors can see this lesson</span><input type="checkbox" id="lsmShow" checked></label>
+      <small class="trm-hint" data-i18n="trLangHint">Other languages are optional. If one is empty, visitors see the text you wrote.</small>
+      <p class="form-msg" id="lsmMsg" hidden></p>
+      <div class="modal-actions">
+        <button class="chip-btn" id="lsmCancel" type="button" data-i18n="cancel">Cancel</button>
+        <button class="add" id="lsmSave" type="submit" data-i18n="save">Save</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="tr-view" id="trView" role="dialog" aria-modal="true" aria-labelledby="tvTitle" hidden>
+    <div class="tv-top">
+      <span class="tv-n" id="tvN" dir="ltr"></span>
+      <b id="tvTitle" dir="auto"></b>
+      <button class="chip-btn sq" id="tvClose" type="button" aria-label="Close"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <div class="tv-wrap">
+      <div class="tv-stage" id="tvStage"><img id="tvImg" alt=""></div>
+      <button class="tv-nav prev" id="tvPrev" type="button" aria-label="Previous"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button class="tv-nav next" id="tvNext" type="button" aria-label="Next"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+    <p class="tv-cap" id="tvCap" dir="auto"></p>
+  </div>
+
   <div class="backdrop" id="couponModal" role="dialog" aria-modal="true" aria-labelledby="cpTitleH">
     <div class="frame modal">
       <span class="gem top"></span>
@@ -1916,6 +2089,7 @@
         annOn: 'Announcement: on', annOff: 'Announcement: off',
         vipTip: '{d}-day package or longer with 3zReil',
         payHow: 'How to pay', payName: 'Name', payInGame: 'In game', payInGameVal: 'Silk (Item Mall, F10) or Gold, straight to 3zReil', payEgypt: 'From Egypt', payAbroad: 'From abroad', qrScan: 'Scan to pay', contactMe: 'Contact me', tgNotify: 'Get a Telegram message before your time ends', tgOn: 'Telegram alerts are on ✓', dcTip: 'DC: tell the customer on Telegram that his account is not in the party', dcOff: 'DC: the customer has not turned on Telegram alerts yet', dcNoBell: '{name} has not turned on Telegram alerts (the bell), so the bot cannot message him.', dcSent: 'DC message sent to {name} on Telegram ✓', dcWait: 'A DC message was sent to {name} less than a minute ago.', dcSentTo: 'DC message for {name} sent on Telegram ✓\nReceived by: {who}', dcSomeone: 'a Telegram user',
+        trHiddenTag: 'Hidden', trNewLesson: 'New lesson', trNewLessonOpt: '＋ New lesson…', trRename: 'Rename', trShow: 'Show to visitors', trHide: 'Hide from visitors', trShownN: 'Visitors can see this lesson now ✓', trHiddenN: 'Lesson hidden from visitors ✓', trEarlier: 'Move earlier', trLater: 'Move later', trDelLesson: 'Delete lesson', trProg: '{n} of {total} steps done', trAllDone: 'All done! You are ready for the party 👑', trStepN: 'Step {n}', trZoom: 'Tap to see it big', trDone: 'Done', trEditStep: 'Edit step', trSoon: 'Training lessons are coming very soon.', trSoonAdmin: 'No lessons yet. Press "＋ Add step" to put up your first picture.', trEmptyLesson: 'No steps in this lesson yet. Press "＋ Add step".', trConfirmDel: 'Delete this step and its picture?', trConfirmDelLesson: 'Delete the lesson "{name}" and its {n} steps?', trDeleted: 'Deleted ✓', trPick: 'Choose a picture or video', trChange: 'Change', trBadType: 'Use a picture (JPG, PNG, WebP) or an MP4 video.', trTooBig: 'This file is too big (50 MB at most).', trNeedLesson: 'Write the lesson name.', trNeedTitle: 'Write a title for this step.', trUploading: 'Uploading…', trSaved: 'Training saved ✓', trPrev: 'Previous', trNext: 'Next',
         shopPer: '{amt} =', shopOut: 'Out of stock', shopBuy: 'Buy', shopCustom: 'Or type your own amount', shopGoldUnit: 'million Gold', shopRange: 'From {min} to {max}', ordTitle: 'Buy {amt}', ordOr: 'or {v}', ordNotAvail: 'This is not available right now. The prices were updated, please check again.', ordDone: 'Order #{id} sent ✓', ordDonePay: 'Now pay {price} with {method}, then send me the receipt:', ordWaText: 'Hi 3zReil, order #{id}: {amt} = {price}, paid with {method}. My in-game name: {name}', ordTrade: 'As soon as the payment arrives, I will give it to {name} in game by Trade.', shpNotSet: 'No prices yet', shpPriceEgp: '{amt} in EGP', shpPriceUsd: '{amt} in USD', shpPacksSilk: 'Packages (Silk)', shpPacksGold: 'Packages (millions of Gold, 1000 = 1b)', shpAvailable: 'Available (off = out of stock)', shpBad: 'Check the {item} prices: fill both EGP and USD (or leave both empty).', shpSaved: 'Shop prices saved.', nNewOrder: 'New order: {amt} from {name}', nNewOrderTitle: 'New shop order', ordPrice: 'Price', ordContactShort: 'Contact', ordStNew: 'Waiting for payment', ordStPaid: 'Paid, deliver it', ordMarkPaid: 'Paid', ordMarkDone: 'Delivered', ordEmpty: 'No open orders right now.', confirmDelOrder: 'Delete this order?', nOrderDone: 'Order delivered ✓', openInstapay: 'Open in InstaPay', payReceipt: 'Send me the receipt here', copy: 'Copy', copied: 'Copied ✓', chat: 'Chat',
         faqOpenAll: 'Open all', faqCloseAll: 'Close all',
         cpOk: '✓ {p}% off', cpInvalid: 'This code is not valid.', cpExpired: 'This code has expired.', cpUsedUp: 'This code was already used up.',
@@ -2079,6 +2253,7 @@
         annOn: 'الإعلان: ظاهر', annOff: 'الإعلان: مخفي',
         vipTip: 'باقة {d} أيام أو أكثر مع 3zReil',
         payHow: 'طرق الدفع', payName: 'الاسم', payInGame: 'داخل اللعبة', payInGameVal: 'Silk (من الـ Item Mall بزرار F10) أو Gold، لـ 3zReil على طول', payEgypt: 'من مصر', payAbroad: 'من برّه مصر', qrScan: 'امسح الكود للدفع', contactMe: 'تواصل معي', tgNotify: 'رسالة على تليجرام قبل انتهاء وقتك', tgOn: 'تنبيهات تليجرام مفعّلة ✓', dcTip: 'DC: إبلاغ الزبون على تليجرام إن الأكونت بتاعه مش في البارتي', dcOff: 'DC: الزبون لسه مفعّلش تنبيهات تليجرام', dcNoBell: '{name} لسه مفعّلش تنبيهات تليجرام (الجرس)، فالبوت مش هيقدر يبعتله.', dcSent: 'اتبعتت رسالة DC لـ {name} على تليجرام ✓', dcWait: 'اتبعتت رسالة DC لـ {name} من أقل من دقيقة.', dcSentTo: 'رسالة DC لـ {name} اتبعتت على تليجرام ✓\nوصلت لـ: {who}', dcSomeone: 'مستخدم تليجرام',
+        navTraining: 'التدريب', trTitle: 'تدريب البارتي', trAddStep: 'إضافة خطوة', trIntro: 'شروحات قصيرة بالصور للأعضاء الجدد في البارتي. اتبع الخطوات بالترتيب، واضغط على أي صورة لتكبيرها.', trMore: 'وقفت عند خطوة؟ راسلني وسأساعدك.', trLesson: 'الدرس', trLessonName: 'اسم الدرس', trLessonPh: 'إعدادات البارتي', trMedia: 'صورة أو فيديو', trRemove: 'إزالة', trMediaHint: 'الصور تُخفَّف تلقائياً. الفيديو: MP4 حتى 50 ميجا.', trStepTitle: 'العنوان', trStepBody: 'الشرح', trBodyPh: 'ماذا تفعل هنا، ولماذا يفيدك', trLangHint: 'باقي اللغات اختيارية. إذا كانت لغة فارغة، يرى الزائر النص الذي كتبته.', trVisible: 'الزوار يمكنهم رؤية هذا الدرس', trHiddenTag: 'مخفي', trNewLesson: 'درس جديد', trNewLessonOpt: '＋ درس جديد…', trRename: 'تغيير الاسم', trShow: 'إظهار للزوار', trHide: 'إخفاء عن الزوار', trShownN: 'الدرس ظاهر للزوار الآن ✓', trHiddenN: 'تم إخفاء الدرس عن الزوار ✓', trEarlier: 'تقديم', trLater: 'تأخير', trDelLesson: 'حذف الدرس', trProg: 'أنجزت {n} من {total}', trAllDone: 'أنهيت كل الخطوات! أنت جاهز للبارتي 👑', trStepN: 'الخطوة {n}', trZoom: 'اضغط للتكبير', trDone: 'تم', trEditStep: 'تعديل الخطوة', trSoon: 'دروس التدريب قريباً جداً.', trSoonAdmin: 'لا توجد دروس بعد. اضغط «＋ إضافة خطوة» لرفع أول صورة.', trEmptyLesson: 'لا توجد خطوات في هذا الدرس بعد. اضغط «＋ إضافة خطوة».', trConfirmDel: 'حذف هذه الخطوة وصورتها؟', trConfirmDelLesson: 'حذف درس «{name}» وكل خطواته ({n})؟', trDeleted: 'تم الحذف ✓', trPick: 'اختر صورة أو فيديو', trChange: 'تغيير', trBadType: 'استخدم صورة (JPG أو PNG أو WebP) أو فيديو MP4.', trTooBig: 'الملف كبير جداً (الحد الأقصى 50 ميجا).', trNeedLesson: 'اكتب اسم الدرس.', trNeedTitle: 'اكتب عنواناً لهذه الخطوة.', trUploading: 'جارٍ الرفع…', trSaved: 'تم حفظ التدريب ✓', trPrev: 'السابق', trNext: 'التالي',
         shopPer: '{amt} =', shopOut: 'نفدت الكمية', shopBuy: 'اشترِ', shopCustom: 'أو اكتب الكمية التي تريدها', shopGoldUnit: 'مليون Gold', shopRange: 'من {min} إلى {max}', ordTitle: 'شراء {amt}', ordOr: 'أو {v}', ordNotAvail: 'غير متاح الآن، تم تحديث الأسعار. راجع الصفحة مرة أخرى.', ordDone: 'تم إرسال الطلب رقم {id} ✓', ordDonePay: 'ادفع الآن {price} عن طريق {method}، ثم أرسل لي الإيصال:', ordWaText: 'أهلاً 3zReil، الطلب رقم {id}: {amt} = {price}، الدفع عن طريق {method}. اسمي في اللعبة: {name}', ordTrade: 'فور وصول الدفع سأسلّمها إلى {name} داخل اللعبة عن طريق Trade.', shpNotSet: 'لا توجد أسعار بعد', shpPriceEgp: 'سعر {amt} بالجنيه', shpPriceUsd: 'سعر {amt} بالدولار', shpPacksSilk: 'الباقات (Silk)', shpPacksGold: 'الباقات (بالمليون Gold، 1000 = 1b)', shpAvailable: 'متاح (عند الإيقاف: نفدت الكمية)', shpBad: 'راجع أسعار {item}: اكتب الجنيه والدولار معاً (أو اترك الاثنين فارغين).', shpSaved: 'تم حفظ أسعار المتجر.', nNewOrder: 'طلب جديد: {amt} من {name}', nNewOrderTitle: 'طلب جديد من المتجر', ordPrice: 'السعر', ordContactShort: 'التواصل', ordStNew: 'في انتظار الدفع', ordStPaid: 'تم الدفع، سلّمها', ordMarkPaid: 'تم الدفع', ordMarkDone: 'تم التسليم', ordEmpty: 'لا توجد طلبات مفتوحة الآن.', confirmDelOrder: 'حذف هذا الطلب؟', nOrderDone: 'تم تسليم الطلب ✓',
         navShop: 'المتجر', shopTitle: 'متجر Silk و Gold', shopIntro: 'اشترِ Silk و Gold من 3zReil مباشرة. اختر باقة أو اكتب الكمية التي تريدها، ادفع، وسأسلّمها لك داخل اللعبة عن طريق Trade.', shopSoon: 'الأسعار قريباً جداً. لو تريد الشراء الآن راسلني على واتساب.', shopHow: 'طريقة الشراء', shopStep1: 'اختر ما تريده وأرسل الطلب.', shopStep2: 'ادفع بفودافون كاش أو إنستاباي أو Binance وأرسل لي الإيصال.', shopStep3: 'نتقابل في اللعبة وأسلّمها لك عن طريق Trade.', ordPay: 'طريقة الدفع', ordContact: 'واتساب أو تليجرام أو ديسكورد', ordSend: 'إرسال الطلب', ordReceipt: 'أرسل لي الإيصال على واتساب', shpTitle: 'أسعار المتجر', shpIntro: 'السعر لكل 100 Silk ولكل 100 مليون Gold. اترك السعر فارغاً لإخفاء المنتج. العميل يدفع دائماً السعر المكتوب هنا.', reqTabOrders: 'طلبات المتجر', ordAdminIntro: 'طلبات صفحة المتجر. علّم الطلب «تم الدفع» عند وصول المال، ثم «تم التسليم» بعد الـ Trade.', openInstapay: 'افتح في إنستاباي', payReceipt: 'ابعتلي الإيصال هنا', copy: 'نسخ', copied: 'اتنسخ ✓', chat: 'محادثة',
         navFaq: 'الأسئلة', faqTitle: 'الأسئلة الشائعة', faqMore: 'لسه عندك سؤال؟ كلّمني، أنا موجود دايمًا.', faqOpenAll: 'فتح الكل', faqCloseAll: 'قفل الكل',
@@ -2298,6 +2473,7 @@
         annOn: 'Duyuru: açık', annOff: 'Duyuru: kapalı',
         vipTip: '3zReil ile {d} günlük veya daha uzun paket',
         payHow: 'Nasıl ödenir', payName: 'Ad', payInGame: 'Oyun içinde', payInGameVal: 'Silk (Item Mall, F10) veya Gold, doğrudan 3zReil\'e', payEgypt: 'Mısır\'dan', payAbroad: 'Yurt dışından', qrScan: 'Ödemek için tarayın', contactMe: 'Bana ulaş', tgNotify: 'Süren bitmeden Telegram mesajı al', tgOn: 'Telegram bildirimleri açık ✓', dcTip: 'DC: müşteriye Telegram\'dan hesabının partide olmadığını bildir', dcOff: 'DC: müşteri henüz Telegram bildirimlerini açmadı', dcNoBell: '{name} Telegram bildirimlerini (zil) açmadı, bot ona yazamaz.', dcSent: '{name} adlı müşteriye Telegram\'dan DC mesajı gönderildi ✓', dcWait: '{name} adlı müşteriye bir dakikadan kısa süre önce DC mesajı gönderildi.', dcSentTo: '{name} için DC mesajı Telegram\'dan gönderildi ✓\nAlan: {who}', dcSomeone: 'bir Telegram kullanıcısı',
+        navTraining: 'Eğitim', trTitle: 'Parti eğitimi', trAddStep: 'Adım ekle', trIntro: 'Partiye yeni katılanlar için kısa resimli rehberler. Adımları sırayla takip et, büyütmek için herhangi bir resme dokun.', trMore: 'Bir adımda takıldın mı? Bana yaz, yardım edeyim.', trLesson: 'Ders', trLessonName: 'Ders adı', trLessonPh: 'Parti ayarları', trMedia: 'Resim veya video', trRemove: 'Kaldır', trMediaHint: 'Resimler otomatik olarak hafifletilir. Video: MP4, en fazla 50 MB.', trStepTitle: 'Başlık', trStepBody: 'Açıklama', trBodyPh: 'Burada ne yapılır ve neden işe yarar', trLangHint: 'Diğer diller isteğe bağlı. Boş olan dilde ziyaretçi senin yazdığın metni görür.', trVisible: 'Ziyaretçiler bu dersi görebilir', trHiddenTag: 'Gizli', trNewLesson: 'Yeni ders', trNewLessonOpt: '＋ Yeni ders…', trRename: 'Yeniden adlandır', trShow: 'Ziyaretçilere göster', trHide: 'Ziyaretçilerden gizle', trShownN: 'Ders artık ziyaretçilere açık ✓', trHiddenN: 'Ders ziyaretçilerden gizlendi ✓', trEarlier: 'Öne al', trLater: 'Geriye al', trDelLesson: 'Dersi sil', trProg: '{total} adımdan {n} tanesi tamam', trAllDone: 'Hepsi tamam! Partiye hazırsın 👑', trStepN: '{n}. adım', trZoom: 'Büyütmek için dokun', trDone: 'Tamam', trEditStep: 'Adımı düzenle', trSoon: 'Eğitim dersleri çok yakında.', trSoonAdmin: 'Henüz ders yok. İlk resmini eklemek için "＋ Adım ekle"ye bas.', trEmptyLesson: 'Bu derste henüz adım yok. "＋ Adım ekle"ye bas.', trConfirmDel: 'Bu adım ve resmi silinsin mi?', trConfirmDelLesson: '"{name}" dersi ve {n} adımı silinsin mi?', trDeleted: 'Silindi ✓', trPick: 'Resim veya video seç', trChange: 'Değiştir', trBadType: 'Bir resim (JPG, PNG, WebP) veya MP4 video kullan.', trTooBig: 'Bu dosya çok büyük (en fazla 50 MB).', trNeedLesson: 'Ders adını yaz.', trNeedTitle: 'Bu adım için bir başlık yaz.', trUploading: 'Yükleniyor…', trSaved: 'Eğitim kaydedildi ✓', trPrev: 'Önceki', trNext: 'Sonraki',
         shopPer: '{amt} =', shopOut: 'Stokta yok', shopBuy: 'Satın al', shopCustom: 'Ya da istediğin miktarı yaz', shopGoldUnit: 'milyon Gold', shopRange: '{min} ile {max} arası', ordTitle: '{amt} satın al', ordOr: 'veya {v}', ordNotAvail: 'Şu anda mevcut değil. Fiyatlar güncellendi, lütfen tekrar bak.', ordDone: '#{id} numaralı sipariş gönderildi ✓', ordDonePay: 'Şimdi {price} tutarını {method} ile öde, sonra dekontu bana gönder:', ordWaText: 'Merhaba 3zReil, sipariş #{id}: {amt} = {price}, ödeme {method} ile. Oyundaki adım: {name}', ordTrade: 'Ödeme gelir gelmez oyunda {name} adlı karaktere Trade ile vereceğim.', shpNotSet: 'Henüz fiyat yok', shpPriceEgp: '{amt} fiyatı (EGP)', shpPriceUsd: '{amt} fiyatı (USD)', shpPacksSilk: 'Paketler (Silk)', shpPacksGold: 'Paketler (milyon Gold, 1000 = 1b)', shpAvailable: 'Mevcut (kapalı = stokta yok)', shpBad: '{item} fiyatlarını kontrol et: EGP ve USD ikisini birlikte yaz (ya da ikisini de boş bırak).', shpSaved: 'Mağaza fiyatları kaydedildi.', nNewOrder: 'Yeni sipariş: {amt} ({name})', nNewOrderTitle: 'Yeni mağaza siparişi', ordPrice: 'Fiyat', ordContactShort: 'İletişim', ordStNew: 'Ödeme bekleniyor', ordStPaid: 'Ödendi, teslim et', ordMarkPaid: 'Ödendi', ordMarkDone: 'Teslim edildi', ordEmpty: 'Şu anda açık sipariş yok.', confirmDelOrder: 'Bu sipariş silinsin mi?', nOrderDone: 'Sipariş teslim edildi ✓',
         navShop: 'Mağaza', shopTitle: 'Silk & Gold mağazası', shopIntro: 'Silk ve Gold\'u doğrudan 3zReil\'den al. Bir paket seç ya da istediğin miktarı yaz, öde, ben de oyunda Trade ile sana vereyim.', shopSoon: 'Fiyatlar çok yakında. Şimdi almak istersen bana WhatsApp\'tan yaz.', shopHow: 'Nasıl çalışır', shopStep1: 'İstediğini seç ve siparişi gönder.', shopStep2: 'Vodafone Cash, InstaPay veya Binance ile öde ve dekontu bana gönder.', shopStep3: 'Oyunda buluşuruz ve sana Trade ile veririm.', ordPay: 'Ödeme yöntemi', ordContact: 'WhatsApp, Telegram veya Discord', ordSend: 'Siparişi gönder', ordReceipt: 'Dekontu WhatsApp\'tan gönder', shpTitle: 'Mağaza fiyatları', shpIntro: 'Her 100 Silk ve her 100m Gold için fiyat. Bir ürünü gizlemek için fiyatı boş bırak. Müşteri her zaman burada yazan fiyatı öder.', reqTabOrders: 'Siparişler', ordAdminIntro: 'Mağaza sayfasından gelen siparişler. Para gelince "Ödendi", Trade\'den sonra "Teslim edildi" olarak işaretle.', openInstapay: 'InstaPay\'de aç', payReceipt: 'Dekontu buradan gönder', copy: 'Kopyala', copied: 'Kopyalandı ✓', chat: 'Sohbet',
         navFaq: 'SSS', faqTitle: 'Sıkça sorulan sorular', faqMore: 'Başka bir soru mu var? Bana yaz, her zaman buralardayım.', faqOpenAll: 'Tümünü aç', faqCloseAll: 'Tümünü kapat',
@@ -2517,6 +2693,7 @@
         annOn: 'Annonce : affichée', annOff: 'Annonce : masquée',
         vipTip: 'Forfait de {d} jours ou plus avec 3zReil',
         payHow: 'Comment payer', payName: 'Nom', payInGame: 'En jeu', payInGameVal: 'Silk (Item Mall, F10) ou Gold, directement à 3zReil', payEgypt: 'Depuis l\'Égypte', payAbroad: 'Depuis l\'étranger', qrScan: 'Scannez pour payer', contactMe: 'Me contacter', tgNotify: 'Recevoir un message Telegram avant la fin', tgOn: 'Alertes Telegram activées ✓', dcTip: 'DC : prévenir le client sur Telegram que son compte n\'est pas dans la party', dcOff: 'DC : le client n\'a pas encore activé les alertes Telegram', dcNoBell: '{name} n\'a pas activé les alertes Telegram (la cloche), le bot ne peut pas lui écrire.', dcSent: 'Message DC envoyé à {name} sur Telegram ✓', dcWait: 'Un message DC a déjà été envoyé à {name} il y a moins d\'une minute.', dcSentTo: 'Message DC pour {name} envoyé sur Telegram ✓\nReçu par : {who}', dcSomeone: 'un utilisateur Telegram',
+        navTraining: 'Formation', trTitle: 'Formation de la party', trAddStep: 'Ajouter une étape', trIntro: 'De courts guides en images pour les nouveaux membres de la party. Suivez les étapes dans l\'ordre et touchez une image pour l\'agrandir.', trMore: 'Bloqué à une étape ? Écrivez-moi, je vous aide.', trLesson: 'Leçon', trLessonName: 'Nom de la leçon', trLessonPh: 'Réglages de la party', trMedia: 'Image ou vidéo', trRemove: 'Retirer', trMediaHint: 'Les images sont allégées automatiquement. Vidéo : MP4, 50 Mo maximum.', trStepTitle: 'Titre', trStepBody: 'Explication', trBodyPh: 'Ce qu\'il faut faire ici, et pourquoi c\'est utile', trLangHint: 'Les autres langues sont facultatives. Si l\'une est vide, le visiteur voit le texte que vous avez écrit.', trVisible: 'Les visiteurs voient cette leçon', trHiddenTag: 'Masquée', trNewLesson: 'Nouvelle leçon', trNewLessonOpt: '＋ Nouvelle leçon…', trRename: 'Renommer', trShow: 'Montrer aux visiteurs', trHide: 'Masquer aux visiteurs', trShownN: 'Les visiteurs voient maintenant cette leçon ✓', trHiddenN: 'Leçon masquée aux visiteurs ✓', trEarlier: 'Avancer', trLater: 'Reculer', trDelLesson: 'Supprimer la leçon', trProg: '{n} sur {total} faites', trAllDone: 'Tout est fait ! Vous êtes prêt pour la party 👑', trStepN: 'Étape {n}', trZoom: 'Touchez pour agrandir', trDone: 'Fait', trEditStep: 'Modifier l\'étape', trSoon: 'Les leçons arrivent très bientôt.', trSoonAdmin: 'Pas encore de leçon. Appuyez sur « ＋ Ajouter une étape » pour mettre votre première image.', trEmptyLesson: 'Pas encore d\'étape dans cette leçon. Appuyez sur « ＋ Ajouter une étape ».', trConfirmDel: 'Supprimer cette étape et son image ?', trConfirmDelLesson: 'Supprimer la leçon « {name} » et ses {n} étapes ?', trDeleted: 'Supprimé ✓', trPick: 'Choisir une image ou une vidéo', trChange: 'Changer', trBadType: 'Utilisez une image (JPG, PNG, WebP) ou une vidéo MP4.', trTooBig: 'Ce fichier est trop lourd (50 Mo maximum).', trNeedLesson: 'Écrivez le nom de la leçon.', trNeedTitle: 'Écrivez un titre pour cette étape.', trUploading: 'Envoi…', trSaved: 'Formation enregistrée ✓', trPrev: 'Précédent', trNext: 'Suivant',
         shopPer: '{amt} =', shopOut: 'Rupture de stock', shopBuy: 'Acheter', shopCustom: 'Ou tapez la quantité voulue', shopGoldUnit: 'millions de Gold', shopRange: 'De {min} à {max}', ordTitle: 'Acheter {amt}', ordOr: 'ou {v}', ordNotAvail: 'Ce n\'est pas disponible pour le moment. Les prix ont été mis à jour, vérifiez à nouveau.', ordDone: 'Commande n°{id} envoyée ✓', ordDonePay: 'Payez maintenant {price} avec {method}, puis envoyez-moi le reçu :', ordWaText: 'Salut 3zReil, commande n°{id} : {amt} = {price}, payée avec {method}. Mon nom en jeu : {name}', ordTrade: 'Dès réception du paiement, je le donne à {name} en jeu par Trade.', shpNotSet: 'Pas encore de prix', shpPriceEgp: '{amt} en EGP', shpPriceUsd: '{amt} en USD', shpPacksSilk: 'Packs (Silk)', shpPacksGold: 'Packs (millions de Gold, 1000 = 1b)', shpAvailable: 'Disponible (désactivé = rupture de stock)', shpBad: 'Vérifiez les prix {item} : remplissez EGP et USD (ou laissez les deux vides).', shpSaved: 'Prix de la boutique enregistrés.', nNewOrder: 'Nouvelle commande : {amt} de {name}', nNewOrderTitle: 'Nouvelle commande boutique', ordPrice: 'Prix', ordContactShort: 'Contact', ordStNew: 'En attente du paiement', ordStPaid: 'Payé, à livrer', ordMarkPaid: 'Payé', ordMarkDone: 'Livré', ordEmpty: 'Aucune commande en cours.', confirmDelOrder: 'Supprimer cette commande ?', nOrderDone: 'Commande livrée ✓',
         navShop: 'Boutique', shopTitle: 'Boutique Silk & Gold', shopIntro: 'Achetez Silk et Gold directement à 3zReil. Choisissez un pack ou tapez votre quantité, payez, et je vous le donne en jeu par Trade.', shopSoon: 'Les prix arrivent très bientôt. Écrivez-moi sur WhatsApp pour acheter maintenant.', shopHow: 'Comment ça marche', shopStep1: 'Choisissez ce que vous voulez et envoyez la commande.', shopStep2: 'Payez par Vodafone Cash, InstaPay ou Binance et envoyez-moi le reçu.', shopStep3: 'On se retrouve en jeu et je vous le donne par Trade.', ordPay: 'Payer avec', ordContact: 'WhatsApp, Telegram ou Discord', ordSend: 'Envoyer la commande', ordReceipt: 'Envoyez-moi le reçu sur WhatsApp', shpTitle: 'Prix de la boutique', shpIntro: 'Prix pour 100 Silk et pour 100m de Gold. Laissez un prix vide pour masquer l\'article. Le client paie toujours le prix indiqué ici.', reqTabOrders: 'Commandes', ordAdminIntro: 'Commandes de la page Boutique. Marquez « Payé » quand l\'argent arrive, puis « Livré » après le Trade.', openInstapay: 'Ouvrir dans InstaPay', payReceipt: 'Envoyez-moi le reçu ici', copy: 'Copier', copied: 'Copié ✓', chat: 'Discuter',
         navFaq: 'FAQ', faqTitle: 'Questions fréquentes', faqMore: 'Encore une question ? Écrivez-moi, je suis toujours là.', faqOpenAll: 'Tout ouvrir', faqCloseAll: 'Tout fermer',
@@ -3448,6 +3625,361 @@
       showNotice(T('shpSaved'));
     });
 
+    /* ---------- Training: lessons made of steps (a picture or short video + what it is for). The admin edits them right here;
+       pictures go to Supabase Storage (bucket "training"), texts are { ar, en, tr, fr } and an empty language shows another one. ---------- */
+    const TR_LANGS = [['ar', 'عربي'], ['en', 'English'], ['tr', 'Türkçe'], ['fr', 'Français']];
+    const TR_ICON = {
+      up: '<path d="M12 19V5M6 11l6-6 6 6"/>', down: '<path d="M12 5v14M6 13l6 6 6-6"/>',
+      left: '<path d="M15 5l-7 7 7 7"/>', right: '<path d="M9 5l7 7-7 7"/>',
+      eyeOff: '<path d="M3 3l18 18M10.6 6.1A9.8 9.8 0 0 1 12 6c5 0 9 6 9 6a17 17 0 0 1-2.7 3.3M6.6 6.6C4.3 8.2 3 12 3 12s4 6 9 6a8.6 8.6 0 0 0 4.4-1.2"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/>',
+      zoom: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4M11 8v6M8 11h6"/>',
+      eye: '<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>'
+    };
+    const trSvg = k => `<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${TR_ICON[k]}</svg>`;
+    let trLessons = [], trSteps = [], trOk = null, trCur = null, trDone = new Set();
+    try { trDone = new Set(JSON.parse(localStorage.getItem('trDone') || '[]').map(String)); } catch (e) {}
+    try { trCur = localStorage.getItem('trLesson'); } catch (e) {}
+    const trRemember = () => { try { localStorage.setItem('trDone', JSON.stringify([...trDone])); localStorage.setItem('trLesson', trCur || ''); } catch (e) {} };
+    const trPick = o => { o = o || {}; return o[lang] || o.ar || o.en || o.tr || o.fr || ''; };
+    const trClean = o => Object.fromEntries(TR_LANGS.map(([k]) => [k, String((o || {})[k] || '').trim()]).filter(([, v]) => v));
+    const trUrl = path => db.storage.from('training').getPublicUrl(path).data.publicUrl;
+    const trBySort = (a, b) => ((a.sort || 0) - (b.sort || 0)) || (a.id - b.id);
+    const trLessonSteps = id => trSteps.filter(s => String(s.lesson_id) === String(id)).sort(trBySort);
+    const trSeen = () => trLessons.filter(l => isAdmin || !l.hidden).sort(trBySort);
+    const trNext = list => Math.max(0, ...list.map(x => x.sort || 0)) + 1;
+    const trErr = e => /relation|does not exist|schema cache|bucket not found/i.test(e?.message || '') ? T('setupNeeded') : (e?.message || String(e));
+
+    async function loadTraining() {
+      try {
+        const [l, s] = await Promise.all([
+          db.from('training_lessons').select('id,sort,title,hidden').order('sort', { ascending: true }),
+          db.from('training_steps').select('id,lesson_id,sort,media_path,media_type,title,body').order('sort', { ascending: true })]);
+        if (l.error || s.error) trOk = false;
+        else { trOk = true; trLessons = l.data || []; trSteps = s.data || []; }
+      } catch (e) { trOk = false; }
+      renderTraining();
+    }
+
+    function renderTraining() {
+      $('trAddBtn').hidden = !isAdmin;
+      const lessons = trSeen();
+      if (!lessons.some(l => String(l.id) === String(trCur))) trCur = lessons[0] ? String(lessons[0].id) : null;
+      const cur = lessons.find(l => String(l.id) === trCur) || null, li = lessons.indexOf(cur);
+      $('trLessons').innerHTML = lessons.map(l => { const on = String(l.id) === trCur; return `
+        <button class="tr-chip${on ? ' active' : ''}${l.hidden ? ' hid' : ''}" type="button" role="tab" aria-selected="${on}" data-lesson="${l.id}"${l.hidden ? ` title="${escapeHtml(T('trHiddenTag'))}"` : ''}>
+          ${l.hidden ? trSvg('eyeOff') : ''}<span dir="auto">${escapeHtml(trPick(l.title) || T('trNewLesson'))}</span><small>${trLessonSteps(l.id).length}</small></button>`; }).join('')
+        + (isAdmin && trOk ? `<button class="tr-chip tr-new" type="button" data-lesson-new="1">＋ ${escapeHtml(T('trNewLesson'))}</button>` : '');
+      $('trLessonAdmin').hidden = !(isAdmin && cur);
+      $('trLessonAdmin').innerHTML = isAdmin && cur ? `
+        <button class="chip-btn" type="button" data-lt="rename" aria-label="${escapeHtml(T('trRename'))}">${svg('edit')}<span>${escapeHtml(T('trRename'))}</span></button>
+        <button class="chip-btn" type="button" data-lt="hide">${trSvg(cur.hidden ? 'eye' : 'eyeOff')}${escapeHtml(T(cur.hidden ? 'trShow' : 'trHide'))}</button>
+        <button class="chip-btn sq tr-flip" type="button" data-lt="earlier" aria-label="${escapeHtml(T('trEarlier'))}" title="${escapeHtml(T('trEarlier'))}"${li <= 0 ? ' disabled' : ''}>${trSvg('left')}</button>
+        <button class="chip-btn sq tr-flip" type="button" data-lt="later" aria-label="${escapeHtml(T('trLater'))}" title="${escapeHtml(T('trLater'))}"${li >= lessons.length - 1 ? ' disabled' : ''}>${trSvg('right')}</button>
+        <button class="chip-btn tr-del" type="button" data-lt="delete" aria-label="${escapeHtml(T('trDelLesson'))}">${svg('trash')}<span>${escapeHtml(T('trDelLesson'))}</span></button>` : '';
+      const steps = cur ? trLessonSteps(cur.id) : [];
+      const done = steps.filter(s => trDone.has(String(s.id))).length, all = steps.length > 0 && done === steps.length;
+      $('trProg').hidden = steps.length < 2;
+      $('trProg').className = 'tr-prog' + (all ? ' all' : '');
+      $('trProg').innerHTML = steps.length < 2 ? '' : `<span>${escapeHtml(all ? T('trAllDone') : T('trProg', { n: done, total: steps.length }))}</span>
+        <span class="tr-bar" role="progressbar" aria-valuemin="0" aria-valuemax="${steps.length}" aria-valuenow="${done}"><i style="width:${Math.round(done / steps.length * 100)}%"></i></span>`;
+      $('trSteps').innerHTML = steps.map((s, i) => {
+        const id = String(s.id), isDone = trDone.has(id), title = trPick(s.title) || T('trStepN', { n: i + 1 }), body = trPick(s.body), url = s.media_path ? trUrl(s.media_path) : '';
+        const media = !url ? '' : s.media_type === 'video'
+          ? `<video class="ts-vid" src="${escapeHtml(url)}" controls playsinline preload="metadata"></video>`
+          : `<button class="ts-media" type="button" data-zoom="${id}" aria-label="${escapeHtml(T('trZoom') + ': ' + title)}"><img src="${escapeHtml(url)}" alt="${escapeHtml(title)}" loading="lazy" decoding="async"><span class="ts-zoom">${trSvg('zoom')}${escapeHtml(T('trZoom'))}</span></button>`;
+        return `
+        <li class="tr-step${isDone ? ' done' : ''}" data-step="${id}">
+          <div class="ts-head"><span class="faq-n">${i + 1}</span><h3 dir="auto">${escapeHtml(title)}</h3>
+            <label class="ts-done"><input type="checkbox" data-done="${id}"${isDone ? ' checked' : ''}><span>${escapeHtml(T('trDone'))}</span></label></div>
+          ${media}
+          ${body ? `<p class="ts-body" dir="auto">${escapeHtml(body)}</p>` : ''}
+          ${isAdmin ? `<div class="ts-admin">
+            <button class="ib tm" type="button" data-ts="edit" aria-label="${escapeHtml(T('trEditStep'))}" title="${escapeHtml(T('trEditStep'))}">${svg('edit')}</button>
+            <button class="ib" type="button" data-ts="up" aria-label="${escapeHtml(T('trEarlier'))}" title="${escapeHtml(T('trEarlier'))}"${i === 0 ? ' disabled' : ''}>${trSvg('up')}</button>
+            <button class="ib" type="button" data-ts="down" aria-label="${escapeHtml(T('trLater'))}" title="${escapeHtml(T('trLater'))}"${i === steps.length - 1 ? ' disabled' : ''}>${trSvg('down')}</button>
+            <button class="ib del" type="button" data-ts="delete" aria-label="${escapeHtml(T('delete'))}" title="${escapeHtml(T('delete'))}">${svg('trash')}</button></div>` : ''}
+        </li>`; }).join('');
+      const soon = $('trSoon');
+      soon.hidden = trOk === null || steps.length > 0;
+      soon.textContent = !isAdmin ? T('trSoon') : trOk === false ? T('setupNeeded') : cur ? T('trEmptyLesson') : T('trSoonAdmin');
+    }
+
+    async function trRenumber(table, list) {           // saves a new order; only rows whose place changed are written
+      for (let k = 0; k < list.length; k++) {
+        if (list[k].sort === k + 1) continue;
+        const { error } = await db.from(table).update({ sort: k + 1 }).eq('id', list[k].id);
+        if (error) throw error;
+        list[k].sort = k + 1;
+      }
+    }
+    const trDropFiles = paths => { paths = paths.filter(Boolean); if (paths.length) Promise.resolve(db.storage.from('training').remove(paths)).catch(() => {}); };
+
+    $('trLessons').addEventListener('click', e => {
+      if (e.target.closest('[data-lesson-new]')) { openLessonEditor(null); return; }
+      const b = e.target.closest('[data-lesson]'); if (!b) return;
+      trCur = b.dataset.lesson; trRemember(); renderTraining();
+      document.querySelector(`#trLessons [data-lesson="${CSS.escape(trCur)}"]`)?.focus();
+    });
+    $('trSteps').addEventListener('change', e => {
+      const id = e.target.dataset.done; if (!id) return;
+      if (e.target.checked) trDone.add(id); else trDone.delete(id);
+      trRemember(); renderTraining();
+      document.querySelector(`[data-done="${CSS.escape(id)}"]`)?.focus();
+    });
+    $('trSteps').addEventListener('click', async e => {
+      const z = e.target.closest('[data-zoom]'); if (z) { openTrView(z.dataset.zoom); return; }
+      const a = e.target.closest('[data-ts]'); if (!a) return;
+      if (!isAdmin) { showNotice(T('adminOnly'), 'error'); return; }
+      const id = a.closest('[data-step]').dataset.step, step = trSteps.find(s => String(s.id) === id); if (!step) return;
+      try {
+        if (a.dataset.ts === 'edit') { openTrainEditor(step); return; }
+        if (a.dataset.ts === 'delete') {
+          if (!confirm(T('trConfirmDel'))) return;
+          const { error } = await db.from('training_steps').delete().eq('id', step.id); if (error) throw error;
+          trDropFiles([step.media_path]); trDone.delete(id); trRemember();
+          await loadTraining(); showNotice(T('trDeleted')); return;
+        }
+        const list = trLessonSteps(step.lesson_id), i = list.indexOf(step), j = a.dataset.ts === 'up' ? i - 1 : i + 1;
+        if (j < 0 || j >= list.length) return;
+        [list[i], list[j]] = [list[j], list[i]];
+        await trRenumber('training_steps', list); await loadTraining();
+        const again = document.querySelector(`[data-step="${CSS.escape(id)}"] [data-ts="${a.dataset.ts}"]`);
+        (again && !again.disabled ? again : document.querySelector(`[data-step="${CSS.escape(id)}"] [data-ts="edit"]`))?.focus();
+      } catch (err) { showNotice(trErr(err), 'error'); }
+    });
+    $('trLessonAdmin').addEventListener('click', async e => {
+      const b = e.target.closest('[data-lt]'); if (!b || !isAdmin) return;
+      const lessons = trSeen(), cur = lessons.find(l => String(l.id) === trCur); if (!cur) return;
+      try {
+        if (b.dataset.lt === 'rename') { openLessonEditor(cur); return; }
+        if (b.dataset.lt === 'hide') {
+          const { error } = await db.from('training_lessons').update({ hidden: !cur.hidden }).eq('id', cur.id); if (error) throw error;
+          await loadTraining(); showNotice(T(cur.hidden ? 'trShownN' : 'trHiddenN')); return;
+        }
+        if (b.dataset.lt === 'delete') {
+          const steps = trLessonSteps(cur.id);
+          if (!confirm(T('trConfirmDelLesson', { name: trPick(cur.title) || T('trNewLesson'), n: steps.length }))) return;
+          const { error } = await db.from('training_lessons').delete().eq('id', cur.id); if (error) throw error;
+          trDropFiles(steps.map(s => s.media_path)); trCur = null;
+          await loadTraining(); trRemember(); showNotice(T('trDeleted')); return;
+        }
+        const i = lessons.indexOf(cur), j = b.dataset.lt === 'earlier' ? i - 1 : i + 1;
+        if (j < 0 || j >= lessons.length) return;
+        [lessons[i], lessons[j]] = [lessons[j], lessons[i]];
+        await trRenumber('training_lessons', lessons); await loadTraining();
+      } catch (err) { showNotice(trErr(err), 'error'); }
+    });
+    $('trAddBtn').addEventListener('click', () => openTrainEditor(null));
+
+    // language tabs in the admin windows: one set of boxes, the tab picks which language is being typed (green dot = has text)
+    function trTabs(box, ed, keys) {
+      box.innerHTML = TR_LANGS.map(([k, name]) => `<button class="tr-lang${k === ed.lang ? ' on' : ''}" type="button" data-tl="${k}" lang="${k}" aria-pressed="${k === ed.lang}">${name}${keys.some(f => String(ed[f][k] || '').trim()) ? '<i aria-hidden="true"></i>' : ''}</button>`).join('');
+    }
+
+    // ---- add / edit a step ----
+    const trEd = { lang: 'ar', step: null, file: null, removeMedia: false, previewUrl: null, title: {}, body: {} };
+    const trmGet = () => { trEd.title[trEd.lang] = $('trmStepTitle').value; trEd.body[trEd.lang] = $('trmBody').value; };
+    const trmPut = () => { $('trmStepTitle').value = trEd.title[trEd.lang] || ''; $('trmBody').value = trEd.body[trEd.lang] || ''; trTabs($('trmLangs'), trEd, ['title', 'body']); };
+    const trmMsg = text => { const m = $('trmMsg'); m.hidden = false; m.className = 'form-msg err'; m.textContent = text; };
+    const trmLessonUI = () => { $('trmNewWrap').hidden = $('trmLesson').value !== 'new'; };
+    function trmShowMedia(m, objectUrl) {
+      if (trEd.previewUrl) { URL.revokeObjectURL(trEd.previewUrl); trEd.previewUrl = null; }
+      if (objectUrl) trEd.previewUrl = objectUrl;
+      $('trmPrev').hidden = !m;
+      $('trmPrev').innerHTML = !m ? '' : m.type === 'video' ? `<video src="${escapeHtml(m.url)}" controls playsinline preload="metadata"></video>` : `<img src="${escapeHtml(m.url)}" alt="">`;
+      $('trmRemove').hidden = !m;
+      $('trmPickTxt').textContent = T(m ? 'trChange' : 'trPick');
+    }
+    function openTrainEditor(step) {
+      if (!isAdmin) { showNotice(T('adminOnly'), 'error'); return; }
+      Object.assign(trEd, { lang, step, file: null, removeMedia: false, title: { ...(step?.title || {}) }, body: { ...(step?.body || {}) } });
+      $('trmTitle').textContent = T(step ? 'trEditStep' : 'trAddStep');
+      const lessons = [...trLessons].sort(trBySort);
+      $('trmLesson').innerHTML = lessons.map(l => `<option value="${l.id}">${escapeHtml(trPick(l.title) || T('trNewLesson'))}${l.hidden ? ' (' + escapeHtml(T('trHiddenTag')) + ')' : ''}</option>`).join('')
+        + `<option value="new">${escapeHtml(T('trNewLessonOpt'))}</option>`;
+      $('trmLesson').value = step ? String(step.lesson_id) : lessons.some(l => String(l.id) === trCur) ? trCur : lessons[0] ? String(lessons[0].id) : 'new';
+      $('trmNewLesson').value = ''; trmLessonUI();
+      $('trmFile').value = '';
+      trmShowMedia(step && step.media_path ? { url: trUrl(step.media_path), type: step.media_type } : null);
+      trmPut();
+      $('trmMsg').hidden = true; $('trmSave').disabled = false; $('trmSave').textContent = T('save');
+      $('trainModal').classList.add('open');
+    }
+    $('trmLesson').addEventListener('change', () => { trmLessonUI(); if (!$('trmNewWrap').hidden) $('trmNewLesson').focus(); });
+    $('trmLangs').addEventListener('click', e => { const b = e.target.closest('[data-tl]'); if (!b) return; trmGet(); trEd.lang = b.dataset.tl; trmPut(); $('trmStepTitle').focus(); });
+    $('trmStepTitle').addEventListener('input', () => { trmGet(); trTabs($('trmLangs'), trEd, ['title', 'body']); });
+    $('trmBody').addEventListener('input', () => { trmGet(); trTabs($('trmLangs'), trEd, ['title', 'body']); });
+    $('trmFile').addEventListener('change', () => {
+      const f = $('trmFile').files[0]; if (!f) return;
+      const isVid = /^video\//.test(f.type);
+      if (!(isVid ? /^video\/(mp4|webm)$/.test(f.type) : /^image\//.test(f.type))) { $('trmFile').value = ''; trmMsg(T('trBadType')); return; }
+      if (f.size > 50 * 1024 * 1024) { $('trmFile').value = ''; trmMsg(T('trTooBig')); return; }
+      trEd.file = f; trEd.removeMedia = false; $('trmMsg').hidden = true;
+      const url = URL.createObjectURL(f);
+      trmShowMedia({ url, type: isVid ? 'video' : 'image' }, url);
+    });
+    $('trmRemove').addEventListener('click', () => { trEd.file = null; trEd.removeMedia = !!trEd.step?.media_path; $('trmFile').value = ''; trmShowMedia(null); });
+    $('trmCancel').addEventListener('click', () => { $('trainModal').classList.remove('open'); trmShowMedia(null); });
+
+    async function trPrepare(file) {                   // pictures: at most 1920 px, saved as WebP (JPEG if the browser cannot) so they open fast on phones
+      const ext = { 'image/webp': 'webp', 'image/jpeg': 'jpg', 'image/png': 'png', 'image/gif': 'gif', 'video/mp4': 'mp4', 'video/webm': 'webm' };
+      if (!/^image\//.test(file.type) || file.type === 'image/gif') {
+        if (!ext[file.type]) throw new Error(T('trBadType'));
+        return { blob: file, ext: ext[file.type] };
+      }
+      let img;
+      try { img = await createImageBitmap(file); }
+      catch (e) {
+        img = await new Promise((ok, bad) => { const i = new Image(), u = URL.createObjectURL(file); i.onload = () => { URL.revokeObjectURL(u); ok(i); }; i.onerror = () => bad(new Error(T('trBadType'))); i.src = u; });
+      }
+      const w = img.naturalWidth || img.width, h = img.naturalHeight || img.height, k = Math.min(1, 1920 / Math.max(w, h));
+      const c = document.createElement('canvas'); c.width = Math.max(1, Math.round(w * k)); c.height = Math.max(1, Math.round(h * k));
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      const make = (type, q) => new Promise(ok => c.toBlob(ok, type, q));
+      let blob = await make('image/webp', .88);
+      if (!blob || blob.type !== 'image/webp') blob = await make('image/jpeg', .9);
+      if (!blob || (k === 1 && blob.size >= file.size && ext[file.type])) blob = file;   // already small: keep the original
+      if (!ext[blob.type]) throw new Error(T('trBadType'));
+      return { blob, ext: ext[blob.type] };
+    }
+
+    $('trForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      if (!isAdmin) return;
+      trmGet();
+      const title = trClean(trEd.title), body = trClean(trEd.body);
+      const toNew = $('trmLesson').value === 'new', lname = $('trmNewLesson').value.trim();
+      if (toNew && !lname) { trmMsg(T('trNeedLesson')); $('trmNewLesson').focus(); return; }
+      if (!Object.keys(title).length) { trmMsg(T('trNeedTitle')); $('trmStepTitle').focus(); return; }
+      const btn = $('trmSave'); btn.disabled = true;
+      let uploaded = null, madeLesson = false;
+      try {
+        let lessonId = $('trmLesson').value;
+        if (toNew) {
+          const { data, error } = await db.from('training_lessons').insert({ title: { [trEd.lang]: lname }, sort: trNext(trLessons) }).select('id').single();
+          if (error) throw error;
+          lessonId = data.id; madeLesson = true;
+        }
+        const row = { lesson_id: Number(lessonId), title, body }, old = trEd.step;
+        if (trEd.file) {
+          btn.textContent = T('trUploading');
+          const { blob, ext } = await trPrepare(trEd.file);
+          const path = `steps/${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+          const { error } = await db.storage.from('training').upload(path, blob, { contentType: blob.type, cacheControl: '31536000', upsert: false });
+          if (error) throw error;
+          uploaded = path;
+          row.media_path = path; row.media_type = /^video\//.test(blob.type) ? 'video' : 'image';
+        } else if (trEd.removeMedia) { row.media_path = null; row.media_type = null; }
+        if (old) {
+          if (String(old.lesson_id) !== String(row.lesson_id)) row.sort = trNext(trLessonSteps(row.lesson_id));
+          const { error } = await db.from('training_steps').update({ ...row, updated_at: new Date().toISOString() }).eq('id', old.id);
+          if (error) throw error;
+          if (old.media_path && (uploaded || trEd.removeMedia)) trDropFiles([old.media_path]);
+        } else {
+          row.sort = trNext(trLessonSteps(row.lesson_id));
+          const { error } = await db.from('training_steps').insert(row);
+          if (error) throw error;
+        }
+        uploaded = null;
+        trCur = String(row.lesson_id); trRemember();
+        await loadTraining();
+        $('trainModal').classList.remove('open'); trmShowMedia(null);
+        showNotice(T('trSaved'));
+      } catch (err) {
+        if (uploaded) trDropFiles([uploaded]);
+        if (madeLesson) loadTraining();
+        trmMsg(trErr(err));
+      } finally { btn.disabled = false; btn.textContent = T('save'); }
+    });
+
+    // ---- new lesson / rename a lesson ----
+    const lsEd = { lang: 'ar', lesson: null, title: {} };
+    const lsGet = () => { lsEd.title[lsEd.lang] = $('lsmName').value; };
+    const lsPut = () => { $('lsmName').value = lsEd.title[lsEd.lang] || ''; trTabs($('lsmLangs'), lsEd, ['title']); };
+    function openLessonEditor(lesson) {
+      if (!isAdmin) return;
+      Object.assign(lsEd, { lang, lesson, title: { ...(lesson?.title || {}) } });
+      $('lsmTitle').textContent = T(lesson ? 'trRename' : 'trNewLesson');
+      $('lsmShow').checked = !(lesson && lesson.hidden);
+      lsPut(); $('lsmMsg').hidden = true; $('lsmSave').disabled = false;
+      $('lessonModal').classList.add('open');
+    }
+    $('lsmLangs').addEventListener('click', e => { const b = e.target.closest('[data-tl]'); if (!b) return; lsGet(); lsEd.lang = b.dataset.tl; lsPut(); $('lsmName').focus(); });
+    $('lsmName').addEventListener('input', () => { lsGet(); trTabs($('lsmLangs'), lsEd, ['title']); });
+    $('lsmCancel').addEventListener('click', () => $('lessonModal').classList.remove('open'));
+    $('lsForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      if (!isAdmin) return;
+      lsGet();
+      const title = trClean(lsEd.title), msg = $('lsmMsg');
+      if (!Object.keys(title).length) { msg.hidden = false; msg.className = 'form-msg err'; msg.textContent = T('trNeedLesson'); $('lsmName').focus(); return; }
+      $('lsmSave').disabled = true;
+      try {
+        if (lsEd.lesson) {
+          const { error } = await db.from('training_lessons').update({ title, hidden: !$('lsmShow').checked }).eq('id', lsEd.lesson.id);
+          if (error) throw error;
+        } else {
+          const { data, error } = await db.from('training_lessons').insert({ title, hidden: !$('lsmShow').checked, sort: trNext(trLessons) }).select('id').single();
+          if (error) throw error;
+          trCur = String(data.id); trRemember();
+        }
+        await loadTraining();
+        $('lessonModal').classList.remove('open');
+        showNotice(T('trSaved'));
+      } catch (err) { msg.hidden = false; msg.className = 'form-msg err'; msg.textContent = trErr(err); }
+      finally { $('lsmSave').disabled = false; }
+    });
+
+    // ---- full-screen picture viewer: arrows / swipe go through the pictures of the lesson, a tap zooms in ----
+    let tvList = [], tvI = 0, tvX = null, tvBack = null;
+    function openTrView(id) {
+      const s = trSteps.find(x => String(x.id) === String(id)); if (!s) return;
+      tvList = trLessonSteps(s.lesson_id).filter(x => x.media_path && x.media_type !== 'video');
+      tvI = Math.max(0, tvList.indexOf(s));
+      tvBack = document.activeElement;
+      showTv(); $('trView').hidden = false; document.body.classList.add('tv-lock'); $('tvClose').focus();
+    }
+    function showTv() {
+      const s = tvList[tvI]; if (!s) return;
+      const all = trLessonSteps(s.lesson_id), n = all.indexOf(s) + 1;
+      $('tvStage').classList.remove('zoom'); $('tvStage').scrollTo(0, 0);
+      $('tvImg').src = trUrl(s.media_path); $('tvImg').alt = trPick(s.title) || T('trStepN', { n });
+      $('tvN').textContent = `${n} / ${all.length}`;
+      $('tvTitle').textContent = trPick(s.title) || T('trStepN', { n });
+      const body = trPick(s.body); $('tvCap').textContent = body; $('tvCap').hidden = !body;
+      $('tvPrev').hidden = $('tvNext').hidden = tvList.length < 2;
+      $('tvPrev').disabled = tvI <= 0; $('tvNext').disabled = tvI >= tvList.length - 1;
+      $('tvPrev').setAttribute('aria-label', T('trPrev')); $('tvNext').setAttribute('aria-label', T('trNext')); $('tvClose').setAttribute('aria-label', T('close'));
+    }
+    function closeTv() {
+      if ($('trView').hidden) return;
+      $('trView').hidden = true; document.body.classList.remove('tv-lock');
+      if (tvBack && document.contains(tvBack)) tvBack.focus();
+    }
+    const tvGo = d => { const j = tvI + d; if (j >= 0 && j < tvList.length) { tvI = j; showTv(); } };
+    $('tvClose').addEventListener('click', closeTv);
+    $('tvPrev').addEventListener('click', () => tvGo(-1));
+    $('tvNext').addEventListener('click', () => tvGo(1));
+    $('tvImg').addEventListener('click', () => $('tvStage').classList.toggle('zoom'));
+    $('tvStage').addEventListener('touchstart', e => { tvX = e.touches.length === 1 && !$('tvStage').classList.contains('zoom') ? e.touches[0].clientX : null; }, { passive: true });
+    $('tvStage').addEventListener('touchend', e => {
+      if (tvX == null) return;
+      const dx = e.changedTouches[0].clientX - tvX; tvX = null;
+      if (Math.abs(dx) > 50) tvGo((dx < 0) !== (lang === 'ar') ? 1 : -1);     // swipe towards the reading direction = next
+    });
+    document.addEventListener('keydown', e => {
+      if ($('trView').hidden) return;
+      if (e.key === 'ArrowRight') tvGo(lang === 'ar' ? -1 : 1);
+      else if (e.key === 'ArrowLeft') tvGo(lang === 'ar' ? 1 : -1);
+      else if (e.key === 'Tab') {                         // keep the keyboard inside the viewer
+        const f = [...$('trView').querySelectorAll('button:not([hidden]):not(:disabled)')];
+        if (!f.length) return;
+        const i = f.indexOf(document.activeElement);
+        if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); }
+        else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); }
+      }
+    });
+
     // admin: orders (Requests > Orders)
     let orders = [], ordersOk = null, ordersLoaded = false;
     async function loadOrders() {
@@ -4176,7 +4708,7 @@
       $('hours').value = p.hours; $('minutes').value = 0; $('seconds').value = 0; $('priceSilk').value = p.price;
     }
     const closeModal = () => { $('timerModal').classList.remove('open'); };
-    const closeAll = () => { closeModal(); closeTimeModal(); ['aboutModal', 'settingsModal', 'paymentModal', 'statsModal', 'bookModal', 'reqModal', 'homeModal', 'reviewModal', 'couponModal', 'shopModal', 'shopAdminModal'].forEach(id => $(id).classList.remove('open')); };
+    const closeAll = () => { closeModal(); closeTimeModal(); ['aboutModal', 'settingsModal', 'paymentModal', 'statsModal', 'bookModal', 'reqModal', 'homeModal', 'reviewModal', 'couponModal', 'shopModal', 'shopAdminModal', 'trainModal', 'lessonModal'].forEach(id => $(id).classList.remove('open')); closeTv(); };
 
     $('loginBtn').addEventListener('click', async () => {
       const { error } = await db.auth.signInWithOAuth({
@@ -4362,7 +4894,7 @@
     document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeAll(); if (!$('alarm').hidden) stopAlarm(); } });
 
     function setView() {
-      const view = location.hash === '#timers' ? 'timers' : location.hash === '#faq' ? 'faq' : location.hash === '#shop' ? 'shop' : 'home';
+      const view = location.hash === '#timers' ? 'timers' : location.hash === '#faq' ? 'faq' : location.hash === '#shop' ? 'shop' : location.hash === '#training' ? 'training' : 'home';
       document.body.dataset.view = view;
       document.querySelectorAll('[data-nav]').forEach(l => l.classList.toggle('active', l.dataset.nav === view));
       window.scrollTo(0, 0);
@@ -4385,11 +4917,11 @@
       }
       if (dcUrl) { $('dcLink').href = dcUrl; $('dcLink').hidden = false; }
       if (!$('waLink').hidden) { $('aboutWa').href = $('waLink').href; $('aboutWa').hidden = false; }
-      if (dcUrl) { $('aboutDc').href = dcUrl; $('aboutDc').hidden = false; $('faqDc').href = dcUrl; $('faqDc').hidden = false; }
-      if (!$('waLink').hidden) { $('faqWa').href = $('waLink').href; $('faqWa').hidden = false; }
+      if (dcUrl) for (const id of ['aboutDc', 'faqDc', 'trDc']) { $(id).href = dcUrl; $(id).hidden = false; }
+      if (!$('waLink').hidden) for (const id of ['faqWa', 'trWa']) { $(id).href = $('waLink').href; $(id).hidden = false; }
       const tg = TELEGRAM_LINK.trim();
       const tgUrl = !tg ? '' : /^https?:\/\//i.test(tg) ? tg : 'https://t.me/' + tg.replace(/^@/, '');
-      if (tgUrl) for (const id of ['tgLink', 'aboutTg', 'faqTg']) { $(id).href = tgUrl; $(id).hidden = false; }
+      if (tgUrl) for (const id of ['tgLink', 'aboutTg', 'faqTg', 'trTg']) { $(id).href = tgUrl; $(id).hidden = false; }
       $('social').hidden = !(digits || dcUrl || tgUrl);
     }
     setupContact();
@@ -4564,7 +5096,7 @@
         const on = b.dataset.lang === lang;
         b.classList.toggle('on', on); b.setAttribute('aria-checked', on ? 'true' : 'false');
       });
-      $('statsBtn').title = T('navStats'); $('reqBtn').title = T('navRequests');
+      $('statsBtn').title = T('navStats'); $('reqBtn').title = T('navRequests'); $('settingsBtn').title = T('navSettings'); $('aboutBtn').title = T('navAbout');
       $('socialToggle').title = T('contactMe'); $('socialToggle').setAttribute('aria-label', T('contactMe'));
       document.documentElement.classList.remove('i18n-wait');
       fitNav();
@@ -4573,12 +5105,12 @@
       setupPayment(); fillPackageSelects(); updateAccountUI(); updateHoldUI();
       if (lastSync) setSync(lastSync[0], lastSync[1]);
       if (!$('timerGrid').querySelector('.loading')) renderTimers();
-      renderReviews(); updateInstallUI(); showCouponMsg(); renderFaq(); renderShop(); updateShopSum(); renderOrderSum();
+      renderReviews(); updateInstallUI(); showCouponMsg(); renderFaq(); renderShop(); updateShopSum(); renderOrderSum(); renderTraining();
       if (isAdmin) { renderEarnings(); renderHistory(); renderRequests(); renderOrders(); renderAdminReviews(); renderCoupons(); }
     }
     function fitNav() {
       const nav = $('top'), menu = nav.querySelector('.menu');
-      nav.classList.remove('fit1', 'fit2', 'fit3');
+      nav.classList.remove('fit1', 'fit2', 'fit25', 'fit3');
       const desk = innerWidth >= 1100;
       const tooWide = () => {
         if (!desk) return menu.scrollWidth > menu.clientWidth + 1;
@@ -4587,7 +5119,7 @@
         const right = Math.max(...items.map(e => e.getBoundingClientRect().right));
         return right > nav.querySelector('.user').getBoundingClientRect().left - 14 * innerWidth / 1344;
       };
-      for (const step of ['fit1', 'fit2', 'fit3']) { if (!tooWide()) break; nav.classList.add(step); }
+      for (const step of ['fit1', 'fit2', 'fit25', 'fit3']) { if (!tooWide()) break; nav.classList.add(step); }
     }
     window.addEventListener('resize', () => { clearTimeout(fitNav.t); fitNav.t = setTimeout(fitNav, 120); });
     try { document.fonts.ready.then(fitNav); } catch (e) {}
@@ -4685,12 +5217,13 @@
       loadEarnings(); loadRequests(); setInterval(() => { if (isAdmin) { loadRequests(); loadAdminReviews(); } }, 20000);
       loadReviews(); setInterval(loadReviews, 5 * 60000);
       loadShop(); setInterval(loadShop, 5 * 60000);
+      loadTraining(); setInterval(loadTraining, 10 * 60000);
 
       db.auth.onAuthStateChange((_event, session) => {
         currentUser = session?.user || null;
         isAdmin = isAdminEmail(currentUser?.email);
         updateAccountUI();
-        loadTimers(); loadEarnings(); loadRequests(); loadReviews();
+        loadTimers(); loadEarnings(); loadRequests(); loadReviews(); loadTraining();
       });
 
       if (channel) await db.removeChannel(channel);
